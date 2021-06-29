@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="warranty_reg_template"
+              label="Warranty Reg"
+              file="warranty_reg_template.html" type="html"
+              module="Ecopure_Gift" area="frontend"/>
+</config>

@@ -1,0 +1,284 @@
+<?php
+    $viewModel = $block->getViewModel();
+    $customer = $viewModel->getCustomer();
+    $gifts = $viewModel->getGift();
+    $check = $viewModel->getCheck();
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $states = $objectManager->create('Magento\Directory\Model\RegionFactory')->create()->getCollection()->addFieldToFilter('country_id','US');
+    $states2 = $objectManager->create('Magento\Directory\Model\RegionFactory')->create()->getCollection()->addFieldToFilter('country_id','CA');
+    $mediaUrl = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+?>
+<?php
+    if (count($gifts->getData())==0) {
+//        header("location:".$this->getUrl('gift/index/comment'));
+        header("location:".$this->getUrl('gift/index/success'));
+    }
+?>
+<style>
+.pre-notes{
+    position: absolute;
+    top: 0;
+    background: #ffffff;
+    z-index: 11111;
+    left: 0;
+    right: 0;
+    padding: 0 20px 20px 20px;
+}
+.pre-notes h2 {
+    text-align: center;
+}
+.pre-notes button {
+    text-align: center;
+    display: block;
+    margin: auto;
+    padding: 5px 40px;
+}
+#notes {
+    margin-top: 150px;
+}
+</style>
+<div class="parent-div">
+    <!-- VERIFIED -->
+    <?php if($check): ?>
+        <div class="verrified-title">
+            <h3>VERIFIED</h3>
+            <span>You have already registered 1-year warranty.</span>
+            <img src="<?php echo $mediaUrl ?>gift/success.png" alt="" class="verrified-icon">
+        </div>
+    <?php else: ?>
+        <div class="verrified-title">
+            <h3>SUCCEED</h3>
+            <span>We have send an e-mail about your warranty info to <?php echo $customer['email'] ?></span>
+            <img src="<?php echo $mediaUrl ?>gift/success.png" alt="" class="verrified-icon">
+        </div>
+    <?php endif; ?>
+    <!-- choose your gift -->
+    <div class="choose-div">
+        <form action="<?=$this->getUrl('gift/index/receive');?>" method="post" id="gift-form">
+            <h2 class="choose-title"><?php echo __('Choose Your Gift!') ?></h2>
+            <p class="choose-title-p"><?php echo __('IF YOU MISSED OUR GIFT WHEN PURCHASING FILTRATION SYSTEM, CLAIM A FREE GIFT NOW!') ?>
+            </p>
+            <span class="choose-title-span"><?php echo __('*Everyone who purchased our filtration system could get a free gift (Only once). If you already claimed your gift, please ignore this step.') ?></span>
+
+            <!-- input -->
+            <input type="hidden" name="product_info" id="productids" class="required" />
+            <input type="hidden" name="brands" id="brands" />
+            <input type="hidden" name="models" id="models" />
+            <input type="hidden" name="product_name" id="product_name" />
+
+            <!-- select -->
+            <div class="row">
+                <?php foreach ($gifts as $gift) : ?>
+                <div class="select-left col-sm-12 col-xs-24">
+                    <img src="<?php echo $mediaUrl ?>gift/image/<?php echo $gift['image'] ?>" alt="" class="select-product-img">
+                    <p class="select-product-title" data-productname="<?php echo $gift['name'] ?>" id="product-name-<?php echo $gift['id'] ?>"><?php echo $gift['name'] ?> <span></span></p>
+                    <p class="select-product-text">
+                        <?php echo $gift['description'] ?>
+                    </p>
+                    <p class="select-product-oldPrice"><?php echo __('Retail Price') ?>: $<?php echo $gift['price'] ?></p>
+                    <p class="select-product-newPrice"><?php echo __('Now') ?> $0.00</p>
+                    <button type="button" class="select-product-button" <?php if ($gift->getOptions()) : ?>id="click-me" <?php else: ?>onclick="chooseproductmodal('','','<?php echo $gift->getId() ?>','<?php echo $gift->getName() ?>');"<?php endif; ?>><?php echo __('CHOOSE THIS') ?></button>
+                </div>
+                <?php if ($gift->getOptions()) : ?>
+                    <div id="popup-modal" style="display: none">
+                        <div id="select-custom">
+                            <div class="pre-notes">
+                                <h2>Note：</h2>
+                                <p>Due to the water inlet setting of the refrigerator, using a bypass to connect a dispenser and an ice maker may result in the problems with the RO system, such as frequently starting and stopping, reporting errors, no longer making ice and
+                                    so on. Do you still want to receive a bypass?
+                                </p>
+                                <button id="notes" class="choose btn btn-default" onclick="showNotes();">Yes</button>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-24">
+                                    <label class="col-md-8" style="padding: 6px 12px;" for="brand">Brand</label>
+                                    <select class="brand col-md-16 form-control" id="brand" name="brand" style="width: 50%"></select>
+                                </div>
+
+                                <div class="form-group col-md-24">
+                                    <label class="col-md-8" style="padding: 6px 12px;" for="model">Model</label>
+                                    <select class="model col-md-16 form-control" id="model" name="model" style="width: 50%"></select>
+                                </div>
+                            </div>
+                            <div style="text-align: center;">
+                                <button data-role="closeBtn" type="button" class="choose btn btn-default" onclick="chooseproductmodal('model','brand','<?php echo  $gift->getId() ?>','<?php echo $gift->getName() ?>');">Submit</button>
+                                <button data-role="closeBtn" type="button" class="btn btn-default" onclick="cancel('<?php echo  $gift->getId() ?>');">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        require(
+                            [
+                                "jquery",
+                                "cxSelect",
+                                "select2"
+                            ],
+                            function(
+                                $,
+                                cxSelect,
+                                select2
+                            ) {
+                                $('#select-custom').cxSelect({
+                                    selects: ['brand', 'model'],
+                                    required: true,
+                                    data: <?php echo $viewModel->formatoption($gift->getOptions())?>
+                                });
+                                $('.form-control').select2();
+                            });
+                    </script>
+                <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- input -->
+            <div class="input-div">
+                <!-- input title -->
+                <div class="input-title">
+                    <h4><?php echo __('Shipping Information') ?></h4>
+                    <span id="disabled-span"><?php echo __('You don\'t need to fill in the content.') ?></span>
+                </div>
+                <!-- input row -->
+                <div class="input-row">
+                    <div class="input-half-row">
+                        <div class="input-half-row-left">
+                            <em>*</em><?php echo __('First Name') ?>
+                        </div>
+                        <input type="text" name="first_name" id="first_name" class="required disabled">
+                    </div>
+                    <div class="input-half-row">
+                        <div class="input-half-row-left">
+                            <em>*</em><?php echo __('Last Name') ?>
+                        </div>
+                        <input type="text" name="last_name" id="last_name" class="required disabled">
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="input-half-row">
+                        <div class="input-half-row-left">
+                            <em>*</em><?php echo __('Street Address 1') ?>
+                        </div>
+                        <input type="text" name="address1" id="address1" class="required disabled">
+                    </div>
+                    <div class="input-half-row">
+                        <div class="input-half-row-left">
+                            <em></em><?php echo __('Street Address 2') ?>
+                        </div>
+                        <input type="text" name="address2" class="disabled">
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="input-half-row">
+                        <div class="input-half-row-left">
+                            <em>*</em><?php echo __('City') ?>
+                        </div>
+                        <input type="text" name="city" id="city" class="required disabled">
+                    </div>
+                    <div class="input-half-row">
+                        <div class="input-half-row-left">
+                            <em>*</em><?php echo __('Country') ?>
+                        </div>
+                        <select name="country" id="country" class="input-select disabled required">
+                            <option value="" disabled><?php echo __('-- Select Country --') ?></option>
+                            <option value="us" selected><?php echo __('United States') ?></option>
+                            <option value="ca"><?php echo __('Canada') ?></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="input-half-row">
+                        <div class="input-half-row-left">
+                            <em>*</em><?php echo __('State/Province') ?>
+                        </div>
+                        <select name="state" id="state" class="required state-select input-select disabled">
+                            <option value="" disabled selected><?php echo __('Please select region, state or province') ?></option>
+                            <?php foreach ($states as $state) : ?>
+                            <option value="<?= $state['code'] ?>"><?= $state['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <div class="input-half-row">
+                        <div class="input-half-row-left">
+                            <em>*</em><?php echo __('Zip/Postal Code') ?>
+                        </div>
+                        <input type="text" name="zip" id="zip" class="required disabled">
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="input-half-row">
+                        <div class="input-half-row-left">
+                            <em>*</em><?php echo __('Telephone') ?>
+                        </div>
+                        <input type="text" name="telephone" id="telephone" class="required disabled">
+                    </div>
+                </div>
+
+                <!-- submit -->
+                <div class="input-submit-div">
+                    <div>
+                        <input type="checkbox" class="required" id="conditions" name="conditions">
+                        <label for="conditions"><p class="input-submit-p"><?php echo __('I have read and agree to the') ?> <a id="click-me2"><?php echo __('Privacy Policy') ?></a></p></label>
+                    </div>
+                    <button type="submit"><?php echo __('SUBMIT') ?></button>
+                </div>
+
+                <div id="popup-modal2" style="display: none">
+                    <div style="height: 400px; overflow-y: scroll;">
+                        <div style="padding:10px; line-height: 1.7;">
+                            <strong>Privacy Policy</strong><br>
+                            We guarantee that your personal information is only used to fill your order, to contact you if we have questions regarding your order, and to send order confirmation &amp; shipment tracking numbers. Your information is never sold, rented, or shared. <br>
+                            Our privacy policy is for better serving those who concern over how their ‘Personally Identifiable Information’ (PII) is being used online, which is of vital importance to identify, locate or contact an individual. So, please read our privacy policy carefully on how we collect, use and protect your personal information.<br>
+                            <strong>What we do with the information we collect:</strong><br>
+                            We use your information only to understand your needs and provide you with a better service, in particular for the following reasons:<br>
+                            <ul>
+                                <li style="list-style: disc !important; margin-left: 16px;">
+                                    Internal record keeping.
+                                </li>
+                                <li style="list-style: disc !important; margin-left: 16px;">
+                                    We may use the information to send you free gift that you apply for.
+                                </li>
+                                <li style="list-style: disc !important; margin-left: 16px;">
+                                    We may contact you in case there are some questions on your order.
+                                </li>
+                                <ul>
+                                    <br>
+                                    Your personal information will never be used for any purpose including posting, selling or renting.<br>
+                                    <strong>How is your information protected?</strong><br>
+                                    This privacy policy illustrates how water-filter.com, treats your personal information that you submit through this website as our precious property. Your information is protected through secured network and only a limited number of people have special access to your personal information. Your name and address is only printed on your packing slip and shipping label. Should we ask you to provide certain information by which you can be identified when using this website, then you can be assured that it will only be used in accordance with this privacy statement. Please rest assured that all transactions are under control of a gateway provider.  <br>
+                                    If you have any questions about the Privacy Policy, please feel free to email us at service@ecolifefilter.com or call 1-888-352-3558.
+                                    <br>
+                                </ul>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    require(
+        [
+            "jquery"
+        ],
+        function(
+            $
+        ) {
+            $('#country').change(function () {
+                var ss = $(this).children('option:selected').val();
+                var content = '';
+                if (ss === "us") {
+                    content += "<option value='' disabled selected><?php echo __('Please select region, state or province') ?></option>";
+                    <?php foreach ($states as $state) : ?>
+                    content += "<option value='<?= $state['code'] ?>'><?= $state['name'] ?></option>";
+                    <?php endforeach; ?>
+                    $('#state').html(content);
+                } else if (ss === "ca") {
+                    content += "<option value='' disabled selected><?php echo __('Please select region, state or province') ?></option>";
+                    <?php foreach ($states2 as $state2) : ?>
+                    content += "<option value='<?= $state2['code'] ?>'><?= $state2['name'] ?></option>";
+                    <?php endforeach; ?>
+                    $('#state').html(content);
+                }
+            });
+        });
+</script>

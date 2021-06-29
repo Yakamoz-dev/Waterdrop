@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Ecopure_Gift::css/gift_check.css" />
+        <script src="Ecopure_Gift::js/gift_check.js"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Ecopure\Gift\Block\Check" name="ecopure_gift_check" template="check.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,1 @@
+/var/www/fastest/app/code/Mageplaza/SocialLogin/view/frontend/web/js/provider.js

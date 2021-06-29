@@ -1,0 +1,1 @@
+/var/www/fastest/app/design/frontend/Codazon/fastest/fashion/Codazon_ProductFilter/web/js/productfilter.js

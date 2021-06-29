@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">ecopure_gift_product_form.ecopure_gift_product_data_source</item>
+            <item name="deps" xsi:type="string">ecopure_gift_product_form.ecopure_gift_product_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Product Form</item>
+        <item name="layout" xsi:type="array">
+            <item name="type" xsi:type="string">tabs</item>
+        </item>
+
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Ecopure\Gift\Block\Adminhtml\Product\Edit\BackButton</item>
+            <item name="delete" xsi:type="string">Ecopure\Gift\Block\Adminhtml\Product\Edit\DeleteButton</item>
+            <item name="reset" xsi:type="string">Ecopure\Gift\Block\Adminhtml\Product\Edit\ResetButton</item>
+            <item name="save" xsi:type="string">Ecopure\Gift\Block\Adminhtml\Product\Edit\SaveButton</item>
+        </item>
+    </argument>
+
+    <dataSource name="ecopure_gift_product_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Ecopure\Gift\Model\Product\DataProvider</argument>
+            <argument name="name" xsi:type="string">ecopure_gift_product_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">ro_id</argument>
+            <argument name="requestFieldName" xsi:type="string">ro_id</argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="ecopure_gift/product/save" />
+        </settings>
+    </dataSource>
+
+    <fieldset name="product">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Product Fieldset</item>
+            </item>
+        </argument>
+
+        <!-- This field represents form id and is hidden -->
+        <field name="ro_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">product</item>
+                    <item name="dataScope" xsi:type="string">ro_id</item>
+                </item>
+            </argument>
+        </field>
+
+        <!-- This field has data type 'text' and standard 'input' form element and looks like input -->
+        <field name="ro_productid">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Product ID</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">product</item>
+                    <item name="dataScope" xsi:type="string">ro_productid</item>
+<!--                    <item name="validation" xsi:type="array">-->
+<!--                        <item name="validate-number" xsi:type="boolean">true</item>-->
+<!--                    </item>-->
+                </item>
+            </argument>
+        </field>
+
+
+        <!-- This field has data type 'text' and standard 'input' form element and looks like input -->
+        <field name="ro_model_no">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Model No</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">product</item>
+                    <item name="dataScope" xsi:type="string">ro_model_no</item>
+                </item>
+            </argument>
+        </field>
+
+        <!-- This field has data type 'text' and standard 'input' form element and looks like input -->
+        <field name="ro_asin">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Asin</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">product</item>
+                    <item name="dataScope" xsi:type="string">ro_asin</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+
+        <!-- This field has data type 'text' and standard 'input' form element and looks like input -->
+        <field name="ro_order_no">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Order No</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">product</item>
+                    <item name="dataScope" xsi:type="string">ro_order_no</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="ro_used" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Ecopure\Gift\Model\Source\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Used</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">product</item>
+                    <item name="dataScope" xsi:type="string">ro_used</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="ro_regd" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Ecopure\Gift\Model\Source\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Regd</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">product</item>
+                    <item name="dataScope" xsi:type="string">ro_regd</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="use_order" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Ecopure\Gift\Model\Source\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Use Order</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">product</item>
+                    <item name="dataScope" xsi:type="string">use_order</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="only_reg" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Ecopure\Gift\Model\Source\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Only Reg</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">product</item>
+                    <item name="dataScope" xsi:type="string">only_reg</item>
+                </item>
+            </argument>
+        </field>
+
+        <!-- This field has data type 'text' and standard 'input' form element and looks like input -->
+        <field name="country">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Country</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">product</item>
+                    <item name="dataScope" xsi:type="string">country</item>
+                </item>
+            </argument>
+        </field>
+<!--        <field name="use_order" formElement="select">-->
+<!--            <settings>-->
+<!--                <dataType>text</dataType>-->
+<!--                <label translate="true">Use Order</label>-->
+<!--                <dataScope>use_order</dataScope>-->
+<!--            </settings>-->
+<!--            <formElements>-->
+<!--                <select>-->
+<!--                    <settings>-->
+<!--                        <options>-->
+<!--                            <option name="1" xsi:type="array">-->
+<!--                                <item name="value" xsi:type="string">1</item>-->
+<!--                                <item name="label" xsi:type="string">Yes</item>-->
+<!--                            </option>-->
+<!--                            <option name="0" xsi:type="array">-->
+<!--                                <item name="value" xsi:type="string">0</item>-->
+<!--                                <item name="label" xsi:type="string">No</item>-->
+<!--                            </option>-->
+<!--                        </options>-->
+<!--                        <caption translate="true">&#45;&#45; Please Select &#45;&#45;</caption>-->
+<!--                    </settings>-->
+<!--                </select>-->
+<!--            </formElements>-->
+<!--        </field>-->
+
+    </fieldset>
+</form>

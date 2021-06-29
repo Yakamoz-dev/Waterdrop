@@ -1,0 +1,26 @@
+<?php
+    $mediaUrl = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+?>
+<div class="container parent-div">
+    <input type="hidden" id="complete" value="<?= $this->getUrl('gift/index/complete'); ?>">
+    <input type="hidden" id="gift" value="<?= $this->getUrl('gift/index/gift'); ?>">
+    <img src="<?php echo $mediaUrl ?>gift/ro-bg.png" alt="" class="bg-img">
+    <div class="absolute-div">
+        <h2 class="absolute-title">Get A Free Gift</h2>
+        <p class="absolute-text">Already Registered Additional Warranty For Your Waterdrop Product?</p>
+        <div class="absolute-enter-div">
+            <p>Enter Your Serial Number or Order Number</p>
+            <input type="text" class="enter-icon">
+            <div class="img-div">
+                <img src="<?php echo $mediaUrl ?>gift/productid_new.png" alt="">
+                <img src="<?php echo $mediaUrl ?>gift/orderno_new.jpg"" alt="">
+            </div>
+        </div>
+        <div class="input-div">
+            <input type="text" id="userInput">
+            <button id="check">Check</button>
+            <p class="input-loading"></p>
+        </div>
+        <p class="register-p">If Not, Please <a href="">Register</a> Warranty First</p>
+    </div>
+</div>

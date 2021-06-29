@@ -1,0 +1,1 @@
+/var/www/fastest/vendor/sparsh/buy-now-magento-2-extension/view/frontend/web/js/buy-now.js

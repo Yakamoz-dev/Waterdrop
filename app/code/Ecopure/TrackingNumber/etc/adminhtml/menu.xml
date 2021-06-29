@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ecopure_TrackingNumber::top_level"
+             title="Tracking Number Importer"
+             module="Ecopure_TrackingNumber"
+             sortOrder="9999"
+             resource="Magento_Backend::content" />
+         <add id="Ecopure_TrackingNumber::level_1"
+             title="Import"
+             module="Ecopure_TrackingNumber"
+             sortOrder="0"
+             action="trackingnumber_importer/import"
+             parent="Ecopure_TrackingNumber::top_level"
+             resource="Magento_Backend::content" />
+    </menu>
+</config>

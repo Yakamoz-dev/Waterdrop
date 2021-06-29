@@ -1,0 +1,4 @@
+ID,PRODUCT,SKU,EMAIL,NICKNAME,RATING,TITLE,DETAIL,DATE,STATUS
+1,13,F456,hasemail@mail.com,Emily,2,"Not Good Enough!","Missing something",08/13/2016,1
+2,,T567,roni_cost@example.com,Roni,5,Amazing!,"Excellent product",12/13/2017,2
+3,243,,,Jamie,3,Almost!,"Would have given it 5 stars if not for the damage",12/25/2017,3

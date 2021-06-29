@@ -1,0 +1,1 @@
+/var/www/fastest/app/code/Flurrybox/EnhancedPrivacy/view/frontend/web/js/view/popup.js

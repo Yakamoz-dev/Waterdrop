@@ -1,0 +1,1 @@
+/var/www/fastest/vendor/klarna/module-onsitemessaging/view/frontend/web/js/pricebox-widget-mixin.js

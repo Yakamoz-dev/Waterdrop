@@ -1,0 +1,1 @@
+/var/www/fastest/app/code/Codazon/Shopbybrandpro/view/frontend/web/js/brands.js

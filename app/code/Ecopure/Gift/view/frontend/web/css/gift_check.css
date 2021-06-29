@@ -1,0 +1,183 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+input:focus,button:focus {
+    outline: none;
+}
+
+#check {
+    margin-bottom: 0;
+}
+
+.parent-div {
+    position: relative;
+    margin: 0 auto;
+}
+
+.bg-img {
+    width: 100%
+}
+
+.absolute-div {
+    background: #fff;
+    width: 40%;
+    padding: 20px;
+    position: absolute;
+    right: 11%;
+    top: 19%;
+}
+
+.absolute-title {
+    text-align: center;
+    color: #000;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 14px;
+}
+
+.absolute-text {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.absolute-enter-div {
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.absolute-enter-div p {
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+.enter-icon {
+    width: 20px !important;
+    height: 22px !important;
+    border: 0 !important;
+    background: url(/media/gift/ronote.png) !important;
+    display: inline-block !important;
+    background-size: 100% !important;
+    background-repeat: no-repeat !important;
+    color: transparent !important;
+    cursor: pointer !important;
+}
+
+.absolute-enter-div img {
+    width: 100%;
+}
+.img-div{
+    position: absolute;
+    display: none;
+    z-index: 1;
+}
+
+.input-div {}
+
+.input-div input {
+    border: 1px solid #ddd;
+    color: #999;
+    height: 40px;
+    width: 70%;
+    font-size: 100%;
+    display: inline;
+}
+
+.input-div button {
+    background: #09f;
+    color: #fff;
+    border-radius: 3px;
+    height: 40px;
+    padding: 0 20px;
+    border: 0;
+    font-size: 100%;
+    display: inline-block;
+    margin-left: -6px;
+}
+
+.input-loading {
+    padding: 10px 0;
+    float: left;
+}
+
+.register-p {
+    margin-top: 50px;
+}
+
+.register-p a {
+    color: #09f;
+    text-decoration: none;
+}
+@media (max-width:1199px){
+    .absolute-title{
+        font-size: 18px;
+    }
+    .absolute-text,.absolute-enter-div p,.input-loading,.register-p{
+        font-size: 14px;
+    }
+    .input-div input,.input-div button{
+        height: 35px;
+    }
+    .register-p{
+        margin-top: 40px;
+    }
+}
+
+@media (max-width:1024px){
+    .absolute-title{
+        font-size: 18px;
+    }
+    .absolute-text,.absolute-enter-div p,.input-loading,.register-p{
+        font-size: 12px;
+    }
+    .input-div input,.input-div button{
+        height: 30px;
+    }
+    .absolute-title,.absolute-text{
+        margin-bottom: 10px;
+    }
+    .absolute-enter-div{
+        padding-bottom: 10px;
+    }
+    .register-p{
+        padding-top: 0;
+    }
+    .absolute-div{
+        padding: 15px;
+    }
+}
+@media (max-width:991px){
+    .absolute-div{
+        width: 45%;
+        padding: 10px;
+    }
+}
+@media (max-width:767px){
+    .absolute-div{
+        position: unset;
+        width: 100%;
+        text-align: center;
+    }
+    .absolute-title, .absolute-text{
+        margin-bottom: 5px;
+    }
+    .absolute-enter-div{
+        padding-bottom: 5px;
+    }
+    .input-loading{
+        margin-top: 10px;
+        padding: 0;
+    }
+    .img-div{
+        width: 65%;
+        left: 20%;
+        top: 100%;
+    }
+    .input-loading{
+        float: unset;
+    }
+    .register-p{
+        margin-top: 10px;
+    }
+}

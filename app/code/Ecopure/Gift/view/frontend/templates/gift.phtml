@@ -1,0 +1,168 @@
+<?php
+    $mediaUrl = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+    $modelNos = $block->getModelNos();
+?>
+<img src="<?php echo $mediaUrl ?>gift/reg.jpg"  alt=""/>
+<div class="form-div">
+    <form action="<?= $this->getUrl('gift/index/reg'); ?>" method="post" data-mage-init='{"validation":{}}'>
+        <div class="title-div">
+            <h4 class="title-word"><?php echo __('Product Information') ?></h4>
+        </div>
+        <div class="input-font">
+            <div class="part1-select-div">
+                <div class="part1-input1-title">
+                    <em class="red-title">*</em><span class="part1-input1-title-span"><?php echo __('Model No.') ?></span>
+                </div>
+                <select class="part1-select required error-text-before" id="change-select" name="ro_model_no">
+                    <option value="" disabled selected><?php echo __('-- Please Select --') ?></option>
+                    <?php foreach ($modelNos as $modelNo) : ?>
+                    <option value="<?= $modelNo['ro_model_no'] ?>" data-order="<?= $modelNo['use_order'] ?>"><?= $modelNo['ro_model_no'] ?></option>
+                    <?php endforeach ?>
+                </select>
+            </div>
+            <div class="part1-rightInput-div display-input-div" id="Serial-Number">
+                <div class="input-titleWord-div part1-input1-div">
+                    <em class="red-title">*</em><span class="part1-input1-title-span"><?php echo __('Serial Number') ?></span>
+                </div>
+                <input type="text" class="input error-text-before" name="ro_productid" id="ro_productid">
+                <input id="input-icon1" class="input-left-icon"/>
+                <div class="display-img">
+                    <img src="<?php echo $mediaUrl ?>gift/productid_new.png" alt="productid_new.png" class="display-img-width">
+                </div>
+            </div>
+            <div class="part1-leftInput-div">
+                <div class="input-titleWord-div part1-input3-width">
+                    <em class="red-title">*</em><span class="part1-input1-title-span"><?php echo __('Order Number') ?></span>
+                </div>
+                <input type="text" class="input required error-text-before" name="ro_order_no">
+                <input id="input-icon2" class="input-left-icon"/>
+                <div class="display-img">
+                    <img src="<?php echo $mediaUrl ?>gift/orderno_new.jpg" alt="productid_new.png" class="display-img-width">
+                </div>
+            </div>
+            <div class="part1-rightInput-div">
+                <div class="input-titleWord-div part1-input4-width">
+                    <span class="part1-input1-title-span"><?php echo __('Purchase Date') ?></span>
+                </div>
+                <input type="text" class="input datepicker" name="purchase_date">
+            </div>
+            <div class="part1-leftInput-div">
+                <div class="input-titleWord-div part1-input2-width">
+                    <span class="part1-input1-title-span"><?php echo __('Installation Date') ?></span>
+                </div>
+                <input type="text" class="input datepicker" name="installation_data">
+            </div>
+        </div>
+
+        <div class="title-div">
+            <h4 class="title-word"><?php echo __('Customer Information') ?></h4>
+        </div>
+        <div class="input-font">
+            <div class="part2-leftInput-div">
+                <div class="part2-titleWord-div">
+                    <em class="red-title">*</em><span class="part1-input1-title-span"><?php echo __('First Name') ?></span>
+                </div>
+                <input type="text" class="input required error-text-before" name="first_name">
+            </div>
+            <div class="part2-rightInput-div">
+                <div class="part2-titleWord-div">
+                    <em class="red-title">*</em><span class="part1-input1-title-span"><?php echo __('Last Name') ?></span>
+                </div>
+                <input type="text" class="input required error-text-before" name="last_name">
+            </div>
+            <div class="part2-leftInput-div">
+                <div class="part2-titleWord-div">
+                    <em class="red-title">*</em><span class="part1-input1-title-span"><?php echo __('Email') ?></span>
+                </div>
+                <input type="text" class="input required email error-text-before" name="email">
+            </div>
+            <div class="part2-rightInput-div">
+                <div class="part2-titleWord-div">
+                    <span class="part1-input1-title-span"><?php echo __('Telephone') ?></span>
+                </div>
+                <input type="text" class="input" name="telephone">
+            </div>
+        </div>
+
+        <div class="submit-div">
+            <input type="checkbox" class="checkbox required error-text-before" id="conditions" name="conditions" /> <label for="conditions"><?php echo __('I have read and agree to the') ?></label>
+            <a id="click-me" data-target="#general_warranty_terms_and_conditions" class="button-right-span" style="cursor: pointer"><?php echo __('General Warranty Terms and Conditions') ?></a>
+            <button type="submit" class="form-button"><span><span><?php echo __('Submit') ?></span></span></button>
+        </div>
+    </form>
+    <div class="bottom-content">
+        <div>
+            Besides the 30-day return from Amazon, we provide warranty and
+            support as the manufacturer.
+            We stand behind our products and love to help our customers. Our
+            products come with extended manufacturer
+            warranty. In order to provide you with better service,
+            registration is required to verify the purchase and activate the
+            warranty.
+        </div>
+    </div>
+    <div id="popup-modal" style="display: none">
+        <div style="height: 400px; overflow-y: scroll;">
+            <div style="padding:10px; line-height: 1.7;">
+                The warranty of Waterdrop Reverse Osmosis Filtration System covers defects in materials
+                and workmanship from the original date of purchase. During the warranty period, we
+                will replace or repair any part which is deemed to be defective, if product has not been
+                subjected to tampering, alteration, lack of regular maintenance or improper use after
+                delivery. The cost of repair or replacement under those excluded circumstances shall be
+                borne by the consumer. This Limited Warranty does not cover the following items: filters
+                and all other parts or components that require regular replacement as a result of ordinary
+                usage. This Limited Warranty only applies if the system is installed, used, and maintained in
+                compliance with all instructions and requirements enclosed with the system. <br>
+                This Limited Warranty shall only be valid if:<br>
+                1. The system is to be used with municipal water only;<br>
+                2. Feed water pressure is no less than 14.5 PSI and no longer than 87 PSI;<br>
+                3. Feed water temperature must be no less than 41°F and no more than 100 °F;<br>
+                4. Feed water must have a pH between 6.5 and 8.5;<br>
+                5. Turbidity must be less than 1.0 NTU.<br>
+
+                Any information or suggestion by Waterdrop with respect to the Product concerning
+                applications, specifications or standards is provided solely for your convenient reference.
+                The quality of water supplies may vary seasonably or over a period of time. Your water
+                usage may vary as well. The manufacturer assumes no liability for the determination of the
+                proper equipment necessary to meet your requirements, and we do not authorize others
+                to assume such obligation on our behalf. You must verify and test the suitability of any
+                information with respect to the Product for your specific application.<br>
+
+                This Limited Warranty shall be void if:<br>
+                1. Cartridge filters are not replaced on the recommended maintenance schedule;<br>
+                2. The product is purchased from someone other than Waterdrop or Waterdrop’s
+                authorized dealers as Waterdrop cannot verify or guarantee the integrity or authenticity
+                of the Product. <br>
+
+                Waterdrop’s sole obligation under this warranty shall be repair or replacement of a nonconforming product or parts of this product, or at Waterdrop’s option, return of the
+                product and a refund of the purchase price. Our obligation does not include the cost of
+                transportation. We are not responsible for damage in transit, and claims for such damage
+                should be presented to the carrier by the customer.<br>
+
+                The warranties set forth herein are the only warranties made by Waterdrop with respect
+                to the product. Waterdrop makes no warranties, expressed or implied, including, but not
+                limited to, any warranties of fitness or merchantability, except as expressly set forth above. <br>
+                <strong>
+                    NOTE: IN CASE SOME STATES DO NOT ALLOW LIMITATIONS ON HOW LONG AN IMPLIED
+                    WARRANTY LASTS, YOU MAY CHOOSE TO RETURN THE SYSTEM. IF YOU CHOOSE TO
+                    KEEP IT. YOU AGREE THAT THE ABOVE LIMITATIONS STILL APPLY TO YOU.</strong><br>
+                <strong>
+                    Warranty Registration</strong><br>
+                Please visit our website www.water-filter.com and go to the “Warranty Registration” tab to
+                register your product for the warranty.<br>
+
+                We offer a 30-day money back guarantee, a 1-year manufacturer warranty, and lifetime tech
+                support for all our products. Please be sure to fill in the order information upon registration
+                of your system. For any questions and concerns about the product, please feel free to call or
+                email us. Your satisfaction is our top priority! <br>
+
+                If you are happy with our products and service, please share with your friends or share on
+                Amazon. We will highly appreciate your voice and support. Thank you!<br>
+                <strong>
+                    How to Contact Us</strong><br>
+                Tel: 1-888-352-3558 Mon-Fri 8:00 AM-5:00 PM (PST)<br>
+                Email: service@water-filter.com<br>
+            </div>
+        </div>
+    </div>
+</div>

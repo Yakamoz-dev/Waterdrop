@@ -1,0 +1,1 @@
+/var/www/fastest/app/design/frontend/Codazon/fastest/fashion/web/js/menu/cdz_menu.js

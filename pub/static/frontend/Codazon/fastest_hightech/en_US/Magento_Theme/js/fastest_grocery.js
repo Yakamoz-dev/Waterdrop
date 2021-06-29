@@ -1,0 +1,1 @@
+/var/www/fastest/app/design/frontend/Codazon/fastest/hightech/Magento_Theme/web/js/fastest_grocery.js

@@ -1,0 +1,1 @@
+/var/www/fastest/app/code/Codazon/ThemeOptions/view/frontend/web/js/is-mobile.js

@@ -1,0 +1,1 @@
+/var/www/fastest/app/code/Codazon/MegaMenu/view/frontend/web/js/menu.js

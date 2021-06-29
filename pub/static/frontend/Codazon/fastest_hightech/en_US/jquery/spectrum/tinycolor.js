@@ -1,0 +1,1 @@
+/var/www/fastest/lib/web/jquery/spectrum/tinycolor.js

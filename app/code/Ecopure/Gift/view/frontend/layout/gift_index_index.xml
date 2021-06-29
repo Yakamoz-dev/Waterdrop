@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Ecopure_Gift::css/gift.css" />
+        <script src="Ecopure_Gift::js/gift.js"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Ecopure\Gift\Block\Gift" name="ecopure_gift" template="gift.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

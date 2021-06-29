@@ -1,0 +1,83 @@
+<?php
+    $viewModel = $block->getViewModel();
+    $customer = $viewModel->getCustomer();
+    $product = $viewModel->getProductName();
+    $asin = $viewModel->getAsin();
+    $mediaUrl = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+?>
+<div class="container">
+    <div class="bg-div">
+        <h2 class="title-success"><?php echo __('Success!') ?></h2>
+        <?php if($product == 'Warranty'): ?>
+            <p class="title-text">We have received your gift request. Your warranty requests are recorded.<br>
+                Your ideas about the product do matter for us! Many thanks for you to rate the product and share your
+                thoughts!
+            </p>
+        <?php else: ?>
+            <p class="title-text">We have received your gift request. Your gift will be shipped out within 48 hours.<br>
+                Your ideas about the product do matter for us! Many thanks for you to rate the product and share your thoughts!
+            </p>
+        <?php endif; ?>
+        <!-- input -->
+        <input type="hidden" id="gotourl" value="<?=$this->getUrl('gift/index/success');?>" />
+        <div id="popup-modal" style="display: none">
+            <div id="select-custom">
+                <div class="row">
+                    <div class="form-group col-md-24">
+                        <h3>Share your experience with others.</h3>
+                        <p>It won’t take long, and it just need a few seconds. It is not mandatory but will really help us to keep offering amazing promotions to our preferred customers.</p>
+                        <h3 style="text-align:center; margin-top:40px">Your comment</h3>
+                        <textarea name="amazoncomment" id="amazoncomment-box" rows="4" cols="50"></textarea>
+                        <button type="button" onclick="sendAmazon('<?php echo $asin ?>')" style="color: #fff;background: #282828;">Click here to copy and post your<img src="<?php echo $mediaUrl ?>gift/amazon-02.png"  alt="" style="width: 3%" />review.</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="popup-modal2" style="display: none">
+            <div id="select-custom">
+                <div class="row">
+                    <div class="form-group col-md-24">
+                        <p>Thanks for your feedback. We here at Waterdrop strives to deliver the best customer experience. We have received your feedback and someone from our support team will contact you soon.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="popup-modal3" style="display: none">
+            <div id="select-custom">
+                <div class="row">
+                    <div class="form-group col-md-24">
+                        <p>Waterdrop strives to deliver the best customer experience, and it makes our day to hear we have accomplished that. We count ourselves lucky to have you as a customer. It’s people like you that inspire us.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <select name="channel" id="channel" class="evaluate-select">
+                <option value="" selected disabled>Where did you purchase?</option>
+                <option value="amazon">amazon</option>
+                <option value="shopify">waterdropfilter.com</option>
+            </select>
+            <p class="rating-p"><?php echo __('Overall rating') ?></p>
+
+            <div class="rating">
+                <input type="radio" id="star5" value="5" name="star" class="checked">
+                <label for="star5" id="star5">&#9733</label>
+                <input type="radio" id="star4" value="4" name="star" class="checked">
+                <label for="star4" id="star4">&#9733</label>
+                <input type="radio" id="star3" value="3" name="star" class="checked">
+                <label for="star3" id="star3">&#9733</label>
+                <input type="radio" id="star2" value="2" name="star" class="checked">
+                <label for="star2" id="star2">&#9733</label>
+                <input type="radio" id="star1" value="1" name="star" class="checked">
+                <label for="star1" id="star1">&#9733</label>
+            </div>
+
+            <p class="textarea-p">Let us know how you feel about this product. We would like to hear from you.
+                Please enter at least 10 characters.</p>
+            <textarea name="comment" id="comment" cols="50" rows="4" class="rating-textarea"></textarea>
+            <div>
+                <button type="button" class="rating-button" onclick="check('<?=$this->getUrl("gift/index/refer");?>','<?=$customer["id"];?>');">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

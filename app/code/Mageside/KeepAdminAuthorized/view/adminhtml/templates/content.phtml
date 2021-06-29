@@ -1,0 +1,21 @@
+<?php
+/**
+ * Copyright © Mageside. All rights reserved.
+ * See MS-LICENSE.txt for license details.
+ */
+
+/** @var Magento\Framework\View\Element\Template $block */
+/** @var Mageside\KeepAdminAuthorized\Helper\Config $config */
+$config = $this->helper('Mageside\KeepAdminAuthorized\Helper\Config');
+?>
+<?php if ($config->isEnabled()) : ?>
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "Mageside_KeepAdminAuthorized/js/keep-authorized": {
+                    "url": "<?php echo $block->getUrl('admin_authorized/authorize/keep')?>"
+                }
+            }
+        }
+    </script>
+<?php endif ?>

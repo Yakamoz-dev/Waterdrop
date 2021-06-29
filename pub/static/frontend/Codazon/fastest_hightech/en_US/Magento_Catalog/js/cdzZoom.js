@@ -1,0 +1,1 @@
+/var/www/fastest/app/design/frontend/Codazon/fastest/fashion/Magento_Catalog/web/js/cdzZoom.js

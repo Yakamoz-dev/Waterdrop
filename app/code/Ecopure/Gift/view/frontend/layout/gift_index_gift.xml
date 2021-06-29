@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Ecopure_Gift::css/giftsel.css" />
+        <css src="Ecopure_Gift::css/select2.min.css" />
+        <script src="Ecopure_Gift::js/giftsel.js"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Ecopure\Gift\Block\Giftsel" name="ecopure_giftsel" template="giftsel.phtml">
+                <arguments>
+                    <argument name="view_model" xsi:type="object">Ecopure\Gift\ViewModel\LoginHistory</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

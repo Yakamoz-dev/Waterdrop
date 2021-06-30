@@ -3,7 +3,7 @@
 .no-padding{ padding:0;}
 .no-padding-left{padding-left:0 !important}
 .page-main .block.block-static-block {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 }
 .abs-line-left{
 	position:relative;
@@ -609,7 +609,8 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
 		}
 	}
 	.page-main .sidebar .block:not(.block-static-block){
-		margin-bottom: 20px !important;
+        margin-top: 0;
+		margin-bottom: 24px !important;
 	}
 }
 /*Deals*/
@@ -785,6 +786,13 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
 		}
 		.icon-font{
 			float:left; font-size:0; width:60px; height:60px; line-height:60px; text-align:center; position: absolute; left: 0; top:0;
+            display: inline-block;
+            font-family: 'icomoon';
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
 			.lib-css(color, @main_note_text);
 			.lib-css(border, 2px solid @main_note_text);
 			.abs-borderradius(100%);
@@ -806,6 +814,11 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
 		}
 		p.text{color:#acacac; font-size:15px;}
 	}
+    background: #F4FBFF;
+    display: inline-block;
+    width: 100%;
+    position: absolute;
+    left: 0;
 }
 //social
 .wrapper-ads08{

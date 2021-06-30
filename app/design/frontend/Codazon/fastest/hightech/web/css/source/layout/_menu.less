@@ -535,23 +535,31 @@
 		}
 		.cdz-vertical-menu{
 			li.level0{
-				border-color:@vermenu_border;
+				border-color:#ffffff;
 				> a.menu-link{
-					.abs-link(@vermenu_text, @vermenu_hover_text);
-					.abs-cssall(@vermenu_text, @vermenu_border, @vermenu_background, @vermenu_font);
+					//.abs-link(@vermenu_text, @vermenu_hover_text);
+					//.abs-cssall(@vermenu_text, @vermenu_border, @vermenu_background, @vermenu_font);
+                    text-decoration: none;
+                    color: #333333;
+                    background-color: #ffffff;
+                    border-color: #ffffff;
+                    font: 400 14px/1.35 Roboto, Helvetica Neue, Verdana, Arial, sans-serif;
 					padding:0;
 					margin:0;
 					.menu-icon{
 						min-width:50px;
 						font-size: 130%;
-						padding-top:18px;
+						padding-top:9px;
 						vertical-align: top;
+                        img {
+                            max-width: 32px;
+                        }
 					}
 					&:before{
 						margin-top: 12px;
 					}
 					span{
-						padding:17px 20px 17px 20px;
+						padding:16.5px 20px 16.5px 20px;
 						text-transform: none;
 						.rtl-layout &{
 							padding-left:20px;

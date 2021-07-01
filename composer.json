@@ -12,7 +12,6 @@
     },
     "require": {
         "ext-json": "*",
-        "magento/data-migration-tool": "2.4.2",
         "magento/product-community-edition": "2.4.2",
         "nordcomputer/showoutofstockprice": "0.4.2",
         "olegkoval/magento2-regenerate-url-rewrites": "^1.3",

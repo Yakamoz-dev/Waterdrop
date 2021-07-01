@@ -66,7 +66,6 @@ return array(
     'Nordcomputer\\Showoutofstockprice\\' => array($vendorDir . '/nordcomputer/showoutofstockprice'),
     'MyCLabs\\Enum\\' => array($vendorDir . '/myclabs/php-enum/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
-    'Migration\\' => array($vendorDir . '/magento/data-migration-tool/src/Migration'),
     'Magento\\Wishlist\\' => array($vendorDir . '/magento/module-wishlist'),
     'Magento\\WishlistGraphQl\\' => array($vendorDir . '/magento/module-wishlist-graph-ql'),
     'Magento\\WishlistAnalytics\\' => array($vendorDir . '/magento/module-wishlist-analytics'),

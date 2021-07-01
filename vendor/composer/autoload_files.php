@@ -481,8 +481,6 @@ return array(
     '6124b4c8570aa390c21fafd04a26c69f' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
     '3109cb1a231dcd04bee1f9f620d46975' => $vendorDir . '/paragonie/sodium_compat/autoload.php',
     'aa75ea0761a2f40c1f3b32ad314f86c4' => $vendorDir . '/phpseclib/mcrypt_compat/lib/mcrypt.php',
-    '0675d4e4a5ec2bff513f44d595f3b063' => $vendorDir . '/magento/data-migration-tool/src/Migration/cli_commands.php',
-    'a1a5ee93938163d4806d2cc4f289e75c' => $vendorDir . '/magento/data-migration-tool/registration.php',
     '79b3724166c1e73e36c45f44df1c4e1a' => $vendorDir . '/nordcomputer/showoutofstockprice/registration.php',
     'dc4b4418d0c68b7ed636761dce59ad35' => $vendorDir . '/olegkoval/magento2-regenerate-url-rewrites/registration.php',
     'e3374b74f4d3a702a6980fab2d4c0d68' => $vendorDir . '/sparsh/buy-now-magento-2-extension/registration.php',

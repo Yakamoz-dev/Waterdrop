@@ -867,15 +867,6 @@
       ),
       'reference' => NULL,
     ),
-    'magento/data-migration-tool' => 
-    array (
-      'pretty_version' => '2.4.2',
-      'version' => '2.4.2.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'defabdb069cfb354b4c0377de17fae822b495c4a',
-    ),
     'magento/framework' => 
     array (
       'pretty_version' => '103.0.2',

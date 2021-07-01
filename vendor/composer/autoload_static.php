@@ -482,8 +482,6 @@ class ComposerStaticInitfea2efe9fa4d73211abe777881f2e709
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '3109cb1a231dcd04bee1f9f620d46975' => __DIR__ . '/..' . '/paragonie/sodium_compat/autoload.php',
         'aa75ea0761a2f40c1f3b32ad314f86c4' => __DIR__ . '/..' . '/phpseclib/mcrypt_compat/lib/mcrypt.php',
-        '0675d4e4a5ec2bff513f44d595f3b063' => __DIR__ . '/..' . '/magento/data-migration-tool/src/Migration/cli_commands.php',
-        'a1a5ee93938163d4806d2cc4f289e75c' => __DIR__ . '/..' . '/magento/data-migration-tool/registration.php',
         '79b3724166c1e73e36c45f44df1c4e1a' => __DIR__ . '/..' . '/nordcomputer/showoutofstockprice/registration.php',
         'dc4b4418d0c68b7ed636761dce59ad35' => __DIR__ . '/..' . '/olegkoval/magento2-regenerate-url-rewrites/registration.php',
         'e3374b74f4d3a702a6980fab2d4c0d68' => __DIR__ . '/..' . '/sparsh/buy-now-magento-2-extension/registration.php',
@@ -589,7 +587,6 @@ class ComposerStaticInitfea2efe9fa4d73211abe777881f2e709
         array (
             'MyCLabs\\Enum\\' => 13,
             'Monolog\\' => 8,
-            'Migration\\' => 10,
             'Magento\\Wishlist\\' => 17,
             'Magento\\WishlistGraphQl\\' => 24,
             'Magento\\WishlistAnalytics\\' => 26,
@@ -1266,10 +1263,6 @@ class ComposerStaticInitfea2efe9fa4d73211abe777881f2e709
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
-        ),
-        'Migration\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/magento/data-migration-tool/src/Migration',
         ),
         'Magento\\Wishlist\\' => 
         array (

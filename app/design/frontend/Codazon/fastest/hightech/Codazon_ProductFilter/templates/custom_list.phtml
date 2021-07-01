@@ -42,11 +42,11 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
 				<?php $iterator = 0; ?>
 				<div class="products list items product-items">
 				    <?php /** @var $_product \Magento\Catalog\Model\Product */ ?>
-				    <?php foreach ($_productCollection as $_product): ?>				    			    					    					    						    				    		
+				    <?php foreach ($_productCollection as $_product): ?>
 						        <div class="item product product-item">
 							        <div class="product-item-info" data-container="product-grid">
 							        	<div class="product-images">
-							        		
+
 							            <?php
 							            $productImage = $block->getImage($_product, $image);
 							            $productHoverImage = $block->getImage($_product, $image_hover);
@@ -66,11 +66,11 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
 												<?php echo $productHoverImage->toHtml(); ?>
 											</span>
 							            </a>
-							            <?php $labelHelper->showLabel($_product) ?> 
+							            <?php $labelHelper->showLabel($_product) ?>
 							            </div>
-							           
+
 							            <?php endif ?>
-										
+
 							        	</div>
 							            <div class="product details product-item-details">
 							                <?php
@@ -84,13 +84,15 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
 							                    </a>
 							                </strong>
 							                <?php endif ?>
+
+                                            <?php if($block->isShow('review')): ?>
+                                                <?php echo $block->getReviewsSummaryHtml($_product, $templateType); ?>
+                                            <?php endif ?>
+
 											<?php if($block->isShow('price')): ?>
 							                <?php /* @escapeNotVerified */ echo $block->getProductPrice($_product) ?>
 							                <?php endif ?>
-							                <?php if($block->isShow('review')): ?>
-							                <?php echo $block->getReviewsSummaryHtml($_product, $templateType); ?>
-							                <?php endif ?>
-							                
+
 							                <?php echo $block->getProductDetailsHtml($_product); ?>
 
 							                <div class="cdz-product-bottom">
@@ -116,7 +118,7 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
 																<div class="stock unavailable"><span><?php /* @escapeNotVerified */ echo __('Out of stock') ?></span></div>
 															<?php endif; ?>
 														<?php endif; ?>
-													
+
 													<?php endif ?>
 													<?php if($block->isShow('addto')): ?>
 													<?php if ($this->helper('Magento\Wishlist\Helper\Data')->isAllow()): ?>
@@ -142,17 +144,17 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
 														   role="button">
 															<span><?php /* @escapeNotVerified */ echo __('Add to Compare') ?></span>
 														</a>
-													</div>										
+													</div>
 													<?php endif ?>
-													
+
 														<?php echo $this->helper('Codazon\QuickShop\Helper\Data')->getQuickShopButton($_product); ?>
-													
+
 													</div>
 												</div>
 							                </div>
 							            </div>
 							        </div>
-						        </div>									
+						        </div>
 				        <?php $iterator++; ?>
 				    <?php endforeach; ?>
 				</div>
@@ -168,5 +170,5 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
 				</script>
 			<?php endif; ?>
 		</div>
-	</div>	
+	</div>
 <?php endif ?>

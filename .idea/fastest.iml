@@ -98,7 +98,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/league/mime-type-detection" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/lusitanian/oauth" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/magento/composer" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/magento/data-migration-tool" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/magento/framework" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/magento/framework-amqp" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/magento/framework-bulk" />

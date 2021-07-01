@@ -517,7 +517,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
       <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
-      <path value="$PROJECT_DIR$/vendor/magento/data-migration-tool" />
       <path value="$PROJECT_DIR$/vendor/nordcomputer/showoutofstockprice" />
       <path value="$PROJECT_DIR$/vendor/sparsh/buy-now-magento-2-extension" />
     </include_path>

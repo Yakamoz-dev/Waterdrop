@@ -1,0 +1,21 @@
+{
+    "name": "nordcomputer/showoutofstockprice",
+    "description": "Adds price to out-of-stock products",
+    "version": "v0.4.2",
+    "require": {
+        "php": "^7.1|^7.2|^7.3|^7.4"
+    },
+    "type": "magento2-module",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Nordcomputer\\Showoutofstockprice\\": ""
+        }
+    }
+}

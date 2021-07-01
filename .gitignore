@@ -44,3 +44,4 @@
 !/var/package/*.xml
 
 /pub/static/*
+.idea/*

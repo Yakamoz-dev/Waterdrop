@@ -67,10 +67,6 @@
             "type": "git",
             "url": "git@github.com:nordcomputer/magento2-showoutofstockprice.git"
         },
-        "data-migration-tool": {
-            "type": "git",
-            "url": "https://github.com/magento/data-migration-tool"
-        },
         "0": {
             "type": "composer",
             "url": "https://repo.magento.com/"

@@ -17,9 +17,54 @@ class Interceptor extends \Magento\Framework\View\Asset\Source implements \Magen
     /**
      * {@inheritdoc}
      */
+    public function getFile(\Magento\Framework\View\Asset\LocalInterface $asset)
+    {
+        $pluginInfo = $this->pluginList->getNext($this->subjectType, 'getFile');
+        return $pluginInfo ? $this->___callPlugins('getFile', func_get_args(), $pluginInfo) : parent::getFile($asset);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getContent(\Magento\Framework\View\Asset\LocalInterface $asset)
     {
         $pluginInfo = $this->pluginList->getNext($this->subjectType, 'getContent');
         return $pluginInfo ? $this->___callPlugins('getContent', func_get_args(), $pluginInfo) : parent::getContent($asset);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSourceContentType(\Magento\Framework\View\Asset\LocalInterface $asset)
+    {
+        $pluginInfo = $this->pluginList->getNext($this->subjectType, 'getSourceContentType');
+        return $pluginInfo ? $this->___callPlugins('getSourceContentType', func_get_args(), $pluginInfo) : parent::getSourceContentType($asset);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findSource(\Magento\Framework\View\Asset\LocalInterface $asset)
+    {
+        $pluginInfo = $this->pluginList->getNext($this->subjectType, 'findSource');
+        return $pluginInfo ? $this->___callPlugins('findSource', func_get_args(), $pluginInfo) : parent::findSource($asset);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getContentType($path)
+    {
+        $pluginInfo = $this->pluginList->getNext($this->subjectType, 'getContentType');
+        return $pluginInfo ? $this->___callPlugins('getContentType', func_get_args(), $pluginInfo) : parent::getContentType($path);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findRelativeSourceFilePath(\Magento\Framework\View\Asset\LocalInterface $asset)
+    {
+        $pluginInfo = $this->pluginList->getNext($this->subjectType, 'findRelativeSourceFilePath');
+        return $pluginInfo ? $this->___callPlugins('findRelativeSourceFilePath', func_get_args(), $pluginInfo) : parent::findRelativeSourceFilePath($asset);
     }
 }

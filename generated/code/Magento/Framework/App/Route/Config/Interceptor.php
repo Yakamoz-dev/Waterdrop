@@ -17,9 +17,27 @@ class Interceptor extends \Magento\Framework\App\Route\Config implements \Magent
     /**
      * {@inheritdoc}
      */
+    public function getRouteFrontName($routeId, $scope = null)
+    {
+        $pluginInfo = $this->pluginList->getNext($this->subjectType, 'getRouteFrontName');
+        return $pluginInfo ? $this->___callPlugins('getRouteFrontName', func_get_args(), $pluginInfo) : parent::getRouteFrontName($routeId, $scope);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRouteByFrontName($frontName, $scope = null)
     {
         $pluginInfo = $this->pluginList->getNext($this->subjectType, 'getRouteByFrontName');
         return $pluginInfo ? $this->___callPlugins('getRouteByFrontName', func_get_args(), $pluginInfo) : parent::getRouteByFrontName($frontName, $scope);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getModulesByFrontName($frontName, $scope = null)
+    {
+        $pluginInfo = $this->pluginList->getNext($this->subjectType, 'getModulesByFrontName');
+        return $pluginInfo ? $this->___callPlugins('getModulesByFrontName', func_get_args(), $pluginInfo) : parent::getModulesByFrontName($frontName, $scope);
     }
 }

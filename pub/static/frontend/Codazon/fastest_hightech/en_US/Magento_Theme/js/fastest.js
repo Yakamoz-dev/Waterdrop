@@ -1,1 +1,0 @@
-/var/www/fastest/app/design/frontend/Codazon/fastest/fashion/Magento_Theme/web/js/fastest.js

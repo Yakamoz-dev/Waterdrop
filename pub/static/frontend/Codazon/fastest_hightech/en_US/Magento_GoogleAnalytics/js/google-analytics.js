@@ -1,1 +1,0 @@
-/var/www/fastest/vendor/magento/module-google-analytics/view/frontend/web/js/google-analytics.js

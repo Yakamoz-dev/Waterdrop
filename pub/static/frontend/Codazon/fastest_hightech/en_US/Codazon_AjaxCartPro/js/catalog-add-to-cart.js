@@ -1,1 +1,0 @@
-/var/www/fastest/app/code/Codazon/AjaxCartPro/view/frontend/web/js/catalog-add-to-cart.js

@@ -4,8 +4,12 @@
 
 /PATCH_*.sh
 
-/app/etc/local.xml
 /app/etc/env.php
+/app/etc/config.php
+/sitemap
+/sitemap.xml
+/pub/sitemap
+/pub/sitemap.xml
 
 /media/*
 !/media/.htaccess
@@ -45,5 +49,6 @@
 !/var/package/*.xml
 
 /pub/static/*
+/pub/errors/*
 /.idea/*
 /generated/*

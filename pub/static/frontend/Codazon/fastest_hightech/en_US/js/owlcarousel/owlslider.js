@@ -1,1 +1,0 @@
-/var/www/fastest/app/design/frontend/Codazon/fastest/fashion/web/js/owlcarousel/owlslider.js

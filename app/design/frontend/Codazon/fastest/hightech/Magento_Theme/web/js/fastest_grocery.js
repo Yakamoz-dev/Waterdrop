@@ -139,7 +139,7 @@
 				}
 				$floatBar.css({
 						left: leftSize,
-						top: $header.outerHeight() +10,
+						top: $header.outerHeight() +210,
 				});
 			}
 
@@ -161,13 +161,13 @@
 				if(curWinTop > headerHeight){
 					$floatBar.css({
 						left: leftSize,
-						top: $header.outerHeight() + 30,
+						top: $header.outerHeight() + 230,
 					})
 				}
 				else {
 					$floatBar.css({
 						left: leftSize,
-						top: $header.outerHeight() + 10,
+						top: $header.outerHeight() + 210,
 					})
 				}
 

@@ -6,6 +6,9 @@
  */
 -->
 <page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Codazon_ThemeOptions::css/product.css"/>
+    </head>
     <body>
         <move element="product.info.sku" destination="page.main.title" />
         <move element="product.info.review" destination="page.main.title" after="product.info.sku"/>
@@ -42,6 +45,7 @@
 	</referenceContainer>
 	<move element="product.info.media" destination="product.info.left" before='-'/>
 	<move element="product.info.main" destination="product.info.left" />
+	<move element="catalog.product.related" destination="content" after="product.main.content" />
 
     <referenceBlock name="catalog.compare.sidebar" remove="true" />
     <referenceBlock name="wishlist_sidebar" remove="true" />

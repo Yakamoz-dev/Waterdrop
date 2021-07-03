@@ -12,7 +12,7 @@
     <body>
         <referenceBlock name="mgs.richsnippets.cat" remove="true" />
 		<referenceContainer name="sidebar.main">
-            <block ifconfig="codazon_shopbybrand/brand_search_box/display_on_lsb_brand_page" class="Codazon\Shopbybrandpro\Block\Widget\BrandSearch" name="sidebar.brand.search" template="Codazon_Shopbybrandpro::brand/brand_search.phtml"/>
+<!--            <block ifconfig="codazon_shopbybrand/brand_search_box/display_on_lsb_brand_page" class="Codazon\Shopbybrandpro\Block\Widget\BrandSearch" name="sidebar.brand.search" template="Codazon_Shopbybrandpro::brand/brand_search.phtml"/>-->
 			<block ifconfig="codazon_shopbybrand/featured_brands/display_on_lsb_brand_page" class="Codazon\Shopbybrandpro\Block\Widget\BrandSlider" name="sidebar.brand.slider" template="Codazon_Shopbybrandpro::brand/brand_slider.phtml">
                 <action method="setData">
                     <argument name="name" xsi:type="string">featured_brands</argument>
@@ -88,7 +88,7 @@
                     </action>
 				</block>
 			</block>
-			
+
 			<!-- Wishlist -->
 			<block class="Magento\Cookie\Block\RequireCookie" name="require-cookie" template="Magento_Cookie::require_cookie.phtml">
                 <arguments>
@@ -106,7 +106,7 @@
                 <block class="Magento\Wishlist\Block\AddToWishlist" template="Magento_Wishlist::addto.phtml" />
             </referenceContainer>
 			<!-- End Wishlist -->
-			
+
 			<!-- Configurable Swatch -->
 			<referenceBlock name="category.product.type.details.renderers">
                 <block class="Magento\Swatches\Block\Product\Renderer\Listing\Configurable"
@@ -115,7 +115,7 @@
                        ifconfig="catalog/frontend/show_swatches_in_product_list" />
             </referenceBlock>
 			<!-- End Configurable Swatch -->
-			
+
         </referenceContainer>
         <referenceBlock name="page.main.title">
             <arguments>
@@ -123,5 +123,8 @@
                 <argument name="add_base_attribute_aria" xsi:type="string">page-title-heading toolbar-amount</argument>
             </arguments>
         </referenceBlock>
+
+        <referenceBlock name="catalog.compare.sidebar" remove="true" />
+        <referenceBlock name="wishlist_sidebar" remove="true" />
 	</body>
 </page>

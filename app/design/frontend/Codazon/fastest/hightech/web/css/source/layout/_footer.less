@@ -148,13 +148,17 @@
 	}
 
 	.bottom-footer-wrapper{
-		.lib-css(background, @footer-bottom__background);
-		padding:@indent__l 0;
+		.lib-css(background, #155DA4);
+        padding: 16px 0;
 		overflow:hidden;
-		.lib-css(border-top, 1px solid @footer__border);
+		.lib-css(border-top, 1px solid #155DA4);
 		.block-static-block.widget{
 			margin-bottom:0;
 		}
+        .footer.content {
+            display: flex;
+            justify-content: center;
+        }
 	}
 	.copyright{ .lib-css(font, @f_h5); float:left}
 	address{margin-bottom:@indent__s; margin-top:@indent__s;}

@@ -48,10 +48,10 @@ switch ($type = $block->getType()) {
             $shuffle = 0;
             $canItemsAddToCart = $block->canItemsAddToCart();
 
-            $showWishlist = true;
+            $showWishlist = false;
             $showCompare = false;
-            $showCart = true;
-            $templateType = null;
+            $showCart = false;
+            $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
             $description = false;
         }
     break;
@@ -257,11 +257,11 @@ switch ($type = $block->getType()) {
 								<?php echo $block->escapeHtml($_item->getName()) ?></a>
 							</strong>
 
-							<?php /* @escapeNotVerified */ echo $block->getProductPrice($_item); ?>
-
                             <?php if ($templateType): ?>
                                 <?php echo $block->getReviewsSummaryHtml($_item, $templateType) ?>
                             <?php endif; ?>
+
+							<?php /* @escapeNotVerified */ echo $block->getProductPrice($_item); ?>
 
 							<div class="cdz-product-bottom">
 								<div class="cdz-buttons-container">
@@ -338,6 +338,9 @@ switch ($type = $block->getType()) {
 	if($type == 'crosssell' || $type == 'crosssell-rule'){
 		$itemSlider = 4;
 	}
+	if($type == 'related' || $type == 'related-rule') {
+        $itemSlider = 6;
+    }
 ?>
 <script type="text/javascript">
 require(['jquery','cdz_slider'],function($){

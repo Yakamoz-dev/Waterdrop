@@ -33,8 +33,8 @@
                 <height>240</height>
             </image>
             <image id="category_page_grid-1" type="small_image">
-                <width>135</width>
-                <height>135</height>
+                <width>195</width>
+                <height>195</height>
             </image>
             <image id="category_page_list" type="small_image">
                 <width>240</width>
@@ -118,8 +118,8 @@
                 <height>76</height>
             </image>
             <image id="product_small_image" type="small_image">
-                <width>135</width>
-                <height>135</height>
+                <width>195</width>
+                <height>195</height>
             </image>
             <image id="product_thumbnail_image" type="thumbnail">
                 <width>75</width>
@@ -178,8 +178,8 @@
                 <height>75</height>
             </image>
             <image id="shared_wishlist_email" type="small_image">
-                <width>135</width>
-                <height>135</height>
+                <width>195</width>
+                <height>195</height>
             </image>
             <image id="side_column_widget_product_thumbnail" type="small_image">
                 <width>75</width>

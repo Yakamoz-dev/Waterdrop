@@ -9,3 +9,11 @@
     font-style: normal;
     font-display: block;
 }
+
+@font-face {
+    font-family: 'roboto-medium';
+    src:  url('fonts/Roboto-Medium.ttf');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}

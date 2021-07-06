@@ -188,7 +188,7 @@
 		.lib-css(border-bottom, 1px solid @main_border);
 		&.last{
 			border-bottom:0;
-            margin-bottom: 24px;
+            margin-bottom: 12px;
             background: #ffffff;
             padding: 0;
 		}
@@ -466,7 +466,7 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
 //New product
 .box-product{
 	.lib-css(background, @main_block_background);
-	.lib-css(border, 1px solid @main_border);
+	//.lib-css(border, 1px solid @main_border);
 	.block-title{
 		.lib-css(border-bottom, 1px solid @main_border);
 		padding: 20px 20px 0;
@@ -490,6 +490,11 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
 			left:-3px;
 		}
 	}
+    &.cdz-best-seller-wrap {
+        .owl-carousel .owl-nav {
+            top: -45px;
+        }
+    }
 	.owl-carousel .owl-nav [class*='owl-']{
 		margin:0 2px;
 		position:static !important;
@@ -784,7 +789,8 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
 		}
 	}
 	.block-content{
-		padding:0
+		padding:0;
+        border: none !important;
 	}
 	.cdz-block-title{
 		background:@main_block_title_background;
@@ -801,6 +807,7 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
 .our-brands {
     .block-content{
         padding: 10px 0 0 10px !important;
+        border: none !important;
     }
     .brand-item {
         margin-right: 0;

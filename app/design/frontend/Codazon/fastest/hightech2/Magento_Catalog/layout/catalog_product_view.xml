@@ -45,6 +45,7 @@
 	</referenceContainer>
 	<move element="product.info.media" destination="product.info.left" before='-'/>
 	<move element="product.info.main" destination="product.info.left" />
+    <move element="catalog.product.related" destination="content" after="product.main.content" />
 
     <referenceBlock name="catalog.compare.sidebar" remove="true" />
     <referenceBlock name="wishlist_sidebar" remove="true" />

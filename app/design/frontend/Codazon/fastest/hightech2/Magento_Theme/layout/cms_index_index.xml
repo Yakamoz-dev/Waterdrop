@@ -14,8 +14,8 @@
 		</referenceContainer>
 		<referenceContainer name="content">
 			<container label="Top Main Grid" name="top.main.grid" as="topMainGrid" htmlTag="div" htmlClass="row">
+                <container label="Top Main Grid Right" name="top.main.grid.right" as="topMainGridRight" htmlTag="div" htmlClass="col-sm-18"/>
 				<container label="Top Main Grid Left" name="top.main.grid.left" as="topMainGridLeft" htmlTag="div" htmlClass="col-sm-6 sidebar"/>
-				<container label="Top Main Grid Right" name="top.main.grid.right" as="topMainGridRight" htmlTag="div" htmlClass="col-sm-18"/>
 			</container>
 		</referenceContainer>
       </body>

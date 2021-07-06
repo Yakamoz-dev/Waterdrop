@@ -36,7 +36,7 @@
         left: 15px;
         position: absolute;
         top: 23px;
-        z-index: 14;
+        z-index: 100;
 		width:26px;
 		height:18px;
 		&:hover{
@@ -129,6 +129,7 @@
         top: 0;
         width: 80%;
         width: calc(~"100% - @{active-nav-indent}");
+        background: #ffffff;
 		.rtl-layout &{
 			left:auto;
 			right: -80%;
@@ -240,6 +241,14 @@
         }
     }
 
+    .page-wrapper {
+        .lib-css(transition, left .3s, 1);
+        height: 100%;
+        left: 0;
+        overflow: hidden;
+        position: relative;
+    }
+
     .nav-before-open {
         height: 100%;
         width: 100%;
@@ -283,7 +292,7 @@
 			}
 		}
         .nav-sections {
-            @_shadow: 0 0 5px 0 rgba(50, 50, 50, .75);
+            @_shadow: 100px 0 0 0 rgba(17, 17, 17, .8);
 
             .lib-css(box-shadow, @_shadow, 1);
             left: 0;
@@ -303,19 +312,19 @@
             }*/
         }
 
-        .nav-toggle {
-            &:after{
-                background: rgba(0,0,0,.01);
-                content: '';
-                display: block;
-                height: 100%;
-                position: fixed;
-                right:0;
-                top: 0;
-                width: 100%;
-                z-index: 1;
-            }
-        }
+        //.nav-toggle {
+        //    &:after{
+        //        background: rgba(0,0,0,.01);
+        //        content: '';
+        //        display: block;
+        //        height: 100%;
+        //        position: fixed;
+        //        right:0;
+        //        top: 0;
+        //        width: 100%;
+        //        z-index: 1;
+        //    }
+        //}
     }
 
     .nav-toggle {
@@ -337,7 +346,17 @@
     }
 
     .nav-sections-item-title { display: none; }
-    .nav-sections-item-content { margin-top: 40px !important; }
+    .nav-sections-item-content {
+        margin-top: 40px !important;
+        margin-bottom: 36px;
+    }
+    .nav-sections-item-first {
+        border-top: 8px solid #F4F4F4;
+        padding-top: 12px;
+    }
+    .nav-sections-item-last {
+        padding-bottom: 17px;
+    }
 
     .nav-sections {
         &-items {

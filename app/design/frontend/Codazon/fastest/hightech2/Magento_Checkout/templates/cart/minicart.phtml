@@ -10,13 +10,13 @@
 ?>
 
 <div data-block="minicart" class="minicart-wrapper">
-    <a class="action showcart" href="<?php /* @escapeNotVerified */ echo $block->getShoppingCartUrl(); ?>"
+    <a class="action" href="<?php /* @escapeNotVerified */ echo $block->getShoppingCartUrl(); ?>"
        data-bind="scope: 'minicart_content'">
-        <span class="text"><?php /* @escapeNotVerified */ echo __('My Cart'); ?></span>        
-        <span class="price-label" data-bind="html: getCartParam('subtotal')"><!-- ko text: getCartParam('subtotal') --><!-- /ko --></span>        
+        <span class="text"><?php /* @escapeNotVerified */ echo __('My Cart'); ?></span>
+        <span class="price-label" data-bind="html: getCartParam('subtotal')"><!-- ko text: getCartParam('subtotal') --><!-- /ko --></span>
         <!-- ko ifnot: getCartParam('subtotal') -->
-        <span class="price-label">        
-                <!-- ko i18n: '0.00 ' --><!-- /ko -->        
+        <span class="price-label">
+                <!-- ko i18n: '0.00 ' --><!-- /ko -->
         </span>
             <!-- /ko -->
         <span class="counter qty empty"
@@ -27,7 +27,7 @@
             <!-- /ko -->
             <!-- ko if: getCartParam('summary_count') -->
             	<!-- ko text: getCartParam('summary_count') --><!-- /ko -->
-            <!-- /ko -->            	
+            <!-- /ko -->
             </span>
             <span class="counter-label">
             <!-- ko if: getCartParam('summary_count') -->

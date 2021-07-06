@@ -9,7 +9,7 @@
 }
 
 .mg-product-block-title-content {
-    font-family: roboto-medium;
+    font-family: 'roboto-medium';
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
@@ -34,7 +34,7 @@
 
 .mg-product-block-text-content-bold {
     display: block;
-    font-family: roboto-medium;
+    font-family: 'roboto-medium';
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -151,7 +151,7 @@
 }
 
 .mg-product-block-threetables-content-title {
-    font-family: roboto-medium;
+    font-family: 'roboto-medium';
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
@@ -218,7 +218,7 @@
 }
 
 .mg-product-block-fourtables-content-title {
-    font-family: roboto-medium;
+    font-family: 'roboto-medium';
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
@@ -311,7 +311,7 @@
 }
 
 .mg-product-block-pitchertext-content-title {
-    font-family: roboto-medium;
+    font-family: 'roboto-medium';
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
@@ -397,7 +397,7 @@
 }
 
 .mg-product-block-infotables-title {
-    font-family: roboto-medium;
+    font-family: 'roboto-medium';
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
@@ -562,7 +562,7 @@
     font-size: 14px;
     line-height: 150%;
     color: #155DA4;
-    font-family: roboto-medium;
+    font-family: 'roboto-medium';
 }
 
 .mg-product-block-comparisontable-img p:hover {
@@ -603,7 +603,7 @@
 }
 
 .mg-product-block-doublecolumn-box-center-title {
-    font-family: roboto-medium;
+    font-family: 'roboto-medium';
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
@@ -631,7 +631,7 @@
     color: #333333;
     margin-bottom: 16px;
     display: inline-block;
-    width: 420px;
+    width: 390px;
     background: #F4F4F4;
     padding: 15px;
 }
@@ -643,7 +643,7 @@
 }
 
 .mg-product-block-doublecolumn-box-right-title {
-    font-family: roboto-medium;
+    font-family: 'roboto-medium';
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
@@ -683,9 +683,9 @@
 .mg-product-block-doublecolumn-box-left {
     float: left;
     display: block;
-    margin-right: 20px;
+    margin-right: 40px;
     margin-bottom: 10px;
-    width: 300px;
+    width: 330px;
 }
 
 .mg-product-block-doublecolumn-box-left img {
@@ -695,7 +695,7 @@
 
 .mg-product-block-doublecolumn-box-right {
     float: right;
-    width: 230px;
+    width: 229px;
     padding-left: 40px;
     margin-left: 40px;
     border-left: 1px solid #dddddd;
@@ -712,7 +712,7 @@
 
 @media (max-width:1200px) {
     .mg-product-block-doublecolumn-box-left {
-        width: 25vw;
+        width: 30vw;
     }
     .mg-product-block-doublecolumn-box-right {
         width: 19vw;
@@ -720,6 +720,9 @@
     .mg-product-block-doublecolumn-box-right {
         padding-left: 3vw;
         margin-left: 3vw;
+    }
+    .mg-product-block-doublecolumn-box-center-ul {
+        width: 35vw;
     }
 }
 

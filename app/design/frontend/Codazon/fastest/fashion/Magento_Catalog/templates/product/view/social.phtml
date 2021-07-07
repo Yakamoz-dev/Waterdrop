@@ -8,24 +8,54 @@
 
 ?>
 <?php $_product = $block->getProduct();
- $_helper = $this->helper('Magento\Catalog\Helper\Output');
- $imageUrl = $this->helper('Magento\Catalog\Helper\Image')
-                    ->init($_product, 'product_base_image')
-                    ->constrainOnly(TRUE)
-                    ->keepAspectRatio(TRUE)
-                    ->keepTransparency(TRUE)
-                    ->keepFrame(FALSE)
-                    ->resize(800, 800)->getUrl();
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+$imageUrl = $this->helper('Magento\Catalog\Helper\Image')
+    ->init($_product, 'product_base_image')
+    ->constrainOnly(TRUE)
+    ->keepAspectRatio(TRUE)
+    ->keepTransparency(TRUE)
+    ->keepFrame(FALSE)
+    ->resize(800, 800)->getUrl();
+$_themeHelper = $this->helper('Codazon\ThemeOptions\Helper\Data');
+
 ?>
 
-<div class="social-addthis" data-media="<?php echo $imageUrl ?>">
+<!-- <div class="social-addthis" data-media="<?php echo $imageUrl ?>">
       <a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $_helper->productAttribute($_product, $_product->getProductUrl(), 'product_url'); ?>&amp;title=<?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>" target="_blank">
 	      <span class="icon-facebook fa fa-facebook"></span>
-      </a> 
+      </a>
       <a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $_helper->productAttribute($_product, $_product->getProductUrl(), 'product_url'); ?>&amp;title=<?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>" target="_blank">
 	      <span class="icon-twitter fa fa-twitter"></span>
       </a>
 	 <a href="https://www.pinterest.com/pin/create/button/?url=<?php echo $_helper->productAttribute($_product, $_product->getProductUrl(), 'product_url'); ?>&media=<?php echo $imageUrl ?>&description=<?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>" target="_blank">
 	      <span class="icon-pinterest fa fa-pinterest-square"></span>
-      </a> 
-</div>  
+      </a>
+</div>   -->
+
+<div class="custom-payment">
+    <img src="<?php echo $_themeHelper->getMediaUrl()?>wysiwyg/codazon/fastest_fashion/home/product_payment.png " alt="">
+</div>
+<div class="custom-shipping">
+    <div class="custom-shipping-infobox">
+        <span>Shipping:</span>
+        <span>FREE SHIPPING</span>
+        <span> on all orders</span>
+    </div>
+    <a class="custom-style-a" href="#">Learn more</a>
+</div>
+<div class="custom-proterction">
+    <div class="custom-proterction-title">
+        <span>Buyer Protection:</span>
+        <a class="custom-style-a-mobile" href="#">Learn more</a>
+    </div>
+
+    <div class="custom-proterction-contentbox">
+        <div class="custom-proterction-contentbox-info1">
+            <span>Full refund if you don't receive your order</span>
+        </div>
+        <div class="custom-proterction-contentbox-info2">
+            <span>Full refund if the item is not as described</span>
+            <a class="custom-style-a" href="#">Learn more</a>
+        </div>
+    </div>
+</div>

@@ -416,7 +416,8 @@ define([
          * @private
          */
         _RenderControls: function () {
-            var $widget = this,
+            var options,
+                $widget = this,
                 container = this.element,
                 classes = this.options.classes,
                 chooseText = this.options.jsonConfig.chooseText,
@@ -427,7 +428,6 @@ define([
             $.each(this.options.jsonConfig.attributes, function () {
                 var item = this,
                     controlLabelId = 'option-label-' + item.code + '-' + item.id,
-                    options = $widget._RenderSwatchOptions(item, controlLabelId),
                     select = $widget._RenderSwatchSelect(item, chooseText),
                     input = $widget._RenderFormInput(item),
                     listLabel = '',
@@ -454,6 +454,23 @@ define([
                     listLabel = 'aria-labelledby="' + controlLabelId + '"';
                 }
 
+                $widget.optionsMap[item.id] = {};
+
+                // Aggregate options array to hash (key => value)
+                $.each(item.options, function () {
+                    if (this.products.length > 0) {
+                        $widget.optionsMap[item.id][this.id] = {
+                            price: parseInt(
+                                $widget.options.jsonConfig.optionPrices[this.products[0]].finalPrice.amount,
+                                10
+                            ),
+                            products: this.products
+                        };
+                    }
+                });
+
+                options = $widget._RenderSwatchOptions(item, controlLabelId, $widget, item.id);
+
                 // Create new control
                 container.append(
                     '<div class="' + classes.attributeClass + ' ' + item.code + '" ' +
@@ -470,21 +487,6 @@ define([
                     '</div>' + input +
                     '</div>'
                 );
-
-                $widget.optionsMap[item.id] = {};
-
-                // Aggregate options array to hash (key => value)
-                $.each(item.options, function () {
-                    if (this.products.length > 0) {
-                        $widget.optionsMap[item.id][this.id] = {
-                            price: parseInt(
-                                $widget.options.jsonConfig.optionPrices[this.products[0]].finalPrice.amount,
-                                10
-                            ),
-                            products: this.products
-                        };
-                    }
-                });
             });
 
             if (showTooltip === 1) {
@@ -517,7 +519,7 @@ define([
          * @returns {String}
          * @private
          */
-        _RenderSwatchOptions: function (config, controlId) {
+        _RenderSwatchOptions: function (config, controlId, $widget, itemId) {
             var optionConfig = this.options.jsonSwatchConfig[config.id],
                 optionClass = this.options.classes.optionClass,
                 sizeConfig = this.options.jsonSwatchImageSizeConfig,
@@ -560,6 +562,27 @@ define([
                 width = _.has(sizeConfig, 'swatchThumb') ? sizeConfig.swatchThumb.width : 110;
                 height = _.has(sizeConfig, 'swatchThumb') ? sizeConfig.swatchThumb.height : 90;
                 label = this.label ? $('<i></i>').text(this.label).html() : '';
+                if (parseInt(itemId) === 134) {
+                    var woarr = Object.keys($widget['optionsMap']);
+                    var alltrue = !!woarr.length;
+                    var label_price, format_label_price, pack, each_pack;
+                    if (alltrue) {
+                        if ($widget['optionsMap'][itemId] == null) {
+                            alltrue = false;
+                        }
+                    }
+                    if (alltrue) {
+                        label_price = $widget['optionsMap'][itemId][id]['price'];
+                        pack = parseInt(label);
+                        each_pack = (label_price/pack).toFixed(2);
+                        format_label_price = (' - $'+each_pack+' each');
+                    } else {
+                        format_label_price = '';
+                    }
+                } else {
+                    format_label_price = '';
+                }
+
                 attr =
                     ' id="' + controlId + '-item-' + id + '"' +
                     ' index="' + index + '"' +
@@ -568,7 +591,7 @@ define([
                     ' tabindex="0"' +
                     ' data-option-type="' + type + '"' +
                     ' data-option-id="' + id + '"' +
-                    ' data-option-label="' + label + '"' +
+                    ' data-option-label="' + label + format_label_price + '"' +
                     ' aria-label="' + label + '"' +
                     ' role="option"' +
                     ' data-thumb-width="' + width + '"' +

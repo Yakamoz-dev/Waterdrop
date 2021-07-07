@@ -7,41 +7,44 @@ $flag = 1;
 <?php $_product = $block->getProduct(); ?>
 <?php $buttonTitle = __('Add to Cart'); ?>
 <?php if ($_product->isSaleable()): ?>
-<div class="box-tocart">
-    <div class="fieldset">
-        <?php if ($block->shouldRenderQuantity()): ?>
-        <div class="field qty">
-            <label class="label" for="qty"><span><?= /* @noEscape */ __('Qty') ?></span></label>
-            <div class="control">
-                <input type="number"
-                       name="qty"
-                       id="qty"
-                       min="0"
-                       value="<?= /* @noEscape */ $block->getProductDefaultQty() * 1 ?>"
-                       title="<?= /* @noEscape */ __('Qty') ?>"
-                       class="input-text qty"
-                       data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
-                       />
-            </div>
-        </div>
-        <?php endif; ?>
-        <div class="actions">
-            <?php if ($isModuleEnable ? ($hideCart ? $flag = 0 : $flag) : $flag): ?>
-                <button type="submit"
-                        title="<?= /* @noEscape */ $buttonTitle ?>"
-                        class="action primary tocart"
-                        id="product-addtocart-button">
-                    <span><?= /* @noEscape */ $buttonTitle ?></span>
-                </button>
+    <div class="box-tocart">
+        <div class="fieldset">
+            <?php if ($block->shouldRenderQuantity()): ?>
+                <div class="field qty">
+                    <label class="label" for="qty"><span><?= /* @noEscape */ __('Qty') ?></span></label>
+                    <div  class="custom-style-addtocar-qut">Quantity:</div>
+                    <div class="control">
+                        <div id="custom-id-qty-minus" class="custom-style-qty-minus"></div>
+                        <input type="number"
+                               name="qty"
+                               id="qty"
+                               min="1"
+                               value="1"
+                               title="<?= /* @noEscape */ __('Qty') ?>"
+                               class="input-text qty"
+                               data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                        />
+                        <div id="custom-id-qty-plus" class="custom-style-qty-plus"> </div>
+                    </div>
+                </div>
             <?php endif; ?>
-            <?php if ($isModuleEnable):
-                $buttonTitle = $this->helper(\Sparsh\BuyNow\Helper\Data::class)->getConfig('buynow/advance/button_title'); ?>
-                <div class="sparsh-buynow-view">
+            <div class="actions">
+                <?php if ($isModuleEnable ? ($hideCart ? $flag = 0 : $flag) : $flag): ?>
                     <button type="submit"
-                            title="<?= /* @noEscape */ __($buttonTitle) ?>"
-                            class="action primary"
-                            id="product-sparsh-buynow-button"
-                            data-mage-init='
+                            title="<?= /* @noEscape */ $buttonTitle ?>"
+                            class="action primary tocart"
+                            id="product-addtocart-button">
+                        <span><?= /* @noEscape */ $buttonTitle ?></span>
+                    </button>
+                <?php endif; ?>
+                <?php if ($isModuleEnable):
+                    $buttonTitle = $this->helper(\Sparsh\BuyNow\Helper\Data::class)->getConfig('buynow/advance/button_title'); ?>
+                    <div class="sparsh-buynow-view">
+                        <button type="submit"
+                                title="<?= /* @noEscape */ __($buttonTitle) ?>"
+                                class="action primary"
+                                id="product-sparsh-buynow-button"
+                                data-mage-init='
                             {
                                 "Sparsh_BuyNow/js/buy-now":
                                 {
@@ -49,14 +52,14 @@ $flag = 1;
                                 }
                             }
                             '>
-                    <span><?= /* @noEscape */ __($buttonTitle) ?></span>
-                    </button>
-                </div>
-            <?php endif; ?>
-            <?= $block->getChildHtml('', true) ?>
+                            <span><?= /* @noEscape */ __($buttonTitle) ?></span>
+                        </button>
+                    </div>
+                <?php endif; ?>
+                <?= $block->getChildHtml('', true) ?>
+            </div>
         </div>
     </div>
-</div>
 <?php endif; ?>
 <script type="text/x-magento-init">
     {
@@ -64,4 +67,20 @@ $flag = 1;
             "Magento_Catalog/js/validate-product": {}
         }
     }
+</script>
+<script type="text/javascript">
+    require(['jquery'],function($){
+        $("#custom-id-qty-minus").click(function(){
+            if ( parseInt($("#qty").val())  > 1 ){
+                $("#qty").val( String(parseInt($("#qty").val()) - 1))
+            }else{
+                $("#custom-id-qty-minus").css("color","#999999");
+            }
+        })
+        $("#custom-id-qty-plus").click(function(){
+            $("#custom-id-qty-minus").css("color","#333333");
+            $("#qty").val( String(parseInt($("#qty").val()) + 1))
+        })
+
+    });
 </script>

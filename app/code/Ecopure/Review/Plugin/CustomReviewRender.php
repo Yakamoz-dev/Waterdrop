@@ -25,13 +25,14 @@ class CustomReviewRender {
         \Magento\Review\Block\Product\ReviewRenderer $subject,
         $result
     ) {
-        if ($this->request->getFullActionName() == 'catalog_product_view') {
-            //return 'Vendor_Module::custom_summary.phtml'; // For product view page => In core Magento_Review::helper/summary.phtml display
-            return $result; // For product listing page => In core Magento_Review::helper/summary.phtml display
-        }
+//        if ($this->request->getFullActionName() == 'catalog_product_view') {
+//            //return 'Vendor_Module::custom_summary.phtml'; // For product view page => In core Magento_Review::helper/summary.phtml display
+//            return $result; // For product listing page => In core Magento_Review::helper/summary.phtml display
+//        }
         if ($this->request->getFullActionName() == 'catalog_category_view'
             || $this->request->getFullActionName() == 'catalogsearch_result_index'
             || $this->request->getFullActionName() == 'productfilter_index_firstLoad'
+            || $this->request->getFullActionName() == 'catalog_product_view'
         ) {
             return 'Ecopure_Review::helper/summary_short.phtml';
         }

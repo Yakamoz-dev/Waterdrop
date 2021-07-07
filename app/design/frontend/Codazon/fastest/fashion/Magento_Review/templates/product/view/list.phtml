@@ -1,3 +1,102 @@
+<style>
+    .review-item {
+        padding:20px 0;
+    }
+    .review-author .review-details-value{
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 14px;
+        color: #155DA4;
+    }
+    .block p:last-child{
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 14px;
+        color: #333333;
+        margin-left:12px;
+    }
+    .review-details {
+        margin-bottom:8px;
+    }
+    .review-title{
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 16px;
+        color: #333333;
+        margin: 0 0 17px 80px;
+    }
+    .review-ratings~.review-content, .review-ratings~.review-details{
+        margin-left:0;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 150%;
+        color: #333333;
+        margin-bottom:0;
+    }
+    .review-items li:first-child{
+        border-top:1px solid #e1e1e1;
+    }
+    .custom-style-review-toolbar{
+        background: unset;
+        box-shadow: unset;
+        -moz-box-shadow: unset;
+        -webkit-box-shadow: unset;
+        -o-box-shadow: unset;
+        -ms-box-shadow: unset;
+        -webkit-border-radius: unset;
+        -moz-border-radius: unset;
+        border-radius: unset;
+        padding: 0;
+        margin: 0;
+    }
+    .review-toolbar .pages{
+        padding:0;
+        padding-top:32px;
+        border-bottom:none;
+        text-align:end;
+    }
+    .pages strong.page, .pages a.page, .pages .action.next, .pages .action.previous{
+        background: #FFFFFF;
+        border: 1px solid #E1E1E1;
+        box-sizing: border-box;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        color: #333333;
+        padding: 3px 7px;
+    }
+    .pages .action.next, .pages .action.previous{
+        padding:3px 5px;
+    }
+    .pages .action.next:before{
+        font-family: 'icomoon';
+        content:'\e930';
+        color:#333333;
+    }
+    .pages .action.previous:before{
+        font-family: 'icomoon';
+        content:'\e932';
+        color:#333333;
+    }
+    .pages .action:hover, .pages a.page:hover{
+        background: #ffffff;
+        border:1px solid #e1e1e1;
+        color:#333333;
+    }
+    .pages-items .item.current .page{
+        background:#155DA4;
+        color:#FFFFFF;
+    }
+    .pages .action.next:hover:before, .pages .action.previous:hover:before{
+        color:#333333;
+    }
+</style>
+
 <?php
 /**
  * Copyright © Magento, Inc. All rights reserved.
@@ -11,72 +110,68 @@ $_items = $block->getReviewsCollection()->getItems();
 $format = $block->getDateFormat() ?: \IntlDateFormatter::MEDIUM;
 ?>
 <?php if (count($_items)): ?>
-<div class="block review-list" id="customer-reviews">
-    <?php if (!$block->getHideTitle()): ?>
-        <div class="block-title">
-            <strong><?= $block->escapeHtml(__('Customer Reviews123')) ?></strong>
-        </div>
-    <?php endif ?>
-    <div class="block-content">
-        <div class="toolbar review-toolbar">
-            <?= $block->getChildHtml('toolbar') ?>
-        </div>
-        <ol class="items review-items">
-        <?php foreach ($_items as $_review): ?>
-            <li class="item review-item" itemscope itemprop="review" itemtype="http://schema.org/Review">
-                <div class="review-title" itemprop="name"><?= $block->escapeHtml($_review->getTitle()) ?></div>
-                <?php if (count($_review->getRatingVotes())): ?>
-                    <div class="review-ratings">
-                    <?php foreach ($_review->getRatingVotes() as $_vote): ?>
-                    <div class="rating-summary item"
-                         itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
-                        <span class="label rating-label">
-                            <span><?= $block->escapeHtml($_vote->getRatingCode()) ?></span>
-                        </span>
-                        <div class="rating-result"
-                             id="review_<?= /* @noEscape */ $_review->getReviewId()
-                                ?>_vote_<?= /* @noEscape */ $_vote->getVoteId() ?>"
-                             title="<?= $block->escapeHtmlAttr($_vote->getPercent()) ?>%">
-                            <meta itemprop="worstRating" content = "1"/>
-                            <meta itemprop="bestRating" content = "100"/>
-                            <span>
+    <div class="block review-list" id="customer-reviews">
+        <?php if (!$block->getHideTitle()): ?>
+            <div class="block-title"></div>
+        <?php endif ?>
+        <div class="block-content">
+            <div class="toolbar review-toolbar">
+                <?= $block->getChildHtml('toolbar') ?>
+            </div>
+            <ol class="items review-items">
+                <?php foreach ($_items as $_review): ?>
+                    <li class="item review-item" itemscope itemprop="review" itemtype="http://schema.org/Review">
+
+                        <div class="review-details">
+                            <p class="review-author">
+                                <strong class="review-details-value"
+                                        itemprop="author"><?= $block->escapeHtml($_review->getNickname()) ?></strong>
+                            </p>
+                            <p class="review-date">
+                                <span class="review-details-label"><?= $block->escapeHtml(__('Posted on')) ?></span>
+                                <time class="review-details-value"
+                                      itemprop="datePublished"
+                                      datetime="<?= $block->escapeHtmlAttr($block->formatDate(
+                                          $_review->getCreatedAt(),
+                                          $format
+                                      )) ?>"><?= $block->escapeHtml($block->formatDate($_review->getCreatedAt(), $format)) ?>
+                                </time>
+                            </p>
+                        </div>
+                        <?php if (count($_review->getRatingVotes())): ?>
+                            <div class="review-ratings">
+                                <?php foreach ($_review->getRatingVotes() as $_vote): ?>
+                                    <div class="rating-summary item"
+                                         itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+                                        <div class="rating-result"
+                                             id="review_<?= /* @noEscape */ $_review->getReviewId()
+                                             ?>_vote_<?= /* @noEscape */ $_vote->getVoteId() ?>"
+                                             title="<?= $block->escapeHtmlAttr($_vote->getPercent()) ?>%">
+                                            <meta itemprop="worstRating" content = "1"/>
+                                            <meta itemprop="bestRating" content = "100"/>
+                                            <span>
                                 <span itemprop="ratingValue"><?= $block->escapeHtml($_vote->getPercent()) ?>%</span>
                             </span>
+                                        </div>
+                                        <?= /* @noEscape */ $secureRenderer->renderStyleAsTag(
+                                            'width:' . $_vote->getPercent() . '%',
+                                            'div#review_' . $_review->getReviewId() . '_vote_' . $_vote->getVoteId() . ' span'
+                                        ) ?>
+                                        <div class="review-title-mobile" itemprop="name"><?= $block->escapeHtml($_review->getTitle()) ?></div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+                        <div class="review-title" itemprop="name"><?= $block->escapeHtml($_review->getTitle()) ?></div>
+                        <div class="review-content" itemprop="description">
+                            <?= /* @noEscape */ nl2br($block->escapeHtml($_review->getDetail())) ?>
                         </div>
-                        <?= /* @noEscape */ $secureRenderer->renderStyleAsTag(
-                            'width:' . $_vote->getPercent() . '%',
-                            'div#review_' . $_review->getReviewId() . '_vote_' . $_vote->getVoteId() . ' span'
-                        ) ?>
-                    </div>
-                    <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
-                <div class="review-content" itemprop="description">
-                    <?= /* @noEscape */ nl2br($block->escapeHtml($_review->getDetail())) ?>
-                </div>
-                <div class="review-details">
-                    <p class="review-author">
-                        <span class="review-details-label"><?= $block->escapeHtml(__('Review by')) ?></span>
-                        <strong class="review-details-value"
-                                itemprop="author"><?= $block->escapeHtml($_review->getNickname()) ?></strong>
-                    </p>
-                    <p class="review-date">
-                        <span class="review-details-label"><?= $block->escapeHtml(__('Posted on')) ?></span>
-                        <time class="review-details-value"
-                              itemprop="datePublished"
-                              datetime="<?= $block->escapeHtmlAttr($block->formatDate(
-                                  $_review->getCreatedAt(),
-                                  $format
-                              )) ?>"><?= $block->escapeHtml($block->formatDate($_review->getCreatedAt(), $format)) ?>
-                        </time>
-                    </p>
-                </div>
-            </li>
-        <?php endforeach; ?>
-        </ol>
-        <div class="toolbar review-toolbar">
-            <?= $block->getChildHtml('toolbar') ?>
+                    </li>
+                <?php endforeach; ?>
+            </ol>
+            <div class="toolbar review-toolbar custom-style-review-toolbar">
+                <?= $block->getChildHtml('toolbar') ?>
+            </div>
         </div>
     </div>
-</div>
 <?php endif;?>

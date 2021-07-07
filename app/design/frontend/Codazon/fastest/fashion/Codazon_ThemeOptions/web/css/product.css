@@ -695,7 +695,7 @@
 
 .mg-product-block-doublecolumn-box-right {
     float: right;
-    width: 229px;
+    width: 269px;
     padding-left: 40px;
     margin-left: 40px;
     border-left: 1px solid #dddddd;
@@ -715,14 +715,12 @@
         width: 30vw;
     }
     .mg-product-block-doublecolumn-box-right {
-        width: 19vw;
-    }
-    .mg-product-block-doublecolumn-box-right {
+        width: 24vw;
         padding-left: 3vw;
         margin-left: 3vw;
     }
     .mg-product-block-doublecolumn-box-center-ul {
-        width: 34vw;
+        width: 30vw;
     }
 }
 

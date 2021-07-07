@@ -65,8 +65,8 @@ define([
 			});
 			if(searchField.length == 0){
 				searchField = $('#search');
-			}	
-				
+			}
+
             var searchFieldHasFocus = searchField.is(':focus') && searchField.val().length >= self.minSearchLength;
 
             registry.get('searchsuiteautocomplete_form', function (autocomplete) {
@@ -88,7 +88,7 @@ define([
                 searchButton = $(self.searchButtonSelector),
                 searchButtonDisabled = (searchField.val().length > 0) ? false : true;
 
-            //searchButton.attr('disabled', searchButtonDisabled);
+            searchButton.attr('disabled', searchButtonDisabled);
         },
 
         spinnerShow: function () {

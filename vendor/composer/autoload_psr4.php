@@ -43,6 +43,8 @@ return array(
     'Symfony\\Component\\CssSelector\\' => array($vendorDir . '/symfony/css-selector'),
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'Symfony\\Component\\Config\\' => array($vendorDir . '/symfony/config'),
+    'Stripe\\' => array($vendorDir . '/stripe/stripe-php/lib'),
+    'StripeIntegration\\Payments\\' => array($vendorDir . '/stripe/module-payments'),
     'Sparsh\\BuyNow\\' => array($vendorDir . '/sparsh/buy-now-magento-2-extension'),
     'Seld\\PharUtils\\' => array($vendorDir . '/seld/phar-utils/src'),
     'Seld\\JsonLint\\' => array($vendorDir . '/seld/jsonlint/src/Seld/JsonLint'),

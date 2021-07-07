@@ -482,6 +482,7 @@ class ComposerStaticInitfea2efe9fa4d73211abe777881f2e709
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '3109cb1a231dcd04bee1f9f620d46975' => __DIR__ . '/..' . '/paragonie/sodium_compat/autoload.php',
         'aa75ea0761a2f40c1f3b32ad314f86c4' => __DIR__ . '/..' . '/phpseclib/mcrypt_compat/lib/mcrypt.php',
+        '6afbb3ece6b14bcedd88522ddc6978f5' => __DIR__ . '/..' . '/stripe/module-payments/registration.php',
         '79b3724166c1e73e36c45f44df1c4e1a' => __DIR__ . '/..' . '/nordcomputer/showoutofstockprice/registration.php',
         'dc4b4418d0c68b7ed636761dce59ad35' => __DIR__ . '/..' . '/olegkoval/magento2-regenerate-url-rewrites/registration.php',
         'e3374b74f4d3a702a6980fab2d4c0d68' => __DIR__ . '/..' . '/sparsh/buy-now-magento-2-extension/registration.php',
@@ -549,6 +550,8 @@ class ComposerStaticInitfea2efe9fa4d73211abe777881f2e709
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
             'Symfony\\Component\\Config\\' => 25,
+            'Stripe\\' => 7,
+            'StripeIntegration\\Payments\\' => 27,
             'Sparsh\\BuyNow\\' => 14,
             'Seld\\PharUtils\\' => 15,
             'Seld\\JsonLint\\' => 14,
@@ -1169,6 +1172,14 @@ class ComposerStaticInitfea2efe9fa4d73211abe777881f2e709
         'Symfony\\Component\\Config\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/config',
+        ),
+        'Stripe\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
+        ),
+        'StripeIntegration\\Payments\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stripe/module-payments',
         ),
         'Sparsh\\BuyNow\\' => 
         array (

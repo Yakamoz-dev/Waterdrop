@@ -37,12 +37,12 @@ define(['jquery'], function($) {
         },
         _assignEvents: function() {
             var self = this, conf = this.options;
-            
+
             $('body').on('click', '#suggest > li:first > a, .searchsuite-autocomplete .see-all', function(e) {
                 e.preventDefault();
                 self.$searchForm.submit();
             });
-            
+
             this.$trigger.on('click', function() {
                 self.element.toggleClass(conf.activeClass);
             });

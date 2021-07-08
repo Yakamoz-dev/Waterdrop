@@ -16,7 +16,10 @@
 	<referenceBlock name="catalog.leftnav" remove="true"/>
 	<move element="product.info.overview" destination="product.info.main" after="product.info.review" />
 
-	<referenceBlock name="product.info.overview" template="product/view/short_description.phtml">
+    <referenceBlock name="page.main.title">
+        <block class="Magento\Catalog\Block\Product\View\Description" name="product.subtitle" template="product/view/subtitle.phtml" />
+    </referenceBlock>
+    <referenceBlock name="product.info.overview" template="product/view/short_description.phtml">
 		<arguments>
             <argument name="at_call" xsi:type="string">getShortDescription</argument>
             <argument name="at_code" xsi:type="string">short_description</argument>

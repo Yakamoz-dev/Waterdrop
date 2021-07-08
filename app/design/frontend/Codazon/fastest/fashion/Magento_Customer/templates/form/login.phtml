@@ -95,6 +95,17 @@
     .custom-style-login-create a{
         color: #155DA4;
     }
+    @media screen and (max-width: 768px) {
+        .customer-account-forgotpassword .page-main, .block-new-customer, .login-container, #register-form-now {
+            width: 100%;
+        }
+        .block-customer-login .login .actions-toolbar .secondary a{
+            text-decoration: underline;
+        }
+        .custom-style-login-create a span{
+            text-decoration: underline;
+        }
+    }
 </style>
 
 
@@ -157,7 +168,7 @@
         </div>
         <div class="custom-style-login-create">
              <span>New to Waterdrop?</span>
-             <a href="#"> Create an Account</a>
+             <a href="#"> <span>Create an Account</span> &nbsp&nbsp></a>
         </div>
     </div>
 </div>

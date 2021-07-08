@@ -293,7 +293,7 @@
 }
 
 .flex-left img {
-    padding-right: 40px;
+    margin-right: 40px;
 }
 
 .flex-right {
@@ -301,13 +301,14 @@
 }
 
 .flex-right img {
-    padding-left: 40px;
+    margin-left: 40px;
 }
 
 .mg-product-block-pitchertext-content-box {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
 }
 
 .mg-product-block-pitchertext-content-title {
@@ -358,10 +359,10 @@
         display: block;
     }
     .flex-left img {
-        padding-right: 0;
+        margin-right: 0;
     }
     .flex-right img {
-        padding-left: 0;
+        margin-left: 0;
     }
     .mg-product-block-pitchertext-content img {
         width: 100%;

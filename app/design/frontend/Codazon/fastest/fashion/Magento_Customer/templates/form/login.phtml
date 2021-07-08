@@ -1,3 +1,106 @@
+<style>
+    .customer-account-forgotpassword .page-main, .block-new-customer, .login-container, #register-form-now {
+        width: 400px;
+    }
+    .login-container .block-new-customer{
+        display:none;
+    }
+    .customer-account-login .page-main .block-customer-login .block-content{
+        box-shadow: none;
+        border-radius: 4px;
+        padding: 24px 20px 40px 20px;
+    }
+    .custom-sytle-login-title{
+        font-style: normal;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 150%;
+        color: #333333;
+        margin-bottom: 24px;
+    }
+    .custom-style-login-infotext{
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        color: #333333;
+        margin-bottom: 8px;
+    }
+    .block-customer-login .email, .block-customer-login .password {
+        margin-bottom: 16px;
+    }
+    .block-customer-login .email .control input, .block-customer-login .password .control input{
+        border: 1px solid #E1E1E1;
+        border-radius: 4px;
+    }
+    .block-customer-login .login .actions-toolbar {
+        margin-top: 0;
+    }
+    .block-customer-login .login .actions-toolbar .secondary{
+        margin: 0;
+        margin-bottom: 24px;
+        text-align: left;
+        display: block;
+    }
+    .block-customer-login .login .actions-toolbar .secondary a{
+        margin-top: 0;
+    }
+    .block-customer-login .login .actions-toolbar div:last-child {
+        padding: 0;
+    }
+    .block-customer-login .login .actions-toolbar .primary{
+        padding: 0;
+    }
+    .block-customer-login .login .actions-toolbar .primary  button {
+        width: 100%;
+        padding: 12px 0;
+        border: none;
+        border-radius: 4px;
+        margin:0;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+    }
+    .customer-account-login .form-login{
+        margin-bottom: 24px;
+    }
+    .custom-style-login-or{
+        display: flex;
+        justify-content: space-around;
+    }
+    .custom-style-login-or-1, .custom-style-login-or-3{
+        width: 160px;
+        border-top: 1px solid #E2E2E2;
+    }
+    .custom-style-login-or-2{
+        position: relative;
+        top: -8px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        text-align: center;
+        color: #333333;
+    }
+    .custom-style-login-create{
+        padding-top: 24px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        color: #333333;
+        border-top: 1px solid #e2e2e2;
+    }
+    .custom-style-login-create a{
+        color: #155DA4;
+    }
+</style>
+
+
+
+
+
 <?php
 /**
  * Copyright © 2016 Magento. All rights reserved.
@@ -17,11 +120,8 @@
  */
 ?>
 <div class="block block-customer-login">
-    <div class="block-title">
-        <strong id="block-customer-login-heading" role="heading" aria-level="2"><?php /* @escapeNotVerified */ echo __('Registered Customers') ?></strong>
-		<div class="field note"><?php /* @escapeNotVerified */ echo __('If you have an account, sign in with your email address.') ?></div>
-    </div>
     <div class="block-content" aria-labelledby="block-customer-login-heading">
+        <div class="custom-sytle-login-title">Sign In</div>
         <form class="form form-login"
               action="<?php /* @escapeNotVerified */ echo $block->getPostActionUrl() ?>"
               method="post"
@@ -29,25 +129,35 @@
               data-mage-init='{"validation":{}}'>
             <?php echo $block->getBlockHtml('formkey'); ?>
             <fieldset class="fieldset login" data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>">
-
+                <div class="custom-style-login-infotext">Email</div>
                 <div class="field email required">
                     <label class="label" for="email"><span><?php /* @escapeNotVerified */ echo __('Email') ?></span></label>
                     <div class="control">
-                        <input placeholder="<?php /* @escapeNotVerified */ echo __('Email') ?>" name="login[username]" value="<?php echo $block->escapeHtml($block->getUsername()) ?>" <?php if ($block->isAutocompleteDisabled()) :?> autocomplete="off"<?php endif; ?> id="email" type="email" class="input-text" title="<?php /* @escapeNotVerified */ echo __('Email') ?>" data-validate="{required:true, 'validate-email':true}">
+                        <input placeholder="" name="login[username]" value="<?php echo $block->escapeHtml($block->getUsername()) ?>" <?php if ($block->isAutocompleteDisabled()) :?> autocomplete="off"<?php endif; ?> id="email" type="email" class="input-text" title="<?php /* @escapeNotVerified */ echo __('Email') ?>" data-validate="{required:true, 'validate-email':true}">
                     </div>
                 </div>
+                <div class="custom-style-login-infotext">Password</div>
                 <div class="field password required">
                     <label for="pass" class="label"><span><?php /* @escapeNotVerified */ echo __('Password') ?></span></label>
                     <div class="control">
-                        <input placeholder="Password" name="login[password]" type="password" <?php if ($block->isAutocompleteDisabled()) :?> autocomplete="off"<?php endif; ?> class="input-text" id="pass" title="<?php /* @escapeNotVerified */ echo __('Password') ?>" data-validate="{required:true, 'validate-password':true}">
+                        <input placeholder="" name="login[password]" type="password" <?php if ($block->isAutocompleteDisabled()) :?> autocomplete="off"<?php endif; ?> class="input-text" id="pass" title="<?php /* @escapeNotVerified */ echo __('Password') ?>" data-validate="{required:true, 'validate-password':true}">
                     </div>
                 </div>
                 <?php echo $block->getChildHtml('form_additional_info'); ?>
                 <div class="actions-toolbar">
-                    <div class="primary"><button type="submit" class="action login primary" name="send" id="send2"><span><?php /* @escapeNotVerified */ echo __('Login') ?></span></button></div>
                     <div class="secondary"><a class="action remind" href="<?php /* @escapeNotVerified */ echo $block->getForgotPasswordUrl() ?>"><span><?php /* @escapeNotVerified */ echo __('Forgot Your Password?') ?></span></a></div>
+                    <div class="primary"><button type="submit" class="action login primary" name="send" id="send2"><span><?php /* @escapeNotVerified */ echo __('Sign In') ?></span></button></div>
                 </div>
             </fieldset>
         </form>
+        <div class="custom-style-login-or">
+            <div class="custom-style-login-or-1"></div>
+            <div class="custom-style-login-or-2">or</div>
+            <div class="custom-style-login-or-3"></div>
+        </div>
+        <div class="custom-style-login-create">
+             <span>New to Waterdrop?</span>
+             <a href="#"> Create an Account</a>
+        </div>
     </div>
 </div>

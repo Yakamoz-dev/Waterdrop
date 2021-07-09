@@ -1,3 +1,144 @@
+<style>
+    .customer-account-forgotpassword .page-main, .block-new-customer, .login-container, #register-form-now{
+        width: 400px;
+        margin-top: 20px;
+    }
+    .block-register-account .block-content-register{
+        box-shadow: none;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: 0px 0px 1px #8c8686;
+        -o-box-shadow: none;
+        -ms-box-shadow: none;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+    }
+    .block-register-account .block-content-register{
+        padding: 24px 20px 40px 20px;
+    }
+    .form.password.reset, .form.send.confirmation, .form.password.forget, .form.create.account{
+        width: 400px;
+        min-width: unset;
+    }
+    .custom-style-register-creat {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 150%;
+        color: #333333;
+        margin-bottom: 24px;
+    }
+    .custom-style-register-email, .custom-style-register-email, .custom-style-register-confirmpassword{
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        color: #333333;
+        margin-bottom: 8px;
+    }
+    #email_address, #password, #password-confirmation, #captcha_user_create{
+        border: 1px solid #E1E1E1;
+        border-radius: 4px;
+    }
+    .block-content-register .fieldset>.field, .fieldset>.fields>.field{
+        margin-bottom: 16px;
+    }
+    #password-strength-meter-container{
+        margin-top: 8px;
+        margin-bottom:16px;
+    }
+    .block-content-register .confirmation{
+        margin-bottom: 16px;
+    }
+    #form-validate > div > div > div.primary > button {
+        width: 100%; 
+        margin: 0;
+        padding: 12px 0;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        color: #FFFFFF;
+        border: none;
+        background: #155DA4;
+        border-radius: 4px;
+    }
+    .block-register-account .newsletter .label span {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 125%;
+        color: #666666;
+    }
+    .custom-style-toolbar{
+        margin-top: 0 !important;
+        margin-bottom: 24px;
+    }
+    .customer-account-forgotpassword .page-main .actions-toolbar>div.primary .primary, .block-new-customer .actions-toolbar>div.primary .primary, .login-container .actions-toolbar>div.primary .primary, #register-form-now .actions-toolbar>div.primary .primary{
+        width: 100%;
+        margin: 0;
+    }
+    .custom-style-sevicepolicy{
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 125%;
+        color: #666666;
+        margin-bottom: 24px;
+    }
+    .custom-style-sevicepolicy a{
+        color: #00549c;
+    }
+    .custom-style-login-signin{
+        padding-top: 24px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        color: #333333;
+        border-top: 1px solid #e2e2e2;
+    }
+    .custom-style-login-signin a{
+        color: #155DA4;
+    }
+    .fieldset{
+        margin: 0 0 24px;
+    }
+    #register-form-now #captcha-container-user_create > div > button{
+        border-radius: 4px;
+    }
+    #register-form-now #captcha-container-user_create > div > button:hover {
+        color: #ffffff;
+        background-color: #155da4;
+    }
+
+    @media screen and (max-width: 768px) {
+        .block-register-account .block-content-register{
+            padding: 24px 16px 40px 16px;
+        }
+        .customer-account-forgotpassword .page-main, .block-new-customer, .login-container, #register-form-now {
+            width: 100%;
+            margin-top: 8px;
+            margin-bottom: 0;
+        }
+        #maincontent > div.columns > div > div.login-container > div.block.block-customer-login {
+            margin-bottom: 0;
+        }
+        .block-customer-login .email .control input, .block-customer-login .password .control input{
+            height: 40px;
+        }
+        .form.password.reset, .form.send.confirmation, .form.password.forget, .form.create.account{
+            width: 100%;
+        }
+        #email_address, #password, #password-confirmation, #captcha_user_create{
+            height: 40px;
+        }
+        .custom-style-sevicepolicy a, .custom-style-login-signin a{
+            text-decoration: underline;
+        }
+    }
+    </style>
+
 <?php
 /**
  * Copyright © 2016 Magento. All rights reserved.
@@ -16,37 +157,57 @@
 ?>
 <div id="register-form-now">
 <div class="block block-register-account">
-<div class="block-title">
-	<strong id="block-customer-login-heading">
-	<?php /* @escapeNotVerified */ echo __('Create New Customer Account') ?>
-	</strong>
-	<div class="field note">
-		<?php /* @escapeNotVerified */ echo __('Creating an account is easy. Just fill in the form below.') ?>
-	</div>
-</div>
 <?php echo $block->getChildHtml('form_fields_before')?>
 <?php /* Extensions placeholder */ ?>
 <?php echo $block->getChildHtml('customer.form.register.extra')?>
-
-
 <form class="form create account form-create-account" action="<?php /* @escapeNotVerified */ echo $block->getPostActionUrl() ?>" method="post" id="form-validate" enctype="multipart/form-data" autocomplete="off">
     <?php /* @noEscape */ echo $block->getBlockHtml('formkey'); ?>
 	<div class="block-content-register">
     <fieldset class="fieldset create info">
-        <legend class="legend"><span><?php /* @escapeNotVerified */ echo __('Personal Information') ?></span></legend><br>
+      <div class="custom-style-register-creat">Create an Account</div>
         <input type="hidden" name="success_url" value="<?php /* @escapeNotVerified */ echo $block->getSuccessUrl() ?>">
         <input type="hidden" name="error_url" value="<?php /* @escapeNotVerified */ echo $block->getErrorUrl() ?>">
         <?php echo $block->getLayout()->createBlock('Magento\Customer\Block\Widget\Name')->setObject($block->getFormData())->setForceUseCustomerAttributes(true)->toHtml() ?>
+        <div class="custom-style-register-email">Email</div>
         <div class="field required">
             <label for="email_address" class="label"><span><?php /* @escapeNotVerified */ echo __('Email') ?></span></label>
             <div class="control">
-                <input type="email" placeholder="<?php /* @escapeNotVerified */ echo __('Email') ?>" name="email" id="email_address" value="<?php echo $block->escapeHtml($block->getFormData()->getEmail()) ?>" title="<?php /* @escapeNotVerified */ echo __('Email') ?>" class="input-text" data-validate="{required:true, 'validate-email':true}">
+                <input type="email" name="email" id="email_address" value="<?php echo $block->escapeHtml($block->getFormData()->getEmail()) ?>" title="<?php /* @escapeNotVerified */ echo __('Email') ?>" class="input-text" data-validate="{required:true, 'validate-email':true}">
+            </div>
+        </div>
+        <div class="custom-style-register-email">Password</div>
+        <div class="field password required">
+        <div class="field password required" data-mage-init='{"passwordStrengthIndicator": {}}'>
+            <label for="password" class="label"><span><?php /* @escapeNotVerified */ echo __('Password') ?></span></label>
+            <div class="control">               
+                <input type="password" name="password" id="password"
+                       title="<?php /* @escapeNotVerified */ echo __('Password') ?>"
+                       class="input-text"
+                       data-password-min-length="<?php echo $block->escapeHtml($block->getMinimumPasswordLength()) ?>"
+                       data-password-min-character-sets="<?php echo $block->escapeHtml($block->getRequiredCharacterClassesNumber()) ?>"
+                       data-validate="{required:true, 'validate-customer-password':true}"
+                       autocomplete="off">
+                <div id="password-strength-meter-container" data-role="password-strength-meter" >
+                    <div id="password-strength-meter" class="password-strength-meter">
+                        <?php /* @escapeNotVerified */ echo __('Password Strength'); ?>:
+                        <span id="password-strength-meter-label" data-role="password-strength-meter-label" >
+                            <?php /* @escapeNotVerified */ echo __('No Password'); ?>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="custom-style-register-confirmpassword">Confirm  Password</div>
+        <div class="field confirmation required">
+            <label for="password-confirmation" class="label"><span><?php /* @escapeNotVerified */ echo __('Confirm Password') ?></span></label>
+            <div class="control">
+                <input type="password" name="password_confirmation" title="<?php /* @escapeNotVerified */ echo __('Confirm Password') ?>" id="password-confirmation" class="input-text" data-validate="{required:true, equalTo:'#password'}" autocomplete="off">
             </div>
         </div>
         <?php if ($block->isNewsletterEnabled()): ?>
             <div class="field choice newsletter">
-                <input type="checkbox" name="is_subscribed" title="<?php /* @escapeNotVerified */ echo __('Sign Up for Newsletter') ?>" value="1" id="is_subscribed"<?php if ($block->getFormData()->getIsSubscribed()): ?> checked="checked"<?php endif; ?> class="checkbox">
-                <label for="is_subscribed" class="label"><span><?php /* @escapeNotVerified */ echo __('Sign Up for Newsletter') ?></span></label>
+                <input type="checkbox" name="is_subscribed" title="<?php /* @escapeNotVerified */ echo __('Sign me up for emails to receive updates, access to exclusive deals, and more.') ?>" value="1" id="is_subscribed"<?php if ($block->getFormData()->getIsSubscribed()): ?> checked="checked"<?php endif; ?> class="checkbox">
+                <label for="is_subscribed" class="label"><span><?php /* @escapeNotVerified */ echo __('Sign me up for emails to receive updates, access to exclusive deals, and more.') ?></span></label>
             </div>
             <?php /* Extensions placeholder */ ?>
             <?php echo $block->getChildHtml('customer.form.register.newsletter')?>
@@ -83,9 +244,7 @@
                     <input placeholder="<?php /* @escapeNotVerified */ echo __('Phone') ?>" type="text" name="telephone" id="telephone" value="<?php echo $block->escapeHtml($block->getFormData()->getTelephone()) ?>" title="<?php /* @escapeNotVerified */ echo __('Phone Number') ?>" class="input-text <?php /* @escapeNotVerified */ echo $this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('telephone') ?>">
                 </div>
             </div>
-
             <?php $_streetValidationClass = $this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('street'); ?>
-
             <div class="field street required">
                 <label for="street_1" class="label"><span><?php /* @escapeNotVerified */ echo __('Street Address') ?></span></label>
                 <div class="control">
@@ -105,14 +264,12 @@
                     </div>
                 </div>
             </div>
-
             <div class="field required">
                 <label for="city" class="label"><span><?php /* @escapeNotVerified */ echo __('City') ?></span></label>
                 <div class="control">
                     <input placeholder="<?php /* @escapeNotVerified */ echo __('City') ?>" type="text" name="city" value="<?php echo $block->escapeHtml($block->getFormData()->getCity()) ?>" title="<?php /* @escapeNotVerified */ echo __('City') ?>" class="input-text <?php /* @escapeNotVerified */ echo $this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('city') ?>" id="city">
                 </div>
             </div>
-
             <div class="field region required">
                 <label for="region_id" class="label"><span><?php /* @escapeNotVerified */ echo __('State/Province') ?></span></label>
                 <div class="control">
@@ -122,14 +279,12 @@
                     <input placeholder="<?php /* @escapeNotVerified */ echo __('Region') ?>" type="text" id="region" name="region" value="<?php echo $block->escapeHtml($block->getRegion()) ?>" title="<?php /* @escapeNotVerified */ echo __('State/Province') ?>" class="input-text <?php /* @escapeNotVerified */ echo $this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('region') ?>" style="display:none;">
                 </div>
             </div>
-
             <div class="field zip required">
                 <label for="zip" class="label"><span><?php /* @escapeNotVerified */ echo __('Zip/Postal Code') ?></span></label>
                 <div class="control">
                     <input placeholder="<?php /* @escapeNotVerified */ echo __('Zip/Postal Code') ?>" type="text" name="postcode" value="<?php echo $block->escapeHtml($block->getFormData()->getPostcode()) ?>" title="<?php /* @escapeNotVerified */ echo __('Zip/Postal Code') ?>" id="zip" class="input-text validate-zip-international <?php /* @escapeNotVerified */ echo $this->helper('Magento\Customer\Helper\Address')->getAttributeValidationClass('postcode') ?>">
                 </div>
             </div>
-
             <div class="field country required">
                 <label for="country" class="label"><span><?php /* @escapeNotVerified */ echo __('Country') ?></span></label>
                 <div class="control">
@@ -146,43 +301,11 @@
             <input type="hidden" name="default_billing" value="1">
             <input type="hidden" name="default_shipping" value="1">
         </fieldset>
-
     <?php endif; ?>
     <fieldset class="fieldset create account" data-hasrequired="<?php /* @escapeNotVerified */ echo __('* Required Fields') ?>">
-        <legend class="legend"><span><?php /* @escapeNotVerified */ echo __('Sign-in Information') ?></span></legend><br>
-
-        <div class="field password required">
-        <div class="field password required" data-mage-init='{"passwordStrengthIndicator": {}}'>
-            <label for="password" class="label"><span><?php /* @escapeNotVerified */ echo __('Password') ?></span></label>
-            <div class="control">               
-                <input placeholder="<?php /* @escapeNotVerified */ echo __('Password') ?>" type="password" name="password" id="password"
-                       title="<?php /* @escapeNotVerified */ echo __('Password') ?>"
-                       class="input-text"
-                       data-password-min-length="<?php echo $block->escapeHtml($block->getMinimumPasswordLength()) ?>"
-                       data-password-min-character-sets="<?php echo $block->escapeHtml($block->getRequiredCharacterClassesNumber()) ?>"
-                       data-validate="{required:true, 'validate-customer-password':true}"
-                       autocomplete="off">
-                <div id="password-strength-meter-container" data-role="password-strength-meter" >
-                    <div id="password-strength-meter" class="password-strength-meter">
-                        <?php /* @escapeNotVerified */ echo __('Password Strength'); ?>:
-                        <span id="password-strength-meter-label" data-role="password-strength-meter-label" >
-                            <?php /* @escapeNotVerified */ echo __('No Password'); ?>
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="field confirmation required">
-            <label for="password-confirmation" class="label"><span><?php /* @escapeNotVerified */ echo __('Confirm Password') ?></span></label>
-            <div class="control">
-                <input type="password" placeholder="<?php /* @escapeNotVerified */ echo __('Confirm Password') ?>" name="password_confirmation" title="<?php /* @escapeNotVerified */ echo __('Confirm Password') ?>" id="password-confirmation" class="input-text" data-validate="{required:true, equalTo:'#password'}" autocomplete="off">
-            </div>
-        </div>
         <?php echo $block->getChildHtml('form_additional_info'); ?>
     </fieldset>
-	</div>
-    <div class="actions-toolbar">
+    <div class="actions-toolbar custom-style-toolbar">
         <div class="primary">
             <button type="submit" class="action submit primary" title="<?php /* @escapeNotVerified */ echo __('Create an Account') ?>"><span><?php /* @escapeNotVerified */ echo __('Create an Account') ?></span></button>
         </div>
@@ -190,6 +313,14 @@
             <a class="action back" href="<?php echo $block->escapeUrl($block->getBackUrl()) ?>"><span><?php /* @escapeNotVerified */ echo __('Back') ?></span></a>
         </div>
     </div>
+    <div class="custom-style-sevicepolicy">
+        By clicking Create an Account, you agree to Waterdrop's <a href="#" >Terms of Sevice </a> and <a href="#" >Privacy Policy</a>.
+    </div>
+    <div class="custom-style-login-signin">
+             <span>Already have an account? </span>
+             <a href="#"> <span>Sign in</span> &nbsp&nbsp></a>
+    </div>
+	</div>
 </form>
 </div>
 </div>

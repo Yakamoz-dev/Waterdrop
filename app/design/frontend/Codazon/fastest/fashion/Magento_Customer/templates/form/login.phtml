@@ -1,6 +1,7 @@
 <style>
     .customer-account-forgotpassword .page-main, .block-new-customer, .login-container, #register-form-now {
         width: 400px;
+        margin-top: 20px;
     }
     .login-container .block-new-customer{
         display:none;
@@ -95,15 +96,83 @@
     .custom-style-login-create a{
         color: #155DA4;
     }
+    #maincontent > div.columns > div > div.login-container > div.block.block-customer-login > div > div.block.social-login-authentication-channel.account-social-login{
+        margin-bottom: 24px;
+    }
+    .block-customer-login .social-btn .btn-social{
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        text-align: center;
+        color: #333333;
+        background: none;
+        text-align: center;
+        border: 1px solid #e1e1e1;
+        padding-top: 11px;
+        padding-bottom: 11px;
+    }
+    .custom-style-google, .custom-style-facebook{
+        border-right: none !important;
+    }
+    .block-customer-login .account-social-login .actions-toolbar.social-btn{
+        width: 100%;
+    }
+    #maincontent > div.columns > div > div.login-container > div.block.block-customer-login > div > div.block.social-login-authentication-channel.account-social-login > div {
+        padding: 0;
+    }
+    .custom-style-google{
+        top: 2px !important;
+        left: 100px !important;
+    }
+    .custom-style-facebook:before {
+        font-family: 'icomoon';
+        content: "\e935";
+        color: #155DA4;
+    }
+    .custom-style-facebook {
+        top: 2px !important;
+        left: 92px !important;
+    }
+    #maincontent > div.columns > div > div.login-container > div.block.block-customer-login > div > div.block.social-login-authentication-channel.account-social-login > div{
+        margin-top: 10px;
+    }
+    .block-customer-login .facebook-login {
+        margin-top: 12px;
+    }
+
+
+
+
+
+
     @media screen and (max-width: 768px) {
         .customer-account-forgotpassword .page-main, .block-new-customer, .login-container, #register-form-now {
             width: 100%;
+            margin-top: 8px;
+            margin-bottom: 0;
         }
-        .block-customer-login .login .actions-toolbar .secondary a{
+        #maincontent > div.columns > div > div.login-container > div.block.block-customer-login {
+            margin-bottom: 0;
+        }
+        .block-customer-login .login .actions-toolbar .secondary a {
             text-decoration: underline;
         }
-        .custom-style-login-create a span{
+        .custom-style-login-create a span {
             text-decoration: underline;
+        }
+        .custom-style-google {
+            left: 85px !important;
+        }
+        .custom-style-facebook {
+            left: 79px !important;
+        }
+        .block-customer-login .email .control input, .block-customer-login .password .control input{
+            height: 40px;
+        }
+        #send2:hover {
+            background: #155da4;
+            color: #fff;
         }
     }
 </style>
@@ -166,6 +235,7 @@
             <div class="custom-style-login-or-2">or</div>
             <div class="custom-style-login-or-3"></div>
         </div>
+        <?php echo $this->getLayout() ->createBlock('Mageplaza\SocialLogin\Block\Popup\Social') ->setTemplate('Mageplaza_SocialLogin::form/social.phtml') ->toHtml(); ?>
         <div class="custom-style-login-create">
              <span>New to Waterdrop?</span>
              <a href="#"> <span>Create an Account</span> &nbsp&nbsp></a>

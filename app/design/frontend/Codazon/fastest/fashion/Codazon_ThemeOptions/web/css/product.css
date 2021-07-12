@@ -3,6 +3,17 @@
     padding: 0;
 }
 /* title start */
+#maincontent #description .description .value div:last-child {
+    margin-bottom: 0;
+}
+
+#maincontent #description .description .value img {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+}
 
 .mg-product-block-title {
     margin-bottom: 24px;

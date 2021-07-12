@@ -114,7 +114,7 @@ define([
                 hasNewAddress,
                 fieldsetName = 'checkout.steps.shipping-step.shippingAddress.shipping-address-fieldset';
             this._super();
-            
+
             self.hasShippingMethod = ko.pureComputed(function(){
                 var hasMethod = false;
                 if(quote.shippingMethod()){
@@ -143,10 +143,10 @@ define([
                             isSavingShipping = false;
                         });//save seleted shipping method and update payment method by ajax
                     }
-                    
+
                 }
             });
-            
+
             quote.shippingAddress.subscribe(function(address){
                 if(address['extension_attributes']){
                     if(address['extension_attributes']['pickup_location_code']){ //trigger after select pickup store
@@ -274,7 +274,7 @@ define([
             isSetDefaultShippingMethod = true;
             selectShippingMethodAction(shippingMethod);
             checkoutData.setSelectedShippingRate(shippingMethod['carrier_code'] + '_' + shippingMethod['method_code']);
-            
+
             if(shippingMethod['method_code'] == 'pickup'){
                 quote.billingAddress(null);
             }else{

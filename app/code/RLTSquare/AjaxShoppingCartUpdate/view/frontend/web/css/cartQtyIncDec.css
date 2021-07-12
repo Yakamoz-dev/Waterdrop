@@ -1,8 +1,8 @@
 .ajax-cart-qty-minus:before {
-    font-size: 12px;
-    line-height: 28px;
-    color: #757575;
-    font-family: 'luma-icons';
+    font-size: 16px;
+    line-height: 32px;
+    color: #E1E1E1;
+    font-family: 'icomoon';
     margin: 0;
     vertical-align: top;
     display: inline-block;
@@ -10,14 +10,18 @@
     overflow: hidden;
     speak: none;
     text-align: center;
-    content: '\e60f';
+    content: '\e924';
+    border: 1px solid #E1E1E1;
+    border-right: none;
+    width: 32px;
+    height: 32px;
 }
 
 .ajax-cart-qty-plus:before {
-    font-size: 12px;
-    line-height: 28px;
-    color: #757575;
-    font-family: 'luma-icons';
+    font-size: 16px;
+    line-height: 32px;
+    color: #E1E1E1;
+    font-family: 'icomoon';
     margin: 0;
     vertical-align: top;
     display: inline-block;
@@ -25,5 +29,9 @@
     overflow: hidden;
     speak: none;
     text-align: center;
-    content: '\e61c';
+    content: '\e92a';
+    border: 1px solid #E1E1E1;
+    border-left: none;
+    width: 32px;
+    height: 32px;
 }

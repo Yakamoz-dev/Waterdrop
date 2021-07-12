@@ -11,6 +11,7 @@ use Magento\Framework\App\Action\Action;
 ?>
 
 <?php
+$_mobileHelper = $this->helper('Codazon\ThemeOptions\Helper\Mobile');
 switch ($type = $block->getType()) {
 
     case 'related-rule':
@@ -26,9 +27,9 @@ switch ($type = $block->getType()) {
             $shuffle = (int) $block->isShuffled();
             $canItemsAddToCart = $block->canItemsAddToCart();
 
-            $showWishlist = true;
+            $showWishlist = false;
             $showCompare = false;
-            $showCart = true;
+            $showCart = false;
             $templateType = null;
             $description = false;
         }
@@ -70,7 +71,7 @@ switch ($type = $block->getType()) {
 
             $showWishlist = false;
             $showCompare = false;
-            $showCart = true;
+            $showCart = false;
             $templateType = null;
             $description = false;
             $canItemsAddToCart = false;
@@ -92,7 +93,7 @@ switch ($type = $block->getType()) {
 
             $showWishlist = false;
             $showCompare = false;
-            $showCart = true;
+            $showCart = false;
             $templateType = null;
             $description = false;
             $canItemsAddToCart = false;
@@ -111,9 +112,9 @@ switch ($type = $block->getType()) {
             $items = $block->getItemCollection();
             $limit = 0;
 
-            $showWishlist = true;
-            $showCompare = true;
-            $showCart = true;
+            $showWishlist = false;
+            $showCompare = false;
+            $showCart = false;
             $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
             $description = false;
             $canItemsAddToCart = false;
@@ -132,9 +133,9 @@ switch ($type = $block->getType()) {
             $items = $block->getItems();
             $limit = 0;
 
-            $showWishlist = true;
-            $showCompare = true;
-            $showCart = true;
+            $showWishlist = false;
+            $showCompare = false;
+            $showCart = false;
             $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
             $description = false;
             $canItemsAddToCart = false;
@@ -154,9 +155,9 @@ switch ($type = $block->getType()) {
             $title = __('New Products');
             $items = $exist;
 
-            $showWishlist = true;
-            $showCompare = true;
-            $showCart = true;
+            $showWishlist = false;
+            $showCompare = false;
+            $showCart = false;
             $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
             $description = ($mode == 'list') ? true : false;
             $canItemsAddToCart = false;
@@ -341,6 +342,11 @@ switch ($type = $block->getType()) {
     if($type == 'related' || $type == 'related-rule'){
         $itemSlider = 6;
     }
+    if($_mobileHelper->isMobile()){
+        $itemMargin = 13;
+    } else {
+        $itemMargin = 20;
+    }
     ?>
     <script type="text/javascript">
         require(['jquery','cdz_slider'],function($){
@@ -354,7 +360,7 @@ switch ($type = $block->getType()) {
                     items:<?php echo $itemSlider ?>,
                     lazyLoad: true,
                     loop: false,
-                    margin: 20,
+                    margin: <?php echo $itemMargin ?>,
                     responsiveClass: true,
                     nav: true,
                     dots: false,

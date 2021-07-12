@@ -3,7 +3,7 @@
     padding: 0;
 }
 /* title start */
-#maincontent #description .description .value div:last-child {
+#maincontent #description .description .value>div:last-child {
     margin-bottom: 0;
 }
 

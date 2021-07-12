@@ -161,6 +161,14 @@
     .product.info.detailed {
         clear: both;
 
+        .product.attribute.description {
+            .value {
+                .mg-product-block-bigbanner:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+
         .additional-attributes {
             width: auto;
             .lib-table-bordered(
@@ -1611,11 +1619,64 @@ strong#block-related-heading:before {
     -webkit-backface-visibility: unset !important;;
     backface-visibility: unset !important;;
 }
+.crosssell .title{
+    background: #ffffff !important;
+    padding: 20px 0 12px 20px !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    font-size: 16px  !important;
+    line-height: 19px !important;
+    color: #333333 !important;
+    border-bottom: 1px solid #e1e1e1;
+}
+strong#block-crosssell-heading:before {
+    content: " ";
+    width: 12%;
+    background: #155da4;
+    position: absolute;
+    bottom: 0;
+    left: 15px;
+    height: 2px;
+}
+.crosssell .related-upsell-crossell.block-content.content{
+    border: 0;
+}
+.crosssell .owl-stage-outer{
+    padding: 0 20px !important;
+}
+.crosssell .owl-stage .owl-item {
+    width: 174px !important;
+}
+.crosssell .products-grid .product-item-info .product-item-details{
+    margin-top: 10px;
+    padding: 0;
+}
+.crosssell .product-item-name{
+    margin-bottom: 8px;
+}
+.crosssell .products-grid .product-item:hover .product-item-info {
+    box-shadow: unset !important;
+    -webkit-box-shadow: unset !important;
+}
+.crosssell .related-upsell-crossell .product-item-info:hover .price-box , .crosssell .related-upsell-crossell:hover .product-reviews-summary{
+    opacity: unset !important;
+    transform: unset !important;
+    -moz-transition: unset !important;;
+    -webkit-transition: unset !important;;
+    -o-transition: unset !important;;
+    transition: unset !important;;
+    -moz-backface-visibility: unset !important;;
+    -webkit-backface-visibility: unset !important;;
+    backface-visibility: unset !important;;
+}
 .products-list .item a.product-item-photo .hover-image .product-image-container, .products-grid .item a.product-item-photo .hover-image .product-image-container{
     opacity:1 !important;
     -webkit-opacity:1 !important;
 }
 .block.related .owl-carousel .owl-nav{
+    top: -40px !important;
+}
+.block.crosssell .owl-carousel .owl-nav{
     top: -40px !important;
 }
 .data.table.additional-attributes .col.label {

@@ -29,32 +29,33 @@ $hasCouponCode = (bool) strlen($block->getCouponCode());
             <div class="fieldset coupon<?= $hasCouponCode ? ' applied' : '' ?>">
                 <input type="hidden" name="remove" id="remove-coupon" value="0" />
                 <div class="field">
-                    <label for="coupon_code" class="label"><span><?= $block->escapeHtml(__('Enter discount code')) ?></span></label>
+                    <label for="coupon_code" class="label" style="display: none;"><span><?= $block->escapeHtml(__('Discount code')) ?></span></label>
                     <div class="control">
                         <input type="text"
                                class="input-text"
                                id="coupon_code"
                                name="coupon_code"
                                value="<?= $block->escapeHtmlAttr($block->getCouponCode()) ?>"
-                               placeholder="<?= $block->escapeHtmlAttr(__('Enter discount code')) ?>"
+                               placeholder="<?= $block->escapeHtmlAttr(__('Discount code')) ?>"
                                 <?php if ($hasCouponCode) :?>
                                    disabled="disabled"
                                 <?php endif; ?>
                         />
-                    </div>
-                </div>
-                <div class="actions-toolbar">
-                    <?php if (!$hasCouponCode) :?>
-                    <div class="primary">
-                        <button class="action apply primary" type="button" value="<?= $block->escapeHtmlAttr(__('Apply Discount')) ?>">
-                            <span><?= $block->escapeHtml(__('Apply Discount')) ?></span>
-                        </button>
-                    </div>
-                    <?php else :?>
-                        <div class="primary">
-                            <button  type="button" class="action cancel primary" value="<?= $block->escapeHtmlAttr(__('Cancel Coupon')) ?>"><span><?= $block->escapeHtml(__('Cancel Coupon')) ?></span></button>
+                        <div class="actions-toolbar">
+                            <?php if (!$hasCouponCode) :?>
+                                <div class="primary">
+                                    <button class="action apply primary" type="button" value="<?= $block->escapeHtmlAttr(__('Apply')) ?>">
+                                        <span><?= $block->escapeHtml(__('Apply')) ?></span>
+                                    </button>
+                                </div>
+                            <?php else :?>
+                                <div class="primary">
+                                    <button  type="button" class="action cancel primary" value="<?= $block->escapeHtmlAttr(__('Cancel')) ?>"><span><?= $block->escapeHtml(__('Cancel')) ?></span></button>
+                                </div>
+                            <?php endif; ?>
                         </div>
-                    <?php endif; ?>
+                    </div>
+                    <div class="cart-code-text">Only one discount code can be used per order</div>
                 </div>
             </div>
             <?php if (!$hasCouponCode) : ?>

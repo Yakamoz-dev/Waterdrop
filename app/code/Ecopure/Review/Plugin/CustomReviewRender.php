@@ -33,6 +33,7 @@ class CustomReviewRender {
             || $this->request->getFullActionName() == 'catalogsearch_result_index'
             || $this->request->getFullActionName() == 'productfilter_index_firstLoad'
             || $this->request->getFullActionName() == 'catalog_product_view'
+            || $this->request->getFullActionName() == 'checkout_cart_index'
         ) {
             return 'Ecopure_Review::helper/summary_short.phtml';
         }

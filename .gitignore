@@ -58,5 +58,7 @@
 /pub/media/.thumbscodazon/*
 /pub/media/.thumbsmagefan_blog/*
 /pub/media/.thumbswysiwyg/*
+/pub/media/.thumbsecopure/*
 /pub/media/wysiwyg/.thumbs/*
 /pub/media/catalog/product/cache/*
+/pub/media/tmp/*

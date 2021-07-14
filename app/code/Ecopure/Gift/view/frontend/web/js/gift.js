@@ -23,24 +23,21 @@ require(
             }]
         };
 
-        var popup = modal(options, $('#popup-modal'));
-        $("#click-me").on('click',function(){
-            $("#popup-modal").modal('openModal');
-        });
+        if ($('#popup-modal').length != 0) {
+            var popup = modal(options, $('#popup-modal'));
+            $("#click-me").on('click',function(){
+                $("#popup-modal").modal('openModal');
+            });
+        }
 
         $(".datepicker").datepicker({
             dateFormat:'mm/dd/yy',
             changeMonth: true,
             changeYear: true,
-            yearRange: '2010:2025',
+            yearRange: '2018:2030',
             showMonthAfterYear: false,
         });
-        $('#input-icon1').focus(function () {
-            $(this).parent().find('.display-img').addClass('display-img-show')
-        });
-        $('#input-icon1').blur(function () {
-            $(this).parent().find('.display-img').removeClass('display-img-show')
-        });
+
         $('#input-icon2').focus(function () {
             $(this).parent().find('.display-img').addClass('display-img-show')
         });
@@ -48,21 +45,22 @@ require(
             $(this).parent().find('.display-img').removeClass('display-img-show')
         });
 
-        $('#change-select').change(function () {
-            var isOrderNo = $(this).find('option:selected').data('order');
-            verifyByOrder(isOrderNo);
-        })
-        function verifyByOrder(isOrderNo) {
-            if (isOrderNo) {
-                $('#Serial-Number').removeClass("display-img-show");
-                $('.part1-rightInput-div').css("margin-right","2%");
-                $('.part1-leftInput-div').css("margin-right","0");
-                $('#ro_productid').removeClass('required');
-            } else {
-                $('#Serial-Number').addClass("display-img-show");
-                $('.part1-rightInput-div').css({ "margin-right":0});
-                $('.part1-leftInput-div').css("margin-right","2%");
-                $('#ro_productid').addClass('required');
+        $('#line').change(function () {
+            if ($(this).val() === "Online") {
+                $('#platform_s').html('Website');
+                $('#platform').html(
+                    '<option value="" disabled selected><?php echo __("-- Please Select --") ?></option>' +
+                    '<option value="Amazon">Amazon</option>' +
+                    '<option value="Official Site">Official Site</option>'
+                );
+            } else if ($(this).val() === "Offline") {
+                $('#platform_s').html('Store');
+                $('#platform').html(
+                    '<option value="" disabled selected><?php echo __("-- Please Select --") ?></option>' +
+                    '<option value="Walmart">Walmart</option>' +
+                    '<option value="Bestbuy">Bestbuy</option>' +
+                    '<option value="Other">Other</option>'
+                );
             }
-        }
+        })
     });

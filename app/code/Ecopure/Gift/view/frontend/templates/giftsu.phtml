@@ -1,8 +1,16 @@
 <?php $mediaUrl = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA); ?>
 <style>
+    .page-header, .page-footer, .cart-footer, .enhanced-privacy-cookie-policy, .wrapper-breadcrums, .block-static-block, .page-title-wrapper {
+        display: none !important;
+    }
+    .page-layout-1column .columns {
+        background: transparent;
+        box-shadow: none;
+        padding: 20px 16px;
+    }
     .verrified-title {
         background-color: #e8f9ef;
-        width: 55%;
+        width: 100%;
         padding: 30px;
         color: #333;
         font-size: 14px;
@@ -10,52 +18,25 @@
         margin: 0 auto;
         text-align: center;
     }
-    .verrified-icon {
-        float: left;
-        width: 30px;
-        height: 30px;
-        margin-top: -15px;
+    h3 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 12px;
     }
-    @media (max-width:1300px){
-        .parent-div{
-            width: 94%;
-            margin: 0 auto;
-        }
-    }
-    @media (max-width:1024px) {
-        .parent-div {
-            width: 90%;
-            margin: 0 auto;
-        }
-    }
-    @media (max-width:865px){
-        .verrified-title{
-            font-size: 12px;
-            padding: 25px;
-        }
-    }
-    @media (max-width:767px){
-        .verrified-title{
-            width: 90%;
-        }
-    }
-    @media (max-width:601px){
-        .verrified-title{
-            padding: 15px;
-        }
-    }
-    @media (max-width:375px) {
-        .verrified-icon {
-            margin-top: 0;
-            float: none;
-        }
+    h3:before {
+        font-family: 'icomoon';
+        font-size: 32px;
+        content: '\e928';
+        color: #01B300;
+        padding-right: 12px;
     }
 </style>
 <div class="form-div">
     <!-- VERIFIED -->
     <div class="verrified-title">
         <h3>SUCCEED</h3>
-        <span>We have received your gift request. Thanks for choosing Waterdrop!</span>
-        <img src="<?php echo $mediaUrl ?>gift/success.png" alt="" class="verrified-icon">
+        <div>You have successfully registered your warranty.</div>
+        <div>Thanks for choosing our products!</div>
     </div>
 </div>

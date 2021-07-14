@@ -47,6 +47,7 @@ class Fields extends \Magento\Config\Block\System\Config\Form\Field\FieldArray\A
         return $this->_typeRenderer
             ->addOption('text', 'text')
             ->addOption('textarea', 'textarea')
+            ->addOption('select', 'select')
             ->addOption('email', 'email');
     }
 
@@ -89,7 +90,7 @@ class Fields extends \Magento\Config\Block\System\Config\Form\Field\FieldArray\A
         $type = $row->getData('field_type');
         $key = 'option_' . $this->getTypeRenderer()->calcOptionHash($type);
         $options[$key] = 'selected="selected"';
-        
+
         $row->setData('option_extra_attrs', $options);
     }
 }

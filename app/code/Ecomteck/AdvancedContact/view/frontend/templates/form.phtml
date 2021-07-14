@@ -22,12 +22,98 @@
 <?php $fields = $this->getFields(); ?>
 
 <?php if(count($fields)>0): ?>
+<style>
+    .page-layout-1column .columns {
+        box-shadow: none;
+        border-radius: 4px;
+    }
+    .page-layout-1column .columns .column.main>.row {
+        margin-top: 0;
+    }
+    .legend {
+        margin-bottom: 12px;
+    }
+    .legend span {
+        font-size: 18px;
+        line-height: 21px;
+    }
+    .fieldset {
+        margin-bottom: 24px;
+    }
+    .fieldset>.field {
+        margin-bottom: 16px;
+    }
+    .fieldset .field.note {
+        font-size: 14px;
+        line-height: 1.25;
+        color: #666666;
+    }
+    .fieldset>.field>.label {
+        font-size: 14px;
+        line-height: 16px;
+        font-weight: normal;
+    }
+    .fieldset input[type="text"], .fieldset input[type="email"] {
+        border: 1px solid #E1E1E1;
+        border-radius: 4px;
+        font-size: 14px;
+        line-height: 16px;
+        padding: 0 16px;
+    }
+    .fieldset select {
+        height: 40px;
+        padding: 10px 25px 10px 16px;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
+        border: none;
+    }
+    .fieldset textarea {
+        border: 1px solid #E1E1E1;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
+    }
+    .actions-toolbar>.primary .action:last-child {
+        padding: 12px 49.5px;
+        background: #155DA4;
+        color: #fff;
+        border-radius: 4px;
+        font-size: 14px;
+        line-height: 16px;
+    }
+    .action.primary:hover {
+        border: 1px solid #155da4;
+    }
+    input.mage-error, select.mage-error, textarea.mage-error {
+        border-color: #ed8380;
+    }
+    @media screen and (max-width:767px) {
+        .page-layout-1column .columns {
+            margin-bottom: 8px;
+        }
+        .fieldset input[type="text"], .fieldset input[type="email"] {
+            height: 40px;
+        }
+        .form.contact {
+            margin-bottom: 40px;
+        }
+        .col-sm-12 {
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+        .row .col-sm-12:last-child {
+            border-top: 8px solid #F4F4F4;
+            padding-top: 24px;
+        }
+    }
+</style>
 	<form class="form contact" action="<?php echo $this->getUrl('advanced_contact/form/post'); ?>" id="contact-form" method="post" data-mage-init='{"validation":{}}'>
 		<input type="hidden" name="form_key" value="<?php echo $this->getFormKey(); ?>">
 		<fieldset class="fieldset">
-			<legend class="legend"><span><?php echo __('Write Us'); ?></span></legend>
+			<legend class="legend"><span><?php echo __('Send Us a Message'); ?></span></legend>
 			<div class="field note no-label">
-				<?php echo __('Jot us a note and we’ll get back to you as quickly as possible.'); ?>
+				<?php echo __('Whatever you need, we\'re here to help. Just get in touch, and we\'ll try our best to respond within 24 hours.'); ?>
 			</div>
 			<?php foreach($fields as $field): ?>
 				<div class="field <?php echo $field->getData('key'); ?> <?php echo $field->getData('field_class'); ?>">
@@ -36,7 +122,19 @@
 						<?php if(in_array($field->getData('field_type'), ['text','email'])): ?>
 							<input name="<?php echo $field->getData('key'); ?>" id="<?php echo $field->getData('key'); ?>" title="<?php echo $field->getData('label'); ?>" value="" class="<?php echo $field->getData('field_class'); ?>" type="<?php echo $field->getData('field_type'); ?>">
 						<?php elseif($field->getData('field_type') == 'textarea'): ?>
-							<textarea name="<?php echo $field->getData('key'); ?>" id="<?php echo $field->getData('key'); ?>" title="<?php echo $field->getData('label'); ?>" value="" class="<?php echo $field->getData('field_class'); ?>" style="resize:none"></textarea>
+							<textarea name="<?php echo $field->getData('key'); ?>" id="<?php echo $field->getData('key'); ?>" title="<?php echo $field->getData('label'); ?>" value="" class="<?php echo $field->getData('field_class'); ?>" rows="10" style="resize:none"></textarea>
+                        <?php elseif($field->getData('field_type') == 'select'): ?>
+                            <select name="<?php echo $field->getData('key'); ?>" id="<?php echo $field->getData('key'); ?>" title="<?php echo $field->getData('label'); ?>" class="<?php echo $field->getData('field_class'); ?>">
+                                <option value="" disabled selected>-- Please Select --</option>
+                                <option value="Question before you buy">Question before you buy</option>
+                                <option value="Product support">Product support</option>
+                                <option value="Order & Shipping">Order & Shipping</option>
+                                <option value="Warranty registration">Warranty registration</option>
+                                <option value="Coupon & Payment">Coupon & Payment</option>
+                                <option value="Website feedback">Website feedback</option>
+                                <option value="Business opportunity">Business opportunity</option>
+                                <option value="Other">Other</option>
+                            </select>
 						<?php endif; ?>
 					</div>
 				</div>
@@ -47,7 +145,7 @@
 			<div class="primary">
 				<input type="hidden" name="hideit" id="hideit" value="">
 				<button type="submit" title="<?php echo __('Submit'); ?>" class="action submit primary">
-					<span><?php echo __('Submit'); ?></span>
+					<span><?php echo __('Send Message'); ?></span>
 				</button>
 			</div>
 		</div>

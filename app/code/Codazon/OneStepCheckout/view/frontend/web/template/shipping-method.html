@@ -1,3 +1,47 @@
+<style>
+    .custom-style-shoppin-method {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 14px;
+        color: #333333;
+    }
+    .custom-style-shoppin-method a {
+        color: #155DA4;
+    }
+    #checkout-shipping-method-load .table-checkout-shipping-method tbody .col-price {
+        padding-left: 0;
+        padding-right: 0;
+        text-align: right;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        color: #333333;
+    }
+    #label_method_freeshipping_freeshipping, #label_method_flatrate_flatrate {
+        display: none;
+    }
+    #label_carrier_freeshipping_freeshipping, #label_carrier_flatrate_flatrate {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        color: #333333;
+    }
+    #checkout .osc #opc-sidebar .actions-toolbar {
+        width: 44%;
+    }
+    #discount-form > div.actions-toolbar > div > button {
+        height: 40px;
+        margin-right: 0;
+        border-radius: 0 4px 4px 0;
+    }
+    #discount-form > div.actions-toolbar > div > button:hover {
+        background: #155DA4;
+        color: #FFFFFF;
+    }
+</style>
 <!--Shipping method template-->
 <li id="opc-shipping_method"
     class="checkout-shipping-method"
@@ -38,6 +82,10 @@
             <div class="no-quotes-block"
                  ifnot="rates().length > 0"
                  translate="'Sorry, no quotes are available for this order at this time'" />
+        </div>
+        <div class="custom-style-shoppin-method">
+            See our 
+            <a href="#">Shipping Policy</a>
         </div>
     </div>
 </li>

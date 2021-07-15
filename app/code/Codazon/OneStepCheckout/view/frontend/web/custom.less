@@ -351,3 +351,32 @@
 .actions-toolbar > .primary .action:last-child {
     width: 100%;
 }
+
+// custom style
+.payment-method-braintree .hosted-control {
+	border: 1px solid #e1e1e1;
+	height: 40px;
+	padding: 8px 15px;
+	max-width: unset;
+}
+.braintree-credit-card-selected {
+	top: -4px;
+}
+#braintree_expirationDate {
+	width: 100%;
+}
+#braintree_cc_type_cvv_div {
+	max-width: unset;
+}
+.checkout-payment-method .ccard>.field.cvv>.control {
+	padding-right: 0;
+}
+#checkout .field-tooltip {
+	right: 0;
+}
+#checkout-payment-method-load > div > div > div.payment-method.payment-method-braintree._active > div.payment-method-content > div.payment-method-billing-address > div > fieldset > div:nth-child(2) > div > form > fieldset > fieldset > div > div.field._required > label > span {
+	display: none;
+}
+#checkout-payment-method-load > div > div > div.payment-method.payment-method-braintree._active > div.payment-method-content > div.payment-method-billing-address > div > fieldset > div.actions-toolbar > div > button.action.action-cancel {
+	width: unset;
+}

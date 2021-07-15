@@ -1,3 +1,276 @@
+<style>
+    #checkout .osc{
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 35px;
+        background: transparent;
+    }
+    #checkout .osc>.col {
+        width: unset;
+        float: unset;
+        padding: unset;
+        background: #fff;
+    }
+    #checkout-step-shipping,  #checkout-step-shipping_method{
+        padding: 0 20px;
+    }
+    #checkout .osc .step-title {
+        height: 40px;
+        border-radius: 4px 4px 0 0;
+        padding: 10.5px 0 10.5px 20px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: #FFFFFF;
+    }
+    #checkout-payment-method-load > div > div > div.payment-method.payment-method-braintree, #checkout-payment-method-load .payment-method {
+        padding: 0 20px;
+    }
+    #checkout .payment-option-content, #checkout .checkout-agreements-block {
+        padding: 0 20px;
+    }
+    .osc #opc-sidebar .opc-block-summary {
+        padding: 0 20px;
+    }
+    #checkout .osc input[type="text"], .osc input[type="password"], .osc input[type="url"], .osc input[type="tel"], .osc input[type="search"], .osc input[type="number"], .osc input[type="datetime"], .osc input[type="email"] {
+        height: 40px;
+        line-height: 40px;
+        border-radius: 4px;
+    }
+    #shipping-new-address-form > fieldset > div > div.field._required > label {
+        display: none;
+    }
+    #checkout .osc select {
+        height: 40px;
+        border-radius: 4px;
+    }
+    #checkout .fieldset>.field,  #checkout .fieldset>.fields>.field {
+        margin: 0 0 16px;
+    }
+    #error-XBO771L {
+        position: absolute;
+    }
+    .fieldset>.field .note, .fieldset>.fields>.field .note {
+        margin-top: 8px;
+    }
+    #shipping-new-address-form > div:nth-child(10) {
+        width: 100%;
+    }
+    #checkout .field .control._with-tooltip input {
+        width: 100%;
+        margin-right: 0;
+    }
+    #checkout .field-tooltip {
+        top: -30px;
+    }
+    #checkout .osc .fieldset>.field>.label {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        color: #333333;
+    }
+    .minicart-items-wrapper .product-item .toggle {
+        display: none;
+    }
+    .minicart-items-wrapper .product-item .content {
+        display: block !important;
+    }
+    #opc-sidebar > div.opc-block-summary > div > div.title > strong {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        color: #333333;
+    }
+    #opc-sidebar .product-image-container {
+        width: 90px !important; 
+        height: 90px !important;
+    }
+    .minicart-items .product-item-details .details-qty .label {
+        display: inline-block;
+    }
+    .minicart-items .product-item-details .details-qty {
+        margin-top: 0;
+    }
+    #opc-sidebar > div.opc-block-summary > div > div.content.minicart-items > div > ol > li:nth-child(2) > div > div > div.details-qty > span > span.value:after {
+        display: none;
+    }
+    #opc-sidebar > div.opc-block-summary > div > div.content.minicart-items {
+        display: block !important;
+    }
+    .opc-block-summary .items-in-cart.active>.title:after {
+        display: none !important;
+    }
+    .opc-block-summary .items-in-cart>.title:after {
+        display: none !important;
+    }
+    .opc-block-summary .items-in-cart>.title {
+        cursor: unset;
+    }
+    .osc #opc-sidebar .opc-block-summary .minicart-items .product-item-name {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px !important;
+        line-height: 125%;
+        color: #333333;
+        margin-bottom: 0;
+    }
+    .opc-block-summary .product-item .product-item-inner {
+        margin-bottom: 8px;
+    }
+    .minicart-items .product-item {
+        padding-bottom: 16px;
+    }
+    .opc-block-summary .product-item .product-item-name-block {
+        padding-right: 24px;
+    }
+    .opc-block-summary .product-item .price {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: #333333;
+    }
+    #opc-sidebar .opc-block-summary .price-including-tax {
+        margin-top: 0;
+    }
+    .custom-style-varint {
+        display: flex;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        color: #666666;
+    }
+    .custom-style-varint dt.label {
+        margin-right: 8px;
+        margin-bottom: 0;
+        font-weight: normal;
+    }
+    .custom-style-varint dt.label:after {
+        content: " :";
+    }
+    #opc-sidebar .item-options {
+        margin-bottom: 8px;
+    }
+    #opc-sidebar .item-options .custom-style-varint:last-child {
+        margin-top: 8px;
+    }
+    .custom-style-varint dd.values {
+        margin-bottom: 0;
+    }
+    #opc-sidebar .details-qty {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        color: #666666;
+    }
+    #opc-sidebar > div.opc-block-summary > table > tbody > tr.totals.shipping.excl > th > span.label {
+        display: none;
+    }
+    #opc-sidebar > div.opc-block-summary > table > tbody > tr.totals.sub > th {
+        padding-top: 20px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        color: #333333;
+    }
+    #opc-sidebar > div.opc-block-summary > table > tbody > tr.totals.sub > td {
+        padding-top: 20px;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 16px;
+        color: #333333;
+    }
+    #opc-sidebar > div.opc-block-summary > table > tbody > tr.totals.shipping.excl > td > span {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 16px;
+        color: #333333;
+    }
+    #opc-sidebar > div.opc-block-summary > table > tbody > tr.grand.totals > th, #opc-sidebar > div.opc-block-summary > table > tbody > tr.grand.totals > td {
+        padding: 16px;
+    }
+    #opc-sidebar > div.opc-block-summary > table > tbody > tr.grand.totals > td > strong > span  {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 21px;
+        color: #333333;
+    }
+    #opc-sidebar > div.opc-block-summary > table > tbody > tr.grand.totals > th > strong {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px !important;
+        line-height: 16px;
+        color: #333333;
+    }
+    .opc-block-summary .mark .value {
+        padding-top: 0;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        color: #333333 !important;
+    }
+    #opc-sidebar > div.opc-block-summary > table > tbody > tr.grand.totals > th, #opc-sidebar > div.opc-block-summary > table > tbody > tr.grand.totals > td{
+        padding: 16px 0;
+    }
+    .opc-block-summary {
+        margin-bottom: 0;
+    }
+    #checkout_agreements_block {
+        margin-top: 4px;
+        margin-bottom: 20px;
+    }   
+    #checkout_agreements_block .actions-toolbar {
+        width: 100% !important;
+    }
+    #sidebar_place_order {
+        height: 48px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+        color: #FFFFFF;
+        border: none;
+    }
+    @media screen and (max-width: 768px) {
+        #checkout .osc {
+            grid-template-columns: repeat(1, 1fr);
+            grid-row-gap: 8px;
+        }
+        #checkout-step-shipping, #checkout-step-shipping_method {
+            padding: 0px 16px;
+        }
+        #checkout .osc .step-title {
+            background: #155DA4;
+            padding: 10.5px 0 10.5px 16px;
+        }
+        #checkout-payment-method-load > div > div > div.payment-method.payment-method-braintree, #checkout-payment-method-load .payment-method {
+            padding: 0px 16px;
+        }
+        .osc #opc-sidebar {
+            border-radius: 4px;
+            border: none;
+        }
+        #checkout .payment-option-content, #checkout .checkout-agreements-block {
+            padding: 0 16px;
+        }   
+        .osc #opc-sidebar .opc-block-summary {
+            padding: 0 16px;
+        }
+        
+    }
+</style>
+
 <!--
 /**
  * Copyright © Magento, Inc. All rights reserved.

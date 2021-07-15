@@ -63,8 +63,8 @@ define([
         defaults: {
             template: 'Magento_Checkout/shipping',
             shippingFormTemplate: 'Magento_Checkout/shipping-address/form',
-            shippingMethodListTemplate: 'Magento_Checkout/shipping-address/shipping-method-list',
-            shippingMethodItemTemplate: 'Magento_Checkout/shipping-address/shipping-method-item'
+            shippingMethodListTemplate: 'Codazon_OneStepCheckout/shipping-address/shipping-method-list',
+            shippingMethodItemTemplate: 'Codazon_OneStepCheckout/shipping-address/shipping-method-item'
         },
         default_shipping_carrier: ko.observable(window.checkoutConfig.default_shipping),
         visible: ko.observable(!quote.isVirtual()),

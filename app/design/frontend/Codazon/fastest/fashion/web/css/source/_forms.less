@@ -234,9 +234,23 @@ select:focus ~ .tooltip .tooltip-content {
 	margin-top:-85px !important;
 	.action.action-auth-toggle{
 		.abs-link(@header_text, @header_hover_text);
+        font-size: 16px;
+        line-height: 19px;
+        color: #fff !important;
+        cursor: pointer;
 		&:before{
-			.abs-iconfont("\f090", 14px);
-			margin-right:@indent__xs;
+            display: none;
+            font-family: icomoon;
+            font-style: normal;
+            font-weight: normal;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            content: "\e914";
+            font-size: 24px;
+            margin-right: 10px;
+            position: relative;
+            top: 4px;
 		}
 	}
 }
@@ -250,11 +264,27 @@ select:focus ~ .tooltip .tooltip-content {
 	}
 }
 
+.block-authentication {
+    .actions-toolbar {
+        > .primary {
+            .action {
+                border-radius: 4px;
+                font-size: 16px;
+                line-height: 19px;
+                padding: 12px 18px;
+            }
+        }
+    }
+}
 
 .opc-block-shipping-information{padding:0 !important}
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
 	.authentication-wrapper{
-		margin-top:0 !important;
+        margin-top: -44px !important;
+        margin-right: 16px;
+        .action.action-auth-toggle{
+            color: #fff;
+        }
 	}
 	.cdz-login-form-dropdown{
 		top:40px;

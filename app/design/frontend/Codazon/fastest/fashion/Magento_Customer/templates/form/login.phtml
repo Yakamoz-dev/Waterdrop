@@ -228,7 +228,7 @@
         <?php echo $this->getLayout() ->createBlock('Mageplaza\SocialLogin\Block\Popup\Social') ->setTemplate('Mageplaza_SocialLogin::form/social.phtml') ->toHtml(); ?>
         <div class="custom-style-login-create">
              <span>New to Waterdrop?</span>
-             <a href="#"> <span>Create an Account</span> &nbsp&nbsp></a>
+             <a href="<?php echo $block->getUrl('customer/account/create'); ?>"> <span>Create an Account</span> &nbsp;&nbsp;></a>
         </div>
     </div>
 </div>

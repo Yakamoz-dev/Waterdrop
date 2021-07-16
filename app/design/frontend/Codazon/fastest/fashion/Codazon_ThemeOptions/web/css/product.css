@@ -15,6 +15,16 @@
     -ms-interpolation-mode: nearest-neighbor;
 }
 
+#maincontent #additional .additional-attributes-wrapper>#product-attribute-specs-table{
+    width: 100%;
+}
+#maincontent #additional .additional-attributes-wrapper>#product-attribute-specs-table tr td{
+    padding: 0;
+}
+#maincontent #additional .additional-attributes-wrapper>#product-attribute-specs-table tr td>div:last-child{
+    margin-bottom: 0;
+}
+
 .mg-product-block-title {
     margin-bottom: 24px;
 }

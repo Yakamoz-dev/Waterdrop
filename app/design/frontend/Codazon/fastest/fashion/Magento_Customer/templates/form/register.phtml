@@ -51,7 +51,7 @@
         margin-bottom: 16px;
     }
     #form-validate > div > div > div.primary > button {
-        width: 100%; 
+        width: 100%;
         margin: 0;
         padding: 12px 0;
         font-style: normal;
@@ -179,7 +179,7 @@
         <div class="field password required">
         <div class="field password required" data-mage-init='{"passwordStrengthIndicator": {}}'>
             <label for="password" class="label"><span><?php /* @escapeNotVerified */ echo __('Password') ?></span></label>
-            <div class="control">               
+            <div class="control">
                 <input type="password" name="password" id="password"
                        title="<?php /* @escapeNotVerified */ echo __('Password') ?>"
                        class="input-text"
@@ -318,7 +318,7 @@
     </div>
     <div class="custom-style-login-signin">
              <span>Already have an account? </span>
-             <a href="#"> <span>Sign in</span> &nbsp&nbsp></a>
+             <a href="<?php echo $block->getUrl('customer/account/login'); ?>"> <span>Sign in</span> &nbsp;&nbsp;></a>
     </div>
 	</div>
 </form>
@@ -332,7 +332,7 @@ require([
 
     var dataForm = $('#form-validate');
     var ignore = <?php /* @escapeNotVerified */ echo $_dob->isEnabled() ? '\'input[id$="full"]\'' : 'null'; ?>;
-    
+
     dataForm.mage('validation', {
     <?php if ($_dob->isEnabled()): ?>
         errorPlacement: function(error, element) {

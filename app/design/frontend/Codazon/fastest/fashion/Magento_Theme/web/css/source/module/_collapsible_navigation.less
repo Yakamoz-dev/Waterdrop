@@ -30,12 +30,14 @@
 	margin-bottom:0 !important;
     .content {
         .lib-css(background, @collapsible-nav-background);
-        padding: 15px 0 0;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
     }
     .item {
-        margin: 10px 0 0;
-		 padding-top:10px;
-		border-top:1px dashed @collapsible-nav-current-border-color;
+        margin: 16px 0 0;
+        padding-top:16px;
+		border-top:1px solid #E1E1E1;
         &:first-child {
             margin-top: 0;
 			border-top:0;
@@ -44,23 +46,41 @@
         a,
         > strong {
             //border-left: 3px solid transparent;
-            .lib-css(color, @collapsible-nav-color);
+            color: #333333;
             display: block;
         }
         a {
             text-decoration: none;
-                .abs-link(@collapsible-nav-color, @collapsible-nav-current-color);
+            color: #333333;
         }
         &.current {
             a,
             > strong {
-                .lib-css(border-color, @collapsible-nav-current-border-color);
-                .lib-css(color, @collapsible-nav-current-color);
-                .lib-css(font-weight, @collapsible-nav-current-font-weight);
+                color: #155DA4;
+                font-weight: normal;
             }
             a {
                 .lib-css(border-color, @collapsible-nav-current-border-color);
             }
+        }
+    }
+}
+
+.block {
+    .block-content {
+        font-size: 14px;
+        line-height: 19px;
+    }
+    .block-title {
+        .action {
+            span {
+                font-size: 14px;
+                line-height: 16px;
+            }
+        }
+        strong {
+            border-bottom: 2px solid #155DA4;
+            padding-bottom: 8px;
         }
     }
 }
@@ -97,9 +117,25 @@
         .content {
             //border-bottom: @border-width__base solid @border-color__base;
             display: none;
+            background: #F4F4F4;
+            border: none;
             &.active {
                 display: block;
             }
         }
+        .block-collapsible-nav-title {
+            padding-top: 16px;
+            padding-left: 16px;
+            padding-bottom: 16px;
+            &:after {
+                font-size: 16px;
+                line-height: 19px;
+                margin: 8px 0 0 0;
+                color: #333;
+            }
+        }
+    }
+    .account .column.main>.table-wrapper, .account .column.main>.form-address-edit, .account .column.main>.form, .account .column.main .block {
+        margin-bottom: 8px;
     }
 }

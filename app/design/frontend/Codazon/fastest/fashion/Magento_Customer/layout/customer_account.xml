@@ -37,6 +37,12 @@
                     </block>
                 </block>
             </block>
+            <referenceBlock name="sidebar.main.account_nav" remove="true" />
+            <referenceBlock name="customer-account-navigation-downloadable-products-link" remove="true" />
+            <referenceBlock name="customer-account-navigation-billing-agreements-link" remove="true" />
+            <referenceBlock name="customer-account-navigation-privacy-link" remove="true" />
+            <referenceBlock name="stripe-payments-customer-cards" remove="true" />
+            <referenceBlock name="stripe-payments-subscriptions" remove="true" />
             <referenceBlock name="customer-account-navigation-delimiter-1" remove="true" />
             <referenceBlock name="customer-account-navigation-delimiter-2" remove="true" />
         </referenceContainer>

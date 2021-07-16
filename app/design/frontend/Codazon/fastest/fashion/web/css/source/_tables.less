@@ -51,7 +51,6 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
     .table-wrapper {
-        border-top: @table__border-width @table__border-style @table__border-color;
         .lib-table-overflow();
         position: relative; // To hide unnecessary horizontal scrollbar in Safari
         .table:not(.totals):not(.cart):not(.table-comparison) {

@@ -33,12 +33,13 @@
 
         <referenceBlock name="my-account-link">
         	<arguments>
-                    <argument name="class" xsi:type="string" translate="false">my-account</argument>
+                <argument name="label" xsi:type="string" translate="true">Account</argument>
+                <argument name="class" xsi:type="string" translate="false">my-account</argument>
             </arguments>
         </referenceBlock>
         <referenceBlock name="register-link">
         	<arguments>
-                    <argument name="class" xsi:type="string" translate="false">register-link</argument>
+                <argument name="class" xsi:type="string" translate="false">register-link</argument>
             </arguments>
         </referenceBlock>
     </body>

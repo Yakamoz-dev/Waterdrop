@@ -75,6 +75,12 @@
 			</container>
 		</container>
 	</referenceContainer>
+
+    <referenceContainer name="sidebar.additional">
+        <referenceBlock name="catalog.compare.sidebar" remove="true" />
+        <referenceBlock name="sale.reorder.sidebar" remove="true" />
+    </referenceContainer>
+
 <!--	<move element="header.links" destination="header.panel.right" />-->
 	<move element="store_switcher" destination="header.panel.right" before="-" />
 	<move element="store_language" destination="header.panel.right" after="store_switcher" />

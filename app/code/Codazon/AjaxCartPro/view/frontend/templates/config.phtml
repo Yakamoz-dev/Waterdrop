@@ -37,7 +37,7 @@ var config = {
             'catalogAddToCart': 'Codazon_AjaxCartPro/js/catalog-add-to-cart',
             'Magento_Catalog/js/catalog-add-to-cart': 'Codazon_AjaxCartPro/js/catalog-add-to-cart',
             'mage/dataPost': 'Codazon_AjaxCartPro/js/ajax-post',
-            'defaultMageDataPost': 'mage/dataPost' 
+            'defaultMageDataPost': 'mage/dataPost'
         }
     },
 	deps: [
@@ -57,7 +57,7 @@ var ajaxShoppingCart = {minicartMaxItemsVisible: 2};
 <?php if ($helper->enableAjaxWishlist() || $helper->enableAjaxCompare()) : ?>
 <?php
 $ajaxPostConfig = [
-    'updateMsgUrl'              => $this->getUrl('customer/section/load', ['_query' => 
+    'updateMsgUrl'              => $this->getUrl('customer/section/load', ['_query' =>
         ['sections' => 'messages', 'update_section_id' => 'true']
     ])
 ];
@@ -79,4 +79,16 @@ if ($helper->enableAjaxCompare()) {
 <script type="text/javascript">
 var cdzAjaxPost = <?php echo json_encode($ajaxPostConfig) ?>;
 </script>
+<?php else : ?>
+    <?php
+        $ajaxPostConfig = [
+            'updateMsgUrl'              => $this->getUrl('customer/section/load', ['_query' =>
+                ['sections' => 'messages', 'update_section_id' => 'true']
+            ])
+        ];
+        $ajaxPostConfig['replacedActions'] = [];
+    ?>
+    <script type="text/javascript">
+        var cdzAjaxPost = <?php echo json_encode($ajaxPostConfig) ?>;
+    </script>
 <?php endif ?>

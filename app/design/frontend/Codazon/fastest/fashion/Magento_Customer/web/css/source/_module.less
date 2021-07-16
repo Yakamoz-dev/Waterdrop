@@ -84,14 +84,21 @@
             }
             .block:not(.widget) {
                 &:extend(.abs-account-blocks all);
-				
+
             }
 			> .table-wrapper,
 			> .form-address-edit,
 			> .form,
 			.block{
 				.abs-block();
+                box-shadow: none;
+                border-radius: 4px;
 			}
+            .block-static-block {
+                background: transparent;
+                box-shadow: none;
+                padding: 0;
+            }
         }
 		&.rtl-layout{
 			.column.main .block:not(.widget) .block-title{
@@ -101,7 +108,7 @@
 				}
 				.action.edit,
 				.action.view{
-					float:left; 
+					float:left;
 					&:after{
 					content:'\f100';
 					margin-right:@indent__xs;
@@ -184,9 +191,13 @@
             }
         }
         .box-actions {
-            margin-top: @indent__xs;
+            margin-top: 16px;
             .action {
+                color: #155DA4;
                 &:extend(.abs-account-actions all);
+                &.log-out {
+                    color: red;
+                }
             }
         }
     }
@@ -218,7 +229,7 @@
 //  ---------------------------------------------
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-	
+
 
     .login-container {
         &:extend(.abs-add-clearfix-desktop all);
@@ -293,9 +304,14 @@
         }
         .data.table {
             margin-bottom: 0;
+            font-size: 14px;
+            line-height: 16px;
             .col {
                 &.actions {
                     white-space: nowrap;
+                    a {
+                        color: #155DA4;
+                    }
                 }
             }
         }
@@ -323,7 +339,7 @@
 
     .page-main .block {
         &:extend(.abs-margin-for-blocks-and-widgets-desktop all);
-		
+
     }
     .form-edit-account,
     .form-address-edit {
@@ -352,11 +368,21 @@
 //  ---------------------------------------------
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
-	
+
     .account {
         .column.main,
         .sidebar-additional {
             margin: 0;
+        }
+        .page-title {
+            margin-left: 16px;
+        }
+        .column.main {
+            padding-bottom: 0;
+            .toolbar-amount {
+                padding: 7px 10px;
+                position: relative;
+            }
         }
         .data.table {
             &:extend(.abs-table-striped-mobile all);
@@ -369,7 +395,7 @@
 //  ---------------------------------------------
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-	
+
     .login-container {
         .fieldset {
             &:after {
@@ -410,5 +436,5 @@
     }
     .customer-account-index {
         .page-title-wrapper { position: relative;}}
-           
+
 }

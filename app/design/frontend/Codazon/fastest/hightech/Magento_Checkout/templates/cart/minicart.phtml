@@ -68,22 +68,6 @@
         }
     }
     </script>
-    <script type="text/javascript">
-        require(['jquery'],function($){
-            $(document).ready(function() {
-                $(".minicart-id-qty-minus").click(function () {
-                    console.log(111);
-                    $(this).siblings('.cart-item-qty').val(parseInt($(this).siblings('.cart-item-qty').val()) - 1);
-                    $(this).siblings('.update-cart-item').trigger('click');
-                })
-                $(".minicart-id-qty-plus").click(function () {
-                    console.log(222);
-                    $(this).siblings('.cart-item-qty').val(parseInt($(this).siblings('.cart-item-qty').val()) + 1);
-                    $(this).siblings('.update-cart-item').trigger('click');
-                })
-            });
-        });
-    </script>
 </div>
 
 

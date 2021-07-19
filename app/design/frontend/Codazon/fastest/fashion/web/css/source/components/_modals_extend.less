@@ -83,7 +83,7 @@
 			padding:0;
 			width:44px;
 			height:44px;
-			background:#000 !important;
+			background:#155da4 !important;
 			.abs-borderradius(0);
 			z-index:1;
 			&:before{
@@ -91,7 +91,7 @@
 				line-height:18px !important;
 			}
 			&:hover{
-				background:#000 !important;
+				background:#155da4 !important;
 				.abs-opacity(0.8);
 			}
         }
@@ -292,24 +292,228 @@
 	}
 }
 
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .cdz-popup-wrapper .modal-popup .modal-inner-wrap {
+        width:733px !important;
+        margin: 10rem auto;
+        .cdz-popup-newsletter {
+            .cdz-popup-newsletter-left {
+                width: 342px;
+            }
+            .cdz-popup-newsletter-right {
+                width: 391px;
+            }
+            .popup-title {
+                display: none;
+            }
+            .popup-content {
+                padding: 80px 40px !important;
+                .popup-content-ads {
+                    .popup-content-title {
+                        font-weight: bold;
+                        font-size: 40px;
+                        line-height: 1.25;
+                        text-align: center;
+                        margin-bottom: 16px !important;
+                    }
+                    .popup-content-desc {
+                        font-size: 15px;
+                        line-height: 1.5;
+                        margin-bottom: 32px !important;
+                        text-align: center;
+                    }
+                    .block.newsletter {
+                        margin-bottom: 0;
+                        .field {
+                            margin-bottom: 12px !important;
+                        }
+                        input {
+                            border-radius: 4px;
+                            border-color: #E1E1E1;
+                            text-align: left;
+                            height: 48px;
+                            font-size: 16px;
+                            line-height: 1.5;
+                            padding: 0 24px;
+                        }
+                        .actions .action.subscribe {
+                            padding: 12px 120px;
+                            font-size: 16px;
+                            line-height: 1.5;
+                            margin-bottom: 40px;
+                            border: 1px solid #155da4;
+                        }
+                    }
+                    .action-close {
+                        width: 100%;
+                        height: 100%;
+                        background: #ffffff !important;
+                        position: relative;
+                        &:before {
+                            display: none;
+                        }
+                        div {
+                            color: #999999;
+                            text-align: center;
+                            font-size: 14px;
+                            line-height: 1.5;
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .cdz-popup-wrapper .modal-popup .modal-inner-wrap {
+        width:733px !important;
+        margin: 10rem auto;
+        .cdz-popup-newsletter {
+            .cdz-popup-newsletter-left {
+                width: 342px;
+            }
+            .cdz-popup-newsletter-right {
+                width: 391px;
+            }
+            .popup-title {
+                display: none;
+            }
+            .popup-content {
+                padding: 80px 40px !important;
+                .popup-content-ads {
+                    .popup-content-title {
+                        font-weight: bold;
+                        font-size: 40px;
+                        line-height: 1.25;
+                        text-align: center;
+                        margin-bottom: 16px !important;
+                    }
+                    .popup-content-desc {
+                        font-size: 15px;
+                        line-height: 1.5;
+                        margin-bottom: 32px !important;
+                        text-align: center;
+                    }
+                    .block.newsletter {
+                        margin-bottom: 0;
+                        .field {
+                            margin-bottom: 12px !important;
+                        }
+                        input {
+                            border-radius: 4px;
+                            border-color: #E1E1E1;
+                            text-align: left;
+                            height: 48px;
+                            font-size: 16px;
+                            line-height: 1.5;
+                            padding: 0 24px;
+                        }
+                        .actions .action.subscribe {
+                            padding: 12px 120px;
+                            font-size: 16px;
+                            line-height: 1.5;
+                            margin-bottom: 40px;
+                            border: 1px solid #155da4;
+                        }
+                    }
+                    .action-close {
+                        width: 100%;
+                        height: 100%;
+                        background: #ffffff !important;
+                        position: relative;
+                        &:before {
+                            display: none;
+                        }
+                        div {
+                            color: #999999;
+                            text-align: center;
+                            font-size: 14px;
+                            line-height: 1.5;
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-	.cdz-popup-wrapper .modal-popup .modal-inner-wrap{
-		width:90% !important;
+	.cdz-popup-wrapper .modal-popup .modal-inner-wrap {
+        width: 91.5% !important;
 	}
 	.cdz-popup-wrapper{
 		.cdz-popup-newsletter-left,
 		.cdz-popup-newsletter-right{width:100%; float:left}
-		.cdz-popup-newsletter-left{ display:none}
-	}
-}
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-	.cdz-popup-wrapper .modal-popup .modal-inner-wrap{
-		width:80% !important;
-	}
-}
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
-	.cdz-popup-wrapper .modal-popup .modal-inner-wrap{
-		width:840px !important;
+        .modal-popup .modal-inner-wrap{
+            .modal-header {
+                .action-close {
+                    display: none;
+                }
+            }
+            .cdz-popup-newsletter {
+                .popup-title {
+                    display: none;
+                }
+                .popup-content {
+                    padding: 32px 20px !important;
+                    .action-close {
+                        width: 100%;
+                        height: 100%;
+                        background: #ffffff !important;
+                        position: relative;
+                        &:before {
+                            display: none;
+                        }
+                        div {
+                            color: #999999;
+                            text-align: center;
+                            font-size: 14px;
+                            line-height: 1.5;
+                            margin-bottom: 0;
+                        }
+                    }
+                    .popup-content-ads {
+                        .popup-content-title {
+                            font-weight: bold;
+                            font-size: 32px;
+                            line-height: 1.25;
+                            text-align: center;
+                            margin-bottom: 12px !important;
+                        }
+                        .popup-content-desc {
+                            font-size: 16px;
+                            line-height: 1.5;
+                            margin-bottom: 24px !important;
+                            text-align: center;
+                            padding: 0px 30px;
+                        }
+                    }
+                    .block.newsletter {
+                        margin-bottom: 0;
+                        .field {
+                            margin-bottom: 12px !important;
+                        }
+                        input {
+                            border-radius: 4px;
+                            border-color: #E1E1E1;
+                            text-align: left;
+                            height: 48px;
+                            font-size: 16px;
+                            line-height: 1.5;
+                            padding: 0 24px;
+                        }
+                        .actions .action.subscribe {
+                            padding: 12px 0;
+                            font-size: 16px;
+                            line-height: 1.5;
+                            margin-bottom: 24px;
+                            border: 1px solid #155da4;
+                        }
+                    }
+                }
+            }
+        }
 	}
 }
 

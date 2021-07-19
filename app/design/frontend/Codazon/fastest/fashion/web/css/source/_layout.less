@@ -1,5 +1,5 @@
 // /**
-//  * Copyright © 2015 Magento. All rights reserved.
+//  * Copyright ï¿½ 2015 Magento. All rights reserved.
 //  * See COPYING.txt for license details.
 //  */
 
@@ -134,13 +134,32 @@
     }
 
     .page-layout-2columns-left {
+        .sidebar-main {
+            .filter-title {
+                height: 40px;
+                border-radius: 4px 4px 0 0;
+            }
+            .filter-content {
+                border: none;
+                border-radius: 0 0 4px 4px;
+            }
+        }
         .sidebar-additional {
             //padding-right: @layout-column__additional-sidebar-offset;
-            padding-left: 0;
             clear: left;
             float: left;
-			padding-left:@layout-indent__width;
-			padding-right:@layout-indent__width;
+            padding-left:@layout-indent__width;
+            padding-right:@layout-indent__width;
+            .block-brands {
+                .block-title {
+                    height: 40px;
+                    border-radius: 4px 4px 0 0;
+                }
+                .block-content {
+                    border: none;
+                    border-radius: 0 0 4px 4px;
+                }
+            }
         }
     }
 

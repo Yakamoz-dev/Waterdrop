@@ -466,6 +466,7 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
 //New product
 .box-product{
 	.lib-css(background, @main_block_background);
+    border-radius: 4px;
 	//.lib-css(border, 1px solid @main_border);
 	.block-title{
 		.lib-css(border-bottom, 1px solid @main_border);
@@ -561,6 +562,7 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
 			font-size:12px;
 			padding: 8px 30px;
             .abs-style( @btn_productitem_text, @btn_productitem_border,@btn_productitem_background);
+            border: 1px solid #155da4;
 			&:hover{
                 .abs-style(#155da4, #155da4, #ffffff);
 			}
@@ -788,9 +790,13 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
 			margin-left:10px;
 		}
 	}
+    .block-title {
+        border-radius: 4px 4px 0 0 !important;
+    }
 	.block-content{
 		padding:0;
         border: none !important;
+        border-radius: 0 0 4px 4px !important;
 	}
 	.cdz-block-title{
 		background:@main_block_title_background;
@@ -805,9 +811,13 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
 
 //custom style
 .our-brands {
+    .block-title {
+        border-radius: 4px 4px 0 0 !important;
+    }
     .block-content{
         padding: 10px 0 0 10px !important;
         border: none !important;
+        border-radius: 0 0 4px 4px !important;
     }
     .brand-item {
         margin-right: 0;

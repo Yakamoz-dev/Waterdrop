@@ -572,10 +572,14 @@ define([
                         }
                     }
                     if (alltrue) {
-                        label_price = $widget['optionsMap'][itemId][id]['price'];
-                        pack = parseInt(label);
-                        each_pack = (label_price/pack).toFixed(2);
-                        format_label_price = (' - $'+each_pack+' each');
+                        if ($widget['optionsMap'][itemId][id] != null) {
+                            label_price = $widget['optionsMap'][itemId][id]['price'];
+                            pack = parseInt(label);
+                            each_pack = (label_price / pack).toFixed(2);
+                            format_label_price = (' - $' + each_pack + ' each');
+                        } else {
+                            format_label_price = '';
+                        }
                     } else {
                         format_label_price = '';
                     }

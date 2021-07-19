@@ -11,7 +11,7 @@
  *
  * @var $block Codazon\Shopbybrandpro\Block\Brand\BrandInformation
  */ ?>
- 
+
 <?php
 $brand = $this->getBrand();
 $displayCover = $this->getConfig('codazon_shopbybrand/brand_page/display_cover') && $brand->getBrandCover();
@@ -63,7 +63,7 @@ $brand->setThumbnail($this->getThumbnailImage($brand, ['width' => 250]));
                     </div>
                     <?php endif ?>
                     <div class="social-section <?= $displayThumbnail?'col-xs-19':'col-xs-24' ?>">
-                        <strong class="title hidden-xs"><?= $brand->getBrandLabel(); ?></strong>
+                        <strong class="title"><?= $brand->getBrandLabel(); ?></strong>
                         <?php echo $socialButtonsHtml ?>
                     </div>
                 </div>

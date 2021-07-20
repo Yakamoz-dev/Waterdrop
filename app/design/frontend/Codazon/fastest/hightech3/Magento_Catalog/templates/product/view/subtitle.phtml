@@ -1,0 +1,23 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var $block \Magento\Catalog\Block\Product\View\Description
+ */
+?>
+<?php if($block->getProduct()->getCertifiedInfo()): ?>
+<style>
+    .certified_info {
+        font-size: 14px;
+        line-height: 16px;
+        color: #155DA4;
+        margin-bottom: 12px;
+    }
+</style>
+<div class="certified_info">
+    <?php /* @escapeNotVerified */ echo $block->getProduct()->getResource()->getAttribute('certified_info')->getFrontend()->getValue($block->getProduct()); ?>
+</div>
+<?php endif; ?>

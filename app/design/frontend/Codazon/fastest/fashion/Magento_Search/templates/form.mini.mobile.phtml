@@ -15,7 +15,7 @@
 <script type="text/javascript">
 require(['jquery'],function($){
     var $searchform = $('#search_mini_form'), $mbwrap = $('#mobile-search-form-container'), $pcwrap = $('#search-content .search-form-container').first();
-    var winwidth = window.innerWidth, adapt = 768;
+    var winwidth = window.innerWidth, adapt = 1025;
     function searchPosition(winwidth){
         if (winwidth < adapt) {
             $searchform.appendTo($mbwrap);

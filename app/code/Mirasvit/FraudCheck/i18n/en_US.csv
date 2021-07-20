@@ -1,0 +1,114 @@
+"Fraud Risk Score","Fraud Risk Score"
+"Custom Rules","Custom Rules"
+"User Manual","User Manual"
+"Get Support","Get Support"
+"Add Rule","Add Rule"
+Save,Save
+"Save & Close","Save & Close"
+"Save Rule","Save Rule"
+"General Information","General Information"
+Name,Name
+"Is Active","Is Active"
+No,No
+Yes,Yes
+"Set status to","Set status to"
+Accept,Accept
+Review,Review
+Reject,Reject
+Conditions,Conditions
+Rules,Rules
+ID,ID
+Status,Status
+Enabled,Enabled
+Disabled,Disabled
+Action,Action
+Edit,Edit
+Duplicate,Duplicate
+Delete,Delete
+"Are you sure?","Are you sure?"
+"Advanced Product Feeds","Advanced Product Feeds"
+"Item was successfully deleted","Item was successfully deleted"
+"New Rule","New Rule"
+"This item does not exist.","This item does not exist."
+"Item was successfully saved","Item was successfully saved"
+"Unable to find item to save","Unable to find item to save"
+"Fraud Score","Fraud Score"
+"Fraud Risk Score Configuration","Fraud Risk Score Configuration"
+"You saved the score.","You saved the score."
+"Billing: Payment Method","Billing: Payment Method"
+"Billing: ","Billing: "
+"Conditions Combination","Conditions Combination"
+Group,Group
+"Lifetime Sales","Lifetime Sales"
+"Number of Orders","Number of Orders"
+"Is subscriber of newsletter","Is subscriber of newsletter"
+"Number of reviews","Number of reviews"
+"Discount Amount","Discount Amount"
+Subtotal,Subtotal
+"Grand Total","Grand Total"
+"Shipping Amount","Shipping Amount"
+"Tax Amount","Tax Amount"
+"Placed from IP","Placed from IP"
+"Items Count","Items Count"
+"Items Quantity","Items Quantity"
+"Is new IP","Is new IP"
+"Shipping: Shipping Method","Shipping: Shipping Method"
+"Shipping: ","Shipping: "
+"Shipping and billing addresses","Shipping and billing addresses"
+"The shipping and billing countries are identical","The shipping and billing countries are identical"
+"The shipping and billing countries are different","The shipping and billing countries are different"
+"The shipping and billing states are identical","The shipping and billing states are identical"
+"The shipping and billing states are different","The shipping and billing states are different"
+"The shipping and billing cities are identical","The shipping and billing cities are identical"
+"The shipping and billing cities are different","The shipping and billing cities are different"
+"The shipping and billing postcodes are identical","The shipping and billing postcodes are identical"
+"The shipping and billing postcodes are different","The shipping and billing postcodes are different"
+"The shipping and billing names are identical","The shipping and billing names are identical"
+"The shipping and billing names are different","The shipping and billing names are different"
+"Customer History","Customer History"
+"IP History","IP History"
+"Customer Location","Customer Location"
+"Can't determine country for IP: %1","Can't determine country for IP: %1"
+"Order placed from %1 and %2 address is in %3","Order placed from %1 and %2 address is in %3"
+"Order placed from %1, but %2 address is in %3","Order placed from %1, but %2 address is in %3"
+"%1 country is not set","%1 country is not set"
+Distance,Distance
+"Can't determine customer coordinates","Can't determine customer coordinates"
+"Can't determine %1 address coordinates","Can't determine %1 address coordinates"
+"Distance between %1 address and customer location near <b>%2</b> km","Distance between %1 address and customer location near <b>%2</b> km"
+"Order amount","Order amount"
+"Order total within the normal range of orders for this store","Order total within the normal range of orders for this store"
+"Order total outside the normal range of orders for this store","Order total outside the normal range of orders for this store"
+"Customer Email","Customer Email"
+"Email (%1) contains firstname","Email (%1) contains firstname"
+"Email (%1) contains lastname","Email (%1) contains lastname"
+"Email (%1) contains blacklist keyword","Email (%1) contains blacklist keyword"
+"The customer's email (%1) does not match any risky patterns","The customer's email (%1) does not match any risky patterns"
+"Phone number","Phone number"
+"Phone (%1) contains 4 repeating digits","Phone (%1) contains 4 repeating digits"
+"Phone (%1) contains 3 repeating digits","Phone (%1) contains 3 repeating digits"
+"Phone (%1) contains 3 repeating digits sequence","Phone (%1) contains 3 repeating digits sequence"
+"Phone (%1) contains 2 repeating digits sequence","Phone (%1) contains 2 repeating digits sequence"
+"The customer's phone number (%1) does not match any risky patterns","The customer's phone number (%1) does not match any risky patterns"
+"Can't determine coordinates for IP: %1","Can't determine coordinates for IP: %1"
+"Can't determine coordinates for location %1","Can't determine coordinates for location %1"
+"Can't determine coordinates for location: %1. Error: %2","Can't determine coordinates for location: %1. Error: %2"
+"Fraud Checklist","Fraud Checklist"
+Statuses,Statuses
+Checklist,Checklist
+Importance,Importance
+Rule,Rule
+"1 - not important indicator, 10 - very important indicator","1 - not important indicator, 10 - very important indicator"
+"Fraud Score:","Fraud Score:"
+Configure,Configure
+"Fraud Detection","Fraud Detection"
+"Hold on Review status","Hold on Review status"
+"Hold on Reject status","Hold on Reject status"
+"Authorization Settings","Authorization Settings"
+"Google API Key","Google API Key"
+"Required APIs: Google Map API, Geocoding API https://cloud.google.com/console/google/maps-apis/overview","Required APIs: Google Map API, Geocoding API https://cloud.google.com/console/google/maps-apis/overview"
+"This rule currently disabled","This rule currently disabled"
+"Order placed from the admin panel","Order placed from the admin panel"
+"Order contains only virtual products","Order contains only virtual products"
+Billing,Billing
+Shipping,Shipping

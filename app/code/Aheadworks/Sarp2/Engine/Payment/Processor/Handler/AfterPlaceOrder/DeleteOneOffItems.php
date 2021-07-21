@@ -1,0 +1,67 @@
+<?php
+/**
+ * Aheadworks Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * https://aheadworks.com/end-user-license-agreement/
+ *
+ * @package    Sarp2
+ * @version    2.15.0
+ * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
+ * @license    https://aheadworks.com/end-user-license-agreement/
+ */
+namespace Aheadworks\Sarp2\Engine\Payment\Processor\Handler\AfterPlaceOrder;
+
+use Aheadworks\Sarp2\Api\ProfileRepositoryInterface;
+use Aheadworks\Sarp2\Engine\Payment\Processor\Handler\HandlerInterface;
+use Aheadworks\Sarp2\Engine\PaymentInterface;
+use Aheadworks\Sarp2\Model\Profile\ItemManagement;
+
+/**
+ * Class DeleteOneOffItems
+ * @package Aheadworks\Sarp2\Engine\Payment\Processor\Handler\AfterPlaceOrder
+ */
+class DeleteOneOffItems implements HandlerInterface
+{
+    /**
+     * @var ItemManagement
+     */
+    private $itemManagement;
+
+    /**
+     * @var ProfileRepositoryInterface
+     */
+    private $profileRepository;
+
+    /**
+     * @param ItemManagement $itemManagement
+     * @param ProfileRepositoryInterface $profileRepository
+     */
+    public function __construct(
+        ItemManagement $itemManagement,
+        ProfileRepositoryInterface $profileRepository
+    ) {
+        $this->itemManagement = $itemManagement;
+        $this->profileRepository = $profileRepository;
+    }
+
+    /**
+     * Process payment
+     *
+     * @param PaymentInterface $payment
+     * @return void
+     */
+    public function handle(PaymentInterface $payment)
+    {
+        try {
+            $profile = $this->profileRepository->get($payment->getProfileId());
+            $this->itemManagement->deleteOneOffItems($profile);
+            $this->profileRepository->save($profile);
+        } catch (\Exception $exception) {
+        }
+    }
+}

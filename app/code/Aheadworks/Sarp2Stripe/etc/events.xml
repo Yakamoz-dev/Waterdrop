@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="payment_method_assign_data_stripe_payments">
+        <observer name="aw_sarp2_stripe_payments_data_assign" instance="Aheadworks\Sarp2Stripe\Observer\Base\DataAssignObserver" />
+    </event>
+    <event name="aw_sarp2_sampler_place_command_before_stripe_payments">
+        <observer name="aw_sarp2" instance="Aheadworks\Sarp2Stripe\Observer\Sampler\CustomerPaymentMethodAssignObserver" />
+    </event>
+</config>

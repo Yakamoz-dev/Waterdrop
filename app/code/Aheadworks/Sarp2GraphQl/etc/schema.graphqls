@@ -1,0 +1,270 @@
+input AwSarp2ProfileFilterInput {
+    profile_id: FilterTypeInput
+    status: FilterTypeInput
+    plan_name: FilterTypeInput
+    or: AwSarp2ProfileFilterInput
+}
+
+type Query {
+    awSarp2Profile (
+        filter: AwSarp2ProfileFilterInput,
+        pageSize: Int = 50,
+        currentPage: Int = 1,
+    ): AwSarp2ProfileSearchResult @resolver(class: "Aheadworks\\Sarp2GraphQl\\Model\\Resolver\\Profile")
+
+    awSarp2ProfileGetNextPaymentInfo (
+        profile_id: Int!
+    ): AwSarp2NextPaymentInfo @resolver(class: "Aheadworks\\Sarp2GraphQl\\Model\\Resolver\\ProfileGetNextPaymentInfo") @deprecated(reason: "Use `AwSarp2Profile.next_payment_info` instead")
+
+    awSarp2ProfileGetAllowedStatuses (
+        profile_id: Int!
+    ): [String] @resolver(class: "Aheadworks\\Sarp2GraphQl\\Model\\Resolver\\ProfileGetAllowedStatuses") @deprecated(reason: "Use `AwSarp2Profile.allowed_statuses` instead")
+}
+
+type Mutation {
+    awSarp2ProfileChangeStatus (
+        profile_id: Int!,
+        status: String!
+    ): Boolean @resolver(class: "\\Aheadworks\\Sarp2GraphQl\\Model\\Resolver\\Mutation\\ProfileChangeStatus")
+
+    awSarp2ProfileExtend (
+        profile_id: Int!
+    ): Boolean @resolver(class: "\\Aheadworks\\Sarp2GraphQl\\Model\\Resolver\\Mutation\\ProfileExtend")
+
+    awSarp2ProfileRenew (
+        profile_id: Int!
+    ): Boolean @resolver(class: "\\Aheadworks\\Sarp2GraphQl\\Model\\Resolver\\Mutation\\ProfileRenew")
+
+    awSarp2ProfileChangeSubscriptionPlan (
+        profile_id: Int!,
+        plan_id: Int!
+    ): Boolean @resolver(class: "\\Aheadworks\\Sarp2GraphQl\\Model\\Resolver\\Mutation\\ProfileChangePlan")
+
+    awSarp2ProfileChangeNextPaymentDate (
+        profile_id: Int!,
+        next_payment_date: String!
+    ): Boolean @resolver(class: "\\Aheadworks\\Sarp2GraphQl\\Model\\Resolver\\Mutation\\ProfileChangeNextPaymentDate")
+
+    awSarp2ProfileRemoveItem (
+        profile_id: Int!,
+        item_id: Int!
+    ): Boolean @resolver(class: "\\Aheadworks\\Sarp2GraphQl\\Model\\Resolver\\Mutation\\ProfileRemoveItem")
+
+    awSarp2ProfileChangeShippingAddress (
+        profile_id: Int!,
+        address: CustomerAddressInput!
+    ): Boolean @resolver(class: "\\Aheadworks\\Sarp2GraphQl\\Model\\Resolver\\Mutation\\ProfileChangeShippingAddress")
+}
+
+type AwSarp2PageInfo {
+    page_size: Int
+    current_page: Int
+}
+
+type AwSarp2ProfileSearchResult {
+    total_count: Int
+    items: [AwSarp2Profile]
+    page_info: AwSarp2PageInfo
+}
+
+type AwSarp2PlanDefinition {
+    definition_id: Int
+    billing_period: String
+    billing_frequency: Int
+    trial_billing_period: String
+    trial_billing_frequency: Int
+    total_billing_cycles: Int
+    start_date_type: String
+    start_date_day_of_month: String
+    is_initial_fee_enabled: Boolean
+    is_trial_period_enabled: Boolean
+    trial_total_billing_cycles: Int
+    is_membership_model_enabled: Boolean
+    is_extend_enable: Boolean
+    offer_extend_email_offset: Int
+    offer_extend_email_template: String
+    upcoming_billing_email_offset: Int
+    upcoming_trial_billing_email_offset: Int
+}
+
+type AwSarp2Profile {
+    profile_id: Int
+    increment_id: String
+    store_id: Int
+    created_at: String
+    updated_at: String
+    status: String
+    allowed_statuses: [String] @resolver(class: "Aheadworks\\Sarp2GraphQl\\Model\\Resolver\\ProfileGetAllowedStatuses")
+    plan_id: Int
+    plan_name: String
+    plan_definition_id: Int
+    plan_definition: AwSarp2PlanDefinition
+    profile_definition_id: Int
+    profile_definition: AwSarp2PlanDefinition
+    start_date: String
+    is_virtual: Boolean
+    items: [AwSarp2ProfileItem]
+    items_qty: Float
+    next_payment_info: AwSarp2NextPaymentInfo @resolver(class: "Aheadworks\\Sarp2GraphQl\\Model\\Resolver\\ProfileGetNextPaymentInfo")
+    billing_address: AwSarp2ProfileAddress
+    shipping_address: AwSarp2ProfileAddress
+    addresses: [AwSarp2ProfileAddress]
+    customer_id: Int
+    customer_tax_class_id: Int
+    customer: String
+    customer_email: String
+    customer_group_id: String
+    customer_fullname: String
+    customer_prefix: String
+    customer_firstname: String
+    customer_middlename: String
+    customer_lastname: String
+    customer_suffix: String
+    customer_dob: String
+    customer_is_guest: String
+    checkout_shipping_method: String
+    checkout_shipping_description: String
+    trial_shipping_method: String
+    trial_shipping_description: String
+    regular_shipping_method: String
+    regular_shipping_description: String
+    global_currency_code: String
+    base_currency_code: String
+    profile_currency_code: String
+    base_to_global_rate: Float
+    base_to_profile_rate: Float
+    initial_subtotal: Float
+    base_initial_subtotal: Float
+    initial_subtotal_incl_tax: Float
+    base_initial_subtotal_incl_tax: Float
+    initial_tax_amount: Float
+    base_initial_tax_amount: Float
+    initial_grand_total: Float
+    base_initial_grand_total: Float
+    trial_subtotal: Float
+    base_trial_subtotal: Float
+    trial_subtotal_incl_tax: Float
+    base_trial_subtotal_incl_tax: Float
+    trial_tax_amount: Float
+    base_trial_tax_amount: Float
+    trial_shipping_amount: Float
+    base_trial_shipping_amount: Float
+    trial_shipping_amount_incl_tax: Float
+    base_trial_shipping_amount_incl_tax: Float
+    trial_shipping_tax_amount: Float
+    base_trial_shipping_tax_amount: Float
+    trial_grand_total: Float
+    base_trial_grand_total: Float
+    regular_subtotal: Float
+    base_regular_subtotal: Float
+    regular_subtotal_incl_tax: Float
+    base_regular_subtotal_incl_tax: Float
+    regular_tax_amount: Float
+    base_regular_tax_amount: Float
+    regular_shipping_amount: Float
+    base_regular_shipping_amount: Float
+    regular_shipping_amount_incl_tax: Float
+    base_regular_shipping_amount_incl_tax: Float
+    regular_shipping_tax_amount: Float
+    base_regular_shipping_tax_amount: Float
+    regular_grand_total: Float
+    base_regular_grand_total: Float
+    payment_method: String
+    payment_token_id: Int
+    last_order_id: Int
+    last_order_date: String
+    membership_active_until_date: String
+    remote_ip: String
+
+}
+
+type AwSarp2ProfileItem {
+    item_id: Int
+    profile_id: Int
+    created_at: String
+    updated_at: String
+    product_id: Int
+    product_type: String
+    product_options: String
+    store_id: Int
+    parent_item_id: Int
+    replacement_item_id: Int
+    is_virtual: Boolean
+    sku: String
+    name: String
+    description: String
+    is_qty_decimal: Boolean
+    weight: Float
+    qty: Float
+    is_free_shipping: Boolean
+    initial_fee: Float
+    base_initial_fee: Float
+    initial_fee_incl_tax: Float
+    base_initial_fee_incl_tax: Float
+    initial_row_total: Float
+    base_initial_row_total: Float
+    initial_row_total_incl_tax: Float
+    base_initial_row_total_incl_tax: Float
+    initial_fee_tax_amount: Float
+    base_initial_fee_tax_amount: Float
+    initial_fee_tax_percent: Float
+    trial_price: Float
+    base_trial_price: Float
+    trial_price_incl_tax: Float
+    base_trial_price_incl_tax: Float
+    trial_row_total: Float
+    base_trial_row_total: Float
+    trial_row_total_incl_tax: Float
+    base_trial_row_total_incl_tax: Float
+    trial_tax_amount: Float
+    trial_tax_percent: Float
+    base_trial_tax_amount: Float
+    regular_price: Float
+    base_regular_price: Float
+    regular_price_incl_tax: Float
+    base_regular_price_incl_tax: Float
+    regular_row_total: Float
+    base_regular_row_total: Float
+    regular_row_total_incl_tax: Float
+    base_regular_row_total_incl_tax: Float
+    regular_tax_amount: Float
+    regular_tax_percent: Float
+    base_regular_tax_amount: Float
+    row_weight: Float
+}
+
+type AwSarp2ProfileAddress {
+    address_id: Int
+    profile_id: Int
+    created_at: String
+    updated_at: String
+    address_type: String
+    customer_address_id: Int
+    quote_address_id: Int
+    customer_id: Int
+    email: String
+    country_id: String
+    region_id: Int
+    region: String
+    postcode: String
+    street: String
+    city: String
+    company: String
+    telephone: String
+    fax: String
+    lastname: String
+    firstname: String
+    middlename: String
+    prefix: String
+    suffix: String
+    weight: Float
+    is_free_shipping: Boolean
+}
+
+type AwSarp2NextPaymentInfo {
+    payment_period: String
+    payment_status: String
+    payment_date: String
+    amount: Float
+    base_amount: Float
+}

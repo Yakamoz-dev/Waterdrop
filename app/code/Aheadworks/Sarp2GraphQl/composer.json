@@ -1,0 +1,21 @@
+{
+    "name": "aheadworks/module-sarp2-graph-ql",
+    "description": "N/A",
+    "type": "magento2-module",
+    "version": "1.0.2",
+    "license": [
+        "proprietary"
+    ],
+    "require": {
+        "magento/module-graph-ql": "100.*.*",
+        "aheadworks/module-sarp2": ">=2.8.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Aheadworks\\Sarp2GraphQl\\": ""
+        }
+    }
+}

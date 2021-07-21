@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="StripeIntegration_Payments::css/stripe_payments.css" />
+        <css src="StripeIntegration_Payments::css/stripe_payments_elements.css" />
+        <css src="StripeIntegration_Payments::css/paymentfont.min.css" />
+    </head>
+    <body>
+        <referenceBlock name="aw_sarp2.customer.subscriptions.edit.payment">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="payment" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="actions-toolbar" xsi:type="array">
+                                    <item name="rendererList" xsi:type="array">
+                                        <item name="stripe_payments" xsi:type="string">Aheadworks_Sarp2Stripe/js/customer/subscriptions/edit-payment/view/actions-toolbar/renderer/stripe-payments</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

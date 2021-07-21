@@ -1,0 +1,21 @@
+{
+    "name": "aheadworks/module-sarp2-stripe",
+    "description": "N/A",
+    "type": "magento2-module",
+    "version": "1.0.5",
+    "license": [
+        "proprietary"
+    ],
+    "require": {
+        "stripe/module-payments": ">=1.8.6",
+        "aheadworks/module-sarp2": ">=2.11.1"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Aheadworks\\Sarp2Stripe\\": ""
+        }
+    }
+}

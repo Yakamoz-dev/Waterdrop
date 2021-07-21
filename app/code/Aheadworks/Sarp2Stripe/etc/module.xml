@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Aheadworks_Sarp2Stripe" setup_version="1.0.5">
+        <sequence>
+            <module name="StripeIntegration_Payments"/>
+            <module name="Aheadworks_Sarp2"/>
+        </sequence>
+    </module>
+</config>

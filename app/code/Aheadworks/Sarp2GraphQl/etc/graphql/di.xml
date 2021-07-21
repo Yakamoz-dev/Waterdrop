@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Aheadworks\Sarp2GraphQl\Model\Resolver\Profile" type="Aheadworks\Sarp2GraphQl\Model\Resolver\EntityList">
+        <arguments>
+            <argument name="dataProvider" xsi:type="object">Aheadworks\Sarp2GraphQl\Model\Resolver\DataProvider\Profiles</argument>
+        </arguments>
+    </virtualType>
+
+</config>

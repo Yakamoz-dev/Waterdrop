@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="aw_sarp2.customer.subscriptions.edit.view.payment.details.renderer.list">
+            <block class="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View\PaymentDetails\Type\DefaultCreditCardRenderer"
+                   name="aw_sarp2.customer.subscriptions.edit.view.payment.details.stripe_payments"
+                   cacheable="false"/>
+        </referenceBlock>
+    </body>
+</page>

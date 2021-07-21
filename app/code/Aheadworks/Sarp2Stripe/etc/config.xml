@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <stripe_payments>
+                <aw_sarp_can_use_mixed_checkout>1</aw_sarp_can_use_mixed_checkout>
+                <aw_sarp_can_use_subscription_checkout>1</aw_sarp_can_use_subscription_checkout>
+                <aw_sarp_cctypes_map><![CDATA[{"amex":"AE","discover":"DI","jcb":"JCB","mastercard":"MC","visa":"VI","diners":"DN"}]]></aw_sarp_cctypes_map>
+            </stripe_payments>
+            <aw_sarp_stripe_payments_recurring>
+                <model>AwSarp2StripePaymentsRecurringFacade</model>
+                <can_use_checkout>0</can_use_checkout>
+            </aw_sarp_stripe_payments_recurring>
+        </payment>
+    </default>
+</config>

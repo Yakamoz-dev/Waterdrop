@@ -35,6 +35,21 @@
     }
 }
 
+@media (min-width: 768px) and (max-width: 1024px) {
+    .enhanced-privacy-popup {
+        .popup {
+            &.content{
+                text-align: center;
+            }
+            .actions-toolbar {
+                display: flex;
+                flex-flow: row-reverse;
+                justify-content: center;
+            }
+        }
+    }
+}
+
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
   .enhanced-privacy-popup {
     .popup {

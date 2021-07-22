@@ -369,12 +369,12 @@ switch ($type = $block->getType()) {
                         0:{items: <?php echo ($itemSlider = 6) ? 2 : ($itemSlider > 2)  ?>},
                         480:{items:	<?php echo ($itemSlider > 2)   ?>},
                         640:{items:	<?php echo ($itemSlider > 2)  ?>},
-                        768:{items:	<?php echo  ($itemSlider - 1) ?>},
+                        768:{items:	<?php echo  ($itemSlider - 2) ?>},
+                        1024:{items:	<?php echo  ($itemSlider - 1) ?>},
                         1200:{items: <?php echo $itemSlider ?>}
                     }
                 });
             }
-
         })
     </script>
 <?php endif;?>

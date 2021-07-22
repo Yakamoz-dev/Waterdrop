@@ -1427,7 +1427,7 @@
 .box-tocart .action.tocart{
     width: 47.4% !important;
     height: 48px;
-    margin-right: 16px;
+    margin-right: 8px;
     padding: 12px 17px !important;
     font-style: normal;
     font-weight: normal;
@@ -1473,57 +1473,65 @@
     justify-content: space-between;
     margin-bottom: 20px;
 }
-.custom-shipping span:nth-child(1){
+.custom-shipping-infobox span:nth-child(1){
+    display: block;
     font-style: normal;
     font-weight: 600;
-    font-size: 14px;
-    line-height: 16px;
-    color: #333333;
-}
-.custom-shipping span:nth-child(2){
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 16px;
-    color: #333333;
-}
-.custom-shipping span:nth-child(3){
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
-    color: #333333;
-}
-.custom-style-a {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 12px;
-    line-height: 14px;
-    color: #155DA4 !important;
-}
-.custom-style-a-mobile{
-    display: none;
-}
-.custom-proterction-title{
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 16px;
+    font-size: 16px;
+    line-height: 19px;
     color: #333333;
     margin-bottom: 12px;
 }
-.custom-proterction-contentbox span{
-    margin-left: 6px;
-}
-.custom-proterction-contentbox-info1, .custom-proterction-contentbox-info2{
+.custom-shipping-infobox span:nth-child(2){
     font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 16px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
     color: #333333;
 }
-.custom-proterction-contentbox-info1{
-    margin-bottom: 4px;
+.custom-shipping a {
+    display: flex;
+    justify-content: flex-end;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    text-decoration-line: underline;
+    color: #155DA4 !important;
+}
+
+.custom-proterction-contentbox-info2 a {
+    display: none;
+}
+.custom-proterction-title{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+.custom-proterction-title span {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    color: #333333;
+}
+.custom-style-a-mobile{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    text-decoration: underline !important;
+    color: #155DA4 !important;
+}
+.custom-proterction-contentbox-info1 span, .custom-proterction-contentbox-info2 span {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: #333333;
 }
 .custom-proterction-contentbox-info1 span:before, .custom-proterction-contentbox-info2 span:before {
     font-family: 'icomoon';
@@ -1531,10 +1539,6 @@
     color: #155DA4;
     position: relative;
     top: 1px;
-}
-.custom-proterction-contentbox-info2{
-    display: flex;
-    justify-content: space-between;
 }
 .product-social-links {
     margin-bottom: 20px;
@@ -1673,11 +1677,8 @@ strong#block-crosssell-heading:before {
     opacity:1 !important;
     -webkit-opacity:1 !important;
 }
-.block.related .owl-carousel .owl-nav{
-    top: -40px !important;
-}
-.block.crosssell .owl-carousel .owl-nav{
-    top: -40px !important;
+.owl-carousel .owl-nav{
+    display: none !important;
 }
 .data.table.additional-attributes .col.label {
     display: none;
@@ -1688,4 +1689,34 @@ strong#block-crosssell-heading:before {
 .review-title-mobile{
     display: none;
 }
-.product-main-content{ margin-bottom: 0; }
+.product-main-content{ 
+    margin-bottom: 0; 
+}
+@media screen and ( width: 1024px ) {
+    .related .owl-stage .owl-item {
+        width: 186.4px !important;
+    }
+    .related .owl-stage-outer {
+        padding: 0 !important;
+    }
+    .crosssell .owl-stage .owl-item {
+        width: 186.4px !important;
+    }
+    .crosssell .owl-stage-outer {
+        padding: 0 !important;
+    }
+}
+@media screen and ( width: 768px ) {
+    .related .owl-stage .owl-item {
+        width: 172.25px !important;
+    }
+    .related .owl-stage-outer {
+        padding: 0 !important;
+    }
+    .crosssell .owl-stage .owl-item {
+        width: 172.25px !important;
+    }
+    .crosssell .owl-stage-outer {
+        padding: 0 !important;
+    }
+}

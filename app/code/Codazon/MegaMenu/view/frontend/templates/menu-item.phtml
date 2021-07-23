@@ -44,7 +44,7 @@ $this->setItemId(0);
             <ul class="groupmenu-nondrop">
                 <?php echo $this->getMenuHtml($item->children); ?>
             </ul>
-            <?php endif ?> 
+            <?php endif ?>
         </div>
 <?php elseif($itemType == 'tab_item'): ?>
 	<div class="cdz-link-wrap"><a class="cdz-tab-link" href="<?php echo $content->url ?>"><?php echo $this->getIcon($content) ?> <?php echo $content->label ?></a></div>

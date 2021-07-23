@@ -191,7 +191,7 @@ body{overflow-x: hidden;}
 			z-index: 99;
 			border: 1px solid #ccc;
 			padding:0;
-			box-shadow: 0 5px 5px rgba(0,0,0,0.19);
+			box-shadow: 0 2px 8px rgba(51,51,51,0.15);
 			/*tab menu*/
 			.cdz-vertical-tabs{
 				.cdz-tabs{
@@ -358,7 +358,7 @@ body{overflow-x: hidden;}
 		.groupmenu-drop > li.item{
 			min-width: 230px;
 			position:relative;
-			padding: 20px;
+			padding: 24px 18px;
 			margin: 0px auto;
 		}
 		.cat-tree li.item{
@@ -587,9 +587,9 @@ body{overflow-x: hidden;}
 			margin-bottom: 0px;
 			&.open > .dropdown-toggle:before,
 			.cdz-tab-link.active + .dropdown-toggle:before{
-				-moz-transform: rotate(90deg);
-				-o-transform: rotate(90deg);
-				transform: rotate(90deg);
+				-moz-transform: rotate(180deg);
+				-o-transform: rotate(180deg);
+				transform: rotate(180deg);
 			}
 		}
 		.menu-tabs{
@@ -609,12 +609,21 @@ body{overflow-x: hidden;}
 		.groupmenu-drop{
 			display:none;
 			li.item{
-				padding:5px 0;
+				padding:0;
 				&.parent .groupmenu-drop{
 					padding-left:20px;
-					padding-top:5px;
+					padding-top:12px;
+                    padding-bottom: 8px;
+                    border-bottom: 1px solid #E1E1E1;
+                    margin-bottom: 12px;
+                    box-shadow: none;
 				}
 			}
+            .groupdrop-link {
+                li.item{
+                    padding: 0 0 16px;
+                }
+            }
 		}
 		.menu-link, a.groupdrop-title{
 			width: 100%;
@@ -642,8 +651,8 @@ body{overflow-x: hidden;}
 			}
 			> .groupmenu-drop{
 				margin:0px;
-				border: 1px solid @depth0_border;
-				padding: 10px;
+				border: none;
+				padding: 12px 20px;
 				box-shadow: none;
 				-moz-box-shadow: none;
 				-webkit-box-shadow: none;
@@ -665,20 +674,20 @@ body{overflow-x: hidden;}
 			}
 			&:before{
 				display: inline-block;
-				font-family: FontAwesome;
+				font-family: icomoon;
 				font-style: normal;
 				font-weight: normal;
 				font-size: 27px;
 				line-height:1;
 				text-rendering: auto;
 				-webkit-font-smoothing: antialiased;
-				content:"\f105";
+				content:"\e934";
 				text-align:center;
 				width:100%;
-				-moz-transition: all 500ms ease;
-				-webkit-transition: all 500ms ease;
-				-o-transition: all 500ms ease;
-				transition: all 500ms ease;
+				-moz-transition: none;
+				-webkit-transition: none;
+				-o-transition: none;
+				transition: none;
 				-moz-backface-visibility: hidden;
 				-webkit-backface-visibility: hidden;
 				backface-visibility: hidden;

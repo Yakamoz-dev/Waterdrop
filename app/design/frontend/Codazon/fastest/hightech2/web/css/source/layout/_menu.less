@@ -400,14 +400,16 @@
 				.abs-link(@menu_drop_text, @menu_drop_hover_text);
 			}
 			&-content{
-				padding:10px;
+				padding:0 12px;
 				.abs-csscf(@menu_drop_text, @menu_drop_font);
 				.groupdrop-title{
 					text-transform:none;
-					.lib-css(color, @menu_drop_text_title);
+                    color: #333333;
 					font-weight:700;
 					margin:0;
-					padding:0 0 @indent__s;
+                    padding: 0 0 16px;
+                    font-size: 14px;
+                    line-height: 19px;
 				}
 				.groupdrop-banner-pos{
 
@@ -432,8 +434,10 @@
 								top:7px;
 							}
 							&:hover{
-								padding-left:15px;
+								padding-left:0;
+                                color: #333333;
 								&:before{
+                                    display: none;
 									width:10px;
 									.lib-css(background-color, @menu_drop_hover_text);
 								}
@@ -607,6 +611,8 @@
 					text-transform: capitalize;
 					.abs-link(#333333, #333333);
 					.abs-cssall(#333333, #ffffff, #ffffff, @menu_font);
+                    font-size: 16px;
+                    line-height: 19px;
                     padding: 12px 20px;
 				}
 				.cdz-menu-toggle:after{
@@ -617,27 +623,81 @@
 					width:37px;
 					height:37px;
 					right: 10px;
-					.lib-css(color, #ffffff);
-					&:before{margin-top: 7px; font-size: 22px;}
+					.lib-css(color, #333333);
+					&:before{margin-top: 14px; font-size: 16px;}
 				}
 				&:hover{
 					> a.menu-link{
 						cursor:pointer;
-						.abs-cssall(#ffffff, darken(#444444,5%), darken(#333333,5%), @menu_font);
+						.abs-cssall(#333333, #ffffff, #ffffff, @menu_font);
+                        font-size: 16px;
+                        line-height: 19px;
+                        font-weight: bold;
 					}
+                    > .dropdown-toggle{
+                        color: #333333;
+                    }
 					.cdz-menu-toggle:after{
 						.lib-css(color, #ffffff);
 					}
 				}
 			}
+            li.level1{
+                width:100%;
+                margin-bottom: 0;
+                //.lib-css(border-bottom, 1px solid #424242);
+                > a.menu-link{
+                    display:block;
+                }
+                //color
+                > a.menu-link{
+                    text-transform: capitalize;
+                    .abs-link(#333333, #333333);
+                    .abs-cssall(#333333, #ffffff, #ffffff, @menu_font);
+                    font-size: 16px;
+                    line-height: 19px;
+                    padding: 12px 20px;
+                }
+                .cdz-menu-toggle:after{
+
+                    .lib-css(color, #ffffff);
+                }
+                > .dropdown-toggle{
+                    width:37px;
+                    height:37px;
+                    right: 10px;
+                    .lib-css(color, #333333);
+                    &:before{margin-top: 14px; font-size: 16px;}
+                }
+                &:hover{
+                    > a.menu-link{
+                        cursor:pointer;
+                        .abs-cssall(#333333, #ffffff, #ffffff, @menu_font);
+                        font-size: 16px;
+                        line-height: 19px;
+                        font-weight: bold;
+                    }
+                    > .dropdown-toggle{
+                        color: #333333;
+                    }
+                    .cdz-menu-toggle:after{
+                        .lib-css(color, #ffffff);
+                    }
+                }
+            }
 			li.expand{
 				overflow: inherit;
 			}
 			.groupmenu-drop{
-				li a{padding:0;}
+				li a{
+                    padding:0;
+                    font-size: 14px;
+                    line-height: 1.25;
+                    color: #333333;
+                }
 				&-content{
 					.groupdrop-link{
-						margin-bottom:20px;
+						margin-bottom:0;
 					}
 					.groupdrop-banner-pos{
 						display:none;

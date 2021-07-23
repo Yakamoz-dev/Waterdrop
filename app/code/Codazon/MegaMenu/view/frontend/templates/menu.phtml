@@ -13,6 +13,7 @@ $dataMenu = json_encode(
 	]]
 );
 $this->setData('need_filter',false);
+$_mobileHelper = $this->helper('Codazon\ThemeOptions\Helper\Mobile');
 ?>
 <div class="cdz-menu <?php echo ($type == 1)?'cdz-vertical-menu':'cdz-horizontal-menu' ?> <?php echo $dropdownStyle ?> <?php echo $styles->css_class ?> <?php echo 'cdz-'.$styles->dropdown_animation ?>" id="<?php echo $uniqId ?>" data-action="navigation" data-mage-init='<?php echo $dataMenu ?>'>
 	<ul class="groupmenu">
@@ -20,3 +21,12 @@ $this->setData('need_filter',false);
 	</ul>
 </div>
 <?php endif ?>
+<?php if(($_mobileHelper->isMobile() || $_mobileHelper->isTablet()) && ($type != 1)): ?>
+    <script type="text/javascript">
+        require(['jquery'],function($){
+            $(".menu-link").click(function () {
+                $(this).next().click();
+            });
+        });
+    </script>
+<?php endif; ?>

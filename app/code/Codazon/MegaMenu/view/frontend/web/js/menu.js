@@ -47,7 +47,7 @@ define(['jquery','jquery-ui-modules/widget'], function($, domReady) {
 				}
 				self._assignControls()._listen();
 			} else {
-				self._alignMenuTop();	
+				self._alignMenuTop();
 			}
 			self._currentMode = self._getMode();
 			self._rebuildHtmlStructure();
@@ -58,7 +58,7 @@ define(['jquery','jquery-ui-modules/widget'], function($, domReady) {
 			}
 			self._menuTabs();
 		},
-		
+
 		_menuTabs: function() {
 			var self = this;
 			$('.menu-tabs',$(self.element)).each(function(){
@@ -93,7 +93,7 @@ define(['jquery','jquery-ui-modules/widget'], function($, domReady) {
 					}
 				}
 			});
-			
+
 			$('.menu-tabs',$(self.element)).each(function(){
 				var $tabs = $(this);
 				var html = '';
@@ -113,13 +113,13 @@ define(['jquery','jquery-ui-modules/widget'], function($, domReady) {
 				$tabInner.appendTo($tabs);
 				var tabLinks = [];
 				var tabPanes = [];
-				
+
 				$('> .tab-item',$accordion).each(function(index, element) {
 					var $tabItem = $(this), $tabLink = $('> .cdz-link-wrap > .cdz-tab-link',$tabItem), $tabPane = $('> .cdz-tab-pane',$tabItem);
                     tabLinks.push($tabLink);
 					tabPanes.push($tabPane);
                 });
-				
+
 				$('> .tab-item',$accordion).each(function(){
 					var $tabItem = $(this), $tabLink = $('> .cdz-link-wrap > .cdz-tab-link',$tabItem), $tabPane = $('> .cdz-tab-pane',$tabItem);
 					$tabLink.on('mouseenter.cdztabs',
@@ -136,7 +136,7 @@ define(['jquery','jquery-ui-modules/widget'], function($, domReady) {
 				$('.cdz-tab-pane',$tabInner).first().addClass('active');
 				$('.cdz-tab-link',$tabInner).first().addClass('active');
 				$accordion.hide();
-				
+
 				function pcTabs(){
 					$accordion.hide();
 					$tabInner.show();
@@ -171,7 +171,7 @@ define(['jquery','jquery-ui-modules/widget'], function($, domReady) {
 						$tabLink.off('mouseenter.cdztabs');
 						var $toggle = $('<span class="dropdown-toggle"></span>');
 						$tabLink.appendTo($linkWrap)
-						
+
 						$toggle.appendTo($linkWrap);
 						$tabPane.appendTo($tabItem);
 						$tabPane.hide();
@@ -180,7 +180,7 @@ define(['jquery','jquery-ui-modules/widget'], function($, domReady) {
 						$toggle.on('click',function(){
 							$tabLink.toggleClass('active');
 							$tabPane.slideToggle(200,function(){
-								$tabPane.toggleClass('active');	
+								$tabPane.toggleClass('active');
 								$tabPane.height('');
 							});
 						});
@@ -231,7 +231,7 @@ define(['jquery','jquery-ui-modules/widget'], function($, domReady) {
 									},150);
 									break;
 								default:
-									tabMinHeight(tabPanes);								
+									tabMinHeight(tabPanes);
 							}
 						}
 					},
@@ -241,7 +241,7 @@ define(['jquery','jquery-ui-modules/widget'], function($, domReady) {
 						});
 					}
 				);
-					
+
 				$(window).on('resize', function() {
 					var mode = self._getMode();
 					if (currentMode != mode) {
@@ -267,7 +267,7 @@ define(['jquery','jquery-ui-modules/widget'], function($, domReady) {
 				}
 				var $container = self.element.parents(self.options.fixedLeftParent).first();
 				$('li.item.level0',self.element).each(function(){
-					
+
 					var $li = $(this);
 					var $dropdown = $('> .groupmenu-drop',$li);
 					if( !$dropdown.hasClass('cat-tree') ){
@@ -305,7 +305,7 @@ define(['jquery','jquery-ui-modules/widget'], function($, domReady) {
             this._on(controls.swipeArea, {'swipeleft': toggle});
         },
 		toggle: function () {
-            if ($('html').hasClass('nav-open')) {           
+            if ($('html').hasClass('nav-open')) {
                 setTimeout(function () {
                    $('html').removeClass('nav-open');
                     $('html').removeClass('nav-before-open');
@@ -508,13 +508,13 @@ define(['jquery','jquery-ui-modules/widget'], function($, domReady) {
 					var adjustment = self.element.offset().left - cOffset;
 					if( adjustment > 10 ){
 						adjustment = 0;
-					} 
+					}
 					if( (cWidth - dWidth) <= 20 && ((cWidth - dWidth) > 0) ){
 						adjustment = (cWidth - dWidth)/2;
 					}
 					var left = -Math.min(relativeLeft,overFlow) - Math.max(0,adjustment);
 					$dropdown.css({left:left});
-				}					
+				}
 			}
 			function handlerOut($li){
 				//$li.children('.groupmenu-drop').css('left', '');
@@ -536,7 +536,7 @@ define(['jquery','jquery-ui-modules/widget'], function($, domReady) {
 					},300);
 				});
 			});
-			if (this.options.type == 'translate') {				
+			if (this.options.type == 'translate') {
 				$li.hover(function() {
 					handlerIn($(this));
 				}, function() {
@@ -581,7 +581,7 @@ define(['jquery','jquery-ui-modules/widget'], function($, domReady) {
 					$dropdown.css({left:dLeft,right:'auto'});
 				}
 			}
-			
+
 			function handlerOut($li){
 				//$li.children('.groupmenu-drop').css('right', '');
 			}
@@ -636,7 +636,7 @@ define(['jquery','jquery-ui-modules/widget'], function($, domReady) {
 				}else if(overflow){
 					var newTop1 = parseInt($ddMenu.css('top')) - (ddTop - winTop + ddHeight - winHeight);
 					var newTop2 = parseInt($ddMenu.css('top')) - (ddTop - self.element.children('.groupmenu').offset().top);
-					var newTop = Math.max(newTop1,newTop2); 
+					var newTop = Math.max(newTop1,newTop2);
 					$ddMenu.css({top: newTop});
 				}
 			},

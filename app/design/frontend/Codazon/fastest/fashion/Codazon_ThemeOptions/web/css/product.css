@@ -75,6 +75,18 @@
     margin-bottom: 16px;
 }
 
+.mg-product-block-text-content-normal-ul {
+    display: block;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 150%;
+    color: #333333;
+    margin-bottom: 16px;
+    padding-left: 20px;
+}
+
 .mg-product-block-text-content span:last-child {
     margin-bottom: 0;
 }
@@ -88,6 +100,9 @@
         margin-bottom: 20px;
     }
     .mg-product-block-text-content-normal {
+        font-size: 16px;
+    }
+    .mg-product-block-text-content-normal-ul {
         font-size: 16px;
     }
 }

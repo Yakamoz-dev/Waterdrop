@@ -410,14 +410,21 @@
 				.abs-link(@menu_drop_text, @menu_drop_hover_text);
 			}
 			&-content{
-				padding:10px;
+                &.all-filters {
+                    .col-sm-4, .col-sm-8 {
+                        width: 160px !important;
+                    }
+                }
+				padding:0;
 				.abs-csscf(@menu_drop_text, @menu_drop_font);
 				.groupdrop-title{
-					text-transform:uppercase;
-					.lib-css(color, @menu_drop_text_title);
-					font-weight:700;
+					text-transform:none;
+                    color: #111111;
+                    font-weight: bold;
+                    font-size: 14px;
+                    line-height: 1.25;
 					margin:0;
-					padding:0 0 @indent__s;
+					padding:0 0 12px;
 				}
 				.groupdrop-banner-pos{
 
@@ -426,11 +433,13 @@
 					.abs-link(@menu_drop_text, @menu_drop_hover_text);
 				}
 				.groupdrop-link{
-					margin-bottom:15px;
+					margin-bottom:0;
 					li{
-						margin:0; padding:6px 0;
+						margin:0; padding:0 0 10px 0;
 						a{
 							position:relative;
+                            font-size: 14px;
+                            line-height: 1.25;
 							.abs-transition();
 							&:before{
 								content:"";
@@ -568,8 +577,11 @@
 				}
 				&:hover{
 					> a.menu-link{
-						cursor:pointer;
-						.abs-cssall(@vermenu_hover_text, @vermenu_border, @vermenu_hover_background, @vermenu_font);
+						cursor: pointer;
+                        color: #ffffff;
+                        background-color: #155DA4;
+                        border-color: #155DA4;
+                        font: 400 14px/1.35 Roboto, Helvetica Neue, Verdana, Arial, sans-serif;
 					}
 				}
 				&.parent > a.menu-link:before{

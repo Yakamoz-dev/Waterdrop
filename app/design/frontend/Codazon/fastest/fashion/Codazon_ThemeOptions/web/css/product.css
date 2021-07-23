@@ -91,6 +91,42 @@
     margin-bottom: 0;
 }
 
+.mg-product-block-text-content-table {
+    text-align: center;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    max-width: 100%;
+    display: block;
+    overflow: hidden;
+    overflow-x: scroll;
+}
+
+.mg-product-block-text-content-table tr th {
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Roboto';
+    line-height: 150%;
+    font-style: normal;
+    font-weight: normal;
+    color: #111;
+    padding: 10px;
+    text-align: center;
+    min-width: 130px;
+}
+
+.mg-product-block-text-content-table tr td {
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Roboto';
+    line-height: 150%;
+    font-style: normal;
+    font-weight: normal;
+    color: #111;
+    padding: 10px;
+    min-width: 130px;
+}
+
 @media(max-width:767px) {
     .mg-product-block-text {
         margin-bottom: 32px;

@@ -410,7 +410,7 @@
 				.abs-link(@menu_drop_text, @menu_drop_hover_text);
 			}
 			&-content{
-				padding:10px;
+				padding:0 12px;
 				.abs-csscf(@menu_drop_text, @menu_drop_font);
 				.groupdrop-title{
 					text-transform:uppercase;
@@ -426,7 +426,7 @@
 					.abs-link(@menu_drop_text, @menu_drop_hover_text);
 				}
 				.groupdrop-link{
-					margin-bottom:15px;
+					margin-bottom:0;
 					li{
 						margin:0; padding:6px 0;
 						a{
@@ -518,17 +518,7 @@
 				}
 				&.parent:hover{
 					&:after{
-						.abs-iconfont('\f0dd', 24px);
-						.lib-css(color, @menu_hover_background);
-						position:absolute;
-						bottom:-10px;
-						left:42%;
-						left: calc(~'(100% - 14px) / 2');
-						-webkit-left: calc(~'(100% - 14px) / 2');
-						-o-left: calc(~'(100% - 14px) / 2');
-						-moz-left: calc(~'(100% - 14px) / 2');
-						z-index:100;
-
+						display: none;
 					}
 				}
 			}
@@ -579,6 +569,60 @@
 		}
 	}
 }
+
+/* custom style  */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .cdz-main-menu{
+        .groupmenu{
+            li.level0 {
+                > .dropdown-toggle {
+                    width: 37px;
+                    height: 37px;
+                    right: 10px;
+                    .lib-css(color, #333333);
+
+                    &:before {
+                        margin-top: 14px;
+                        font-size: 16px;
+                    }
+                }
+                > a.menu-link{
+                    text-transform: none;
+                    text-decoration: none;
+                    color: #333333;
+                    background-color: #ffffff;
+                    border-color: #ffffff;
+                    font-size: 14px;
+                    line-height: 1.25;
+                }
+            }
+            li.level1 {
+                > a.menu-link{
+                    text-transform: none;
+                    text-decoration: none;
+                    color: #333333;
+                    background-color: #ffffff;
+                    border-color: #ffffff;
+                    font-size: 14px;
+                    line-height: 1.25;
+                    padding: 0 0 16px 12px;
+                }
+            }
+            li.item.open{
+                > a.menu-link {
+                    font-weight: bold;
+                }
+            }
+            li.item.level0.open{
+                > a.menu-link {
+                    font-weight: bold !important;
+                    background: #F4FBFF !important;
+                }
+            }
+        }
+    }
+}
+
 //mobile
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
 	/*

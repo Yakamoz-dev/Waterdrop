@@ -632,7 +632,7 @@
 						.abs-cssall(#333333, #ffffff, #ffffff, @menu_font);
                         font-size: 16px;
                         line-height: 19px;
-                        font-weight: bold;
+                        font-weight: normal;
 					}
                     > .dropdown-toggle{
                         color: #333333;
@@ -654,28 +654,28 @@
                     text-transform: capitalize;
                     .abs-link(#333333, #333333);
                     .abs-cssall(#333333, #ffffff, #ffffff, @menu_font);
-                    font-size: 16px;
-                    line-height: 19px;
-                    padding: 12px 20px;
+                    font-size: 14px;
+                    line-height: 1.25;
+                    padding: 0 0 16px 12px;
                 }
                 .cdz-menu-toggle:after{
 
                     .lib-css(color, #ffffff);
                 }
                 > .dropdown-toggle{
-                    width:37px;
-                    height:37px;
-                    right: 10px;
+                    width:16px;
+                    height:16px;
+                    right: 0;
                     .lib-css(color, #333333);
-                    &:before{margin-top: 14px; font-size: 16px;}
+                    &:before{font-size: 16px;}
                 }
                 &:hover{
                     > a.menu-link{
                         cursor:pointer;
                         .abs-cssall(#333333, #ffffff, #ffffff, @menu_font);
-                        font-size: 16px;
-                        line-height: 19px;
-                        font-weight: bold;
+                        font-size: 14px;
+                        line-height: 1.25;
+                        font-weight: normal;
                     }
                     > .dropdown-toggle{
                         color: #333333;
@@ -683,6 +683,16 @@
                     .cdz-menu-toggle:after{
                         .lib-css(color, #ffffff);
                     }
+                }
+            }
+            li.item.open{
+                > a.menu-link {
+                    font-weight: bold;
+                }
+            }
+            li.item.level0.open{
+                > a.menu-link {
+                    background: #F4FBFF;
                 }
             }
 			li.expand{

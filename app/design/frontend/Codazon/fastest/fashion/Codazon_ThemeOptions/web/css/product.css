@@ -98,8 +98,6 @@
     border-spacing: 0;
     max-width: 100%;
     display: block;
-    overflow: hidden;
-    overflow-x: scroll;
 }
 
 .mg-product-block-text-content-table tr th {
@@ -112,7 +110,6 @@
     color: #111;
     padding: 10px;
     text-align: center;
-    min-width: 130px;
 }
 
 .mg-product-block-text-content-table tr td {
@@ -124,7 +121,6 @@
     font-weight: normal;
     color: #111;
     padding: 10px;
-    min-width: 130px;
 }
 
 @media(max-width:767px) {
@@ -140,6 +136,15 @@
     }
     .mg-product-block-text-content-normal-ul {
         font-size: 16px;
+    }
+    .mg-product-block-text-content-table tr th,
+    .mg-product-block-text-content-table tr td {
+        min-width: 130px;
+    }
+
+    .mg-product-block-text-content-table {
+        overflow: hidden;
+        overflow-x: scroll;
     }
 }
 /* text end */

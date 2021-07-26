@@ -18,7 +18,7 @@ define(['jquery','jquery-ui-modules/widget'], function($, domReady) {
 			delay: 100,
 			contPadding: false,
 			responsive: {
-				768: 'mobile',
+				1025: 'mobile',
 			}
 		},
 		_create: function() {

@@ -1707,8 +1707,11 @@ strong#block-related-heading:before {
 .pages .pages-items{
     padding: 2px 0 0 !important;
 }
-.evercrumbs .breadcrumbs .items li:first-child, .evercrumbs .breadcrumbs .items li:last-child {
+.evercrumbs .breadcrumbs .items li {
     display: none;
+}
+.evercrumbs .breadcrumbs .items li:nth-last-child(2) {
+    display: block;
 }
 .evercrumbs .breadcrumbs {
     background: #ffffff !important;

@@ -22,7 +22,7 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
     $showDescription = false;
     $title = $block->getTitle() ? __($block->getTitle()) : '';
     $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
-    $classid = md5(json_encode($block->getData()));    
+    $classid = md5(json_encode($block->getData()));
 	/**
      * Position for actions regarding image size changing in vde if needed
      */
@@ -44,8 +44,8 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
 						data-items="<?php echo $slider_item ?>"
 						data-items-0="1"
 						data-items-480="1"
-						data-items-768="1"		            	
-						data-items-1024="1"	
+						data-items-768="1"
+						data-items-1024="1"
 						data-items-1280="1"
 						data-items-1440="1"
 						data-loop="true"
@@ -57,9 +57,9 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
 				>
 				    <?php /** @var $_product \Magento\Catalog\Model\Product */ ?>
 				    <?php foreach ($_productCollection as $_product): ?>
-				    	
+
 					<?php if ($iterator%$row==0 || $iterator == 0): ?>
-					<div class="item-slider"> 
+					<div class="item-slider">
 				        <?php endif; ?>
 				        <div class="item product product-item">
 				        <div class="product-item-info" data-container="product-grid">
@@ -84,7 +84,7 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
 										</span>
 									</a>
                                 </div>
-                                <?php $labelHelper->showLabel($_product) ?> 
+                                <?php $labelHelper->showLabel($_product) ?>
 								<div class="cdz-product-bottom">
                                 	<div class="cdz-buttons-container">
 				                    	<?php if($block->isShow('addtocart')): ?>
@@ -107,7 +107,7 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
 				                                    <div class="stock unavailable"><span><?php /* @escapeNotVerified */ echo __('Out of stock') ?></span></div>
 				                                <?php endif; ?>
 				                            <?php endif; ?>
-				                        
+
 				                        <?php endif ?>
 				                        <?php if($block->isShow('addto')): ?>
 				                        <div data-role="add-to-links" class="actions-secondary"<?php echo strpos($pos, $viewMode . '-secondary') ? $position : ''; ?>>
@@ -133,12 +133,12 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
 				                               role="button">
 				                                <span><?php /* @escapeNotVerified */ echo __('Add to Compare') ?></span>
 				                            </a>
-				                        </div>										
+				                        </div>
 				                        <?php endif ?>
-										
+
 											<?php echo $this->helper('Codazon\QuickShop\Helper\Data')->getQuickShopButton($_product); ?>
 				                    </div>
-				                   
+
 				                </div>
                             </div>
 				            <?php endif ?>
@@ -157,7 +157,7 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
 								<?php if($block->isShow('description')): ?>
 									<?php $desc = $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description');
 								$descLength = 100;
-                                    if(strlen($desc)> $descLength ) { 
+                                    if(strlen($desc)> $descLength ) {
                                         $strCutDesc = substr($desc, 0, $descLength);
                                         $desc = substr($strCutDesc, 0, strrpos($strCutDesc, ' ')).'&hellip;';
                                     }
@@ -166,18 +166,22 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
                                     <div class="product description product-item-description">
                                         <?php /* @escapeNotVerified */ echo $desc; ?>
                                     </div>
-                                <?php endif; ?>	
+                                <?php endif; ?>
 								<?php if($block->isShow('price')): ?>
 				                <?php /* @escapeNotVerified */ echo $block->getProductPrice($_product) ?>
 				                <?php endif ?>
 				                <?php if($block->isShow('review')): ?>
-				                <?php echo $block->getReviewsSummaryHtml($_product, $templateType); ?>
+                                    <?php if($block->getReviewsSummaryHtml($_product, $templateType)): ?>
+                                        <?php echo $block->getReviewsSummaryHtml($_product, $templateType); ?>
+                                    <?php else: ?>
+                                        <div class="product-reviews-summary short"></div>
+                                    <?php endif ?>
 				                <?php endif ?>
-				                
+
 				                <?php echo $block->getProductDetailsHtml($_product); ?>
 				            </div>
 				        </div>
-				        <?php 
+				        <?php
 				        	$time = strtotime($_product->getSpecialToDate());
 							$newformat = date('M d, Y',$time);
 				        ?>
@@ -216,7 +220,7 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
 							var x = setInterval(function() {
 							    // Find the distance between now an the count down date
 							    var distance = countDownDate - window.now;
-							    
+
 							    // Time calculations for days, hours, minutes and seconds
 							    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
 							    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -228,13 +232,13 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
 							    	minutes = 0;
 							    	seconds = 0;
 							    }
-							    
+
 							    // Output the result in an element with id="demo"
 							    element.find('.days .value').html(days);
 							    element.find('.hours .value').html(hours);
 							    element.find('.mins .value').html(minutes);
 							    element.find('.secs .value').html(seconds);
-							    // If the count down is over, write some text 
+							    // If the count down is over, write some text
 							    if (distance < 0) {
 							        clearInterval(x);
 							        //document.getElementById(id).innerHTML = "EXPIRED";
@@ -255,5 +259,5 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
 			<?php endif; ?>
 		</div>
 	</div>
-	
+
 <?php endif; ?>

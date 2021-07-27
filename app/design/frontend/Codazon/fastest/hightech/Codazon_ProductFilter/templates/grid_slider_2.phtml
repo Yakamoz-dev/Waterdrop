@@ -152,7 +152,11 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
                                     </div>
                                 <?php endif; ?>
                                 <?php if($block->isShow('review')): ?>
-                                    <?php echo $block->getReviewsSummaryHtml($_product, $templateType); ?>
+                                    <?php if($block->getReviewsSummaryHtml($_product, $templateType)): ?>
+                                        <?php echo $block->getReviewsSummaryHtml($_product, $templateType); ?>
+                                    <?php else: ?>
+                                        <div class="product-reviews-summary short"></div>
+                                    <?php endif ?>
                                 <?php endif ?>
 								<?php if($block->isShow('price')): ?>
 				                <?php /* @escapeNotVerified */ echo $block->getProductPrice($_product) ?>

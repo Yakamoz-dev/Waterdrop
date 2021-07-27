@@ -39,7 +39,7 @@ class Upload extends \Magento\Backend\App\Action {
     /**
      * @var array
      */
-    protected $ratings;
+    protected $ratings = [];
 
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
@@ -51,7 +51,7 @@ class Upload extends \Magento\Backend\App\Action {
         \Magento\Review\Model\ReviewFactory $reviewFactory,
         \Magento\Review\Model\ResourceModel\Review\CollectionFactory $reviewCollectionFactory,
         \Magento\Review\Model\RatingFactory $ratingFactory,
-        \Magento\Customer\Model\CustomerFactory $customerFactory      
+        \Magento\Customer\Model\CustomerFactory $customerFactory
     ) {
         parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
@@ -93,7 +93,7 @@ class Upload extends \Magento\Backend\App\Action {
         $this->processUpload($result);
 
         $this->messageManager->addSuccess( __( 'Reviews imported' ) );
-        
+
         return $resultRedirect;
 
         //return  $resultPage = $this->resultPageFactory->create();
@@ -101,7 +101,7 @@ class Upload extends \Magento\Backend\App\Action {
 
     public function validateIfHasExtension($result){
         $extension = pathinfo($result['file'], PATHINFO_EXTENSION);
-        
+
         $uploadedFile = $result['path'] . $result['file'];
         if (!$extension) {
             $this->varDirectory->delete($uploadedFile);
@@ -122,10 +122,10 @@ class Upload extends \Magento\Backend\App\Action {
     public function processUpload( $result ){
 
         $sourceFile = $this->getWorkingDir() . $result['file'];
-        
+
         $rows = $this->csvProcessor->getData($sourceFile);
         $header = array_shift($rows);
-        
+
         // See \Magento\ReviewSampleData\Model\Review::install()
         foreach ($rows as $row) {
             $data = [];
@@ -166,7 +166,7 @@ class Upload extends \Magento\Backend\App\Action {
         }
     }
 
-    /** 
+    /**
      * See \Magento\ReviewSampleData\Model\Review::prepareReview()
      * @param array $row
      * @return \Magento\Review\Model\Review
@@ -254,10 +254,10 @@ class Upload extends \Magento\Backend\App\Action {
      */
     protected function getRating($rating){
         $ratingCollection = $this->ratingFactory->create()->getResourceCollection();
-        if (!$this->ratings[$rating]) {
+        if (!array_key_exists($rating,$this->ratings) || !$this->ratings[$rating]) {
             $this->ratings[$rating] = $ratingCollection->addFieldToFilter('rating_code', $rating)->getFirstItem();
         }
         return $this->ratings[$rating];
     }
-    
+
 }

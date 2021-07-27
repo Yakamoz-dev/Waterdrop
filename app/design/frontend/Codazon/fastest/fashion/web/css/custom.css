@@ -30,3 +30,7 @@ select{
     -webkit-user-select: none;
     user-select:none;
 }
+
+body {
+    background: #f4f4f4 !important;
+}

@@ -45,6 +45,8 @@ $canApplyMsrp = $helper->isShowBeforeOrderConfirm($product) && $helper->isMinima
                             </dd>
                         <?php endforeach; ?>
                     </dl>
+                <?php else: ?>
+                    <dl class="item-options"></dl>
                 <?php endif;?>
                 <?php if ($messages = $block->getMessages()): ?>
                     <?php foreach ($messages as $message): ?>

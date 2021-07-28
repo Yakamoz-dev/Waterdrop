@@ -125,8 +125,8 @@
 			background:transparent;
 		}
 		.action.subscribe{
-			border-width:1px;
-			margin-right:1px;
+			border-width:0;
+			margin-right:0;
 			//.abs-cssall(@btn_default_text, @btn_default_text, transparent);
             color: #fff;
             background: #155DA4;
@@ -137,6 +137,12 @@
 			//&:hover{
 			//	.abs-cssall(@btn_hover_text,  @btn_hover_background, @btn_hover_background );
 			//}
+            &:hover{
+                .abs-style(#ffffff, #4F85BB, #4F85BB);
+            }
+            &:active{
+                .abs-style(#ffffff, #10477D, #10477D);
+            }
 		}
 		.field .control{
 			margin-right:-1px;

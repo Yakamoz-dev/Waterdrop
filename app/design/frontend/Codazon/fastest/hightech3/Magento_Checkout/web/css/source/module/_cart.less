@@ -128,6 +128,12 @@
                         border-radius: 0 4px 4px 0;
                         line-height: 20px;
                         padding: 7px 15px;
+                        &:hover{
+                            .abs-style(#ffffff, #4F85BB, #4F85BB);
+                        }
+                        &:active{
+                            .abs-style(#ffffff, #10477D, #10477D);
+                        }
                     }
                 }
             }
@@ -183,9 +189,11 @@
                 margin: 0;
                 border: 1px solid #155da4;
                 border-radius: 4px;
-                &:hover {
-                    background: #FFFFFF;
-                    color: #155DA4;
+                &:hover{
+                    .abs-style(#ffffff, #4F85BB, #4F85BB);
+                }
+                &:active{
+                    .abs-style(#ffffff, #10477D, #10477D);
                 }
             }
             .item {
@@ -363,7 +371,7 @@
                     }
                 }
                 .action-edit {
-                    width: 43px;
+                    width: 46px;
                     right: 120px;
                     margin-right: 0;
                     text-decoration: none;
@@ -372,14 +380,24 @@
                         position: relative;
                         vertical-align: middle;
                     }
+                    &:hover {
+                        &:before {
+                            color: #155DA4;
+                        }
+                    }
                 }
                 .action-delete {
                     width: 70px;
-                    text-decoration: none;
+                    text-decoration: none !important;
                     span {
                         padding-left: 6px;
                         position: relative;
                         vertical-align: middle;
+                    }
+                    &:hover {
+                        &:before {
+                            color: #155DA4;
+                        }
                     }
                 }
 				.rtl-layout &{
@@ -438,6 +456,7 @@
                 font-weight: normal;
                 line-height: 16px;
                 color: #666666;
+                min-height: 21px;
                 dt {
                     font-weight: normal !important;
                 }

@@ -25,6 +25,9 @@
         .page-title-wrapper {
             padding-left: @layout__width-xs-indent;
             padding-right: @layout__width-xs-indent;
+            .page-title {
+                margin: 24px 0;
+            }
         }
     }
 
@@ -128,6 +131,12 @@
                         border-radius: 0 4px 4px 0;
                         line-height: 20px;
                         padding: 7px 15px;
+                        &:hover{
+                            .abs-style(#ffffff, #4F85BB, #4F85BB);
+                        }
+                        &:active{
+                            .abs-style(#ffffff, #10477D, #10477D);
+                        }
                     }
                 }
             }
@@ -183,9 +192,11 @@
                 margin: 0;
                 border: 1px solid #155da4;
                 border-radius: 4px;
-                &:hover {
-                    background: #FFFFFF;
-                    color: #155DA4;
+                &:hover{
+                    .abs-style(#ffffff, #4F85BB, #4F85BB);
+                }
+                &:active{
+                    .abs-style(#ffffff, #10477D, #10477D);
                 }
             }
             .item {
@@ -438,6 +449,7 @@
                 font-weight: normal;
                 line-height: 16px;
                 color: #666666;
+                min-height: 21px;
                 dt {
                     font-weight: normal !important;
                 }

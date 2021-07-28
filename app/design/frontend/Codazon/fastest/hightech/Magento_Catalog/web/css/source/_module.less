@@ -1437,6 +1437,12 @@
     background: #155DA4;
     border-radius: 4px;
     border: none;
+    &:hover{
+        .abs-style(#ffffff, #4F85BB, #4F85BB);
+    }
+    &:active{
+        .abs-style(#ffffff, #10477D, #10477D);
+    }
 }
 .box-tocart .action.tocart:not(:last-child) {
     margin-bottom: 20px;
@@ -1453,6 +1459,12 @@
     background: #FFFFFF;
     border: 1px solid #155DA4;
     border-radius: 4px;
+    &:hover{
+        .abs-style(#4F85BB, #4F85BB, #ffffff);
+    }
+    &:active{
+        .abs-style(#10477D, #10477D, #ffffff);
+    }
 }
 .action.primary:hover {
     background:#155DA4 ;

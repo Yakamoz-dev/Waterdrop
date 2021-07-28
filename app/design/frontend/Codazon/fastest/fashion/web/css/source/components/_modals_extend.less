@@ -83,16 +83,15 @@
 			padding:0;
 			width:44px;
 			height:44px;
-			background:#155da4 !important;
+			background:#ffffff !important;
 			.abs-borderradius(0);
 			z-index:1;
 			&:before{
-				color:#fff !important;
+				color:#999999 !important;
 				line-height:18px !important;
 			}
 			&:hover{
-				background:#155da4 !important;
-				.abs-opacity(0.8);
+				background:#ffffff !important;
 			}
         }
         .page-main-actions {
@@ -281,9 +280,12 @@
 						.action.subscribe{
 							width:100%;
 							.abs-cssall(@btn_default_text, @btn_default_border, @btn_default_background, @btn_default_font);
-							&:hover{
-								.abs-cssall(@btn_hover_text, @btn_hover_border, @btn_hover_background);
-							}
+                            &:hover{
+                                .abs-style(#ffffff, #4F85BB, #4F85BB);
+                            }
+                            &:active{
+                                .abs-style(#ffffff, #10477D, #10477D);
+                            }
 						}
 					}
 				}
@@ -294,11 +296,11 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
     .cdz-popup-wrapper .modal-popup .modal-inner-wrap {
-        width:733px !important;
+        width:721px !important;
         margin: 10rem auto;
         .cdz-popup-newsletter {
             .cdz-popup-newsletter-left {
-                width: 342px;
+                width: 330px;
             }
             .cdz-popup-newsletter-right {
                 width: 391px;
@@ -340,7 +342,7 @@
                             padding: 12px 120px;
                             font-size: 16px;
                             line-height: 1.5;
-                            margin-bottom: 40px;
+                            margin-bottom: 24px;
                             border: 1px solid #155da4;
                         }
                     }
@@ -367,11 +369,11 @@
 }
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .cdz-popup-wrapper .modal-popup .modal-inner-wrap {
-        width:733px !important;
+        width:721px !important;
         margin: 10rem auto;
         .cdz-popup-newsletter {
             .cdz-popup-newsletter-left {
-                width: 342px;
+                width: 330px;
             }
             .cdz-popup-newsletter-right {
                 width: 391px;
@@ -413,7 +415,7 @@
                             padding: 12px 120px;
                             font-size: 16px;
                             line-height: 1.5;
-                            margin-bottom: 40px;
+                            margin-bottom: 24px;
                             border: 1px solid #155da4;
                         }
                     }

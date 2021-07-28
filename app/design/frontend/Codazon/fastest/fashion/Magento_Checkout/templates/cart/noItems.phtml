@@ -1,0 +1,64 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**  @var $block \Magento\Checkout\Block\Cart */
+?>
+<style>
+    .cart-empty-content {
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 37px;
+        text-align: center;
+        padding-top: 56px;
+        padding-bottom: 120px;
+    }
+    .cart-empty-content-shopping {
+        margin-top: 40px;
+    }
+    .cart-empty-content-a {
+        font-size: 14px;
+        line-height: 16px;
+        padding: 12px 36.5px;
+        background: #155DA4;
+        border-radius: 4px;
+        color: #ffffff !important;
+        text-decoration: none !important;
+    }
+    .cart-empty-content-a:hover {
+        color: #ffffff;
+        border-color: #4f85bb;
+        background: #4f85bb;
+    }
+    .cart-empty-content-a:active {
+        color: #ffffff;
+        border-color: #10477d;
+        background: #10477d;
+    }
+    @media (max-width: 767px) {
+        .cart-empty-content {
+            font-size: 24px;
+            line-height: 28px;
+            padding-top: 80px;
+            padding-bottom: 160px;
+        }
+    }
+</style>
+<div class="cart-empty">
+    <?= $block->getChildHtml('checkout_cart_empty_widget') ?>
+    <div class="cart-empty-content">
+        <div>You have no items in your</div>
+        <div>shopping cart.</div>
+        <div class="cart-empty-content-shopping"><a class="cart-empty-content-a" href="<?php echo $block->escapeUrl($block->getContinueShoppingUrl()); ?>">Continue Shopping</a></div>
+    </div>
+    <?= $block->getChildHtml('shopping.cart.table.after') ?>
+</div>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Magento_Checkout/js/empty-cart": {}
+    }
+}
+</script>

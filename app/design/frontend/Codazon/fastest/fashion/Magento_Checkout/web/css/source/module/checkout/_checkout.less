@@ -35,6 +35,16 @@
     }
 	.checkout-index-index .page-header{
 		padding:10px 0;
+        background: #ffffff;
+        .header.content {
+            padding: 11.5px 10px 11.5px;
+            .main-logo {
+                content:url(/media/logo/stores/1/checkout-logo.png);
+            }
+            .small-logo {
+                content:url(/media/logo/stores/1/checkout-logo-mobile.png);
+            }
+        }
 	}
     .checkout-container {
         &:extend(.abs-add-clearfix all);
@@ -116,3 +126,14 @@
 	padding:40px 0 20px;
 }
 .opc-sidebar .modal-header{ padding:0; border:0;}
+
+//  Mobile
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .checkout-index-index .page-header {
+        padding: 0;
+        .header.content {
+            padding: 12px 10px 2px;
+            border-bottom: 8px solid #f4f4f4;
+        }
+    }
+}

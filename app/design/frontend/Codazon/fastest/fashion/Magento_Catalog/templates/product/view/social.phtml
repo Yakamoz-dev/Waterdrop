@@ -33,7 +33,10 @@ $_themeHelper = $this->helper('Codazon\ThemeOptions\Helper\Data');
 </div>   -->
 
 <div class="custom-payment">
-    <img src="<?php echo $_themeHelper->getMediaUrl()?>wysiwyg/codazon/fastest_fashion/home/product_payment.png " alt="">
+    <picture>
+        <source media="(max-width: 428px)" srcset="<?php echo $_themeHelper->getMediaUrl()?>wysiwyg/codazon/fastest_fashion/home/product_payment_mobile.png">
+        <img src="<?php echo $_themeHelper->getMediaUrl()?>wysiwyg/codazon/fastest_fashion/home/product_payment.png " alt="">
+    </picture>
 </div>
 <div class="custom-shipping">
     <div class="custom-shipping-infobox">

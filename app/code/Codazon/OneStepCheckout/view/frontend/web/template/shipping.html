@@ -10,20 +10,89 @@
         width: unset;
         float: unset;
         padding: unset;
-        background: #fff;
+        background: unset;
     }
+    #checkout > div.osc > div:nth-child(1){
+        background-color: #FFFFFF;
+        border-radius: 4px;
+    }
+    #opc-shipping_method {
+        background: #fff;
+        padding-bottom: 20px;
+        border-radius: 4px;
+    }
+    #payment {
+        background-color: #FFFFFF;
+        border-radius: 4px;
+        margin-top: 24px;
+    }
+    #co-payment-form > fieldset > br {
+        display: none;
+    }
+    #opc-sidebar > div.payment-option.discount-code{
+        background: #fff;
+        padding-bottom: 20px;
+        border-radius: 4px 4px 0 0;
+    }
+    #opc-sidebar > div.checkout-agreements-block {
+        background: #fff;
+        padding-bottom: 20px;
+        margin-top: -5px;
+        border-radius: 0 0 4px 4px;
+    }
+
     #checkout-step-shipping,  #checkout-step-shipping_method{
         padding: 0 20px;
     }
     #checkout .osc .step-title {
-        height: 40px;
+        height: 52px;
         border-radius: 4px 4px 0 0;
-        padding: 10.5px 0 10.5px 20px;
+        padding: 20px 0 13px 16px;
         font-style: normal;
-        font-weight: 500;
+        font-weight: 600;
         font-size: 16px;
         line-height: 19px;
-        color: #FFFFFF;
+        color:#333333;
+        background: #FFFFFF;
+        border: none;
+        border-bottom: 1px solid #e1e1e1;
+    }
+
+    #shipping > div.step-title.b-title.h3:before {
+        content: '';
+        width: 192px;
+        height: 2px;
+        position: absolute;
+        background: #155DA4;
+        top: 49px;
+        left: 15px;
+    }
+    #opc-shipping_method > div > div.step-title.b-title.h3:before {
+        content: '';
+        width: 195px;
+        height: 2px;
+        position: absolute;
+        background: #155DA4;
+        top: 49px;
+        left: 15px;
+    }
+    #checkout-payment-method-load > div > div > div.step-title.b-title.h3:before {
+        content: '';
+        width: 190px;
+        height: 2px;
+        position: absolute;
+        background: #155DA4;
+        top: 49px;
+        left: 15px;
+    }
+    #block-discount-heading > span:before {
+        content: '';
+        width: 217px;
+        height: 2px;
+        position: absolute;
+        background: #155DA4;
+        top: 49px;
+        left: 15px;
     }
     #checkout-payment-method-load > div > div > div.payment-method.payment-method-braintree, #checkout-payment-method-load .payment-method {
         padding: 0 20px;
@@ -32,6 +101,7 @@
         padding: 0 20px;
     }
     .osc #opc-sidebar .opc-block-summary {
+        margin-top: 24px;
         padding: 0 20px;
     }
     #checkout .osc input[type="text"], .osc input[type="password"], .osc input[type="url"], .osc input[type="tel"], .osc input[type="search"], .osc input[type="number"], .osc input[type="datetime"], .osc input[type="email"] {
@@ -108,6 +178,7 @@
         display: none !important;
     }
     .opc-block-summary .items-in-cart>.title {
+        padding: 20px 40px 16px 0 !important;
         cursor: unset;
     }
     .osc #opc-sidebar .opc-block-summary .minicart-items .product-item-name {
@@ -246,6 +317,9 @@
     .stripe-payments-brand {
         right: -45px;
     }
+    #opc-sidebar > div.opc-block-summary > div {
+        margin-bottom: 0;
+    }
     @media screen and (max-width: 768px) {
         #checkout .osc {
             grid-template-columns: repeat(1, 1fr);
@@ -253,11 +327,7 @@
         }
         #checkout-step-shipping, #checkout-step-shipping_method {
             padding: 0px 16px;
-        }
-        #checkout .osc .step-title {
-            background: #155DA4;
-            padding: 10.5px 0 10.5px 16px;
-        }
+        } 
         #checkout-payment-method-load > div > div > div.payment-method.payment-method-braintree, #checkout-payment-method-load .payment-method {
             padding: 0px 16px;
         }
@@ -271,7 +341,11 @@
         .osc #opc-sidebar .opc-block-summary {
             padding: 0 16px;
         }
-
+    }
+    @media screen and (max-width: 428px) {
+        #shipping {
+            margin-top: 8px;
+        }
     }
 </style>
 

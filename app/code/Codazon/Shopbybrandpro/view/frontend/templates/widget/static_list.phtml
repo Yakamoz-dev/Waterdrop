@@ -15,6 +15,7 @@ $itemPerCol = $block->getData('items_per_column');
 $itemCount = count($brands);
 $width = $block->getData('thumb_width');
 $height = $block->getData('thumb_height');
+$width = $height = 300;
 $paddingBottom = 100*$height/$width;
 $adapts = array('1900', '1600', '1420', '1280','980','768','480','320','0');
 foreach ($adapts as $adapt) {

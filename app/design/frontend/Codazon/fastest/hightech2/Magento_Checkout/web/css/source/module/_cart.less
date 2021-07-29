@@ -190,12 +190,20 @@
                 &:extend(.abs-button-l all);
                 width: 100%;
                 margin: 0;
-                border: 1px solid #155da4;
+                border: none;
                 border-radius: 4px;
+                font-size: 16px;
+                line-height: 19px;
+                padding: 14.5px 17px !important;
+                &:focus {
+                    border: none;
+                    .abs-style(#ffffff, #155da4, #155da4);
+                }
                 &:hover{
                     .abs-style(#ffffff, #4F85BB, #4F85BB);
                 }
                 &:active{
+                    border: none;
                     .abs-style(#ffffff, #10477D, #10477D);
                 }
             }

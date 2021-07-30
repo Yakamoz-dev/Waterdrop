@@ -54,6 +54,7 @@
 /generated/*
 /pub/media/captcha/*
 /pub/media/codazon_cache/*
+/pub/media/codazon/slideshow/*
 /pub/media/.thumbs/*
 /pub/media/.thumbscodazon/*
 /pub/media/.thumbsmagefan_blog/*

@@ -130,6 +130,7 @@
 			var headerHeight = $header.outerHeight() + $header.offset().top;
 			var leftPos = 0;
 			var leftSize = 0;
+			var rightSize = 20;
 			function calcLeft() {
 				/*if($(window).width() < $main.offset().left + $main.innerWidth() + $floatBar.width())
 					leftPos = $main.offset().left + $main.innerWidth() + $floatBar.outerWidth() - $(window).width();*/
@@ -138,7 +139,7 @@
 					leftSize = $main.offset().left - $floatBar.width() + leftPos;
 				}
 				$floatBar.css({
-						left: leftSize,
+						right: rightSize,
                         display: 'block'
 				});
 			}
@@ -160,12 +161,12 @@
 					var curWinTop = $win.scrollTop() + newHeight;
 				if(curWinTop > headerHeight){
 					$floatBar.css({
-						left: leftSize
+                        right: rightSize
 					})
 				}
 				else {
 					$floatBar.css({
-						left: leftSize
+                        right: rightSize
 					})
 				}
 

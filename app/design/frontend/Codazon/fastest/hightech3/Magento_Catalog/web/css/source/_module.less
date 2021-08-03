@@ -1077,6 +1077,8 @@
 & when (@media-common = true) {
 
     .block.related {
+        margin-top: 0 !important;
+        margin-bottom: 24px !important;
         .action.select {
             &:extend(.abs-action-button-as-link all);
             vertical-align: top;
@@ -1489,6 +1491,12 @@
     line-height: 19px;
     color: #333333;
 }
+.custom-shipping-infobox span:nth-child(3){
+    font-style: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: #333333;
+}
 .custom-shipping a {
     display: flex;
     justify-content: flex-end;
@@ -1694,7 +1702,7 @@ strong#block-crosssell-heading:before {
     display: none;
 }
 .product-main-content{
-    margin-bottom: 0;
+    margin-bottom: 24px;
 }
 @media screen and ( width: 1024px ) {
     .related .owl-stage .owl-item {

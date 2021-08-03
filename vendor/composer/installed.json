@@ -21447,6 +21447,34 @@
             "install-path": "../sparsh/buy-now-magento-2-extension"
         },
         {
+            "name": "sparsh/magento-2-facebook-pixel-extension",
+            "version": "1.0.1",
+            "version_normalized": "1.0.1.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://repo.magento.com/archives/sparsh/magento-2-facebook-pixel-extension/sparsh-magento-2-facebook-pixel-extension-1.0.1.0.zip",
+                "shasum": "aa4269586783eb5b9e7df6b7e1a9eedc4c9c3a50"
+            },
+            "require": {
+                "php": "~7.0.13|~7.1.0|~7.2.0|~7.3.0|~7.4.0"
+            },
+            "type": "magento2-module",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Sparsh\\FacebookPixel\\": ""
+                }
+            },
+            "license": [
+                "OSL-3.0"
+            ],
+            "description": "Sparsh Facebook Pixel Extension for Magento 2",
+            "install-path": "../sparsh/magento-2-facebook-pixel-extension"
+        },
+        {
             "name": "spomky-labs/otphp",
             "version": "v10.0.1",
             "version_normalized": "10.0.1.0",

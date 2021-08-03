@@ -4371,6 +4371,15 @@ private static $installed = array (
       ),
       'reference' => NULL,
     ),
+    'sparsh/magento-2-facebook-pixel-extension' => 
+    array (
+      'pretty_version' => '1.0.1',
+      'version' => '1.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
     'spomky-labs/otphp' => 
     array (
       'pretty_version' => 'v10.0.1',

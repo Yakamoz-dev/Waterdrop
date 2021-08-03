@@ -486,6 +486,7 @@ class ComposerStaticInitfea2efe9fa4d73211abe777881f2e709
         '79b3724166c1e73e36c45f44df1c4e1a' => __DIR__ . '/..' . '/nordcomputer/showoutofstockprice/registration.php',
         'dc4b4418d0c68b7ed636761dce59ad35' => __DIR__ . '/..' . '/olegkoval/magento2-regenerate-url-rewrites/registration.php',
         'e3374b74f4d3a702a6980fab2d4c0d68' => __DIR__ . '/..' . '/sparsh/buy-now-magento-2-extension/registration.php',
+        'da400493fb2af189f474a289bdfdd8d4' => __DIR__ . '/..' . '/sparsh/magento-2-facebook-pixel-extension/registration.php',
         'b4cf39431a4b949eea8aa69ebb3d39da' => __DIR__ . '/../..' . '/app/etc/NonComposerComponentRegistration.php',
     );
 
@@ -552,6 +553,7 @@ class ComposerStaticInitfea2efe9fa4d73211abe777881f2e709
             'Symfony\\Component\\Config\\' => 25,
             'Stripe\\' => 7,
             'StripeIntegration\\Payments\\' => 27,
+            'Sparsh\\FacebookPixel\\' => 21,
             'Sparsh\\BuyNow\\' => 14,
             'Seld\\PharUtils\\' => 15,
             'Seld\\JsonLint\\' => 14,
@@ -1180,6 +1182,10 @@ class ComposerStaticInitfea2efe9fa4d73211abe777881f2e709
         'StripeIntegration\\Payments\\' => 
         array (
             0 => __DIR__ . '/..' . '/stripe/module-payments',
+        ),
+        'Sparsh\\FacebookPixel\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sparsh/magento-2-facebook-pixel-extension',
         ),
         'Sparsh\\BuyNow\\' => 
         array (

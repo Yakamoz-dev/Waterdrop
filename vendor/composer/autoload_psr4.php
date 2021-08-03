@@ -45,6 +45,7 @@ return array(
     'Symfony\\Component\\Config\\' => array($vendorDir . '/symfony/config'),
     'Stripe\\' => array($vendorDir . '/stripe/stripe-php/lib'),
     'StripeIntegration\\Payments\\' => array($vendorDir . '/stripe/module-payments'),
+    'Sparsh\\FacebookPixel\\' => array($vendorDir . '/sparsh/magento-2-facebook-pixel-extension'),
     'Sparsh\\BuyNow\\' => array($vendorDir . '/sparsh/buy-now-magento-2-extension'),
     'Seld\\PharUtils\\' => array($vendorDir . '/seld/phar-utils/src'),
     'Seld\\JsonLint\\' => array($vendorDir . '/seld/jsonlint/src/Seld/JsonLint'),

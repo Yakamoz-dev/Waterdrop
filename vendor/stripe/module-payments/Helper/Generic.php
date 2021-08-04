@@ -23,6 +23,7 @@ class Generic
     public $orderComments = [];
     public $currentCustomer = null;
     public $trialingSubscriptionsAmounts = null;
+    public $productRepository = null;
 
     public function __construct(
         ScopeConfigInterface $scopeConfig,
@@ -75,6 +76,7 @@ class Generic
         \StripeIntegration\Payments\Model\CouponFactory $stripeCouponFactory,
         \Magento\Checkout\Helper\Data $checkoutHelper,
         \Magento\SalesRule\Api\RuleRepositoryInterface $ruleRepository,
+        \Magento\Sales\Api\Data\TransactionSearchResultInterfaceFactory $transactionSearchResultFactory,
         \Magento\Sales\Model\Order\Email\Sender\InvoiceSender $invoiceSender,
         \StripeIntegration\Payments\Helper\Quote $quoteHelper,
         \Magento\Tax\Model\Config $taxConfig,
@@ -135,6 +137,7 @@ class Generic
         $this->invoiceSender = $invoiceSender;
         $this->quoteHelper = $quoteHelper;
         $this->taxConfig = $taxConfig;
+        $this->transactionSearchResultFactory = $transactionSearchResultFactory;
         $this->subscriptionQuote = $subscriptionQuote;
         $this->bundleOptionFactory = $bundleOptionFactory;
         $this->bundleProductTypeFactory = $bundleProductTypeFactory;
@@ -222,7 +225,14 @@ class Generic
 
     public function loadProductBySku($sku)
     {
-        return $this->productRepository->get($sku);
+        try
+        {
+            return $this->productRepository->get($sku);
+        }
+        catch (\Exception $e)
+        {
+            return null;
+        }
     }
 
     public function loadProductById($productId)
@@ -1588,7 +1598,7 @@ class Generic
 
     public function isAuthenticationRequiredMessage($message)
     {
-        if (strpos($message, "Authentication Required: ") === 0)
+        if (strpos($message, "Authentication Required: ") !== false)
             return true;
 
         return false;
@@ -2221,5 +2231,37 @@ class Generic
     public function priceIncludesTax($store = null)
     {
         return $this->taxConfig->priceIncludesTax($store);
+    }
+
+    /**
+     * Transaction interface types
+     * const TYPE_PAYMENT = 'payment';
+     * const TYPE_ORDER = 'order';
+     * const TYPE_AUTH = 'authorization';
+     * const TYPE_CAPTURE = 'capture';
+     * const TYPE_VOID = 'void';
+     * const TYPE_REFUND = 'refund';
+     **/
+    public function addTransaction($order, $transactionId, $transactionType = "capture")
+    {
+        try
+        {
+            $payment = $order->getPayment();
+            $payment->setTransactionId($transactionId);
+            $payment->setParentTransactionId(null);
+            $transaction = $payment->addTransaction($transactionType, null, true);
+            return  $transaction;
+        }
+        catch (Exception $e)
+        {
+            \StripeIntegration\Payments\Helper\Logger::log($e->getMessage());
+            \StripeIntegration\Payments\Helper\Logger::log($e->getTraceAsString());
+        }
+    }
+
+    public function getOrderTransactions($order)
+    {
+        $transactions = $this->transactionSearchResultFactory->create()->addOrderIdFilter($order->getId());
+        return $transactions->getItems();
     }
 }

@@ -1,7 +1,7 @@
 // Copyright © Stripe, Inc
 //
 // @package    StripeIntegration_Payments
-// @version    2.5.9
+// @version    2.6.1
 
 var stripeTokens = {};
 
@@ -24,7 +24,7 @@ var initStripe = function(params, callback)
 var stripe =
 {
     // Properties
-    version: "2.5.9",
+    version: "2.6.1",
     quote: null, // Comes from the checkout js
     customer: null, // Comes from the checkout js
     multiShippingFormInitialized: false,
@@ -405,27 +405,29 @@ var stripe =
     {
         var radioButton = document.getElementById('p_method_stripe_payments');
         if (radioButton && !radioButton.checked)
-            return order.submit();
+            return order._submit();
 
         createStripeToken(function(err)
         {
             if (err)
                 alert(err);
             else
-                order.submit();
+                order._submit();
         });
     },
 
     initAdminStripeJs: function()
     {
-        // Stripe.js intercept when placing a new order
-        var btn = document.getElementById('order-totals');
-        if (btn) btn = btn.getElementsByTagName('button');
-        if (btn && btn[0]) btn = btn[0];
-        if (btn) btn.onclick = stripe.placeAdminOrder;
-
-        var topBtn = document.getElementById('submit_order_top_button');
-        if (topBtn) topBtn.onclick = stripe.placeAdminOrder;
+        if (typeof order != "undefined" && typeof order._submit != "undefined")
+        {
+            // Is already initialized
+            return;
+        }
+        else if (typeof order != "undefined" && typeof order._submit == "undefined")
+        {
+            order._submit = order.submit;
+            order.submit = stripe.placeAdminOrder;
+        }
     },
 
     getSourceOwner: function()
@@ -758,7 +760,7 @@ var stripe =
             return false;
 
         // Case of subscriptions
-        if (msg.indexOf("Authentication Required: ") === 0)
+        if (msg.indexOf("Authentication Required: ") >= 0)
         {
             stripe.paymentIntents = msg.substring("Authentication Required: ".length).split(",");
             return true;

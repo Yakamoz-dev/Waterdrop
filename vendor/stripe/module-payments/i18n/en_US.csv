@@ -1,3 +1,5 @@
+"%1 Gift Card","%1 Gift Card"
+"%1 Gift Cards","%1 Gift Cards"
 "%1 ending ","%1 ending "
 "%1 ending **** %2","%1 ending **** %2"
 "%1 via Stripe","%1 via Stripe"
@@ -62,6 +64,7 @@
 "Could not find customer with ID %1","Could not find customer with ID %1"
 "Could not place order. Please contact us for assistance.","Could not place order. Please contact us for assistance."
 "Could not refund invoice because %1 is not a valid Payment Intent ID","Could not refund invoice because %1 is not a valid Payment Intent ID"
+"Could not refund payment: %1","Could not refund payment: %1"
 "Could not retrieve Payment Intent for subscription","Could not retrieve Payment Intent for subscription"
 "Could not retrieve payment details. Please contact us.","Could not retrieve payment details. Please contact us."
 "Could not set up customer profile: %1","Could not set up customer profile: %1"
@@ -126,6 +129,7 @@
 "Past Due","Past Due"
 "Pay in store currency","Pay in store currency"
 "Pay with ","Pay with "
+"Payment #%1","Payment #%1"
 "Payment Action","Payment Action"
 "Payment Authorization","Payment Authorization"
 "Payment Failed Emails","Payment Failed Emails"
@@ -159,7 +163,8 @@
 "Receipt Emails","Receipt Emails"
 "Received %1 webhook but could find the order ID for the event.","Received %1 webhook but could find the order ID for the event."
 "Received %1 webhook but could find the source ID in the database.","Received %1 webhook but could find the source ID in the database."
-"Received %1 webhook with Order #%2 but could not find the order in Magento. The order might still be committing to the database; please retry in a minute.","Received %1 webhook with Order #%2 but could not find the order in Magento. The order might still be committing to the database; please retry in a minute."
+"Received %1 webhook but there was no Order # in the source's metadata","Received %1 webhook but there was no Order # in the source's metadata"
+"Received %1 webhook with Order #%2 but could not find the order in Magento.","Received %1 webhook with Order #%2 but could not find the order in Magento."
 "Right hand side of the title","Right hand side of the title"
 "Routing Number","Routing Number"
 "SCA MOTO Exemptions","SCA MOTO Exemptions"
@@ -220,11 +225,12 @@
 "The checkout session for order #%1 could not be retrieved from Stripe","The checkout session for order #%1 could not be retrieved from Stripe"
 "The customer has paid the invoice for this order.","The customer has paid the invoice for this order."
 "The customer needs to pay <b>%1</b> to the following bank account:","The customer needs to pay <b>%1</b> to the following bank account:"
+"The customer was redirected externally for payment processing.","The customer was redirected externally for payment processing."
 "The customer was redirected for payment processing. The payment is pending.","The customer was redirected for payment processing. The payment is pending."
-"The customer was redirected to their bank for payment processing.","The customer was redirected to their bank for payment processing."
 "The discount for %1 could not be created in Stripe: %2","The discount for %1 could not be created in Stripe: %2"
 "The discount for order #%1 could not be created in Stripe: %2","The discount for order #%1 could not be created in Stripe: %2"
 "The full amount is sent","The full amount is sent"
+"The gift cards for order #%1 could not be created in Stripe: %2","The gift cards for order #%1 could not be created in Stripe: %2"
 "The invoice for order #%1 could not be created in Stripe: %2","The invoice for order #%1 could not be created in Stripe: %2"
 "The invoice for this order could not be found.","The invoice for this order could not be found."
 "The invoice item for product ""%1"" could not be created in Stripe: %2","The invoice item for product ""%1"" could not be created in Stripe: %2"
@@ -274,6 +280,7 @@
 "View in Stripe","View in Stripe"
 "Voucher Expiration Days","Voucher Expiration Days"
 "Warn admin and don't capture","Warn admin and don't capture"
+"We refunded %1 through Stripe.","We refunded %1 through Stripe."
 "WeChat Pay","WeChat Pay"
 "You do not have any saved cards yet.","You do not have any saved cards yet."
 "You do not have any subscriptions yet.","You do not have any subscriptions yet."
@@ -282,6 +289,7 @@
 "You must first configure your Stripe API keys before you can configure webhooks","You must first configure your Stripe API keys before you can configure webhooks"
 "You must first set a billing address before you can use this payment method","You must first set a billing address before you can use this payment method"
 "You must first set a shipping address before you can use this payment method","You must first set a shipping address before you can use this payment method"
+"Your %1 order confirmation","Your %1 order confirmation"
 "Your Account Holder Name","Your Account Holder Name"
 "Your Bank","Your Bank"
 "Your IBAN","Your IBAN"
@@ -353,6 +361,7 @@ Multibanco,Multibanco
 None,None
 OXXO,OXXO
 Once,Once
+PayPal,PayPal
 Payment,Payment
 Processed,Processed
 Reference,Reference

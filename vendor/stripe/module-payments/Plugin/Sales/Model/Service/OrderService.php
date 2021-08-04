@@ -30,6 +30,7 @@ class OrderService
         catch (\Exception $e)
         {
             $helper = $this->helperFactory->create();
+            $msg = $e->getMessage();
 
             if ($order->getId())
             {
@@ -38,27 +39,17 @@ class OrderService
             }
             else
             {
-                $msg = $e->getMessage();
-                if (!$this->isAuthenticationRequiredMessage($msg))
+                if (!$helper->isAuthenticationRequiredMessage($msg))
                     $this->rollback->run($e);
                 else
                     $this->rollback->reset(); // In case some customization is trying to place multiple split-orders
 
             }
 
-            if ($this->isAuthenticationRequiredMessage($msg))
+            if ($helper->isAuthenticationRequiredMessage($msg))
                 throw $e;
             else
                 $helper->dieWithError($e->getMessage(), $e);
         }
-    }
-
-    // We can't use the helper method because of a circular dependency
-    private function isAuthenticationRequiredMessage($message)
-    {
-        if (strpos($message, "Authentication Required: ") === 0)
-            return true;
-
-        return false;
     }
 }

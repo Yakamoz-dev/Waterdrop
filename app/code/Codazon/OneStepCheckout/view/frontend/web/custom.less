@@ -256,6 +256,33 @@
 		}
 		.payment-method-billing-address{
 			margin-bottom: 0;
+            .checkout-billing-address {
+                .actions-toolbar {
+                    .action-update {
+                        border-radius: 4px;
+                        height: 40px;
+                        &:focus {
+                            color: #ffffff;
+                            border-color: #155da4;
+                            background: #155da4;
+                        }
+                        &:hover {
+                            color: #ffffff;
+                            border-color: #4f85bb;
+                            background: #4f85bb;
+                        }
+                        &:active {
+                            color: #ffffff;
+                            border-color: #10477d;
+                            background: #10477d;
+                        }
+                    }
+                    .action-cancel {
+                        text-align: right;
+                        padding-right: 20px;
+                    }
+                }
+            }
 		}
 		.payment-group{
 			margin-bottom: 20px;
@@ -334,6 +361,17 @@
 		.payment-option{
 			margin: 0;
 		}
+        .payment-method-billing-address{
+            .checkout-billing-address {
+                .actions-toolbar {
+                    .action-cancel {
+                        text-align: center;
+                        padding-right: 0;
+                        margin-bottom: 12px;
+                    }
+                }
+            }
+        }
 	}
 }
 #delivery-method-selector .action.selected{color:#000;}

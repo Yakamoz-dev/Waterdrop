@@ -1,6 +1,20 @@
 # Changelog
 
-## 2.5.8 - 2021-06-10
+## 2.6.1 - 2021-07-23
+
+- Adobe Commerce gift cards are created in Stripe as Coupons when using the Stripe Checkout payment flow.
+- Partial captures from Stripe will invoice the Magento order for the captured amount.
+- Partial refunds from Stripe will no longer change the order status, unless the full amount is refunded.
+- Multiple partial refunds from Stripe will create multiple Credit Memos in Magento.
+- Manually approved payments in Stripe will remove Magento orders from On Hold status.
+- Fixed a checkout crash happening after multiple failed payment attempts.
+- Some fixes in the admin area when creating a new order.
+
+## 2.6.0 - 2021-07-20
+
+- `MAJOR`: Added support for PayPal
+
+## 2.5.9 - 2021-06-10
 
 - Added support for GraphQL PWA apps.
 - Added support for Tax Inclusive catalog and cart prices.
@@ -10,6 +24,7 @@
 - Improved form validation when manual Terms and Conditions are enabled.
 - Improvements with display and validation of PRAPI requests.
 - Admin errors are more descriptive.
+- Fixed a 3DS issue when database rollback transactions run after an order placement error.
 - Fixed a webhooks deliverability issue causing the event to be processed twice.
 - Various fixes with bundled and configurable subscriptions.
 - Ignore incoming webhooks with no order number.
@@ -18,6 +33,7 @@
 - Fixed a trial virtual subscriptions error at the multishipping checkout page.
 - Fixed FPX payment method not sending out a new order email.
 - Fixed invoicing orders with expired authorizations from guest customers.
+- Fixed some layout warnings in the log files.
 
 ## 2.5.7 - 2021-03-03
 

@@ -28,13 +28,13 @@ class Klarna
         \Magento\Framework\Session\Generic $session,
         \StripeIntegration\Payments\Model\Config $config,
         \Magento\Checkout\Model\Cart $cart,
-        \Magento\Framework\Locale\Resolver $localeResolver
+        \StripeIntegration\Payments\Helper\Locale $localeHelper
     ) {
         $this->helper = $helper;
         $this->session = $session;
         $this->config = $config;
         $this->cart = $cart;
-        $this->localeResolver = $localeResolver;
+        $this->localeHelper = $localeHelper;
     }
 
     public static function getSupportedCurrencies()
@@ -111,7 +111,7 @@ class Klarna
                 "purchase_country" => $country,
                 "first_name" => $billingAddress["firstname"],
                 "last_name" => $billingAddress["lastname"],
-                "locale" => strtolower(str_replace("_", "-", $this->localeResolver->getLocale()))
+                "locale" => $this->localeHelper->getKlarnaLocale()
             ],
             "source_order" => [
                 "items" => $this->getOrderItems($quote)

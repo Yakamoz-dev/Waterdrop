@@ -215,6 +215,7 @@ class ConfigProvider implements ConfigProviderInterface
             'giropay' => $this->getViewFileUrl("StripeIntegration_Payments::img/methods/giropay.svg"),
             'ideal' => $this->getViewFileUrl("StripeIntegration_Payments::img/methods/ideal.svg"),
             'klarna' => $this->getViewFileUrl("StripeIntegration_Payments::img/methods/klarna.svg"),
+            'paypal' => $this->getViewFileUrl("StripeIntegration_Payments::img/methods/paypal.svg"),
             'multibanco' => $this->getViewFileUrl("StripeIntegration_Payments::img/methods/multibanco.svg"),
             'p24' => $this->getViewFileUrl("StripeIntegration_Payments::img/methods/p24.svg"),
             'sepa' => $this->getViewFileUrl("StripeIntegration_Payments::img/methods/sepa.svg"),

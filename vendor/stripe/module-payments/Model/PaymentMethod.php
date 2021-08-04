@@ -47,13 +47,11 @@ class PaymentMethod extends \Magento\Payment\Model\Method\Adapter
         \StripeIntegration\Payments\Model\PaymentIntent $paymentIntent,
         \Magento\Checkout\Helper\Data $checkoutHelper,
         \Magento\Framework\App\CacheInterface $cache,
-        \Psr\Log\LoggerInterface $logger,
         \Magento\Payment\Gateway\Command\CommandPoolInterface $commandPool = null,
         \Magento\Payment\Gateway\Validator\ValidatorPoolInterface $validatorPool = null
     ) {
         $this->config = $config;
         $this->checkoutCardMethod = $checkoutCardMethod;
-        $this->psrLogger = $logger;
         $this->helper = $helper;
         $this->api = $api;
         $this->customer = $helper->getCustomerModel();
@@ -219,8 +217,7 @@ class PaymentMethod extends \Magento\Payment\Model\Method\Adapter
         }
         catch (\Exception $e)
         {
-            $this->psrLogger->addError('Could not refund payment: '.$e->getMessage());
-            throw new \Exception(__($e->getMessage()));
+            $this->helper->dieWithError(__('Could not refund payment: %1', $e->getMessage()));
         }
 
         return $this;

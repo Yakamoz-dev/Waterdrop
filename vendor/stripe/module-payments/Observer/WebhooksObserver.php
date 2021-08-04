@@ -90,6 +90,7 @@ class WebhooksObserver implements ObserverInterface
         {
             // Creates an invoice for an order when the payment is captured from the Stripe dashboard
             case 'stripe_payments_webhook_charge_captured':
+            case 'stripe_payments_webhook_charge_captured_card':
 
                 $orderId = $object['metadata']['Order #'];
                 $order = $this->webhooksHelper->loadOrderFromEvent($orderId, $arrEvent);
@@ -199,6 +200,7 @@ class WebhooksObserver implements ObserverInterface
 
             case 'stripe_payments_webhook_payment_intent_succeeded_fpx':
             case 'stripe_payments_webhook_payment_intent_succeeded_oxxo':
+            case 'stripe_payments_webhook_payment_intent_succeeded_paypal':
 
                 $orderId = $object['metadata']['Order #'];
                 $order = $this->webhooksHelper->loadOrderFromEvent($orderId, $arrEvent);
@@ -264,6 +266,7 @@ class WebhooksObserver implements ObserverInterface
                 break;
 
             case 'stripe_payments_webhook_payment_intent_payment_failed_fpx':
+            case 'stripe_payments_webhook_payment_intent_payment_failed_paypal':
 
                 $orderId = $object['metadata']['Order #'];
                 $order = $this->webhooksHelper->loadOrderFromEvent($orderId, $arrEvent);
@@ -384,17 +387,23 @@ class WebhooksObserver implements ObserverInterface
             case 'stripe_payments_webhook_charge_succeeded_klarna':
             case 'stripe_payments_webhook_charge_succeeded_sepa_credit_transfer':
             case 'stripe_payments_webhook_charge_succeeded_bank_account':
+            case 'stripe_payments_webhook_charge_succeeded_paypal':
 
-                if (in_array($this->getPaymentMethod($object), ["klarna", "ach_debit"]))
+                if (in_array($this->getPaymentMethod($object), ["klarna", "ach_debit", "paypal"]))
                     $orderId = $object['metadata']['Order #'];
                 else
                     $orderId = $object["source"]['metadata']['Order #'];
 
                 $order = $this->webhooksHelper->loadOrderFromEvent($orderId, $arrEvent);
 
+                if (!empty($object["payment_intent"]))
+                    $transactionId = $object["payment_intent"]; // FPX, Paypal etc
+                else
+                    $transactionId = $object["id"];
+
                 $payment = $order->getPayment();
-                $payment->setTransactionId($object['id'])
-                    ->setLastTransId($object['id'])
+                $payment->setTransactionId($transactionId)
+                    ->setLastTransId($transactionId)
                     ->setIsTransactionPending(false)
                     ->setIsTransactionClosed(0)
                     ->setIsFraudDetected(false)
@@ -461,9 +470,10 @@ class WebhooksObserver implements ObserverInterface
                         if (!empty($paymentMethod->customer))
                             $this->deduplicatePaymentMethod($object);
 
-                        return;
+                        break;
 
                     default:
+
                         return;
                 }
 
@@ -485,17 +495,28 @@ class WebhooksObserver implements ObserverInterface
                     $transactionType = \Magento\Sales\Model\Order\Payment\Transaction::TYPE_AUTH;
                     $transaction = $payment->addTransaction($transactionType, null, false);
                     $transaction->save();
-
-                    if ($this->config->isAutomaticInvoicingEnabled())
-                        $this->paymentsHelper->invoicePendingOrder($order, $transactionId);
                 }
                 else
                 {
                     $transactionType = \Magento\Sales\Model\Order\Payment\Transaction::TYPE_CAPTURE;
                     $transaction = $payment->addTransaction($transactionType, null, false);
                     $transaction->save();
+                }
 
-                    $invoice = $this->paymentsHelper->invoiceOrder($order, $transactionId);
+                $amountDetails = $data = [
+                    "amount" => $object["amount"],
+                    "currency" => $object["currency"]
+                ];
+
+                if ($order->canInvoice())
+                {
+                    if ($object["captured"] == false)
+                    {
+                        if ($this->config->isAutomaticInvoicingEnabled())
+                            $this->paymentsHelper->invoicePendingOrder($order, $transactionId, $amountDetails);
+                    }
+                    else
+                        $invoice = $this->paymentsHelper->invoiceOrder($order, $transactionId, \Magento\Sales\Model\Order\Invoice::CAPTURE_OFFLINE, $amountDetails);
                 }
 
                 if ($order->getState() == \Magento\Sales\Model\Order::STATE_HOLDED)
@@ -510,15 +531,17 @@ class WebhooksObserver implements ObserverInterface
 
                     if ($this->config->isStripeRadarEnabled() && !empty($object['outcome']['type']) && $object['outcome']['type'] == "manual_review")
                         $this->paymentsHelper->holdOrder($order)->save();
-                }
-
-                // Update the billing address on the payment method if that is already attached to a customer
-                if (!empty($paymentMethod->customer))
-                {
-                    $this->config->getStripeClient()->paymentMethods->update(
-                        $object['payment_method'],
-                        ['billing_details' => $this->addressHelper->getStripeAddressFromMagentoAddress($order->getBillingAddress())]
-                    );
+                    else
+                    {
+                        // Update the billing address on the payment method if that is already attached to a customer
+                        if (!empty($paymentMethod->customer))
+                        {
+                            $this->config->getStripeClient()->paymentMethods->update(
+                                $object['payment_method'],
+                                ['billing_details' => $this->addressHelper->getStripeAddressFromMagentoAddress($order->getBillingAddress())]
+                            );
+                        }
+                    }
                 }
 
                 break;
@@ -536,6 +559,7 @@ class WebhooksObserver implements ObserverInterface
             case 'stripe_payments_webhook_charge_failed_klarna':
             case 'stripe_payments_webhook_charge_failed_sepa_credit_transfer':
             case 'stripe_payments_webhook_charge_failed_bank_account':
+            case 'stripe_payments_webhook_charge_failed_paypal':
 
                 if (in_array($this->getPaymentMethod($object), ["klarna", "ach_debit"]))
                     $orderId = $object['metadata']['Order #'];
@@ -782,7 +806,7 @@ class WebhooksObserver implements ObserverInterface
         if (!empty($object["payment_method_details"]["type"]))
             return $object["payment_method_details"]["type"];
 
-        return null;
+        return [];
     }
 
     public function addOrderCommentWithEmail($order, $comment)

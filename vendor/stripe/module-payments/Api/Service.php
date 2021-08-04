@@ -193,7 +193,8 @@ class Service implements ServiceInterface
         \StripeIntegration\Payments\Helper\Multishipping $multishippingHelper,
         \StripeIntegration\Payments\Helper\SetupIntent $setupIntent,
         \StripeIntegration\Payments\Helper\Klarna $klarnaHelper,
-        \StripeIntegration\Payments\Helper\Address $addressHelper
+        \StripeIntegration\Payments\Helper\Address $addressHelper,
+        \StripeIntegration\Payments\Helper\Locale $localeHelper
     ) {
         $this->logger = $logger;
         $this->scopeConfig = $scopeConfig;
@@ -226,6 +227,7 @@ class Service implements ServiceInterface
         $this->setupIntent = $setupIntent;
         $this->klarnaHelper = $klarnaHelper;
         $this->addressHelper = $addressHelper;
+        $this->localeHelper = $localeHelper;
     }
 
     public function chooseRedirectUrlBetween($externalUrl, $localUrl, $paymentMethod = null)
@@ -469,6 +471,9 @@ class Service implements ServiceInterface
                 // Set Shipping Address
                 $shippingAddress = $this->expressHelper->getShippingAddressFromResult($result);
 
+                if (empty($shippingAddress["telephone"]) && !empty($billingAddress["telephone"]))
+                    $shippingAddress["telephone"] = $billingAddress["telephone"];
+
                 $shipping = $quote->getShippingAddress()
                                   ->addData($shippingAddress);
 
@@ -584,7 +589,7 @@ class Service implements ServiceInterface
         if (isset($params['qty'])) {
             $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
             $filter = new \Zend_Filter_LocalizedToNormalized(
-                ['locale' => $objectManager->create('Magento\Framework\Locale\ResolverInterface')->getLocale()]
+                ['locale' => $this->localeHelper->getLocale()]
             );
             $params['qty'] = $filter->filter($params['qty']);
         }

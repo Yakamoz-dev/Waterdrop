@@ -37,11 +37,27 @@ class Logger
 
     public static function log($obj)
     {
-        $data = Logger::getPrintableObject($obj);
+        try
+        {
+            $data = Logger::getPrintableObject($obj);
 
-        if (method_exists(Logger::$logger, 'addInfo'))
-            Logger::$logger->addInfo($data); // Magento 2.4.1 and older
-        else
-            Logger::$logger->error($data); // Magento 2.4.2 and newer
+            if (method_exists(Logger::$logger, 'addInfo'))
+                Logger::$logger->addInfo($data); // Magento 2.4.1 and older
+            else
+                Logger::$logger->error($data); // Magento 2.4.2 and newer
+        }
+        catch (\Exception $e)
+        {
+            // Errors cannot be logged...
+        }
+    }
+
+    public static function print($obj)
+    {
+        if (defined('STDIN'))
+        {
+            $data = Logger::getPrintableObject($obj);
+            // echo sprintf("\n>>> %s\n", print_r($data,true));
+        }
     }
 }

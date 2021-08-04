@@ -4400,8 +4400,8 @@ private static $installed = array (
     ),
     'stripe/module-payments' => 
     array (
-      'pretty_version' => '2.5.9',
-      'version' => '2.5.9.0',
+      'pretty_version' => '2.6.1',
+      'version' => '2.6.1.0',
       'aliases' => 
       array (
       ),
@@ -4409,8 +4409,8 @@ private static $installed = array (
     ),
     'stripe/stripe-payments' => 
     array (
-      'pretty_version' => '2.5.9',
-      'version' => '2.5.9.0',
+      'pretty_version' => '2.6.1',
+      'version' => '2.6.1.0',
       'aliases' => 
       array (
       ),
@@ -4418,12 +4418,12 @@ private static $installed = array (
     ),
     'stripe/stripe-php' => 
     array (
-      'pretty_version' => 'v7.87.0',
-      'version' => '7.87.0.0',
+      'pretty_version' => 'v7.92.0',
+      'version' => '7.92.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '9392f03cb8d8803bf8273378ce42d5cbbf1e24fc',
+      'reference' => '4b549e6f7d3e7ffd877547a0f1e8bd01c363e268',
     ),
     'symfony/config' => 
     array (

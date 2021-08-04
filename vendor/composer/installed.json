@@ -21608,12 +21608,12 @@
         },
         {
             "name": "stripe/module-payments",
-            "version": "2.5.9",
-            "version_normalized": "2.5.9.0",
+            "version": "2.6.1",
+            "version_normalized": "2.6.1.0",
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/stripe/module-payments/stripe-module-payments-2.5.9.0.zip",
-                "shasum": "a7148c17b1373218f1371a5989d9bfce5cee7447"
+                "url": "https://repo.magento.com/archives/stripe/module-payments/stripe-module-payments-2.6.1.0.zip",
+                "shasum": "fdda1a62d6ed3a384c0844bf0e51134fcde7bc9a"
             },
             "require": {
                 "stripe/stripe-php": "^7.33.0"
@@ -21636,15 +21636,15 @@
         },
         {
             "name": "stripe/stripe-payments",
-            "version": "2.5.9",
-            "version_normalized": "2.5.9.0",
+            "version": "2.6.1",
+            "version_normalized": "2.6.1.0",
             "dist": {
                 "type": "zip",
-                "url": "https://repo.magento.com/archives/stripe/stripe-payments/stripe-stripe-payments-2.5.9.0.zip",
-                "shasum": "ed43886e5b68c0f99dba4c74179dfcc45eea9b65"
+                "url": "https://repo.magento.com/archives/stripe/stripe-payments/stripe-stripe-payments-2.6.1.0.zip",
+                "shasum": "2ab40a27d5832e63409415804595d755bc74366a"
             },
             "require": {
-                "stripe/module-payments": "2.5.9"
+                "stripe/module-payments": "2.6.1"
             },
             "type": "metapackage",
             "license": [
@@ -21655,17 +21655,17 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v7.87.0",
-            "version_normalized": "7.87.0.0",
+            "version": "v7.92.0",
+            "version_normalized": "7.92.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "9392f03cb8d8803bf8273378ce42d5cbbf1e24fc"
+                "reference": "4b549e6f7d3e7ffd877547a0f1e8bd01c363e268"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/9392f03cb8d8803bf8273378ce42d5cbbf1e24fc",
-                "reference": "9392f03cb8d8803bf8273378ce42d5cbbf1e24fc",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/4b549e6f7d3e7ffd877547a0f1e8bd01c363e268",
+                "reference": "4b549e6f7d3e7ffd877547a0f1e8bd01c363e268",
                 "shasum": ""
             },
             "require": {
@@ -21681,7 +21681,7 @@
                 "squizlabs/php_codesniffer": "^3.3",
                 "symfony/process": "~3.4"
             },
-            "time": "2021-06-30T18:22:47+00:00",
+            "time": "2021-07-28T17:38:57+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -21713,7 +21713,7 @@
             ],
             "support": {
                 "issues": "https://github.com/stripe/stripe-php/issues",
-                "source": "https://github.com/stripe/stripe-php/tree/v7.87.0"
+                "source": "https://github.com/stripe/stripe-php/tree/v7.92.0"
             },
             "install-path": "../stripe/stripe-php"
         },

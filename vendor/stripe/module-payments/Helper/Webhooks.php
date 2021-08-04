@@ -324,7 +324,7 @@ class Webhooks
         while (empty($orderId) && $wait > 0);
 
         if (empty($orderId))
-            throw new WebhookException("Received {$event['type']} webhook but there was no Order # in the source's metadata", 202);
+            throw new WebhookException(__("Received %1 webhook but there was no Order # in the source's metadata", $event['type']), 202);
 
         return $orderId;
     }
@@ -332,6 +332,7 @@ class Webhooks
     public function loadOrderByIncrementId($orderId, $event, $count = 5)
     {
         $order = $this->helper->loadOrderByIncrementId($orderId);
+
         if (empty($order) || empty($order->getId()) && $count >= 0)
         {
             // Webhooks Race Condition: Sometimes we may receive the webhook before Magento commits the order to the database,
@@ -341,7 +342,7 @@ class Webhooks
         }
 
         if (empty($order) || empty($order->getId()))
-            throw new WebhookException(__("Received %1 webhook with Order #%2 but could not find the order in Magento. The order might still be committing to the database; please retry in a minute.", $event['type'], $orderId), 202);
+            throw new WebhookException(__("Received %1 webhook with Order #%2 but could not find the order in Magento.", $event['type'], $orderId), 202);
 
         return $order;
     }
@@ -534,18 +535,6 @@ class Webhooks
         if ($order->getState() == "holded" && $order->canUnhold())
             $order->unhold();
 
-        if (!$order->canCreditmemo())
-        {
-            if ($order->canCancel())
-            {
-                $order->cancel();
-                $order->save();
-                return;
-            }
-
-            throw new WebhookException("Order #{$order->getIncrementId()} cannot be (or has already been) refunded.");
-        }
-
         $dbTransaction = $this->transactionFactory->create();
 
         // Check if the order has an invoice with the charge ID we are refunding
@@ -564,17 +553,41 @@ class Webhooks
         else
             $pi = "not_exists";
 
+        // Calculate the real refund amount
+        if (!$this->helper->isZeroDecimal($currency))
+        {
+            $refundAmount /= 100;
+        }
+
+        $baseTotalNotRefunded = $order->getBaseGrandTotal() - $order->getBaseTotalRefunded();
+        $baseOrderCurrency = strtolower($order->getBaseCurrencyCode());
+        $orderCurrency = strtolower($order->getCurrencyCode());
+
+        if ($baseOrderCurrency != $currency)
+            $refundAmount = round($refundAmount / $order->getBaseToOrderRate(), 4);
+
+        $isPartialRefund = ($baseTotalNotRefunded > $refundAmount);
+
+        if (!$order->canCreditmemo())
+        {
+            if ($order->canCancel())
+            {
+                if (!$isPartialRefund) // Don't do anything on a partial refund, we expect a paynemt_intent.succeeded to arrive for the partial capture.
+                {
+                    $order->cancel();
+                    $order->save();
+                }
+                return;
+            }
+
+            throw new WebhookException("Order #{$order->getIncrementId()} cannot be (or has already been) refunded.");
+        }
+
         if (!empty($lastRefundId) && $lastRefundId == $refundId)
         {
             // This is the scenario where we issue a refund from the admin area, and a webhook comes back about the issued refund.
             // Magento would have already created a credit memo, so we don't want to duplicate that. We just ignore the webhook.
             return;
-        }
-
-        // Calculate the real refund amount
-        if (!$this->helper->isZeroDecimal($currency))
-        {
-            $refundAmount /= 100;
         }
 
         foreach($order->getInvoiceCollection() as $item)
@@ -590,13 +603,6 @@ class Webhooks
         if (!$invoice->canRefund())
             throw new WebhookException("Invoice #{$invoice->getIncrementId()} cannot be (or has already been) refunded.");
 
-        $baseTotalNotRefunded = $order->getBaseGrandTotal() - $order->getBaseTotalRefunded();
-        $baseOrderCurrency = strtolower($invoice->getBaseCurrencyCode());
-        $orderCurrency = strtolower($invoice->getOrderCurrencyCode());
-
-        if ($baseOrderCurrency != $currency)
-            $refundAmount = round($refundAmount / $order->getBaseToOrderRate(), 4);
-
         if ($baseTotalNotRefunded < $refundAmount)
             throw new WebhookException("Error: Trying to refund an amount that is larger than the invoice amount");
 
@@ -607,6 +613,7 @@ class Webhooks
         {
             $baseDiff = $baseTotalNotRefunded - $refundAmount;
             $creditmemo->setAdjustmentPositive($baseDiff);
+            $creditmemo->setItems([]);
         }
 
         $creditmemo->setBaseGrandTotal($refundAmount);
@@ -614,7 +621,8 @@ class Webhooks
 
         $this->creditmemoService->refund($creditmemo, true);
 
-        $order->addStatusToHistory($status = false, "Order refunded through Stripe");
+        $comment = __("We refunded %1 through Stripe.", $this->helper->addCurrencySymbol($refundAmount, $currency));
+        $order->addStatusToHistory($status = false, $comment);
 
         $payment->setAdditionalInformation('last_refund_id', $refundId);
 

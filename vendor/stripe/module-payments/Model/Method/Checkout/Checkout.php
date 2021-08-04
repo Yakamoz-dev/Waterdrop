@@ -51,6 +51,7 @@ abstract class Checkout extends \Magento\Payment\Model\Method\AbstractMethod
         \StripeIntegration\Payments\Model\PaymentIntent $paymentIntent,
         \StripeIntegration\Payments\Model\Stripe\CouponFactory $couponFactory,
         \StripeIntegration\Payments\Helper\Subscriptions $subscriptions,
+        \StripeIntegration\Payments\Helper\Locale $localeHelper,
         \Magento\Payment\Model\Method\Logger $logger,
         \Magento\Checkout\Helper\Data $checkoutHelper,
         \Magento\Framework\Model\ResourceModel\AbstractResource $resource = null,
@@ -86,6 +87,7 @@ abstract class Checkout extends \Magento\Payment\Model\Method\AbstractMethod
         $this->scopeConfig = $scopeConfig;
         $this->couponFactory = $couponFactory;
         $this->subscriptions = $subscriptions;
+        $this->localeHelper = $localeHelper;
     }
 
     public function isAvailable(\Magento\Quote\Api\Data\CartInterface $quote = null)
@@ -404,7 +406,7 @@ abstract class Checkout extends \Magento\Payment\Model\Method\AbstractMethod
         $hasInitialFees = $this->hasInitialFees;
         $hasShipping = $this->hasShipping;
         $hasTax = $this->hasTax;
-        $discountAppliesOnShipping = $stripeCoupon->rule->getApplyToShipping();
+        $discountAppliesOnShipping = $stripeCoupon->getApplyToShipping();
         $isPercentDiscount = !empty($stripeCoupon->getStripeObject()->percent_off);
         $isAmountDiscount = !empty($stripeCoupon->getStripeObject()->amount_off);
         $hasDiscount = ($isPercentDiscount || $isAmountDiscount);
@@ -498,7 +500,7 @@ abstract class Checkout extends \Magento\Payment\Model\Method\AbstractMethod
                 'Order #' => $order->getIncrementId(),
                 'Payment Method' => 'Stripe Checkout'
             ],
-            'locale' => $this->config->getCheckoutLocale(),
+            'locale' => $this->localeHelper->getStripeJsLocale(),
             'line_items' => $lineItems
         ];
 
@@ -529,15 +531,7 @@ abstract class Checkout extends \Magento\Payment\Model\Method\AbstractMethod
             $params["submit_type"] = "pay";
         }
 
-        if ($order->getDiscountAmount() < 0)
-        {
-            $stripeCoupon = $this->couponFactory->create()->fromOrder($order);
-            if ($stripeCoupon->getId())
-            {
-                $this->checkIfDiscountIsSupported($stripeCoupon);
-                $params['discounts'] = [['coupon' => $stripeCoupon->getId()]];
-            }
-        }
+        $this->applyCoupons($order, $params);
 
         if ($this->config->getSaveCards())
         {
@@ -562,6 +556,34 @@ abstract class Checkout extends \Magento\Payment\Model\Method\AbstractMethod
         }
 
         return $params;
+    }
+
+    public function applyCoupons($order, &$params)
+    {
+        if ($order->getDiscountAmount() < 0 || $order->getGiftCardsAmount() > 0)
+        {
+            $params['discounts'] = [];
+        }
+
+        if ($order->getDiscountAmount() < 0)
+        {
+            $stripeCoupon = $this->couponFactory->create()->fromOrder($order);
+            if ($stripeCoupon->getId())
+            {
+                $this->checkIfDiscountIsSupported($stripeCoupon);
+                $params['discounts'][] = ['coupon' => $stripeCoupon->getId()];
+            }
+        }
+
+        if ($order->getGiftCardsAmount() > 0)
+        {
+            $stripeCoupon = $this->couponFactory->create()->fromGiftCards($order);
+            if ($stripeCoupon->getId())
+            {
+                $this->checkIfDiscountIsSupported($stripeCoupon);
+                $params['discounts'][] = ['coupon' => $stripeCoupon->getId()];
+            }
+        }
     }
 
     public function initialize($paymentAction, $stateObject)

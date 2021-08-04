@@ -3,7 +3,6 @@
 namespace StripeIntegration\Payments\Helper;
 
 use StripeIntegration\Payments\Helper\Logger;
-use StripeIntegration\Payments\Exception\WebhookException;
 
 class TaxHelper
 {

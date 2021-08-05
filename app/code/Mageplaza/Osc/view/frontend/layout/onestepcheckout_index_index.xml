@@ -262,6 +262,20 @@
                                                 <item name="template" xsi:type="string">Mageplaza_Osc/container/summary</item>
                                             </item>
                                             <item name="children" xsi:type="array">
+                                                <item name="discount" xsi:type="array">
+                                                    <item name="component" xsi:type="string">Mageplaza_Osc/js/view/payment/discount</item>
+                                                    <item name="sortOrder" xsi:type="string">1</item>
+                                                    <item name="config" xsi:type="array">
+                                                        <item name="componentDisabled" xsi:type="helper" helper="Mageplaza\Osc\Helper\Data::disabledReviewCoupon"/>
+                                                    </item>
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="errors" xsi:type="array">
+                                                            <item name="sortOrder" xsi:type="string">0</item>
+                                                            <item name="component" xsi:type="string">Magento_SalesRule/js/view/payment/discount-messages</item>
+                                                            <item name="displayArea" xsi:type="string">messages</item>
+                                                        </item>
+                                                    </item>
+                                                </item>
                                                 <item name="itemsBefore" xsi:type="array">
                                                     <item name="sortOrder" xsi:type="string">5</item>
                                                 </item>
@@ -315,19 +329,6 @@
                                             <item name="component" xsi:type="string">uiComponent</item>
                                             <item name="displayArea" xsi:type="string">place-order-information-left</item>
                                             <item name="children" xsi:type="array">
-                                                <item name="discount" xsi:type="array">
-                                                    <item name="component" xsi:type="string">Mageplaza_Osc/js/view/payment/discount</item>
-                                                    <item name="config" xsi:type="array">
-                                                        <item name="componentDisabled" xsi:type="helper" helper="Mageplaza\Osc\Helper\Data::disabledReviewCoupon"/>
-                                                    </item>
-                                                    <item name="children" xsi:type="array">
-                                                        <item name="errors" xsi:type="array">
-                                                            <item name="sortOrder" xsi:type="string">0</item>
-                                                            <item name="component" xsi:type="string">Magento_SalesRule/js/view/payment/discount-messages</item>
-                                                            <item name="displayArea" xsi:type="string">messages</item>
-                                                        </item>
-                                                    </item>
-                                                </item>
                                                 <item name="addition-information" xsi:type="array">
                                                     <item name="component" xsi:type="string">Mageplaza_Osc/js/view/review/addition</item>
                                                     <item name="sortOrder" xsi:type="string">20</item>

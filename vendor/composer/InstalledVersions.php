@@ -3845,6 +3845,24 @@ private static $installed = array (
       ),
       'reference' => '6ad81500d33f085ca2391f2b59e37bd34203b29b',
     ),
+    'magepow/core' => 
+    array (
+      'pretty_version' => '1.0.3',
+      'version' => '1.0.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'c722af0e9c3298a4c152d68b91f4234a75a7007b',
+    ),
+    'magepow/stickycart' => 
+    array (
+      'pretty_version' => '1.0.3',
+      'version' => '1.0.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'e634276773fdf1456c56774320346fdb0c666ae3',
+    ),
     'monolog/monolog' => 
     array (
       'pretty_version' => '1.26.1',

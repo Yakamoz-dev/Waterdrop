@@ -482,9 +482,11 @@ return array(
     '3109cb1a231dcd04bee1f9f620d46975' => $vendorDir . '/paragonie/sodium_compat/autoload.php',
     'aa75ea0761a2f40c1f3b32ad314f86c4' => $vendorDir . '/phpseclib/mcrypt_compat/lib/mcrypt.php',
     '6afbb3ece6b14bcedd88522ddc6978f5' => $vendorDir . '/stripe/module-payments/registration.php',
+    '5321be4b24783f90df25151b1242eef9' => $vendorDir . '/magepow/core/registration.php',
     '79b3724166c1e73e36c45f44df1c4e1a' => $vendorDir . '/nordcomputer/showoutofstockprice/registration.php',
     'dc4b4418d0c68b7ed636761dce59ad35' => $vendorDir . '/olegkoval/magento2-regenerate-url-rewrites/registration.php',
     'e3374b74f4d3a702a6980fab2d4c0d68' => $vendorDir . '/sparsh/buy-now-magento-2-extension/registration.php',
     'da400493fb2af189f474a289bdfdd8d4' => $vendorDir . '/sparsh/magento-2-facebook-pixel-extension/registration.php',
+    'f9345205bcd43206b98e59c7597cc3c9' => $vendorDir . '/magepow/stickycart/registration.php',
     'b4cf39431a4b949eea8aa69ebb3d39da' => $baseDir . '/app/etc/NonComposerComponentRegistration.php',
 );

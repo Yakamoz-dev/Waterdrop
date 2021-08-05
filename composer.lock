@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ee34b4f0e2c722c744720485001399b4",
+    "content-hash": "9f38d262e5e02532f378b6c584cae760",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -17002,6 +17002,95 @@
                 "source": "https://github.com/magento/zf1/tree/1.14.5"
             },
             "time": "2020-12-02T21:12:59+00:00"
+        },
+        {
+            "name": "magepow/core",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/magepow/magento-2-core.git",
+                "reference": "c722af0e9c3298a4c152d68b91f4234a75a7007b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/magepow/magento-2-core/zipball/c722af0e9c3298a4c152d68b91f4234a75a7007b",
+                "reference": "c722af0e9c3298a4c152d68b91f4234a75a7007b",
+                "shasum": ""
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Magepow\\Core\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Magepow",
+                    "email": "support@magepow.com",
+                    "homepage": "https://magepow.com",
+                    "role": "Technical Support"
+                }
+            ],
+            "description": "Magepow Core for Magento 2.",
+            "support": {
+                "issues": "https://github.com/magepow/magento-2-core/issues",
+                "source": "https://github.com/magepow/magento-2-core/tree/1.0.3"
+            },
+            "time": "2021-06-04T04:33:41+00:00"
+        },
+        {
+            "name": "magepow/stickycart",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/magepow/magento-2-sticky-cart.git",
+                "reference": "e634276773fdf1456c56774320346fdb0c666ae3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/magepow/magento-2-sticky-cart/zipball/e634276773fdf1456c56774320346fdb0c666ae3",
+                "reference": "e634276773fdf1456c56774320346fdb0c666ae3",
+                "shasum": ""
+            },
+            "require": {
+                "magepow/core": "^1.0.0"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Magepow\\Stickycart\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Magepow",
+                    "email": "support@magepow.com",
+                    "homepage": "https://www.magepow.com",
+                    "role": "Technical Support"
+                }
+            ],
+            "description": "Magepow Sticky Cart",
+            "support": {
+                "issues": "https://github.com/magepow/magento-2-sticky-cart/issues",
+                "source": "https://github.com/magepow/magento-2-sticky-cart/tree/1.0.3"
+            },
+            "time": "2021-05-14T11:12:37+00:00"
         },
         {
             "name": "monolog/monolog",

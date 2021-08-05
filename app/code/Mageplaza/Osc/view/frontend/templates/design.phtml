@@ -48,7 +48,7 @@ $placeOrder = '#' . trim($design['place_order_button'], '#');
     .popup-authentication button.action,
     .popup-gift-message-item button.action,
     .checkout-container button:not(.primary):not(.action-show):not(.action-close):not(.edit-address-link):not(.ui-datepicker-trigger) {
-        background-color: <?= $headingBackground ?> !important;
+        background-color: #155DA4 !important;
         border-color: <?= $headingBackground ?> !important;
         box-shadow: none !important;
         color: #FFFFFF !important;
@@ -61,18 +61,23 @@ $placeOrder = '#' . trim($design['place_order_button'], '#');
     .step-title {
         background-color: <?= $headingBackground ?>;
         padding: 12px 10px 12px 12px !important;
-        font-weight: bold !important;
+        font-weight: 600 !important;
         font-size: 16px !important;
+        line-height: 19px !important;
         color: <?= $headingText ?> !important;
-        text-transform: uppercase;
-        line-height: 1.1;
+        text-transform: none;
     }
 
     .step-title .fa {
-        display: inline-block !important;
+        display: none !important;
         font-size: 24px;
         margin-right: 12px;
         vertical-align: text-bottom;
+    }
+
+    .step-title span {
+        padding-bottom: 10px;
+        border-bottom: 2px solid #155DA4;
     }
 
     .one-step-checkout-container .osc-geolocation {

@@ -62,3 +62,37 @@ $_themeHelper = $this->helper('Codazon\ThemeOptions\Helper\Data');
         </div>
     </div>
 </div>
+
+<script>
+    require([ "jquery" ], function($){
+        $(document).ready(function(){
+            let mediaTop = $('.product.media').offset().top;
+            let mediaHeight = $('.product.media').height() - 52;
+            let mediaBottom = mediaTop + mediaHeight;
+            $(window).scroll(() => {
+                var width = $(window).width();
+                if(width > 1024) {
+                    if($(window).scrollTop() >= 200){
+                        let infoBottom = $('.product-info-main').offset().top + $('.product-info-main').height();
+                        if(mediaBottom <= infoBottom) {
+                            let scrollTop = $(window).scrollTop();
+                            let mediaTopAdjust = Math.max((scrollTop - mediaTop), 0);
+                            let newMediaBottom = mediaTop + mediaTopAdjust + mediaHeight;
+                            let bottomHeightDiff = infoBottom - mediaBottom;
+                            if(newMediaBottom <= infoBottom) {
+                                $('.product.media').css('top','0');
+                                $('.product.media').css('position', 'fixed');
+                            } else {
+                                $('.product.media').css('top', bottomHeightDiff + 'px');
+                                $('.product.media').css('position', 'relative');
+                            }
+                        }
+                    } else {
+                        $('.product.media').css('position', 'relative');
+                        $('.product.media').css('margin-top', "");
+                    }
+                }
+            });
+        });
+    });
+</script>

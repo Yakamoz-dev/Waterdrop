@@ -77,14 +77,14 @@ define([
             if (additionalValidators.validate()) {
                 //update payment method information if additional data was changed
                 this.selectPaymentMethod();
-                // setPaymentMethodAction(this.messageContainer).done(
-                //     function () {
+                setPaymentMethodAction(this.messageContainer).done(
+                    function () {
                         customerData.invalidate(['cart']);
                         $.mage.redirect(
                             window.checkoutConfig.payment.paypalExpress.redirectUrl[quote.paymentMethod().method]
                         );
-                    // }
-                // );
+                    }
+                );
 
                 return false;
             }

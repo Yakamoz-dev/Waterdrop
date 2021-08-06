@@ -42,10 +42,10 @@
 			.abs-transition();
 			&:hover{
 				.abs-cssall(@btn_hover_text, @btn_hover_border, @btn_hover_background);
-			}	
+			}
 		}
 		&.active{
-			> .switch{ 
+			> .switch{
 				.abs-cssall(@btn_hover_text, @btn_hover_border, @btn_hover_background);
 			}
 		}
@@ -61,7 +61,7 @@
 		}
 		.owl-carousel .owl-stage-outer .product-item{
 			margin-bottom:0;
-		}	
+		}
 		.block{ margin-bottom:0;}
 	}
 }
@@ -98,9 +98,9 @@
 					}
 				}
 				&.active{
-					> .switch{ 
+					> .switch{
 						background:transparent;
-						
+
 					}
 				}
 			}
@@ -131,7 +131,7 @@
 			vertical-align:top;
 			> .switch {
 				.lib-css(font, @f_h5);
-				text-transform:uppercase;
+				text-transform:none;
 				position:relative;
 				border-width:0;
 				//border-bottom-width:1px;
@@ -158,7 +158,7 @@
 				}
 			}
 			&.active{
-				> .switch{ 
+				> .switch{
 					font-weight:700;
 					//.lib-css(background, @tab-control__hover__background-color);
 					.abs-cssall(@main_tab_hover_text, @main_tab_hover_text, @main_tab_hover_background);
@@ -166,7 +166,7 @@
 					&:before{
 						.abs-transform(~'scale(1, 1)');
 					}
-					
+
 				}
 			}
 		}
@@ -183,9 +183,9 @@
 			}
 		}
 	}
-	
-	
-	
+
+
+
 	.tabs-list{
 		&.product.data.items{
 			min-height:400px;
@@ -227,16 +227,16 @@
 					}
 				}
 				&.active{
-					> .switch{ 
+					> .switch{
 						font-weight:700;
 						.abs-cssall(@main_tab_hover_text, @main_tab_hover_text, transparent);
 						&:hover{
-							
+
 						}
 					}
 				}
 			}
-		}		
+		}
 	}
 	.tabs-list-sty03{
 		&:extend(.tabs-list all);
@@ -254,7 +254,7 @@
 					.lib-css(font, @f_h3);
 					padding:15px 20px;
 					//line-height:25px;
-					height:50px;	
+					height:50px;
 				}
 			}
 			> .item.content{
@@ -278,13 +278,13 @@
 					.abs-borderradius(4px);
 					&:hover{
 						.abs-cssall(@main_hover_text_box, @btn_primary_background, @btn_primary_background);
-					}					
+					}
 				}
 				&.active{
-					> .switch{ 
+					> .switch{
 						.abs-cssall(@main_hover_text_box, @btn_primary_background, @btn_primary_background);
 						&:hover{
-							
+
 						}
 					}
 				}
@@ -296,7 +296,7 @@
 			}
 		}
 	}
-	
+
 }
 
 //RTL//
@@ -326,7 +326,7 @@ body.rtl-layout{
 //WestyleFashion
 .tabs-list-sty04{
 	.tabs-list {margin: 0 auto;padding-top: 70px;position: relative;}
-	input.tab-radio, 
+	input.tab-radio,
 	.tabs-list.product.data.items > .item.content {clear: both;padding-top: 10px;display: none;}
 	.data.item.title{/*float:left;display:block;float:left;padding:10px;*/cursor:pointer;text-decoration:none}
 
@@ -368,7 +368,7 @@ body.rtl-layout{
 				bottom:0;
 				.abs-transform(~'scale(0, 0)');
 				.abs-transition(~'all 300ms ease');
-			}	
+			}
 			&:hover{
 				.abs-cssall(@main_tab_hover_text, @main_tab_hover_text, @main_tab_hover_background);
 				//border-bottom-width:0px;
@@ -415,7 +415,7 @@ body.rtl-layout{
 /*Baby & Kids*/
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
 	.tabs-list-sty05{
-	
+
 	}
 	.nav-tabs.abs-dropdown{
 		padding: 0;
@@ -439,17 +439,17 @@ body.rtl-layout{
 				.abs-transition();
 				&:hover{
 					.abs-cssall(@main_hover_text_box, @btn_primary_background, @btn_primary_background);
-				}					
+				}
 			}
 			&.active{
-				> .switch{ 
+				> .switch{
 					.abs-cssall(@main_hover_text_box, @btn_primary_background, @btn_primary_background);
 					&:hover{
-						
+
 					}
 				}
 			}
-		}	
+		}
 	}
 	.product-style01{
 		.nav-tabs.abs-dropdown{
@@ -459,18 +459,18 @@ body.rtl-layout{
 					.abs-cssall(@main_tab_text, @main_tab_text, @main_tab_background);
 					&:hover{
 						.abs-cssall(@main_tab_hover_text, @main_tab_hover_text, @main_tab_hover_background);
-					}					
+					}
 				}
 				&.active{
-					> .switch{ 
+					> .switch{
 						font-weight: 700;
 						.abs-cssall(@main_tab_hover_text, @main_tab_hover_text, @main_tab_hover_background);
 						&:hover{
-							
+
 						}
 					}
 				}
-			}	
+			}
 		}
 		.product.data.items > .item.content{
 			padding-top: 0;
@@ -542,7 +542,7 @@ body.rtl-layout{
             right: auto
         }
     }
-    
+
 	.tabs-list-sty05 .product.data.items > .item.content{
 			padding-top:0;
 	}
@@ -552,7 +552,7 @@ body.rtl-layout{
 			top:0;
 			right: 0;
 			width: 200px;
-			left: 40%; 
+			left: 40%;
 			left: calc(~'50% - 100px');
 			-webkit-left: calc(~'50% - 100px');
 			-o-left: calc(~'50% - 100px');
@@ -564,7 +564,7 @@ body.rtl-layout{
 		}
 		ul.abs-dropdown{
 			width: 200px;
-			left: 40%; 
+			left: 40%;
 			left: calc(~'50% - 100px');
 			-webkit-left: calc(~'50% - 100px');
 			-o-left: calc(~'50% - 100px');

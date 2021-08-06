@@ -52,5 +52,19 @@
 
     <referenceBlock name="catalog.compare.sidebar" remove="true" />
     <referenceBlock name="wishlist_sidebar" remove="true" />
+
+    <referenceBlock name="product.info.details">
+        <block class="Magento\Catalog\Block\Product\View\Description" name="faq" template="Magento_Catalog::product/view/faq.phtml" group="detailed_info">
+            <arguments>
+                <argument name="at_call" xsi:type="string">faq</argument>
+                <argument name="at_code" xsi:type="string">faq</argument>
+                <argument name="css_class" xsi:type="string">faq</argument>
+                <argument name="at_label" xsi:type="string">faq</argument>
+                <argument name="add_attribute" xsi:type="string">itemprop="faq"</argument>
+                <argument name="title" translate="true" xsi:type="string">Q&amp;A</argument>
+                <argument name="sort_order" xsi:type="string">40</argument>
+            </arguments>
+        </block>
+    </referenceBlock>
     </body>
 </page>

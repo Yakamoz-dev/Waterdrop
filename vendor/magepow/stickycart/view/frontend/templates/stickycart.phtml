@@ -39,44 +39,46 @@ $imageUrl      = $_imageHelper->init($_product, 'product_base_image')
 <div class="stickyCart">
   <div class="stickyChild">
     <div class="contentHide">
+      <div class="clSticky">
+          <div class="imgBorder">
+              <div class="borderImg">
+                  <img class="stickyImg" src="<?php echo $imageUrl; ?>">
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="contentHide">
       <div class="clSticky" id="timerSticky">
         <div class="stickyProductName"><?php echo $block->escapeHtml($_product->getName()) ?></div>
       </div>
     </div>
     <div class="contentHide">
-      <div class="clSticky">
-        <div class="imgBorder">
-          <div class="borderImg">
-            <img class="stickyImg" src="<?php echo $imageUrl; ?>">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="contentHide">
       <div class="clSticky" id="parentQtySticky">
           <div class="quantity">
+            <div class="btn-plus">
+                <button  type="button" class="reduced items" onclick="var result = document.getElementById('qtySticky'); var qtySticky = result.value; if( !isNaN( qtySticky ) && qtySticky > 1 ) result.value--;return false;">
+                    <i class="fa fa-angle-down"></i>
+                </button>
+            </div>
             <input  name="qty"
-                    type="number" 
-                    min="1" 
-                    value="<?= $block->getProductDefaultQty() * 1 ?>"
+                    type="number"
+                    min="1"
+                    value="1"
                     title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
                     data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
                     id="qtySticky"
                     class="qty"
             >
             <div class="btn-plus">
-              <button  type="button" class="increase items" onclick="var result = document.getElementById('qtySticky'); var qtySticky = result.value; if( !isNaN( qtySticky )) result.value++;return false;">
-                <i class="fa fa-angle-up"></i>
-              </button>
-              <button  type="button" class="reduced items" onclick="var result = document.getElementById('qtySticky'); var qtySticky = result.value; if( !isNaN( qtySticky ) && qtySticky > 1 ) result.value--;return false;">
-                <i class="fa fa-angle-down"></i>
-              </button>  
+                <button  type="button" class="increase items" onclick="var result = document.getElementById('qtySticky'); var qtySticky = result.value; if( !isNaN( qtySticky )) result.value++;return false;">
+                    <i class="fa fa-angle-up"></i>
+                </button>
             </div>
           </div>
       </div>
     </div>
     <div class="contentShow">
-      <div class="clSticky">
+      <div class="clSticky" style="padding: 0;">
         <button id="btnSticky" class="action button" title="<?= $block->escapeHtmlAttr($buttonTitle) ?>"><span><?= $block->escapeHtml($buttonTitle) ?></span></button>
       </div>
     </div>

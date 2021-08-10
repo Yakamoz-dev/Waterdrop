@@ -1,14 +1,63 @@
 <?php /** @var \Sebwite\ProductDownloads\Block\Product\Downloads $block */ ?>
 <?php $downloads = $block->getDownloads(); ?>
 <?php if( count($downloads) > 0 ) : ?>
+<?php
+    $mediaUrl = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+?>
+<style>
+    .product-downloads.s-wysiwyg {
+        display: inline-block;
+        width: 159px;
+        height: 40px;
+        margin-left: 501px;
+        position: relative;
+        top: -36px;
+    }
+    .product-downloads-a {
+        color: #155DA4 !important;
+        text-decoration: unset !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        line-height: 16px;
+        width: 100%;
+        height: 100%;
+    }
+    .product-downloads-a:hover {
+        background: #F4FBFF;
+    }
+    .product-downloads-img {
+        width: 24px;
+        margin-right: 10px;
+    }
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .product-downloads.s-wysiwyg {
+            margin-left: 38vw;
+        }
+    }
+    @media (max-width: 767px) {
+        .product-downloads.s-wysiwyg {
+            width: 100%;
+            height: 48px;
+            margin-left: 0;
+            top: 0;
+            background: #F4FBFF;
+            margin-top: 20px;
+        }
+        .product-downloads-a {
+            font-size: 16px;
+            line-height: 19px;
+        }
+    }
+</style>
     <div class="product-downloads s-wysiwyg">
-        <ul>
-            <?php foreach($downloads as $download) : ?>
-                <li>
-                    <a href="<?php echo $block->getDownloadUrl($download); ?>" target="_blank"><?php echo $download['download_file']; ?></a>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+        <?php foreach($downloads as $download) : ?>
+            <a class="product-downloads-a" href="<?php echo $block->getDownloadUrl($download); ?>" target="_blank">
+                <img class="product-downloads-img" src="<?php echo $mediaUrl ?>manual.png" /><span>User Manual</span>
+            </a>
+        <?php break; ?>
+        <?php endforeach; ?>
     </div>
     <!-- .product-downloads -->
 <?php endif; ?>

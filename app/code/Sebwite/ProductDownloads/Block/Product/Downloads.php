@@ -23,6 +23,8 @@ class Downloads extends Template
      */
     private $coreRegistry;
 
+    public $_storeManager;
+
     /**
      * @param \Magento\Framework\View\Element\Template\Context $context
      * @param \Magento\Framework\Registry                      $coreRegistry
@@ -32,6 +34,7 @@ class Downloads extends Template
     {
         $this->download = $download;
         $this->coreRegistry = $coreRegistry;
+        $this->_storeManager = $context->getStoreManager();
 
         parent::__construct($context);
 

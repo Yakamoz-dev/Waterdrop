@@ -862,14 +862,13 @@
 
 .mg-product-block-QA-content {
     border-top: 1px solid #E1E1E1;
-    cursor: pointer;
 }
 
-.mg-product-block-QA-content:hover .mg-product-block-QA-question .mg-product-block-QA-text {
+.mg-product-block-QA-question:hover .mg-product-block-QA-text {
     color: #155DA4;
 }
 
-.mg-product-block-QA-content:hover .mg-product-block-QA-question .mg-product-block-QA-icon svg path {
+.mg-product-block-QA-question:hover .mg-product-block-QA-icon svg path {
     fill: #155DA4;
 }
 
@@ -881,6 +880,7 @@
     display: grid;
     grid-template-columns: 95% 5%;
     padding: 20px 0;
+    cursor: pointer;
 }
 
 .mg-product-block-QA-question .mg-product-block-QA-text {

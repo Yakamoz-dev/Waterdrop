@@ -20,56 +20,232 @@
  */
 -->
 
-<td class="a-left product">
+<style>
+        .custom-style-cart-button-remove {
+        display: none;
+    }
+    .product-item {
+        display: grid;
+        grid-template-columns: 30% 45% 25%;
+        justify-items: flex-start;
+    }
+    .opc-block-summary .product-item .subtotal {
+        justify-self: end;
+    }
+    .product-item-name {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        overflow: hidden;
+    }
+    .item-options {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        color: #666666;
+    }
+    .item-options .label {
+        display: inline-block;
+    }
+    .item-options .values {
+        display: inline-block;
+    }
+    .qty-wrapper .qty-wrap {
+        display: inline-block;
+        width: 100%;
+        height: 20px;
+        line-height: 18px;
+        vertical-align: top;
+        position: relative;
+        text-align: left;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        color: #666666;
+    }
+    .qty-wrapper {
+        padding: 0;
+        padding-top: 5px;
+    }
+    .custom-style-label {
+        padding-top: 5px;
+    }
+    .opc-block-summary .product-item .price {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        color: #333333;
+    }
+    .order-summary .opc-block-summary table.data.table.table-totals {
+        background: #ffffff;
+        border: none;
+        border-top: 1px solid #dbdbdb;
+    }
+    .opc-block-summary .table-totals tbody .mark, .opc-block-summary .table-totals tfoot .mark {
+        text-align: left;
+        padding-left: 20px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        color: #333333;
+    }
+    .opc-block-summary .table-totals tbody .amount, .opc-block-summary .table-totals tfoot .amount {
+        width: 100px;
+    }
+    .table-totals .price {
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 16px;
+        color: #333333;
+    }
+    #opc-sidebar > div.order-summary.hoverable > div.opc-block-summary.step-content > table > tbody > tr.grand.totals.aaa > td > strong {      
+        position: relative;
+        top: -6px;
+    }
+    #opc-sidebar > div.order-summary.hoverable > div.opc-block-summary.step-content > table > tbody > tr.grand.totals.aaa > td > strong > span{
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 21px;
+        color: #333333;
+    }
+    #opc-sidebar > div.order-summary.hoverable > div.opc-block-summary.step-content > table > tbody > tr.totals.sub.bbb > th, #opc-sidebar > div.order-summary.hoverable > div.opc-block-summary.step-content > table > tbody > tr.totals.sub.bbb > td {
+        padding-top:10px;
+    }
+    #co-place-order-area {
+        background: #ffffff;
+    }
+    .osc-place-order-wrapper button.action.primary.checkout {
+        height: 48px;
+    }
+    .osc-place-order-wrapper button.action.primary.checkout span {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+        color: #FFFFFF;
+    }
+    .minicart-items {
+        display: block !important;
+    }
+    .opc-block-summary .items-in-cart>.title:after {
+        display: none;
+    }
+    .opc-block-summary .items-in-cart>.title {
+        cursor: unset;
+    }
+    .stripe-icon-container.right {
+        margin-left: 20px;
+    }
+    .checkout-payment-method .payment-method-content {
+        padding: 0px 0px 20px 29px;
+    }
+    @media screen and ( max-width: 768px ) {
+        #checkoutSteps {
+            grid-template-columns: repeat(1, 1fr);
+        }
+        .custom-checkout-style {
+            margin-bottom: 20px;
+        }
+        .custom-checkout-style-3 {
+            margin-top: 20px;
+        }
+    }
+    @media screen and ( max-width: 428px ) {
+        #checkout > div.opc-estimated-wrapper {
+            display: none;
+        }
+        .col-mp {
+            padding: 0;
+        }
+        .step-title {
+            padding: 12px 10px 12px 20px !important;
+        }
+        .fieldset > .field {
+            margin: 0 0 16px;
+        }
+        .opc-wrapper .form-login, .opc-wrapper .form-shipping-address, .opc-wrapper .methods-shipping {
+            padding: 0px 15px;
+        }
+        .opc-wrapper .step-content {
+            margin: 0;
+        }
+        .opc-wrapper .step-title {
+            border-bottom: 1px solid #dbdbdb !important;
+        }
+        #co-shipping-method-form {
+            margin-top: 0;
+            padding: 0 20px;
+            margin-bottom: 0;
+        }
+        .custom-style-shoppin-method {
+            padding: 15px 20px;
+        }
+        .checkout-payment-method .payment-method-title {
+            border-top: none;
+        }
+        .stripe-elements-field {
+            padding: 5px 10px;
+        }
+        .checkout-payment-method .payment-method-content {
+            padding: 0 40px 20px;
+        }
+        .stripe-icon-container.right {
+            float: unset;
+            display: block;
+            margin-top: 6px;
+            margin-left: 21px;
+        }
+        .checkout-payment-method .payment-method-content .fieldset:not(:last-child) {
+            margin: 0;
+        }
+        .osc-place-order-block {
+            display: block;
+            float: none;
+            border: none;
+            padding: 20px !important;
+            background: #fff;
+            padding-top: 3px !important;
+        }
+        #checkout-step-payment {
+            padding-bottom: 0;
+        }
+        #checkout-review-table {
+            border: none;
+        }
+        .actions-toolbar {
+            padding: 0px 16px !important;
+        }
+        .opc-payment .payment-method-content .checkout-agreements-block {
+            padding-top: 0;
+            margin-bottom: 0;
+        }
+        #discount-code {
+            height: 40px;
+        }
+        .actions-toolbar {
+            padding: 0;
+        }
+        .actions-toolbar>.primary {
+            margin-left: 0px; 
+            margin-right: 0px;
+        }
+        #discount-form>div.actions-toolbar>div>button {
+            padding: 7px 25px;
+        }
+        #discount-form > div.actions-toolbar {
+            padding: 0 !important;
+        }
+    }
+</style>
+
+<div class="a-left product">
     <!-- ko foreach: getRegion('before_details') -->
     <!-- ko template: getTemplate() --><!-- /ko -->
     <!-- /ko -->
-
-    <div class="product-item-detail">
-        <div class="product-item-inner">
-            <div class="product-item-name-block">
-                <!-- ko if: getProductUrl($parent) -->
-                <a data-bind="attr:{href: getProductUrl($parent)}" target="_blank">
-                    <strong class="product-item-name" data-bind="text: $parent.name"></strong>
-                </a>
-                <!-- /ko -->
-                <!-- ko ifnot: getProductUrl($parent)-->
-                <strong class="product-item-name" data-bind="text: $parent.name"></strong>
-                <!-- /ko -->
-            </div>
-        </div>
-        <!-- ko if: (JSON.parse($parent.options).length > 0)-->
-        <div class="product options" data-bind="mageInit: {'collapsible':{'openedState': 'active'}}">
-            <span data-role="title" class="toggle"><!-- ko i18n: 'View Details' --><!-- /ko --></span>
-            <div data-role="content" class="content">
-                <strong class="subtitle"><!-- ko i18n: 'Options Details' --><!-- /ko --></strong>
-                <dl class="item-options">
-                    <!--ko foreach: JSON.parse($parent.options)-->
-                    <dt class="label" data-bind="text: label"></dt>
-                    <!-- ko if: ($data.full_view)-->
-                    <dd class="values" data-bind="html: full_view"></dd>
-                    <!-- /ko -->
-                    <!-- ko ifnot: ($data.full_view)-->
-                    <dd class="values" data-bind="html: value"></dd>
-                    <!-- /ko -->
-                    <!-- /ko -->
-                </dl>
-            </div>
-        </div>
-        <!-- /ko -->
-        <!-- ko if: getConfigurableOptions($parent).length || getCustomOptions($parent).length -->
-        <div data-bind="attr: {id: 'mposc-product-modal-' + $parent.item_id}">
-            <div class="message message-error error" style="display: none"><span></span></div>
-            <form enctype="multipart/form-data" method="post"
-                  data-bind="attr: {'data-mposc-item-id': $parent.item_id}, afterRender: function(element) {setProductModal(element, $parent)}">
-                <div class="item-options" data-bind="html: getConfigurableOptions($parent)"></div>
-                <div class="item-options" data-bind="html: getCustomOptions($parent)"></div>
-            </form>
-        </div>
-        <!-- ko text: initOptions($parent) --><!-- /ko -->
-        <!-- /ko -->
-    </div>
-
     <!-- ko if: isItemAvailable($parent.item_id) -->
     <div class="gift-message-item-content">
         <div class="gift-message-item"
@@ -149,27 +325,81 @@
     <!-- ko foreach: getRegion('after_item_details') -->
     <!-- ko template: getTemplate() --><!-- /ko -->
     <!-- /ko -->
-</td>
-<td class="a-center details-qty">
-    <div class="qty-wrapper">
-        <a class="button-action minus" data-bind="click: minusQty" title="Minus">
-            <i class="fa fa-minus"></i>
-        </a>
-        <div class="qty-wrap">
-            <input class="item_qty input-text update value" name="item_qty"
-                   data-bind="value: getProductQty($parent.item_id), attr: {id: $parent.item_id}, event: {change: changeQty}"/>
+</div>
+
+<div class="product-item-detail">
+    <div class="product-item-inner">
+        <div class="product-item-name-block">
+            <!-- ko if: getProductUrl($parent) -->
+            <a data-bind="attr:{href: getProductUrl($parent)}" target="_blank">
+                <strong class="product-item-name" data-bind="text: $parent.name"></strong>
+            </a>
+            <!-- /ko -->
+            <!-- ko ifnot: getProductUrl($parent)-->
+            <strong class="product-item-name" data-bind="text: $parent.name"></strong>
+            <!-- /ko -->
         </div>
-        <a class="button-action plus" data-bind="click: plusQty" title="Plus">
-            <i class="fa fa-plus"></i>
-        </a>
     </div>
-</td>
-<td class="a-center subtotal">
+    <!-- ko if: (JSON.parse($parent.options).length > 0)-->
+    <div class="product options" data-bind="mageInit: {'collapsible':{'openedState': 'active'}}">
+        <span data-role="title" class="toggle"><!-- ko i18n: 'View Details' --><!-- /ko --></span>
+        <div data-role="content" class="content">
+            <strong class="subtitle"><!-- ko i18n: 'Options Details' --><!-- /ko --></strong>
+            <div class="item-options">
+                
+                    <!--ko foreach: JSON.parse($parent.options)-->
+                    <div class="custom-style-label">
+                        <div class="label" data-bind="text: label"></div>
+                        <!-- ko if: ($data.full_view)-->
+                        <div class="values" data-bind="html: full_view"></div>
+                        <!-- /ko -->
+                        <!-- ko ifnot: ($data.full_view)-->
+                        <div class="values" data-bind="html: value"></div>
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: getConfigurableOptions($parent).length || getCustomOptions($parent).length -->
+    <div data-bind="attr: {id: 'mposc-product-modal-' + $parent.item_id}">
+        <div class="message message-error error" style="display: none"><span></span></div>
+        <form enctype="multipart/form-data" method="post"
+              data-bind="attr: {'data-mposc-item-id': $parent.item_id}, afterRender: function(element) {setProductModal(element, $parent)}">
+            <div class="item-options" data-bind="html: getConfigurableOptions($parent)"></div>
+            <div class="item-options" data-bind="html: getCustomOptions($parent)"></div>
+        </form>
+    </div>
+    <!-- ko text: initOptions($parent) --><!-- /ko -->
+    <!-- /ko -->
+    
+    <div class="a-center details-qty">
+        <div class="qty-wrapper">
+            <!-- <a class="button-action minus" data-bind="click: minusQty" title="Minus">
+                <i class="fa fa-minus"></i>
+            </a> -->
+            <div class="qty-wrap">
+                <span>Quantity</span>
+                <span  data-bind="html: getProductQty($parent.item_id), attr: {id: $parent.item_id}"></span>
+                <input class="item_qty input-text update value" name="item_qty"  data-bind="value: getProductQty($parent.item_id), attr: {id: $parent.item_id}, event: {change: changeQty}" style="display: none;"/>
+            </div>
+            <!-- <a class="button-action plus" data-bind="click: plusQty" title="Plus">
+                <i class="fa fa-plus"></i>
+            </a> -->
+        </div>
+    </div>
+
+</div>
+
+<div class="a-center subtotal">
     <!-- ko foreach: getRegion('after_details') -->
     <!-- ko template: getTemplate() --><!-- /ko -->
     <!-- /ko -->
-</td>
-<td class="a-center last button-remove">
+</div>
+
+<div class="a-center last button-remove custom-style-cart-button-remove">
     <div class="remove-wrapper">
         <a class="button-action edit"
            data-bind="click: function(data, event) { showProductModal($parent, data, event) },
@@ -180,4 +410,4 @@
             <i class="fa fa-times"></i>
         </a>
     </div>
-</td>
+</div>

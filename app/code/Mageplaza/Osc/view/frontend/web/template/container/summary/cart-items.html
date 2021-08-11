@@ -19,6 +19,17 @@
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
 -->
+<style>
+        .custom-style-cart-title {
+        display: none;
+    }
+    /* .opc-block-summary .items-in-cart.active>.title:after {
+        display: none !important;
+    }
+    .opc-block-summary .items-in-cart>.title:after {
+        display: none !important;
+    } */
+</style>
 
 <div class="block items-in-cart" data-bind="click: toggleCart, mageInit: {'collapsible':{'openedState': 'active', 'active': isCartExpanded()}}">
     <div class="title" data-role="title" data-bind="visible: window.checkoutConfig.oscConfig.isShowItemListToggle">
@@ -34,31 +45,31 @@
     </div>
     <div class="content minicart-items" data-role="content">
         <div class="minicart-items-wrapper overflowed">
-            <table id="checkout-review-table" class="data-table">
+            <div id="checkout-review-table" class="data-table">
                 <colgroup>
                     <col>
                     <col width="1">
                     <col width="1">
                     <col width="1">
                 </colgroup>
-                <thead>
-                    <tr>
-                        <th class="a-center" data-bind="i18n: 'Product Name'"></th>
-                        <th class="a-center" data-bind="i18n: 'Qty'"></th>
-                        <th class="a-center" data-bind="i18n: 'Subtotal'"></th>
-                        <th class="a-center"></th>
-                    </tr>
-                </thead>
-                <tbody>
+                <div class="custom-style-cart-title">
+                    <div>
+                        <div class="a-center" data-bind="i18n: 'Product Name'"></div>
+                        <div class="a-center" data-bind="i18n: 'Qty'"></div>
+                        <div class="a-center" data-bind="i18n: 'Subtotal'"></div>
+                        <div class="a-center"></div>
+                    </div>
+                </div>
+                <div>
                     <!-- ko foreach: getItems() -->
-                    <tr class="product-item">
+                    <div class="product-item">
                         <!-- ko foreach: $parent.elems() -->
                             <!-- ko template: getTemplate() --><!-- /ko -->
                         <!-- /ko -->
-                    </tr>
+                    </div>
                     <!-- /ko -->
-                </tbody>
-            </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>

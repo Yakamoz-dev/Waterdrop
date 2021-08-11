@@ -168,13 +168,25 @@
                 }
                 .modal-inner-wrap {
                     height: auto;
-                    min-height: 100%;
                 }
             }
         }
         .modal-title {
             .lib-css(font-size, @modal-popup-title-mobile__font-size);
             .lib-css(font-weight, @font-weight__bold);
+        }
+    }
+}
+
+// Mobile
+@media (max-width: 767px){
+    .modal-popup {
+        &.modal-slide {
+            &._inner-scroll {
+                .modal-inner-wrap {
+                    height: 100% !important;
+                }
+            }
         }
     }
 }

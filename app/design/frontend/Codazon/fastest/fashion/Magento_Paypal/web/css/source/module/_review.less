@@ -17,6 +17,8 @@
                 .action {
                     &.primary {
                         &:extend(.abs-revert-secondary-color all);
+                        border-radius: 4px;
+                        margin: 8px 0;
                     }
                 }
             }
@@ -49,6 +51,7 @@
                 }
                 &.qty {
                     text-align: center;
+                    padding: 27px 22px 10px !important;
                 }
             }
 
@@ -82,6 +85,17 @@
     }
 }
 
+// Tablet
+@media (max-width: 768px) {
+    .order-review-form {
+        .actions-toolbar {
+            .primary {
+                float: right !important;
+            }
+        }
+    }
+}
+
 //
 //  Mobile
 //  _____________________________________________
@@ -95,6 +109,35 @@
         }
         .product-item-name {
             display: inline-block;
+        }
+    }
+    .paypal-review {
+        .actions-toolbar {
+            > .primary {
+                margin: 0 !important;
+            }
+        }
+        .table-paypal-review-items {
+            .col {
+                &.qty {
+                    position: relative;
+                    top: -20px;
+                }
+            }
+        }
+        .table tfoot > tr:first-child th, .table tfoot > tr:first-child td {
+            border-top: none !important;
+        }
+    }
+    .paypal-express-review {
+        .page-title {
+            margin: 20px 8px !important;
+        }
+        input[type="text"], input[type="password"], input[type="url"], input[type="tel"], input[type="search"], input[type="number"], input[type="datetime"], input[type="email"] {
+            height: 40px !important;
+        }
+        .columns {
+            margin-bottom: 8px !important;
         }
     }
 }

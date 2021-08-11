@@ -34,10 +34,10 @@
                 type="button"
                 data-bind="
                 click: placeOrder,
-                attr: {'title': $t('Place Order')},
+                attr: {'title': $t('Proceed to Checkout')},
                 css: {disabled: !isPlaceOrderActionAllowed()}
                 ">
-            <span data-bind="i18n: 'Place Order'"></span>
+            <span data-bind="i18n: 'Proceed to Checkout'"></span>
         </button>
     </div>
 </div>
@@ -55,10 +55,10 @@
                 data-bind="
                 visible: braintreePaypalModel.isReviewRequired(),
                 click: brainTreePaypalPlaceOrder,
-                attr: {'title': $t('Place Order')},
+                attr: {'title': $t('Proceed to Checkout')},
                 enable: (getBraintreePaypalComponent().isActive())
                 ">
-            <span data-bind="i18n: 'Place Order'"></span>
+            <span data-bind="i18n: 'Proceed to Checkout'"></span>
         </button>
         <button class="action primary checkout"
                 type="button"

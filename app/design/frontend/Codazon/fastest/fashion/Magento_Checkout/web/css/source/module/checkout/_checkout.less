@@ -57,7 +57,7 @@
         .opc {
             &:extend(.abs-reset-list all);
 			.abs-block();
-            padding: 20px 0;
+            padding: 0;
         }
 
         .step-title {
@@ -161,6 +161,9 @@
             .lib-css(margin, 0 0 @checkout-step-content-mobile__margin-s);
         }
     }
+    .checkout-container {
+        margin: 0;
+    }
 }
 
 //
@@ -208,12 +211,18 @@
     box-shadow: unset;
 }
 #checkoutSteps input  {
-    border-radius: 4px !important; 
+    border-radius: 4px !important;
     border: 1px solid #E1E1E1 !important;
 }
+#checkoutSteps {
+    input[type="text"], input[type="password"], input[type="url"], input[type="tel"], input[type="search"], input[type="number"], input[type="datetime"], input[type="email"] {
+        height: 40px;
+    }
+}
 #checkoutSteps select  {
-    border-radius: 4px !important; 
+    border-radius: 4px !important;
     border: 1px solid #E1E1E1 !important;
+    height: 40px;
 }
 .custom-checkout-style {
     width: 100%;
@@ -323,7 +332,7 @@
 }
 .stripe-elements-field {
     padding: 5px 10px;
-} 
+}
 .pf-credit-card:before {
     content: "\f012";
     position: absolute;
@@ -377,4 +386,26 @@
     line-height: 16px;
     color: #333333;
     margin-bottom: 8px;
+}
+// Mobile
+@media (max-width: 767px) {
+    #checkoutSteps > div:nth-child(2) > div > div:nth-child(1) {
+        margin-bottom: 8px;
+    }
+    .opc-wrapper {
+        margin: 0;
+        .opc {
+            margin-bottom: 0;
+        }
+    }
+    #checkout-step-shipping {
+        padding: 0;
+    }
+    .row-mp {
+        margin: 0 !important;
+    }
+
+    .onestepcheckout-index-index .field.choice {
+        padding-bottom: 16px;
+    }
 }

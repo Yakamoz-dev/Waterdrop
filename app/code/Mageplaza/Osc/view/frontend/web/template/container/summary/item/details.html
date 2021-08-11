@@ -73,10 +73,11 @@
     }
     .opc-block-summary .product-item .price {
         font-style: normal;
-        font-weight: 600;
+        font-weight: normal;
         font-size: 16px;
         line-height: 19px;
         color: #333333;
+        font-family: 'roboto-medium';
     }
     .order-summary .opc-block-summary table.data.table.table-totals {
         background: #ffffff;
@@ -96,21 +97,23 @@
         width: 100px;
     }
     .table-totals .price {
-        font-weight: 600;
+        font-weight: normal;
         font-size: 14px;
         line-height: 16px;
         color: #333333;
+        font-family: 'roboto-medium';
     }
-    #opc-sidebar > div.order-summary.hoverable > div.opc-block-summary.step-content > table > tbody > tr.grand.totals.aaa > td > strong {      
+    #opc-sidebar > div.order-summary.hoverable > div.opc-block-summary.step-content > table > tbody > tr.grand.totals.aaa > td > strong {
         position: relative;
         top: -6px;
     }
     #opc-sidebar > div.order-summary.hoverable > div.opc-block-summary.step-content > table > tbody > tr.grand.totals.aaa > td > strong > span{
         font-style: normal;
-        font-weight: 600;
+        font-weight: normal;
         font-size: 18px;
         line-height: 21px;
         color: #333333;
+        font-family: 'roboto-medium';
     }
     #opc-sidebar > div.order-summary.hoverable > div.opc-block-summary.step-content > table > tbody > tr.totals.sub.bbb > th, #opc-sidebar > div.order-summary.hoverable > div.opc-block-summary.step-content > table > tbody > tr.totals.sub.bbb > td {
         padding-top:10px;
@@ -141,7 +144,11 @@
         margin-left: 20px;
     }
     .checkout-payment-method .payment-method-content {
-        padding: 0px 0px 20px 29px;
+        padding: 0 0 20px 29px;
+    }
+    .block-authentication .actions-toolbar > .secondary {
+        padding-top: 0;
+        margin-top: 0;
     }
     @media screen and ( max-width: 768px ) {
         #checkoutSteps {
@@ -160,9 +167,6 @@
         }
         .col-mp {
             padding: 0;
-        }
-        .step-title {
-            padding: 12px 10px 12px 20px !important;
         }
         .fieldset > .field {
             margin: 0 0 16px;
@@ -209,6 +213,7 @@
             padding: 20px !important;
             background: #fff;
             padding-top: 3px !important;
+            margin-bottom: 8px;
         }
         #checkout-step-payment {
             padding-bottom: 0;
@@ -217,7 +222,7 @@
             border: none;
         }
         .actions-toolbar {
-            padding: 0px 16px !important;
+            padding: 0;
         }
         .opc-payment .payment-method-content .checkout-agreements-block {
             padding-top: 0;
@@ -226,18 +231,24 @@
         #discount-code {
             height: 40px;
         }
-        .actions-toolbar {
+        .block-customer-login .actions-toolbar {
             padding: 0;
         }
         .actions-toolbar>.primary {
-            margin-left: 0px; 
-            margin-right: 0px;
+            margin-left: 0;
+            margin-right: 0;
         }
         #discount-form>div.actions-toolbar>div>button {
             padding: 7px 25px;
         }
         #discount-form > div.actions-toolbar {
             padding: 0 !important;
+        }
+        .custom-checkout-style {
+            margin-bottom: 8px;
+        }
+        .custom-checkout-style-3 {
+            margin-top: 8px;
         }
     }
 </style>
@@ -346,10 +357,10 @@
         <div data-role="content" class="content">
             <strong class="subtitle"><!-- ko i18n: 'Options Details' --><!-- /ko --></strong>
             <div class="item-options">
-                
+
                     <!--ko foreach: JSON.parse($parent.options)-->
                     <div class="custom-style-label">
-                        <div class="label" data-bind="text: label"></div>
+                        <div class="label" data-bind="text: label"></div>:
                         <!-- ko if: ($data.full_view)-->
                         <div class="values" data-bind="html: full_view"></div>
                         <!-- /ko -->
@@ -358,7 +369,7 @@
                         <!-- /ko -->
                     </div>
                     <!-- /ko -->
-                
+
             </div>
         </div>
     </div>
@@ -374,14 +385,14 @@
     </div>
     <!-- ko text: initOptions($parent) --><!-- /ko -->
     <!-- /ko -->
-    
+
     <div class="a-center details-qty">
         <div class="qty-wrapper">
             <!-- <a class="button-action minus" data-bind="click: minusQty" title="Minus">
                 <i class="fa fa-minus"></i>
             </a> -->
             <div class="qty-wrap">
-                <span>Quantity</span>
+                <span>Quantity:</span>
                 <span  data-bind="html: getProductQty($parent.item_id), attr: {id: $parent.item_id}"></span>
                 <input class="item_qty input-text update value" name="item_qty"  data-bind="value: getProductQty($parent.item_id), attr: {id: $parent.item_id}, event: {change: changeQty}" style="display: none;"/>
             </div>

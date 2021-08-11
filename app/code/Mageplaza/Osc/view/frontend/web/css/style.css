@@ -84,11 +84,18 @@
 /**************************************************** Authetication area ****************************************************/
 .osc-authentication-wrapper {
     padding-left: 10px;
+    padding-right: 10px;
     text-align: right;
     position: relative;
     top: -55px;
     font-size: 16px;
     line-height: 19px;
+}
+
+@media (max-width: 767px){
+    .osc-authentication-wrapper {
+        top: -46px;
+    }
 }
 
 .osc-authentication-toggle {
@@ -118,12 +125,20 @@
     padding-bottom: 0 !important;
 }
 
-.one-step-checkout-wrapper #customer-email-fieldset.fieldset > .field {
-    margin: 0 !important;
+@media screen and (min-width: 768px) {
+    .one-step-checkout-wrapper #customer-email-fieldset.fieldset > .field {
+        margin: 0 !important;
+    }
 }
 
 fieldset.field.col-mp {
     padding: 0 10px !important;
+}
+
+@media (max-width: 767px){
+    fieldset.field.col-mp {
+        padding: 0 !important;
+    }
 }
 
 .opc-wrapper .shipping-address-items {
@@ -438,6 +453,10 @@ fieldset.field.col-mp {
 
 .one-step-checkout-wrapper .mp-4 #co-place-order-area .osc-addition-content-wrapper,  .one-step-checkout-wrapper .mp-4 #co-place-order-area .osc-place-order-wrapper{
     width: 100%;
+}
+
+.one-step-checkout-wrapper .mp-4 #co-place-order-area .osc-place-order-wrapper {
+    padding: 0 20px;
 }
 
 #order-summary-fieldset .fieldset.address .field{

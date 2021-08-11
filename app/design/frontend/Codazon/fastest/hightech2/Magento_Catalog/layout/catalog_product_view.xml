@@ -63,7 +63,7 @@
                 <argument name="css_class" xsi:type="string">faq</argument>
                 <argument name="at_label" xsi:type="string">faq</argument>
                 <argument name="add_attribute" xsi:type="string">itemprop="faq"</argument>
-                <argument name="title" translate="true" xsi:type="string">Q&amp;A</argument>
+                <argument name="title" translate="true" xsi:type="string">Q&amp;As</argument>
                 <argument name="sort_order" xsi:type="string">40</argument>
             </arguments>
         </block>

@@ -208,7 +208,10 @@
     grid-column-gap: 20px;
     background-color: unset;
     box-shadow: unset;
-    box-shadow: unset;
+    .field-error {
+        color: #e02b27;
+        margin-top: 7px;
+    }
 }
 #checkoutSteps input  {
     border-radius: 4px !important;
@@ -333,8 +336,7 @@
 .stripe-elements-field {
     padding: 5px 10px;
 }
-.pf-credit-card:before {
-    content: "\f012";
+.stripe-payments-elements .stripe-payments-brand .pf:before {
     position: absolute;
     top: 3px;
     left: 47px;

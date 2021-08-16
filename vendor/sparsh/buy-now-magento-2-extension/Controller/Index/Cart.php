@@ -15,7 +15,7 @@ class Cart extends \Magento\Wishlist\Controller\Index\Cart
      * @var \Magento\Wishlist\Model\Item\OptionFactory
      */
     private $optionFactory;
-    
+
     /**
      * @var \Sparsh\BuyNow\Helper\Data
      */
@@ -75,7 +75,7 @@ class Cart extends \Magento\Wishlist\Controller\Index\Cart
       *
       * @return \Magento\Framework\Controller\Result\Json|\Magento\Framework\Controller\Result\Redirect
       */
-    
+
     public function execute()
     {
         /** @var \Magento\Framework\Controller\Result\Redirect $resultRedirect */
@@ -123,12 +123,12 @@ class Cart extends \Magento\Wishlist\Controller\Index\Cart
                 'product_id' => $item->getProductId(),
             ]
         );
-      
+
         try {
             /** @var \Magento\Wishlist\Model\ResourceModel\Item\Option\Collection $options */
             $options = $this->optionFactory->create()->getCollection()->addItemFilter([$itemId]);
             $item->setOptions($options->getOptionsByItem($itemId));
-         
+
             $buyRequest = $this->productHelper->addParamsToBuyRequest(
                 $this->getRequest()->getParams(),
                 ['current_config' => $item->getBuyRequest()]
@@ -143,8 +143,8 @@ class Cart extends \Magento\Wishlist\Controller\Index\Cart
             $item->addToCart($this->cart, true);
             $this->cart->save()->getQuote()->collectTotals();
             $wishlist->save();
-          
-            $refererUrl = $this->_url->getUrl('checkout', ['_secure' => true]);
+
+            $refererUrl = $this->_url->getUrl('onestepcheckout', ['_secure' => true]);
             if ($refererUrl && $refererUrl != $configureUrl) {
                 $redirectUrl = $refererUrl;
             }
@@ -165,7 +165,7 @@ class Cart extends \Magento\Wishlist\Controller\Index\Cart
             $resultJson->setData(['backUrl' => $redirectUrl]);
             return $resultJson;
         }
-        
+
         $resultRedirect->setUrl($redirectUrl);
         return $resultRedirect;
     }

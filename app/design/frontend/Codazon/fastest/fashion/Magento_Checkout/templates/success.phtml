@@ -9,6 +9,21 @@
 ?>
 <?php /** @var $block \Magento\Checkout\Block\Onepage\Success */ ?>
 
+<!-- Event snippet for water-filter.com购买转化率 conversion page -->
+<script>
+    gtag('event', 'conversion', {
+        'send_to': 'AW-746876205/WsFzCMrVtJ8BEK3akeQC',
+        'transaction_id': ''
+    });
+</script>
+
+<!-- Event snippet for 订单转化 - PC conversion page -->
+<script>
+    newgtag('event', 'conversion', {
+        'send_to': 'AW-734942208/7VDICNPy06cBEICoud4C',
+        'transaction_id': ''
+    });
+</script>
 
 <div class="checkout-success">
 	<div class="success-title">
@@ -21,7 +36,7 @@
         <?php  else :?>
             <p><?php echo __('Your order # is: <span>%1</span>.', $block->escapeHtml($block->getOrderId())) ?></p>
         <?php endif;?>
-            <p><?php /* @escapeNotVerified */ echo __('We\'ll email you an order confirmation with details.') ?></p>
+<!--            <p>--><?php ///* @escapeNotVerified */ echo __('We\'ll email you an order confirmation with details.') ?><!--</p>-->
     <?php endif;?>
 
     <?php echo $block->getAdditionalInfoHtml() ?>
@@ -32,3 +47,59 @@
 
 </div>
 
+<!-- begin ShareASale.com affiliate tracking -->
+<?php
+$merchantid = '96131';
+$objectManager  =  \Magento\Framework\App\ObjectManager::getInstance();
+$orderId        = $block->getOrderId();
+$order          = $objectManager->create('Magento\Sales\Model\Order')->loadByIncrementId($orderId);
+$subtotal       = $order->getSubtotal();
+$discount       = $order->getDiscountAmount();
+$affiliateTotal = ($subtotal + $discount);
+$ordered_items = $order->getAllVisibleItems();
+$skulist = '';
+$pricelist = '';
+$quantitylist = '';
+$last_index = array_search(end($ordered_items), $ordered_items, true);
+foreach($ordered_items as $index => $item){
+    $delimiter    = $index === $last_index ? '' : ',';
+    $skulist      .= $item->getSku() . $delimiter;
+    $quantitylist .= ceil($item->getQtyOrdered()) . $delimiter;
+    $pricelist    .= ($item->getProduct()->getFinalPrice() - ($item->getDiscountAmount() / $item->getQtyOrdered())) . $delimiter;
+}
+$couponcodes = $order->getCouponCode();
+$newcustomer = '';
+$customer = $order->getCustomerId();
+if($customer){
+    $orderCount =
+        $objectManager
+            ->create('\Magento\Sales\Model\ResourceModel\Order\CollectionFactory')
+            ->create()
+            ->addFieldToSelect('*')
+            ->addFieldToFilter('customer_id', $customer)
+            ->setOrder('created_at','desc')
+            ->count();
+    $newcustomer = ($orderCount > 1 ? 0 : 1);
+}
+$currency = $order->getOrderCurrencyCode();
+
+if (array_key_exists("waterdrop_ch", $_COOKIE) && $_COOKIE['waterdrop_ch'] != "ShareASale") {
+    $shareasale_channel = true;
+} else {
+    $shareasale_channel = false;
+}
+?>
+
+<?php if($shareasale_channel): ?>
+    <img id='_SHRSL_img_1' src='https://shareasale.com/sale.cfm?tracking=<?php echo $orderId ?>&amp;amount=<?php echo $affiliateTotal ?>&amp;transtype=sale&amp;merchantID=<?php echo $merchantid ?>&amp;couponcode=<?php echo $couponcodes ?>&amp;skulist=<?php echo $skulist ?>&amp;quantitylist=<?php echo $quantitylist ?>&amp;pricelist=<?php echo $pricelist ?>&amp;newcustomer=<?php echo $newcustomer ?>&amp;currency=<?php echo $currency ?>&amp;v=2.1&amp;autovoid=1' width='1' height='1'>
+<?php else: ?>
+    <img id='_SHRSL_img_1' src='https://shareasale.com/sale.cfm?tracking=<?php echo $orderId ?>&amp;amount=<?php echo $affiliateTotal ?>&amp;transtype=sale&amp;merchantID=<?php echo $merchantid ?>&amp;couponcode=<?php echo $couponcodes ?>&amp;skulist=<?php echo $skulist ?>&amp;quantitylist=<?php echo $quantitylist ?>&amp;pricelist=<?php echo $pricelist ?>&amp;newcustomer=<?php echo $newcustomer ?>&amp;currency=<?php echo $currency ?>&amp;v=2.1' width='1' height='1'>
+<?php endif; ?>
+
+<script src='https://www.dwin1.com/19038.js' type='text/javascript' defer='defer'></script>
+<!-- end ShareASale.com affiliate tracking -->
+
+<!-- Bing -->
+<script> window.uetq1 = window.uetq1 || []; window.uetq1.push('event', 'purchase', {'revenue_value': '<?php echo sprintf("%.2f",$subtotal); ?>', 'currency': 'USD' }); </script>
+<script> window.uetq2 = window.uetq2 || []; window.uetq2.push('event', 'purchase', {'revenue_value': '<?php echo sprintf("%.2f",$subtotal); ?>', 'currency': 'USD' }); </script>
+<!-- End Bing -->

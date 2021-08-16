@@ -111,7 +111,14 @@ class Soap implements \Magento\TestFramework\TestCase\Webapi\AdapterInterface
         $accessCredentials = $token
             ? $token
             : \Magento\TestFramework\Authentication\OauthHelper::getApiAccessCredentials()['key'];
-        $opts = ['http' => ['header' => "Authorization: Bearer " . $accessCredentials]];
+        $opts = [
+            'http' => ['header' => "Authorization: Bearer " . $accessCredentials],
+            'ssl' => [
+                'allow_self_signed' => true ,
+                'verify_peer' => false,
+                'verify_peer_name' => false
+            ]
+        ];
         $context = stream_context_create($opts);
         $soapClient = new \Laminas\Soap\Client($wsdlUrl);
         $soapClient->setSoapVersion(SOAP_1_2);

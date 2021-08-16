@@ -18,6 +18,7 @@
  * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
+
 namespace Mageplaza\Smtp\Block\Adminhtml\AbandonedCart;
 
 use Magento\Backend\Block\Widget\Form\Container;
@@ -30,7 +31,7 @@ class Edit extends Container
 {
     protected function _construct()
     {
-        $this->_objectId = 'id';
+        $this->_objectId   = 'id';
         $this->_blockGroup = 'Mageplaza_Smtp';
         $this->_controller = 'adminhtml_AbandonedCart';
         parent::_construct();
@@ -39,7 +40,7 @@ class Edit extends Container
         $this->buttonList->remove('delete');
         $this->buttonList->remove('save');
 
-        if($this->getRequest()->getParam('quote_is_active')){
+        if ($this->getRequest()->getParam('quote_is_active')) {
             $this->addButton(
                 'send',
                 [

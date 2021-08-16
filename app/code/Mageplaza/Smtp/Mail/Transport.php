@@ -30,7 +30,6 @@ use Magento\Framework\Phrase;
 use Magento\Framework\Registry;
 use Mageplaza\Smtp\Helper\Data;
 use Mageplaza\Smtp\Mail\Rse\Mail;
-use Mageplaza\Smtp\Model\AbandonedCart;
 use Mageplaza\Smtp\Model\Log;
 use Mageplaza\Smtp\Model\LogFactory;
 use Psr\Log\LoggerInterface;
@@ -137,7 +136,6 @@ class Transport
                     }
 
                     $this->emailLog($message);
-
                 } catch (Exception $e) {
                     $this->emailLog($message, false);
                     throw new MailException(new Phrase($e->getMessage()), $e);
@@ -243,17 +241,17 @@ class Transport
     }
 
     /**
-     * @param $log
+     * @param Log $log
      */
     protected function saveLogIdForAbandonedCart($log)
     {
         try {
-            $abandonedCart = $this->registry->registry('smtp_abandoned_cart');
+            $quote = $this->registry->registry('smtp_abandoned_cart');
 
-            if ($abandonedCart && $abandonedCart instanceof AbandonedCart) {
-                $ids = $abandonedCart->getLogIds() ? $abandonedCart->getLogIds() . ',' . $log->getId() : $log->getId();
-                $abandonedCart->setStatus(1)->setLogIds($ids)->save();
-
+            if ($quote) {
+                $ids = $quote->getMpSmtpAceLogIds() ?
+                    $quote->getMpSmtpAceLogIds() . ',' . $log->getId() : $log->getId();
+                $quote->setMpSmtpAceSent(1)->setMpSmtpAceLogIds($ids)->save();
             }
         } catch (Exception $e) {
             $this->logger->critical($e->getMessage());

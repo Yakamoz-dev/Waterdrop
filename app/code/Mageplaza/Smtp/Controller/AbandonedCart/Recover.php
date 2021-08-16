@@ -21,17 +21,18 @@
 
 namespace Mageplaza\Smtp\Controller\AbandonedCart;
 
+use Magento\Checkout\Model\Session as CheckoutSession;
+use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Store\Model\StoreManagerInterface;
-use Magento\Quote\Model\QuoteRepository;
-use Mageplaza\Smtp\Helper\Data;
-use Mageplaza\Smtp\Model\ResourceModel\AbandonedCart\Collection;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Model\Quote;
-use Magento\Checkout\Model\Session as CheckoutSession;
-use Magento\Customer\Model\Session as CustomerSession;
+use Magento\Quote\Model\ResourceModel\Quote\Collection;
+use Magento\Store\Model\StoreManagerInterface;
+use Mageplaza\Smtp\Helper\Data;
 
 /**
  * Class Recover
@@ -40,11 +41,6 @@ use Magento\Customer\Model\Session as CustomerSession;
 class Recover extends Action
 {
     /**
-     * @var QuoteRepository
-     */
-    protected $quoteRepository;
-
-    /**
      * @var Data
      */
     protected $helperData;
@@ -52,7 +48,7 @@ class Recover extends Action
     /**
      * @var Collection
      */
-    protected $abandonedCartCollection;
+    protected $quoteCollection;
 
     /**
      * Store manager
@@ -80,38 +76,38 @@ class Recover extends Action
      * Recover constructor.
      *
      * @param Context $context
-     * @param QuoteRepository $quoteRepository
      * @param Data $helperData
-     * @param Collection $abandonedCartCollection
+     * @param Collection $quoteCollection
      * @param StoreManagerInterface $storeManager
      * @param CustomerSession $customerSession
      * @param CheckoutSession $checkoutSession
      */
     public function __construct(
         Context $context,
-        QuoteRepository $quoteRepository,
         Data $helperData,
-        Collection $abandonedCartCollection,
+        Collection $quoteCollection,
         StoreManagerInterface $storeManager,
         CustomerSession $customerSession,
         CheckoutSession $checkoutSession
     ) {
-        $this->quoteRepository         = $quoteRepository;
-        $this->helperData              = $helperData;
-        $this->abandonedCartCollection = $abandonedCartCollection;
-        $this->storeManager            = $storeManager;
-        $this->checkoutSession         = $checkoutSession;
-        $this->customerSession         = $customerSession;
+        $this->helperData      = $helperData;
+        $this->quoteCollection = $quoteCollection;
+        $this->storeManager    = $storeManager;
+        $this->checkoutSession = $checkoutSession;
+        $this->customerSession = $customerSession;
 
         parent::__construct($context);
     }
 
     /**
-     * @return ResponseInterface|\Magento\Framework\Controller\ResultInterface
+     * @return ResponseInterface|ResultInterface
      */
     public function execute()
     {
-        $token = $this->getRequest()->getParam('token');
+        $token        = $this->getRequest()->getParam('token');
+        $isEmCheckout = $this->getRequest()->getParam('isEmCheckout');
+        $emToken      = $this->getRequest()->getParam('emToken');
+
         if (!$token) {
             return $this->_redirect('checkout/cart');
         }
@@ -122,9 +118,12 @@ class Recover extends Action
             } else {
                 $this->messageManager->addNoticeMessage($this->noticeMessage);
             }
-
         } catch (LocalizedException $e) {
             $this->messageManager->addErrorMessage(__($e->getMessage()));
+        }
+
+        if ($isEmCheckout && $emToken) {
+            return $this->_redirect('checkout/cart?isEmCheckout=' . $isEmCheckout . '&token=' . urlencode($emToken));
         }
 
         return $this->_redirect('checkout/cart');
@@ -135,27 +134,28 @@ class Recover extends Action
      *
      * @return bool
      * @throws LocalizedException
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function recover($token)
     {
-        if (!$this->helperData->isEnableAbandonedCart($this->storeManager->getStore()->getId())) {
-            throw new LocalizedException(__('SMTP abandoned cart is disabled.'));
+        if (!$this->helperData->isEnableEmailMarketing($this->storeManager->getStore()->getId())) {
+            throw new LocalizedException(__('Marketing Automation is disabled.'));
         }
 
         $token              = explode('_', $token);
-        $quoteId = isset($token[1]) ? base64_decode($token[1]) : '';
+        $quoteId            = isset($token[1]) ? base64_decode($token[1]) : '';
         $abandonedCartToken = isset($token[0]) ? $token[0] : '';
-        $abandonedCart      = $this->abandonedCartCollection
-            ->addFieldToFilter('quote_id', $quoteId)
-            ->addFieldToFilter('token', $abandonedCartToken)
+
+        /**
+         * @var Quote $quote
+         */
+        $quote = $this->quoteCollection
+            ->addFieldToFilter('entity_id', $quoteId)
+            ->addFieldToFilter('mp_smtp_ace_token', $abandonedCartToken)
             ->getFirstItem();
-        if (!$abandonedCart->getId()) {
+        if (!$quote->getId()) {
             throw new LocalizedException(__('The link is not available for your use'));
         }
-
-        /** @var Quote $quote */
-        $quote = $this->quoteRepository->get($quoteId);
 
         if (!$quote->getIsActive()) {
             throw new LocalizedException(__('An error occurred while recovering your cart.'));

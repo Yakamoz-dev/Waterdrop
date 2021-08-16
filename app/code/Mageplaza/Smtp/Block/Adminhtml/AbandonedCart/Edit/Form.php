@@ -18,25 +18,30 @@
  * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
  * @license     https://www.mageplaza.com/LICENSE.txt
  */
+
 namespace Mageplaza\Smtp\Block\Adminhtml\AbandonedCart\Edit;
 
+use Exception;
+use IntlDateFormatter;
 use Magento\Backend\Block\Template\Context;
 use Magento\Backend\Block\Widget\Form\Generic;
+use Magento\Catalog\Helper\Data as CatalogHelper;
+use Magento\Config\Model\Config\Source\Email\Identity;
+use Magento\Config\Model\Config\Source\Email\Template;
+use Magento\Customer\Api\GroupRepositoryInterface;
 use Magento\Customer\Model\Address\Config as AddressConfig;
 use Magento\Framework\Data\FormFactory;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Pricing\PriceCurrencyInterface;
 use Magento\Framework\Registry;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\Quote\Address;
 use Magento\Quote\Model\Quote\Item;
-use Mageplaza\Smtp\Model\Source\AbandonedCartStatus;
-use Magento\Catalog\Helper\Data as CatalogHelper;
-use Magento\Config\Model\Config\Source\Email\Identity;
-use Magento\Config\Model\Config\Source\Email\Template;
 use Magento\Tax\Model\Config as TaxConfig;
+use Mageplaza\Smtp\Helper\EmailMarketing;
 use Mageplaza\Smtp\Model\ResourceModel\Log\CollectionFactory as LogCollectionFactory;
-use Mageplaza\Smtp\Helper\AbandonedCart;
+use Mageplaza\Smtp\Model\Source\AbandonedCartStatus;
 
 /**
  * Class Form
@@ -85,9 +90,16 @@ class Form extends Generic
     protected $logCollectionFactory;
 
     /**
-     * @var AbandonedCart
+     * @var EmailMarketing
      */
-    protected $helperAbandonedCart;
+    protected $helperEmailMarketing;
+
+    /**
+     * Group service
+     *
+     * @var GroupRepositoryInterface
+     */
+    protected $groupRepository;
 
     /**
      * Form constructor.
@@ -101,7 +113,8 @@ class Form extends Generic
      * @param Template $emailTemplate
      * @param TaxConfig $taxConfig
      * @param LogCollectionFactory $logCollectionFactory
-     * @param AbandonedCart $helperAbandonedCart
+     * @param EmailMarketing $helperEmailMarketing
+     * @param GroupRepositoryInterface $groupRepository
      * @param array $data
      */
     public function __construct(
@@ -114,16 +127,18 @@ class Form extends Generic
         Template $emailTemplate,
         TaxConfig $taxConfig,
         LogCollectionFactory $logCollectionFactory,
-        AbandonedCart $helperAbandonedCart,
+        EmailMarketing $helperEmailMarketing,
+        GroupRepositoryInterface $groupRepository,
         array $data = []
     ) {
-        $this->addressConfig               = $addressConfig;
-        $this->priceCurrency               = $priceCurrency;
-        $this->emailIdentity               = $emailIdentity;
-        $this->emailTemplate               = $emailTemplate;
-        $this->taxConfig                   = $taxConfig;
-        $this->logCollectionFactory        = $logCollectionFactory;
-        $this->helperAbandonedCart         = $helperAbandonedCart;
+        $this->addressConfig = $addressConfig;
+        $this->priceCurrency = $priceCurrency;
+        $this->emailIdentity = $emailIdentity;
+        $this->emailTemplate = $emailTemplate;
+        $this->taxConfig = $taxConfig;
+        $this->logCollectionFactory = $logCollectionFactory;
+        $this->helperEmailMarketing = $helperEmailMarketing;
+        $this->groupRepository = $groupRepository;
 
         parent::__construct($context, $registry, $formFactory, $data);
     }
@@ -159,11 +174,11 @@ class Form extends Generic
     }
 
     /**
-     * @return AbandonedCart
+     * @return EmailMarketing
      */
-    public function getHelperAbandonedCart()
+    public function getHelperEmailMarketing()
     {
-        return $this->helperAbandonedCart;
+        return $this->helperEmailMarketing;
     }
 
     /**
@@ -174,7 +189,7 @@ class Form extends Generic
      */
     public function getSubtotal(Quote $quote, $inclTax = false)
     {
-        $address  = $quote->isVirtual() ? $quote->getBillingAddress() : $quote->getShippingAddress();
+        $address = $quote->isVirtual() ? $quote->getBillingAddress() : $quote->getShippingAddress();
         $subtotal = $inclTax ? $address->getSubtotalInclTax() : $address->getSubtotal();
 
         return $this->formatPrice($subtotal, $quote->getId());
@@ -210,10 +225,10 @@ class Form extends Generic
                 foreach ($collection as $log) {
                     $logDatesHtml .= $this->formatDate(
                         $log->getCreatedAt(),
-                        \IntlDateFormatter::MEDIUM,
+                        IntlDateFormatter::MEDIUM,
                         true
                     );
-                    $logDatesHtml.='</br>';
+                    $logDatesHtml .= '</br>';
                 }
             }
         }
@@ -251,7 +266,7 @@ class Form extends Generic
      */
     public function getQuote()
     {
-        return $this->getModel()->getQuote();
+        return $this->_coreRegistry->registry('quote');
     }
 
     /**
@@ -342,13 +357,13 @@ class Form extends Generic
      * @param Quote $quote
      *
      * @return string
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws NoSuchEntityException
      */
     public function getStoreName(Quote $quote)
     {
         $storeId = $quote->getStoreId();
-        $store   = $this->_storeManager->getStore($storeId);
-        $name    = [$store->getWebsite()->getName(), $store->getGroup()->getName(), $store->getName()];
+        $store = $this->_storeManager->getStore($storeId);
+        $name = [$store->getWebsite()->getName(), $store->getGroup()->getName(), $store->getName()];
 
         return implode('<br/>', $name);
     }
@@ -386,5 +401,23 @@ class Form extends Generic
         }
 
         return $formatType->getRenderer()->renderArray($address->getData());
+    }
+
+    /**
+     * @param string|int $customerGroupId
+     *
+     * @return string
+     */
+    public function getCustomerGroupName($customerGroupId)
+    {
+        if ($customerGroupId !== null) {
+            try {
+                return $this->groupRepository->getById($customerGroupId)->getCode();
+            } catch (Exception $e) {
+                return '';
+            }
+        }
+
+        return '';
     }
 }

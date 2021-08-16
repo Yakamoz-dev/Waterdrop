@@ -26,11 +26,13 @@ use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Email\Model\Template\SenderResolver;
 use Magento\Framework\App\Area;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Mail\Template\FactoryInterface;
 use Magento\Framework\View\Result\Page;
-use Mageplaza\Smtp\Helper\Data as SmtpData;
 use Magento\Quote\Model\QuoteFactory;
+use Mageplaza\Smtp\Helper\Data as SmtpData;
 
 /**
  * Class Preview
@@ -76,14 +78,14 @@ class Preview extends Action
     }
 
     /**
-     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|Page
+     * @return ResponseInterface|ResultInterface|Page
      */
     public function execute()
     {
-        $from         = $this->getRequest()->getParam('from');
-        $templateId   = $this->getRequest()->getParam('template_id');
-        $quoteId      = $this->getRequest()->getParam('quote_id');
-        $customerName = $this->getRequest()->getParam('customer_name');
+        $from              = $this->getRequest()->getParam('from');
+        $templateId        = $this->getRequest()->getParam('template_id');
+        $quoteId           = $this->getRequest()->getParam('quote_id');
+        $customerName      = $this->getRequest()->getParam('customer_name');
         $additionalMessage = $this->getRequest()->getParam('additional_message');
 
         $result = ['status' => false];

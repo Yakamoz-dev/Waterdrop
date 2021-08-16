@@ -38,7 +38,7 @@ class AbandonedCartStatus implements OptionSourceInterface
     public static function getOptionArray()
     {
         return [
-            self::SENT   => __('Sent'),
+            self::SENT          => __('Sent'),
             self::WAIT_FOR_SEND => __('Wait for send')
         ];
     }

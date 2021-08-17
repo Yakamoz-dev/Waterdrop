@@ -3,7 +3,7 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Ecopure_Gift::menu" title="Warranty" sortOrder="10">
+                <resource id="Ecopure_Gift::gift" title="Gift" sortOrder="10">
                     <resource id="Ecopure_Gift::product" title="Gift Product" translate="title" sortOrder="900"/>
                     <resource id="Ecopure_Gift::address" title="Gift Address" translate="title" sortOrder="1000"/>
                     <resource id="Ecopure_Gift::customerro" title="Gift Customer" translate="title" sortOrder="1100"/>

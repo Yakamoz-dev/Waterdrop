@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="Ecopure_Gift::menu" title="Warranty" module="Ecopure_Gift" sortOrder="51" resource="Ecopure_Gift::menu"/>
+        <add id="Ecopure_Gift::gift" title="Gift" module="Ecopure_Gift" sortOrder="51" resource="Ecopure_Gift::gift"/>
         <add id="Ecopure_Gift::product" title="Manage Products" module="Ecopure_Gift" sortOrder="10" action="ecopure_gift/product" resource="Ecopure_Gift::product" parent="Ecopure_Gift::gift"/>
         <add id="Ecopure_Gift::address" title="Manage Addresses" module="Ecopure_Gift" sortOrder="10" action="ecopure_gift/address" resource="Ecopure_Gift::address" parent="Ecopure_Gift::gift"/>
         <add id="Ecopure_Gift::customerro" title="Manage Customers" module="Ecopure_Gift" sortOrder="10" action="ecopure_gift/customer" resource="Ecopure_Gift::customerro" parent="Ecopure_Gift::gift"/>

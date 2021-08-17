@@ -36,7 +36,7 @@
         <?php  else :?>
             <p><?php echo __('Your order # is: <span>%1</span>.', $block->escapeHtml($block->getOrderId())) ?></p>
         <?php endif;?>
-<!--            <p>--><?php ///* @escapeNotVerified */ echo __('We\'ll email you an order confirmation with details.') ?><!--</p>-->
+            <p><?php /* @escapeNotVerified */ echo __('We\'ll email you an order confirmation with details.') ?></p>
     <?php endif;?>
 
     <?php echo $block->getAdditionalInfoHtml() ?>

@@ -14,26 +14,26 @@
                 </tr>
                 <tr>
                     <td class="footer">
-                        <table>
+                        <table style="width: 100%">
                             <tr>
-                                <td>
+                                <td style="display: none;">
                                     <p><a href="#">{{trans "About Us"}}</a></p>
                                     <p><a href="#">{{trans "Customer Service"}}</a></p>
                                 </td>
-                                <td>
+                                <td style="display: none;">
                                     {{depend store_phone}}
-                                        <p class="phone">
-                                            {{trans '<a href="tel:%store_phone">%store_phone</a>' store_phone=$store_phone |raw}}
-                                        </p>
+                                    <p class="phone">
+                                        {{trans '<a href="tel:%store_phone">%store_phone</a>' store_phone=$store_phone |raw}}
+                                    </p>
                                     {{/depend}}
                                     {{depend store_hours}}
-                                        <p class="hours">
-                                            {{trans 'Hours of Operation:<br /><span class="no-link">%store_hours</span>.' store_hours=$store_hours |raw}}
-                                        </p>
+                                    <p class="hours">
+                                        {{trans 'Hours of Operation:<br /><span class="no-link">%store_hours</span>.' store_hours=$store_hours |raw}}
+                                    </p>
                                     {{/depend}}
                                 </td>
                                 <td>
-                                    <p class="address">
+                                    <p class="address" style="float: right;text-align: right;">
                                         {{var store.getFormattedAddress()|raw}}
                                     </p>
                                 </td>

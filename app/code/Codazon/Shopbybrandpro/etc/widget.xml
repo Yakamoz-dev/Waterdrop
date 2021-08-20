@@ -39,7 +39,7 @@
                         <label translate="true">All brands</label>
                     </option>
                     <option name="featured_brands" value="featured_brands">
-                        <label translate="true">Featured brands</label>
+                        <label translate="true">brands</label>
                     </option>
                 </options>
             </parameter>

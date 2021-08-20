@@ -22,12 +22,12 @@ class Evercrumbs extends \Magento\Framework\View\Element\Template
      * @param array $data
      */
     public function __construct(
-		Context $context, 
-		Data $catalogData, 
+		Context $context,
+		Data $catalogData,
 		Registry $registry,
 		array $data = [])
     {
-        $this->_catalogData = $catalogData;	
+        $this->_catalogData = $catalogData;
 		$this->registry = $registry;
         parent::__construct($context, $data);
     }
@@ -35,7 +35,7 @@ class Evercrumbs extends \Magento\Framework\View\Element\Template
 	public function getCrumbs()
     {
 		$evercrumbs = array();
-		
+
 		$evercrumbs[] = array(
 			'label' => 'Home',
 			'title' => 'Go to Home Page',
@@ -46,7 +46,7 @@ class Evercrumbs extends \Magento\Framework\View\Element\Template
 		$product = $this->registry->registry('current_product');
 		$categoryCollection = clone $product->getCategoryCollection();
 		$categoryCollection->clear();
-		$categoryCollection->addAttributeToSort('level', $categoryCollection::SORT_ORDER_DESC)->addAttributeToFilter('path', array('like' => "1/" . $this->_storeManager->getStore()->getRootCategoryId() . "/%"));
+		$categoryCollection->addAttributeToSort('level', $categoryCollection::SORT_ORDER_ASC)->addAttributeToFilter('path', array('like' => "1/" . $this->_storeManager->getStore()->getRootCategoryId() . "/%"));
 		$categoryCollection->setPageSize(1);
 		$breadcrumbCategories = $categoryCollection->getFirstItem()->getParentCategories();
 		foreach ($breadcrumbCategories as $category) {
@@ -56,14 +56,14 @@ class Evercrumbs extends \Magento\Framework\View\Element\Template
 				'link' => $category->getUrl()
 			);
 		}
-	
-		
+
+
 		$evercrumbs[] = array(
 				'label' => $product->getName(),
 				'title' => $product->getName(),
 				'link' => ''
 			);
-				
+
 		return $evercrumbs;
     }
 }

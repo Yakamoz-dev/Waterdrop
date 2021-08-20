@@ -9,7 +9,7 @@ namespace Codazon\Shopbybrandpro\Block\Brand;
 class AllBrands extends \Magento\Framework\View\Element\Template implements \Magento\Framework\DataObject\IdentityInterface
 {
     protected $_coreRegistry = null;
-    
+
     protected $_scopeConfig = null;
 
     public function __construct(
@@ -21,17 +21,17 @@ class AllBrands extends \Magento\Framework\View\Element\Template implements \Mag
         $this->_scopeConfig = $context->getScopeConfig();
         parent::__construct($context, $data);
     }
-    
+
     public function getIdentities()
     {
         return ['codazon_all_brands_page'];
     }
-    
+
     public function getPageInfo()
     {
          if (!$this->_coreRegistry->registry('all_brands_info')) {
              $brands = new \Magento\Framework\DataObject([
-                'title'                     => $this->_scopeConfig->getValue('codazon_shopbybrand/all_brand_page/title', 'store')?:__('Our Brands'),
+                'title'                     => $this->_scopeConfig->getValue('codazon_shopbybrand/all_brand_page/title', 'store')?:__('Brands'),
                 'description'               => $this->_scopeConfig->getValue('codazon_shopbybrand/all_brand_page/description', 'store')?:'',
                 'display_featured_brands'   => $this->_scopeConfig->getValue('codazon_shopbybrand/all_brand_page/display_featured_brands', 'store'),
                 'display_brand_search'      => $this->_scopeConfig->getValue('codazon_shopbybrand/all_brand_page/display_brand_search', 'store'),
@@ -44,5 +44,5 @@ class AllBrands extends \Magento\Framework\View\Element\Template implements \Mag
          }
          return $this->_coreRegistry->registry('all_brands_info');
     }
-    
+
 }

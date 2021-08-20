@@ -3,7 +3,7 @@
  * Copyright © 2017 Codazon, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
- 
+
 namespace Codazon\Shopbybrandpro\Controller\Index;
 
 use Magento\Framework\View\Result\PageFactory;
@@ -11,11 +11,11 @@ use Magento\Framework\View\Result\PageFactory;
 class Index extends \Magento\Framework\App\Action\Action
 {
     protected $_scopeConfig;
-    
+
     protected $_helper;
-    
+
     protected $_attributeCode;
-    
+
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\Registry $coreRegistry,
@@ -32,12 +32,12 @@ class Index extends \Magento\Framework\App\Action\Action
         $this->_brandFactory = $brandFactory;
         $this->_attributeCode = $helper->getStoreBrandCode();
     }
-    
+
     protected function _initBrandPage()
     {
         if (!$this->_coreRegistry->registry('all_brands_info')) {
             $brands = new \Magento\Framework\DataObject([
-                'title'                     => $this->_scopeConfig->getValue('codazon_shopbybrand/all_brand_page/title', 'store')?:__('Our Brands'),
+                'title'                     => $this->_scopeConfig->getValue('codazon_shopbybrand/all_brand_page/title', 'store')?:__('Brands'),
                 'description'               => $this->_scopeConfig->getValue('codazon_shopbybrand/all_brand_page/description', 'store')?:'',
                 'display_featured_brands'   => $this->_scopeConfig->getValue('codazon_shopbybrand/all_brand_page/display_featured_brands', 'store'),
                 'display_brand_search'      => $this->_scopeConfig->getValue('codazon_shopbybrand/all_brand_page/display_brand_search', 'store'),
@@ -50,26 +50,26 @@ class Index extends \Magento\Framework\App\Action\Action
         }
         return $this->_coreRegistry->registry('all_brands_info');
     }
-    
+
     public function execute()
     {
         $page = $this->resultPageFactory->create();
         $brand = $this->_initBrandPage();
         $pageConfig = $page->getConfig();
-        
+
         $pageConfig->addBodyClass('cdz-all-brands');
-        
+
         $title = $brand->getData('title');
-        
+
         $pageConfig->getTitle()->set($brand->getData('meta_title')?:$title);
         $pageConfig->setKeywords($brand->getData('meta_keywords'));
         $pageConfig->setDescription($brand->getData('meta_description'));
-        
+
         $pageMainTitle = $page->getLayout()->getBlock('page.main.title');
         if ($pageMainTitle) {
             $pageMainTitle->setPageTitle($title);
         }
         return $page;
     }
-    
+
 }

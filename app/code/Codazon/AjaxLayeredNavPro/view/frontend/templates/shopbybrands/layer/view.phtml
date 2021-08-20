@@ -56,6 +56,7 @@
                         <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?= __('Shopping Options') ?></strong>
                         <div class="filter-options" id="narrow-by-list" data-role="content" data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": <?= $active ?>, "multipleCollapsible": true}}'>
                     <?php  $wrapOptions = true; endif; ?>
+                    <?php  if($filter->getName() != __('Category')): ?>
                     <div data-role="collapsible" class="filter-options-item <?= $filter->getRequestVar() ?>">
                         <div data-role="title" class="filter-options-title"><?= __($filter->getName()) ?></div>
                         <div data-role="content" class="filter-options-content">
@@ -66,6 +67,7 @@
                             </div>
                         </div>
                     </div>
+                    <?php endif; ?>
                 <?php endif; ?>
             <?php endforeach; ?>
             <?php if ($wrapOptions): ?>

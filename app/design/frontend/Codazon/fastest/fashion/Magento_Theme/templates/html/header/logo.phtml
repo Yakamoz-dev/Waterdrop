@@ -40,6 +40,22 @@ require(['jquery'],function($){
     var imageName = logoSrc.substr(0, logoSrc.length - 4);
     imageName += "-small" + imageType;
     $('.small-logo').attr('src',imageName);
+
+    //add google click add-to-cart event
+    $('.action.tocart.primary').click(function() {
+        function gtag_report_conversion(url) {
+            var callback = function () {
+                if (typeof(url) != 'undefined') {
+                    window.location = url;
+                }
+            };
+            gtag('event', 'conversion', {
+                'send_to': 'AW-734942208/f08TCK-Mwu0CEICoud4C',
+                'event_callback': callback
+            });
+            return false;
+        }
+    });
 });
 </script>
 <?php endif ?>

@@ -13,10 +13,10 @@
  */
 ?>
 <?php
-	$_optionHelper = $this->helper('Codazon\ThemeOptions\Helper\Data');			 
-	$width = $_optionHelper->getConfig('general_section/product_view/base_image_width') ?: $block->getImageAttribute('product_page_image_medium', 'width'); 	 
-	$height = $_optionHelper->getConfig('general_section/product_view/base_image_height') ?: $block->getImageAttribute('product_page_image_medium', 'height');	
-	$thumbWidth = 	$_optionHelper->getConfig('general_section/product_view/moreview_image_width') ?: $block->getImageAttribute('product_page_image_small', 'width');	
+	$_optionHelper = $this->helper('Codazon\ThemeOptions\Helper\Data');
+	$width = $_optionHelper->getConfig('general_section/product_view/base_image_width') ?: $block->getImageAttribute('product_page_image_medium', 'width');
+	$height = $_optionHelper->getConfig('general_section/product_view/base_image_height') ?: $block->getImageAttribute('product_page_image_medium', 'height');
+	$thumbWidth = 	$_optionHelper->getConfig('general_section/product_view/moreview_image_width') ?: $block->getImageAttribute('product_page_image_small', 'width');
 	$thumbHeight = 	$_optionHelper->getConfig('general_section/product_view/moreview_image_height') ?: $block->getImageAttribute('product_page_image_small', 'height');
 	$fullViewType = $_optionHelper->getConfig('general_section/product_view/full_view_type');
 	$allowFullScreen = is_null($fullViewType)?$block->getVar("gallery/allowfullscreen"):(($fullViewType!='pop_up')?'true':'false');
@@ -24,7 +24,7 @@
 ?>
 <script type="text/javascript">
 	<?php $requireJs = ($fullViewType == 'popup')?"'jquery','Magento_Catalog/js/cdzZoom','Magento_Ui/js/modal/modal','js/jquery.nicescroll.min'":"'jquery','Magento_Catalog/js/cdzZoom','Magento_Ui/js/modal/modal'"; ?>
-	
+
 	require([<?php echo $requireJs ?>],function ($) {
 		var imgModal = false, $imgBox = false;
 		var widthImage = <?php /* @escapeNotVerified */ echo $width; ?>;
@@ -54,7 +54,7 @@
 			}
 			<?php endif ?>
 		});
-		<?php if($productLensZoom == '1'): ?>
+		<?php if($productLensZoom == '1' && false): ?>
 		$("[data-gallery-role=gallery-placeholder-q]").on("fotorama:showend fotorama:load",function () {
 			var $this = $(this);
 			var $stage = $('.fotorama__stage',$this);
@@ -89,8 +89,8 @@
 
     if (config.navtype === 'horizontal') {
         thumbBarHeight = config.thumbheight;
-    }    
-	
+    }
+
     loader.style.paddingBottom = ( config.height / config.width * 100) + "%";
 </script>
 <script type="text/x-magento-init">

@@ -67,7 +67,7 @@ $labelHelper = $this->helper('Codazon\ProductLabel\Helper\Data');
             }
             <?php endif ?>
         });
-        <?php if($productLensZoom == '1'): ?>
+        <?php if($productLensZoom == '1' && false): ?>
         $("[data-gallery-role=gallery-placeholder]").on("fotorama:showend fotorama:load",function () {
             var $this = $(this);
             var $stage = $('.fotorama__stage',$this);

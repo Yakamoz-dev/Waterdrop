@@ -15,7 +15,7 @@ define([
 				if( $('.magnify',$this).length == 0 ){
 					var $magnify = $('<div class="magnify" style="background: url(\''+src+'\') no-repeat; width:225px; height:225px;" ></div>');
 					$magnify.appendTo($this);
-					
+
 					var nativeWidth = 0;
 					var nativeHeight = 0;
 					$this.data('cdzZoom',true);

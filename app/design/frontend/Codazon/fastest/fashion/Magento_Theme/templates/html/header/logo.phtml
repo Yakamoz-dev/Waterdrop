@@ -64,18 +64,7 @@ require(['jquery'],function($){
     require(['jquery'],function($){
         //add google click add-to-cart event
         $('.action.tocart.primary').click(function() {
-            function gtag_report_conversion(url) {
-                var callback = function () {
-                    if (typeof(url) != 'undefined') {
-                        window.location = url;
-                    }
-                };
-                gtag('event', 'conversion', {
-                    'send_to': 'AW-734942208/f08TCK-Mwu0CEICoud4C',
-                    'event_callback': callback
-                });
-                return false;
-            }
+            gtag_report_conversion();
         });
     });
 </script>

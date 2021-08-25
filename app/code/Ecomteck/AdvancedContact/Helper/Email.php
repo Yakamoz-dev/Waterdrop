@@ -70,7 +70,7 @@ class Email extends \Ecomteck\AdvancedContact\Helper\Data
                     if (@$field['type'] == self::EMAIL_TYPE) {
                         $vars = $this->toVars($info);
                         $vars['store_name'] = $store_owner;
-                        $from = ['name'=>'Customer Contact', 'email' => $field['value']];
+                        $from = ['name'=>'Customer Contact', 'email' => "order@water-filter.com"];
                         $this->send($from, $to, $vars, $storeId);
                         if($send_thanksyou){
                             $from = ['name'=>$store_owner, 'email' => $to];

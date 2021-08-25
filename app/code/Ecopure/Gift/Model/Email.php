@@ -27,7 +27,7 @@ class Email
             ->setTemplateIdentifier('warranty_reg_template')
             ->setTemplateOptions(['area' => \Magento\Framework\App\Area::AREA_FRONTEND, 'store' => \Magento\Store\Model\Store::DEFAULT_STORE_ID])
             ->setTemplateVars(['data' => $postObject])
-            ->setFrom(['name' => 'Water-Filter','email' => 'syz8734181@126.com'])
+            ->setFrom(['name' => 'Water-Filter','email' => 'order@water-filter.com'])
             ->addTo($email,$name)
             ->getTransport();
         $transport->sendMessage();

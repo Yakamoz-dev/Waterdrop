@@ -162,8 +162,8 @@ class Upload extends \Magento\Backend\App\Action {
                 $shipment->getOrder()->save();
 
             // Send email
-//                $this->_objectManager->create('Magento\Shipping\Model\ShipmentNotifier')
-//                    ->notify($shipment);
+                $this->_objectManager->create('Magento\Shipping\Model\ShipmentNotifier')
+                    ->notify($shipment);
 
                 $shipment->save();
             } catch (\Exception $e) {

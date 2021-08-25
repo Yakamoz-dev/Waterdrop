@@ -1273,7 +1273,20 @@
     display: none !important;
 }
 .product-info-stock-sku {
-    display: none;
+    display: block;
+    padding-top: 0 !important;
+    .configurable-variation-qty {
+        display: none !important;
+    }
+    .stock.available {
+        display: none;
+        text-transform: none;
+        margin-bottom: 0;
+    }
+    .stock.unavailable {
+        text-transform: none;
+        margin-bottom: 0;
+    }
 }
 .product-brand-info{
     display: none;

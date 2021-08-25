@@ -1305,7 +1305,20 @@
     display: none;
 }
 .product-info-main .product-info-stock-sku {
-    display: none;
+    display: block;
+    padding-top: 0;
+    .configurable-variation-qty {
+        display: none !important;
+    }
+    .stock.available {
+        display: none;
+        text-transform: none;
+        margin-bottom: 10px;
+    }
+    .stock.unavailable {
+        text-transform: none;
+        margin-bottom: 10px;
+    }
 }
 .product-info-main .product-brand-info {
     display: none;

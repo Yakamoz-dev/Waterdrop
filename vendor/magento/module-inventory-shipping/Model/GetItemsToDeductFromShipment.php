@@ -17,12 +17,18 @@ use Magento\InventorySourceDeductionApi\Model\ItemToDeductInterfaceFactory;
 use Magento\Sales\Model\Order\Item as OrderItem;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Sales\Model\Order\Shipment\Item;
+use Magento\CatalogInventory\Api\StockConfigurationInterface;
 
 /**
  * Get source items for deduction class.
  */
 class GetItemsToDeductFromShipment
 {
+    /**
+     * @var StockConfigurationInterface
+     */
+    protected $stockConfiguration;
+
     /**
      * @var GetSkuFromOrderItemInterface
      */
@@ -53,6 +59,7 @@ class GetItemsToDeductFromShipment
         GetSkuFromOrderItemInterface $getSkuFromOrderItem,
         Json $jsonSerializer,
         ItemToDeductInterfaceFactory $itemToDeduct,
+        StockConfigurationInterface $stockConfiguration,
         IsItemCouldBeDeductedByTypes $itemCouldBeDeducted = null
     ) {
         $this->jsonSerializer = $jsonSerializer;
@@ -60,6 +67,7 @@ class GetItemsToDeductFromShipment
         $this->getSkuFromOrderItem = $getSkuFromOrderItem;
         $this->itemCouldBeDeducted = $itemCouldBeDeducted ?: ObjectManager::getInstance()
             ->get(IsItemCouldBeDeductedByTypes::class);
+        $this->stockConfiguration = $stockConfiguration;
     }
 
     /**
@@ -72,6 +80,13 @@ class GetItemsToDeductFromShipment
     public function execute(Shipment $shipment): array
     {
         $itemsToShip = [];
+
+        // if canSubtractQty === true
+        // this means "deduct when order is placed" so we
+        // don't want to deduct it again when shipping the order
+        if($this->stockConfiguration->canSubtractQty($shipment->getStoreId())){
+            return $itemsToShip;
+        }
 
         /** @var \Magento\Sales\Model\Order\Shipment\Item $shipmentItem */
         foreach ($shipment->getAllItems() as $shipmentItem) {

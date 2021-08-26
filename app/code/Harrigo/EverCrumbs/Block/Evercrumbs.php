@@ -46,8 +46,11 @@ class Evercrumbs extends \Magento\Framework\View\Element\Template
 		$product = $this->registry->registry('current_product');
 		$categoryCollection = clone $product->getCategoryCollection();
 		$categoryCollection->clear();
-		$categoryCollection->addAttributeToSort('level', $categoryCollection::SORT_ORDER_ASC)->addAttributeToFilter('path', array('like' => "1/" . $this->_storeManager->getStore()->getRootCategoryId() . "/%"));
-		$categoryCollection->setPageSize(1);
+		$categoryCollection
+            ->addAttributeToSort('level', $categoryCollection::SORT_ORDER_ASC)
+            ->addAttributeToFilter('path', array('like' => "1/" . $this->_storeManager->getStore()->getRootCategoryId() . "/%"))
+            ->addAttributeToFilter('entity_id', array('nin' => array(11,12,13,14,89,90,91,92,93,94)));
+        $categoryCollection->setPageSize(1);
 		$breadcrumbCategories = $categoryCollection->getFirstItem()->getParentCategories();
 		foreach ($breadcrumbCategories as $category) {
 			$evercrumbs[] = array(

@@ -22,6 +22,15 @@ $fullViewType = $_optionHelper->getConfig('general_section/product_view/full_vie
 $allowFullScreen = is_null($fullViewType)?$block->getVar("gallery/allowfullscreen"):(($fullViewType!='pop_up')?'true':'false');
 $productLensZoom = $_optionHelper->getConfig('general_section/product_view/product_lens_zoom');
 $labelHelper = $this->helper('Codazon\ProductLabel\Helper\Data');
+$_product = $this->getProduct();
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+$imageUrl = $this->helper('Magento\Catalog\Helper\Image')
+    ->init($_product, 'product_base_image')
+    ->constrainOnly(TRUE)
+    ->keepAspectRatio(TRUE)
+    ->keepTransparency(TRUE)
+    ->keepFrame(FALSE)
+    ->resize(800, 800)->getUrl();
 ?>
 <script type="text/javascript">
     <?php $requireJs = ($fullViewType == 'popup')?"'jquery','Magento_Catalog/js/cdzZoom','Magento_Ui/js/modal/modal','js/jquery.nicescroll.min'":"'jquery','Magento_Catalog/js/cdzZoom','Magento_Ui/js/modal/modal'"; ?>
@@ -126,9 +135,9 @@ $labelHelper = $this->helper('Codazon\ProductLabel\Helper\Data');
 
 <div class="custom-style-galleryshare">
     <span>Share: </span>
-    <a  href="" class="custom-style-galleryshare-fb"  ></a>
-    <a  href="" class="custom-style-galleryshare-tw"  ></a>
-    <a  href="" class="custom-style-galleryshare-pn"  ></a>
+    <a href="https://www.facebook.com/sharer.php?u=<?php echo $_helper->productAttribute($_product, $_product->getProductUrl(), 'product_url'); ?>" class="custom-style-galleryshare-fb"></a>
+    <a href="https://twitter.com/intent/tweet?text=<?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>&url=<?php echo $_helper->productAttribute($_product, $_product->getProductUrl(), 'product_url'); ?>&via=" class="custom-style-galleryshare-tw"></a>
+    <a href="https://pinterest.com/pin/create/button/?description=<?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>&url=<?php echo $_helper->productAttribute($_product, $_product->getProductUrl(), 'product_url'); ?>&media=<?php echo $imageUrl ?>" class="custom-style-galleryshare-pn"></a>
 </div>
 
 <script>

@@ -123,6 +123,9 @@
 			<div class="field note no-label">
 				<?php echo __('Whatever you need, we\'re here to help. Just get in touch, and we\'ll try our best to respond within 24 hours.'); ?>
 			</div>
+            <div style="display: none;">
+                <input name="lastname" value="" />
+            </div>
 			<?php foreach($fields as $field): ?>
 				<div class="field <?php echo $field->getData('key'); ?> <?php echo $field->getData('field_class'); ?>">
 					<label class="label" for="<?php echo $field->getData('key'); ?>"><span><?php echo $field->getData('label'); ?></span></label>

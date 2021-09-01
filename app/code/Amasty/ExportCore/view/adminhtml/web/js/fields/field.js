@@ -75,6 +75,7 @@ define([
                     'options': this.options,
                     'modifierValue': modifierValue || {},
                     'modifierConfig': this.modifierConfig,
+                    'dateOptions': this.dateOptions,
                     'dataScope': this.dataScope + '.modifier.' + this.modifierIndex
                 });
 

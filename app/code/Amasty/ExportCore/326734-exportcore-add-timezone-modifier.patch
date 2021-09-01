@@ -1,0 +1,287 @@
+Index: Export/DataHandling/FieldModifier/Date/Timezones.php
+===================================================================
+diff --git a/Export/DataHandling/FieldModifier/Date/Timezones.php b/Export/DataHandling/FieldModifier/Date/Timezones.php
+new file mode 100644
+--- /dev/null
++++ b/Export/DataHandling/FieldModifier/Date/Timezones.php
+@@ -0,0 +1,63 @@
++<?php
++
++namespace Amasty\ExportCore\Export\DataHandling\FieldModifier\Date;
++
++use Magento\Framework\Data\OptionSourceInterface;
++
++class Timezones implements OptionSourceInterface
++{
++    const OFFSETS = [
++       'UTC−12:00' => -43200,
++       'UTC−11:00' => -39600,
++       'UTC−10:00' => -36000,
++       'UTC−09:30' => -34200,
++       'UTC−09:00' => -32400,
++       'UTC−08:00' => -28800,
++       'UTC−07:00' => -25200,
++       'UTC−06:00' => -21600,
++       'UTC−05:00' => -18000,
++       'UTC−04:00' => -14400,
++       'UTC−03:30' => -12600,
++       'UTC−03:00' => -10800,
++       'UTC−02:00' => -7200,
++       'UTC−01:00' => -3600,
++       'UTC±00:00' => 0,
++       'UTC+01:00' => 3600,
++       'UTC+02:00' => 7200,
++       'UTC+03:00' => 10800,
++       'UTC+03:30' => 12600,
++       'UTC+04:00' => 14400,
++       'UTC+04:30' => 16200,
++       'UTC+05:00' => 18000,
++       'UTC+05:30' => 19800,
++       'UTC+05:45' => 20700,
++       'UTC+06:00' => 21600,
++       'UTC+06:30' => 23400,
++       'UTC+07:00' => 25200,
++       'UTC+08:00' => 28800,
++       'UTC+08:45' => 31500,
++       'UTC+09:00' => 32400,
++       'UTC+09:30' => 34200,
++       'UTC+10:00' => 36000,
++       'UTC+10:30' => 37800,
++       'UTC+11:00' => 39600,
++       'UTC+12:00' => 43200,
++       'UTC+12:45' => 45900,
++       'UTC+13:00' => 46800,
++       'UTC+14:00' => 50400
++    ];
++
++    public function toOptionArray(): array
++    {
++        $options = [];
++
++        foreach (self::OFFSETS as $key => $value) {
++            $options[] = [
++                'label' => $key,
++                'value' => $value
++            ];
++        }
++
++        return $options;
++    }
++}
+Index: Export/DataHandling/FieldModifier/TimeZone.php
+===================================================================
+diff --git a/Export/DataHandling/FieldModifier/TimeZone.php b/Export/DataHandling/FieldModifier/TimeZone.php
+new file mode 100644
+--- /dev/null
++++ b/Export/DataHandling/FieldModifier/TimeZone.php
+@@ -0,0 +1,93 @@
++<?php
++
++declare(strict_types=1);
++
++namespace Amasty\ExportCore\Export\DataHandling\FieldModifier;
++
++use Amasty\ExportCore\Api\Config\Profile\FieldInterface;
++use Amasty\ExportCore\Api\Config\Profile\ModifierInterface;
++use Amasty\ExportCore\Api\FieldModifier\FieldModifierInterface;
++use Amasty\ExportCore\Export\DataHandling\AbstractModifier;
++use Amasty\ExportCore\Export\DataHandling\ModifierProvider;
++use Amasty\ExportCore\Export\Utils\Config\ArgumentConverter;
++use Amasty\ExportCore\Export\DataHandling\FieldModifier\Date\Timezones;
++
++class TimeZone extends AbstractModifier implements FieldModifierInterface
++{
++    const DEFAULT_MYSQL_DATE_FORMAT = 'Y-m-d H:i:s';
++
++    /** @var ArgumentConverter */
++    private $argumentConverter;
++
++    public function __construct(
++        $config,
++        ArgumentConverter $argumentConverter
++    ) {
++        parent::__construct($config);
++        $this->argumentConverter = $argumentConverter;
++    }
++
++    public function transform($value): string
++    {
++        $offset = (isset($this->config['select_input_value'])) ? (int)$this->config['select_input_value'] : 0;
++
++        if (empty($value) || $offset === 0 || !in_array($offset, Timezones::OFFSETS)) {
++            return $value;
++        }
++
++        try {
++            $timestamp = strtotime($value) + $offset;
++            $datetime = new \DateTime();
++            $datetime->setTimestamp($timestamp);
++        } catch (\Exception $e) {
++            return $value;
++        }
++
++        return $datetime->format(self::DEFAULT_MYSQL_DATE_FORMAT);
++    }
++
++    public function getValue(ModifierInterface $modifier): array
++    {
++        $modifierData = [];
++        foreach ($modifier->getArguments() as $argument) {
++            $modifierData['value'][$argument->getName()] = $argument->getValue();
++        }
++        $modifierData['select_value'] = $modifier->getModifierClass();
++
++        return $modifierData;
++    }
++
++    public function prepareArguments(FieldInterface $field, $requestData): array
++    {
++        $arguments = [];
++        if (!empty($requestData['value']['select_input_value'])) {
++            $arguments = $this->argumentConverter->valueToArguments(
++                (int)$requestData['value']['select_input_value'],
++                'select_input_value',
++                'number'
++            );
++        }
++
++        return $arguments;
++    }
++
++    public function getGroup(): string
++    {
++        return ModifierProvider::DATE_GROUP;
++    }
++
++    public function getLabel(): string
++    {
++        return __('Apply Timezone')->getText();
++    }
++
++    public function getJsConfig(): array
++    {
++        return [
++            'component' => 'Amasty_ExportCore/js/fields/modifier',
++            'template' => 'Amasty_ExportCore/fields/modifier',
++            'childTemplate' => 'Amasty_ExportCore/fields/selectinput-modifier',
++            'childComponent' => 'Amasty_ExportCore/js/fields/modifier-field'
++        ];
++    }
++}
+Index: Export/DataHandling/ModifierProvider.php
+===================================================================
+diff --git a/Export/DataHandling/ModifierProvider.php b/Export/DataHandling/ModifierProvider.php
+--- a/Export/DataHandling/ModifierProvider.php
++++ b/Export/DataHandling/ModifierProvider.php
+@@ -44,7 +44,8 @@
+         \Amasty\ExportCore\Export\DataHandling\FieldModifier\Number\Floor::class,
+ 
+         // date
+-        \Amasty\ExportCore\Export\DataHandling\FieldModifier\Date::class
++        \Amasty\ExportCore\Export\DataHandling\FieldModifier\Date::class,
++        \Amasty\ExportCore\Export\DataHandling\FieldModifier\TimeZone::class
+     ];
+ 
+     /**
+Index: Export/Form/FieldsAdvanced.php
+===================================================================
+diff --git a/Export/Form/FieldsAdvanced.php b/Export/Form/FieldsAdvanced.php
+--- a/Export/Form/FieldsAdvanced.php
++++ b/Export/Form/FieldsAdvanced.php
+@@ -16,6 +16,7 @@
+ use Amasty\ExportCore\Api\FormInterface;
+ use Amasty\ExportCore\Export\Config\EntityConfigProvider;
+ use Amasty\ExportCore\Export\Config\RelationConfigProvider;
++use Amasty\ExportCore\Export\DataHandling\FieldModifier\Date\Timezones;
+ use Amasty\ExportCore\Export\DataHandling\ModifierProvider;
+ use Amasty\ExportCore\Export\Utils\Hash;
+ use Amasty\ImportExportCore\Api\Config\ConfigClass\ConfigClassInterfaceFactory;
+@@ -85,6 +86,11 @@
+      */
+     private $modifierFactory;
+ 
++    /**
++     * @var array
++     */
++    private $timezones;
++
+     public function __construct(
+         FieldsConfigInterfaceFactory $fieldsConfigFactory,
+         FieldInterfaceFactory $fieldFactory,
+@@ -96,7 +102,8 @@
+         ConfigClassInterfaceFactory $configClassFactory,
+         Factory $factory,
+         ModifierProvider $modifierProvider,
+-        ModifierInterfaceFactory $modifierFactory
++        ModifierInterfaceFactory $modifierFactory,
++        Timezones $timezones
+     ) {
+         $this->fieldFactory = $fieldFactory;
+         $this->entityConfigProvider = $entityConfigProvider;
+@@ -109,6 +116,7 @@
+         $this->factory = $factory;
+         $this->modifierProvider = $modifierProvider;
+         $this->modifierFactory = $modifierFactory;
++        $this->timezones = $timezones->toOptionArray();
+     }
+ 
+     public function getMeta(EntityConfigInterface $entityConfig, array $arguments = []): array
+@@ -182,6 +190,7 @@
+                             'output_value' => $field->getMap(),
+                             'modifier' => $this->getSelectedModifiers($field),
+                             'options' => $modifierOptions,
++                            'dateOptions' => $this->timezones,
+                             'sortOrder' => $field->getSortOrder()
+                         ];
+                         break;
+Index: view/adminhtml/web/js/fields/field.js
+===================================================================
+diff --git a/view/adminhtml/web/js/fields/field.js b/view/adminhtml/web/js/fields/field.js
+--- a/view/adminhtml/web/js/fields/field.js
++++ b/view/adminhtml/web/js/fields/field.js
+@@ -75,6 +75,7 @@
+                     'options': this.options,
+                     'modifierValue': modifierValue || {},
+                     'modifierConfig': this.modifierConfig,
++                    'dateOptions': this.dateOptions,
+                     'dataScope': this.dataScope + '.modifier.' + this.modifierIndex
+                 });
+ 
+Index: view/adminhtml/web/js/fields/modifier-field.js
+===================================================================
+diff --git a/view/adminhtml/web/js/fields/modifier-field.js b/view/adminhtml/web/js/fields/modifier-field.js
+--- a/view/adminhtml/web/js/fields/modifier-field.js
++++ b/view/adminhtml/web/js/fields/modifier-field.js
+@@ -8,7 +8,8 @@
+             links: {
+                 input_value: '${ $.provider }:${ $.dataScope }.input_value',
+                 from_input_value: '${ $.provider }:${ $.dataScope }.from_input_value',
+-                to_input_value: '${ $.provider }:${ $.dataScope }.to_input_value'
++                to_input_value: '${ $.provider }:${ $.dataScope }.to_input_value',
++                select_input_value: '${ $.provider }:${ $.dataScope }.select_input_value'
+             }
+         },
+ 
+@@ -16,7 +17,8 @@
+             this._super().observe([
+                 'input_value',
+                 'from_input_value',
+-                'to_input_value'
++                'to_input_value',
++                'select_input_value'
+             ]);
+ 
+             return this;
+Index: view/adminhtml/web/template/fields/selectinput-modifier.html
+===================================================================
+diff --git a/view/adminhtml/web/template/fields/selectinput-modifier.html b/view/adminhtml/web/template/fields/selectinput-modifier.html
+new file mode 100644
+--- /dev/null
++++ b/view/adminhtml/web/template/fields/selectinput-modifier.html
+@@ -0,0 +1,6 @@
++<select class="admin__control-select amexportcore-field"
++        data-bind="value: $data.select_input_value,
++                   options: $parent.dateOptions,
++                   optionsText: 'label',
++                   optionsValue: 'value'">
++</select>

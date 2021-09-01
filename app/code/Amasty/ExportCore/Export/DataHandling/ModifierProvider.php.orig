@@ -50,8 +50,7 @@ class ModifierProvider
         \Amasty\ExportCore\Export\DataHandling\FieldModifier\Number\Floor::class,
 
         // date
-        \Amasty\ExportCore\Export\DataHandling\FieldModifier\Date::class,
-        \Amasty\ExportCore\Export\DataHandling\FieldModifier\TimeZone::class
+        \Amasty\ExportCore\Export\DataHandling\FieldModifier\Date::class
     ];
 
     /**

@@ -8,7 +8,8 @@ define([
             links: {
                 input_value: '${ $.provider }:${ $.dataScope }.input_value',
                 from_input_value: '${ $.provider }:${ $.dataScope }.from_input_value',
-                to_input_value: '${ $.provider }:${ $.dataScope }.to_input_value'
+                to_input_value: '${ $.provider }:${ $.dataScope }.to_input_value',
+                select_input_value: '${ $.provider }:${ $.dataScope }.select_input_value'
             }
         },
 
@@ -16,7 +17,8 @@ define([
             this._super().observe([
                 'input_value',
                 'from_input_value',
-                'to_input_value'
+                'to_input_value',
+                'select_input_value'
             ]);
 
             return this;

@@ -22,7 +22,6 @@ use Amasty\ExportCore\Api\FieldModifier\FieldModifierInterface;
 use Amasty\ExportCore\Api\FormInterface;
 use Amasty\ExportCore\Export\Config\EntityConfigProvider;
 use Amasty\ExportCore\Export\Config\RelationConfigProvider;
-use Amasty\ExportCore\Export\DataHandling\FieldModifier\Date\Timezones;
 use Amasty\ExportCore\Export\DataHandling\ModifierProvider;
 use Amasty\ExportCore\Export\Utils\Hash;
 use Amasty\ImportExportCore\Api\Config\ConfigClass\ConfigClassInterfaceFactory;
@@ -92,11 +91,6 @@ class FieldsAdvanced implements FormInterface
      */
     private $modifierFactory;
 
-    /**
-     * @var array
-     */
-    private $timezones;
-
     public function __construct(
         FieldsConfigInterfaceFactory $fieldsConfigFactory,
         FieldInterfaceFactory $fieldFactory,
@@ -108,8 +102,7 @@ class FieldsAdvanced implements FormInterface
         ConfigClassInterfaceFactory $configClassFactory,
         Factory $factory,
         ModifierProvider $modifierProvider,
-        ModifierInterfaceFactory $modifierFactory,
-        Timezones $timezones
+        ModifierInterfaceFactory $modifierFactory
     ) {
         $this->fieldFactory = $fieldFactory;
         $this->entityConfigProvider = $entityConfigProvider;
@@ -122,7 +115,6 @@ class FieldsAdvanced implements FormInterface
         $this->factory = $factory;
         $this->modifierProvider = $modifierProvider;
         $this->modifierFactory = $modifierFactory;
-        $this->timezones = $timezones->toOptionArray();
     }
 
     public function getMeta(EntityConfigInterface $entityConfig, array $arguments = []): array
@@ -196,7 +188,6 @@ class FieldsAdvanced implements FormInterface
                             'output_value' => $field->getMap(),
                             'modifier' => $this->getSelectedModifiers($field),
                             'options' => $modifierOptions,
-                            'dateOptions' => $this->timezones,
                             'sortOrder' => $field->getSortOrder()
                         ];
                         break;

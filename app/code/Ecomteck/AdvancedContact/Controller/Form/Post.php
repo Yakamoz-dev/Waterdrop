@@ -46,6 +46,18 @@ class Post extends Action
             $resultRedirect->setUrl($this->_redirect->getRefererUrl());
             return $resultRedirect;
         } else {
+            $message = $this->getRequest()->getParam("message");
+            if(strpos($message," ") === false) {
+                $messageManager = $this->_objectManager
+                    ->get(\Magento\Framework\Message\ManagerInterface::class);
+                $messageManager->addSuccess(
+                    __('Thanks for contacting us with your comments and questions. We\'ll respond to you very soon.')
+                );
+                $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+                $resultRedirect->setUrl($this->_redirect->getRefererUrl());
+                return $resultRedirect;
+            }
+
             $validator = $this->_objectManager->get(\Magento\Framework\Data\Form\FormKey\Validator::class);
             if ($validator->validate($this->getRequest())) {
                 $helper = $this->_objectManager->get(\Ecomteck\AdvancedContact\Helper\Data::class);

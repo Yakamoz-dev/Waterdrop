@@ -460,6 +460,7 @@ return array(
     'Composer\\Semver\\' => array($vendorDir . '/composer/semver/src'),
     'Composer\\CaBundle\\' => array($vendorDir . '/composer/ca-bundle/src'),
     'Composer\\' => array($vendorDir . '/composer/composer/src/Composer'),
+    'CjPublicis\\UniversalTag\\' => array($vendorDir . '/cjpublicis/universal-tag-module'),
     'Braintree\\' => array($vendorDir . '/braintree/braintree_php/lib/Braintree'),
     'Base32\\' => array($vendorDir . '/christian-riesen/base32/src'),
     'BaconQrCode\\' => array($vendorDir . '/bacon/bacon-qr-code/src'),

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9f38d262e5e02532f378b6c584cae760",
+    "content-hash": "02ed569600288ab7f588805b261cf5fd",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -598,6 +598,32 @@
                 "source": "https://github.com/ChristianRiesen/base32/tree/1.6.0"
             },
             "time": "2021-02-26T10:19:33+00:00"
+        },
+        {
+            "name": "cjpublicis/universal-tag-module",
+            "version": "1.0.3",
+            "dist": {
+                "type": "zip",
+                "url": "https://repo.magento.com/archives/cjpublicis/universal-tag-module/cjpublicis-universal-tag-module-1.0.3.0.zip",
+                "shasum": "727309b235baaec93a82d93100bc5a59fd46e972"
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "CjPublicis\\UniversalTag\\": ""
+                }
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "description": "Universal Tag"
         },
         {
             "name": "colinmollenhour/cache-backend-file",

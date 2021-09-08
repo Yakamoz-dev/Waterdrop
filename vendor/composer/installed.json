@@ -625,6 +625,35 @@
             "install-path": "../christian-riesen/base32"
         },
         {
+            "name": "cjpublicis/universal-tag-module",
+            "version": "1.0.3",
+            "version_normalized": "1.0.3.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://repo.magento.com/archives/cjpublicis/universal-tag-module/cjpublicis-universal-tag-module-1.0.3.0.zip",
+                "shasum": "727309b235baaec93a82d93100bc5a59fd46e972"
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "type": "magento2-module",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "CjPublicis\\UniversalTag\\": ""
+                }
+            },
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "description": "Universal Tag",
+            "install-path": "../cjpublicis/universal-tag-module"
+        },
+        {
             "name": "colinmollenhour/cache-backend-file",
             "version": "v1.4.5",
             "version_normalized": "1.4.5.0",

@@ -152,6 +152,15 @@ private static $installed = array (
       ),
       'reference' => '2e82dab3baa008e24a505649b0d583c31d31e894',
     ),
+    'cjpublicis/universal-tag-module' => 
+    array (
+      'pretty_version' => '1.0.3',
+      'version' => '1.0.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
     'colinmollenhour/cache-backend-file' => 
     array (
       'pretty_version' => 'v1.4.5',

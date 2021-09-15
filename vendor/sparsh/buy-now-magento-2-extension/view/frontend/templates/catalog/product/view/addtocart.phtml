@@ -2,6 +2,7 @@
 <?php
 $isModuleEnable = $this->helper(\Sparsh\BuyNow\Helper\Data::class)->getConfig('buynow/general/enable_buynow');
 $hideCart = $this->helper(\Sparsh\BuyNow\Helper\Data::class)->getConfig('buynow/advance/hide_add_to_cart');
+$_themeHelper = $this->helper('Codazon\ThemeOptions\Helper\Data');
 $flag = 1;
 ?>
 <?php $_product = $block->getProduct(); ?>
@@ -54,6 +55,44 @@ $flag = 1;
                             '>
                             <span><?= /* @noEscape */ __($buttonTitle) ?></span>
                         </button>
+                    </div>
+                <?php endif; ?>
+                <?php if ($_product->getAmazonLink()): ?>
+                    <style>
+                        .buy-on-amazon {
+                            width: 99%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            background: #FFD158;
+                            padding: 12px;
+                            border-radius: 4px;
+                            font-size: 16px;
+                            line-height: 24px;
+                            color: #333333 !important;
+                            text-decoration: unset !important;
+                        }
+                        .amazon-img {
+                            width: 24px;
+                            margin-right: 12px;
+                        }
+                        .amazon-div {
+                            padding-bottom: 12px;
+                        }
+                        @media screen and (max-width: 428px) {
+                            .buy-on-amazon {
+                                width: 100%;
+                            }
+                            .amazon-div {
+                                padding-bottom: 5px;
+                            }
+                        }
+                    </style>
+                    <div class="amazon-div">
+                        <a class="buy-on-amazon" target="_blank" href="<?php echo $_product->getAmazonLink(); ?>">
+                            <img class="amazon-img" src="<?php echo $_themeHelper->getMediaUrl()?>wysiwyg/codazon/fastest_fashion/home/amazon.png" />
+                            Buy on Amazon
+                        </a>
                     </div>
                 <?php endif; ?>
                 <?= $block->getChildHtml('', true) ?>

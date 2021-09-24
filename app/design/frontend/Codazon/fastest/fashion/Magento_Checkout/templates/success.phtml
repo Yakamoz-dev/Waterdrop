@@ -111,3 +111,37 @@ if (array_key_exists("waterdrop_ch", $_COOKIE) && $_COOKIE['waterdrop_ch'] != "S
 <script> window.uetq1 = window.uetq1 || []; window.uetq1.push('event', 'purchase', {'revenue_value': '<?php echo sprintf("%.2f",$subtotal); ?>', 'currency': 'USD' }); </script>
 <script> window.uetq2 = window.uetq2 || []; window.uetq2.push('event', 'purchase', {'revenue_value': '<?php echo sprintf("%.2f",$subtotal); ?>', 'currency': 'USD' }); </script>
 <!-- End Bing -->
+
+<!-- BEGIN GCR Opt-in Module Code -->
+<script src="https://apis.google.com/js/platform.js?onload=renderOptIn" async defer></script>
+<script>
+    window.renderOptIn = function() {
+        window.gapi.load('surveyoptin', function() {
+            window.gapi.surveyoptin.render(
+                {
+                    // REQUIRED FIELDS
+                    "merchant_id": 135359691,
+                    "order_id": "<?php echo $orderId ?>",
+                    "email": "<?php echo $order->getCustomerEmail() ?>",
+                    "delivery_country": "US",
+                    "estimated_delivery_date": "<?php echo date('Y-m-d') ?>",
+
+                    // OPTIONAL FIELDS
+                    "products": [
+                        <?php foreach($ordered_items as $index => $item): ?>
+                            <?php
+                                $product = $objectManager->create('Magento\Catalog\Model\Product')->load($item->getProductId());
+                                $children = $item->getChildrenItems();
+                                if ($children) {
+                                    $product = $objectManager->create('Magento\Catalog\Model\Product')->load($children[0]->getProductId());
+                                }
+                            ?>
+                            <?php if($product->getData('gtin')): ?>
+                            {"gtin":"<?php echo $product->getData('gtin') ?>"},
+                            <?php endif; ?>
+                        <?php endforeach;?>
+                    ]
+                });
+        });
+    }
+</script>

@@ -21,3 +21,6 @@
     <?php /* @escapeNotVerified */ echo $block->getProduct()->getResource()->getAttribute('certified_info')->getFrontend()->getValue($block->getProduct()); ?>
 </div>
 <?php endif; ?>
+<?php if($block->getProduct()->getGtin()): ?>
+    <div itemprop="gtin12" style="display: none;"><?php echo $block->getProduct()->getGtin(); ?></div>
+<?php endif; ?>

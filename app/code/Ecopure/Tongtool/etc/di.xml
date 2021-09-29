@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Ecopure\Tongtool\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Ecopure\Tongtool\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">tongtool</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Ecopure\Tongtool\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="ecopure_tongtool_order_listing_data_source" xsi:type="string">Ecopure\Tongtool\Model\ResourceModel\Order\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Ecopure\Tongtool\Model\ResourceModel\Order\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">tongtool</argument>
+            <argument name="eventPrefix" xsi:type="string">ecopure_tongtool_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">ecopure_tongtool_tongtool</argument>
+            <argument name="resourceModel" xsi:type="string">Ecopure\Tongtool\Model\ResourceModel\Tongtool</argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Ecomteck
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Ecomteck.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.ecomteck.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Ecomteck
+ * @package     Ecomteck_AdvancedContact
+ * @copyright   Copyright (c) Ecomteck (https://www.ecomteck.com/)
+ * @license     https://www.ecomteck.com/LICENSE.txt
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="Ecopure_Tongtool::section"
+			 title="Tongtool"
+			 module="Ecopure_Tongtool"
+			 sortOrder="200"
+			 parent="Magento_Backend::content"
+			 resource="Ecopure_Tongtool::section" />
+		<add id="Ecopure_Tongtool::order"
+			 title="Orders"
+			 module="Ecopure_Tongtool"
+			 sortOrder="10"
+			 parent="Ecopure_Tongtool::section"
+			 action="ecopure_tongtool/order"
+			 resource="Ecopure_Tongtool::order" />
+	</menu>
+</config>

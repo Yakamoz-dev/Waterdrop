@@ -9,9 +9,9 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
         $installer = $setup;
         $installer->startSetup();
         /* tongtool_order table */
-        if (!$installer->tableExists('tongtool_order')) {
+        if (!$installer->tableExists('tongtool')) {
             $table = $installer->getConnection()->newTable(
-                $installer->getTable('tongtool_order')
+                $installer->getTable('tongtool')
             )
                 ->addColumn(
                     'id',
@@ -137,7 +137,21 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
                     [],
                     'Is Completed'
                 )
-                ->setComment('Tongtool Order');
+                ->addColumn(
+                    'is_uploaded',
+                    \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                    1,
+                    [],
+                    'Is Uploaded'
+                )
+                ->addColumn(
+                    'error',
+                    \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    255,
+                    [],
+                    'Error'
+                )
+                ->setComment('Tongtool');
             $installer->getConnection()->createTable($table);
         }
         $installer->endSetup();

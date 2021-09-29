@@ -1,0 +1,36 @@
+<?php
+
+namespace Ecopure\Tongtool\Observer;
+
+use Magento\Framework\Event\Observer;
+use Magento\Framework\Event\ObserverInterface;
+
+class CancelOrder implements ObserverInterface
+{
+    protected $_logger;
+
+    public function __construct(
+        \Ecopure\Tongtool\Logger\Logger $logger
+    ) {
+        $this->_logger = $logger;
+    }
+
+    public function execute(Observer $observer)
+    {
+        try {
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+
+            $order = $observer->getEvent()->getOrder();
+            $incrementId = $order->getIncrementId();
+            $orderId = 'M_' . $incrementId;
+
+            $tongtoolOrder = $objectManager->create('Ecopure\Tongtool\Model\Tongtool')->load($orderId, 'order_id');
+            $tongtoolOrder->setIsCancelled(1);
+            $tongtoolOrder->save();
+
+            $this->_logger->info("Cancel Order: ".$incrementId);
+        } catch (\Exception $e) {
+            $this->_logger->info($e->getMessage());
+        }
+    }
+}

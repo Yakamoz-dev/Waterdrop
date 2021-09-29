@@ -69,20 +69,19 @@ class InitialFee
 
         foreach ($items as $item)
         {
-            if (!in_array($item->getProductType(), ["simple", "virtual"]))
-                continue;
-
             $qty = $this->paymentsHelper->getItemQty($item);
             $productId = $item->getProductId();
-            $total += $this->getInitialFeeForProductId($item->getProductId(), $rate, $qty);
+            $total += $this->getInitialFeeForProductId($productId, $rate, $qty);
         }
-
         return $total;
     }
 
     public function getInitialFeeForProductId($productId, $rate, $qty)
     {
         $product = $this->paymentsHelper->loadProductById($productId);
+
+        if (!in_array($product->getTypeId(), ["simple", "virtual"]))
+            return 0;
 
         if (!is_numeric($product->getStripeSubInitialFee()))
             return 0;

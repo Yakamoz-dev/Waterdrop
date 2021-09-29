@@ -11,7 +11,7 @@ use Magento\Framework\Exception\LocalizedException;
 class Config
 {
     public static $moduleName           = "Magento2";
-    public static $moduleVersion        = "2.6.1";
+    public static $moduleVersion        = "2.7.4";
     public static $minStripePHPVersion  = "7.61.0";
     public static $moduleUrl            = "https://stripe.com/docs/plugins/magento";
     public static $partnerId            = "pp_partner_Fs67gT2M6v3mH7";

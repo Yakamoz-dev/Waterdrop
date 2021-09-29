@@ -127,6 +127,78 @@ class PaymentMethod extends \Magento\Payment\Model\Method\Adapter
         return $this;
     }
 
+    public function checkIfWeCanRefundMore($refundedAmount, $remainingAmount, $requestedAmount, $order, $currency)
+    {
+        $cents = 100;
+        if ($this->helper->isZeroDecimal($currency))
+            $cents = 1;
+
+        if ($remainingAmount <= 0)
+        {
+            if ($refundedAmount < $requestedAmount)
+            {
+                $humanReadable1 = $this->helper->addCurrencySymbol(($requestedAmount - $refundedAmount) / $cents, $currency);
+                $humanReadable2 = $this->helper->addCurrencySymbol($requestedAmount / $cents, $currency);
+                $msg = __('%1 out of %2 could not be refunded online. Creating an offline refund instead.', $humanReadable1, $humanReadable2);
+                $this->helper->addWarning($msg);
+                $this->helper->addOrderComment($msg, $order);
+            }
+
+            return false;
+        }
+
+        if ($refundedAmount >= $requestedAmount)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function setRefundedAmount($amount, $requestedAmount, $currency, $order)
+    {
+        $currency = strtolower($currency);
+        $orderCurrency = strtolower($order->getOrderCurrencyCode());
+        $baseCurrency = strtolower($order->getBaseCurrencyCode());
+
+        $cents = 100;
+        if ($this->helper->isZeroDecimal($currency))
+            $cents = 1;
+
+        // If this is a partial refund (2nd or 3rd), there will be an amount set already which we need to adjust instead of overwrite
+        if ($order->getTotalRefunded() > 0)
+        {
+            $diff = $amount - $requestedAmount;
+            if ($diff == 0)
+                return; // Let Magento set the refund amount
+
+            $refunded = $diff / $cents;
+        }
+        else
+        {
+            $refunded = $amount / $cents;
+        }
+
+        if ($currency == $orderCurrency)
+        {
+            $order->setTotalRefunded($order->getTotalRefunded() + $refunded);
+            $baseRefunded = $this->helper->convertOrderAmountToBaseAmount($refunded, $currency, $order);
+            $order->setBaseTotalRefunded($order->getBaseTotalRefunded() + $baseRefunded);
+        }
+        else if ($currency == $baseCurrency)
+        {
+            $rate = ($order->getBaseToOrderRate() ? $order->getBaseToOrderRate() : 1);
+            $order->setTotalRefunded($order->getTotalRefunded() + round($refunded * $rate, 2));
+            $order->setBaseTotalRefunded($order->getBaseTotalRefunded() + $refunded);
+        }
+        else
+        {
+            $this->helper->addWarning(__("Could not set order refunded amount because the currency %1 matches neither the order currency, nor the base currency."), $currency);
+        }
+
+        return $this;
+    }
+
     public function cancel(InfoInterface $payment, $amount = null)
     {
         $method = $payment->getMethod();
@@ -135,7 +207,7 @@ class PaymentMethod extends \Magento\Payment\Model\Method\Adapter
         if ($method == "stripe_payments" && !$useStoreCurrency)
         {
             // Authorized Only
-            $amount = (empty($amount)) ? $payment->getOrder()->getBaseTotalDue() : $amount;
+            $amount = (empty($amount)) ? $payment->getOrder()->getBaseGrandTotal() : $amount;
             $currency = $payment->getOrder()->getBaseCurrencyCode();
         }
         else
@@ -155,69 +227,170 @@ class PaymentMethod extends \Magento\Payment\Model\Method\Adapter
             }
 
             // Authorized
-            $amount = (empty($amount)) ? $payment->getOrder()->getTotalDue() : $amount;
+            $amount = (empty($amount)) ? $payment->getOrder()->getGrandTotal() : $amount;
             $currency = $payment->getOrder()->getOrderCurrencyCode();
         }
 
-        $transactionId = $payment->getParentTransactionId();
-
-        // With asynchronous payment methods, the parent transaction may be empty
-        if (empty($transactionId))
-            $transactionId = $payment->getLastTransId();
+        $transactionId = $this->helper->cleanToken($payment->getLastTransId());
 
         // Case where an invoice is in Pending status, with no transaction ID, receiving a source.failed event which cancels the invoice.
         if (empty($transactionId))
+        {
+            $humanReadable = $this->helper->addCurrencySymbol($amount, $currency);
+            $msg = __("Cannot refund %1 online because the order has no transaction ID. Creating an offline Credit Memo instead.", $humanReadable);
+            $this->helper->addWarning($msg);
+            $this->helper->addOrderComment($msg, $payment->getOrder());
             return $this;
-
-        $transactionId = preg_replace('/-.*$/', '', $transactionId);
+        }
 
         try {
+            $refundSessionId = rand(); // In case cancel() is called multiple times in one of the automated tests
+
+            $stripe = $this->config->getStripeClient();
+
+            $order = $payment->getOrder();
+            $refundableAmount = $this->helper->getAmountCaptured($order, $refundSessionId) - $this->helper->getAmountRefunded($order, $refundSessionId);
+            $capturableAmount = $this->helper->getAmountAuthorized($order, $refundSessionId);
+
+            $availableAmount = ($refundableAmount + $capturableAmount);
+            if ($availableAmount < $amount)
+            {
+                $humanReadable = $this->helper->addCurrencySymbol($availableAmount, $currency);
+                throw new LocalizedException(__("The most amount that can be refunded online is %1.", $humanReadable));
+            }
+
+            // Refund strategy with $refundableAmount and $capturableAmount:
+            // - Fully cancel authorizations; it is not possible to partially refund the order if there are authorizations, because you must first capture them. You can only cancel the whole order.
+            // - Refund any regular paid PIs next; there should be only one.
+            // - Refund paid amounts from subscription PIs; there can be one or more depending on how many subscriptions were in the cart.
+
             $cents = 100;
             if ($this->helper->isZeroDecimal($currency))
                 $cents = 1;
 
-            $params = array();
-            if ($amount > 0)
-                $params["amount"] = round($amount * $cents);
-            else
-                return;
+            $refundedAmount = 0;
+            $requestedAmount = round($amount * $cents);
+            $remainingAmount = $requestedAmount;
 
-            if (strpos($transactionId, 'pi_') === 0)
+            // 1. Fully cancel authorizations. It is not possible to partially refund the order if there are authorizations,
+            // because you must first capture them. You can only cancel the whole order.
+            $paymentIntents = $this->helper->getOrderPaymentIntents($order, $refundSessionId);
+            foreach ($paymentIntents as $paymentIntentId => $paymentIntent)
             {
-                $pi = \Stripe\PaymentIntent::retrieve($transactionId);
-                if ($pi->status == \StripeIntegration\Payments\Model\PaymentIntent::AUTHORIZED)
+                if ($paymentIntent->status != \StripeIntegration\Payments\Model\PaymentIntent::AUTHORIZED
+                    || $paymentIntent->amount > $remainingAmount)
+                    continue;
+
+                foreach ($paymentIntent->charges->data as $charge)
                 {
-                    $pi->cancel();
-                    return $this;
+                    // If it is an uncaptured authorization
+                    if (!$charge->captured)
+                    {
+                        $humanReadable = $this->helper->addCurrencySymbol($charge->amount / $cents, $currency);
+
+                        // which has not expired yet
+                        if (!$charge->refunded)
+                        {
+                            $this->cache->save($value = "1", $key = "admin_refunded_" . $charge->id, ["stripe_payments"], $lifetime = 60 * 60);
+                            $msg = __('We refunded online/released the uncaptured amount of %1 via Stripe. Charge ID: %2', $humanReadable, $charge->id);
+                            $this->helper->addOrderComment($msg, $order);
+                            // We intentionally do not cancel the $charge in this block, there is a $paymentIntent->cancel() further down
+                        }
+                        // which has expired
+                        else
+                        {
+                            $msg = __('We refunded offline the expired authorization of %1. Charge ID: %2', $humanReadable, $charge->id);
+                            $this->helper->addOrderComment($msg, $order);
+                        }
+
+                        $remainingAmount -= $charge->amount;
+                        $refundedAmount += $charge->amount;
+                    }
                 }
-                else
-                    $charge = $pi->charges->data[0];
-            }
-            else
-            {
-                $charge = $this->api->retrieveCharge($transactionId);
+
+                // Fully cancel the payment intent
+                $paymentIntent->cancel();
             }
 
-            $params["charge"] = $charge->id;
-
-            // This is true when an authorization has expired or when there was a refund through the Stripe account
-            if (!$charge->refunded)
+            if (!$this->checkIfWeCanRefundMore($refundedAmount, $remainingAmount, $requestedAmount, $order, $currency))
             {
-                $this->cache->save($value = "1", $key = "admin_refunded_" . $charge->id, ["stripe_payments"], $lifetime = 60 * 60);
-                \Stripe\Refund::create($params);
+                $this->setRefundedAmount($refundedAmount, $requestedAmount, $currency, $order);
+                return $this;
+            }
 
-                $refundId = $this->helper->getRefundIdFrom($charge);
-                $payment->setAdditionalInformation('last_refund_id', $refundId);
-            }
-            else
+            // 2. Refund any regular payments next; there should be only one.
+            foreach ($paymentIntents as $paymentIntentId => $paymentIntent)
             {
-                $comment = __('An attempt to manually refund the order was made, however this order was already refunded in Stripe. Creating an offline refund instead.');
-                $payment->getOrder()->addStatusToHistory($status = false, $comment, $isCustomerNotified = false);
+                foreach ($paymentIntent->charges->data as $charge)
+                {
+                    if ($charge->captured && !$charge->invoice)
+                    {
+                        $amountToRefund = min($remainingAmount, $charge->amount_captured - $charge->amount_refunded);
+                        if ($amountToRefund <= 0)
+                            continue;
+
+                        $this->cache->save($value = "1", $key = "admin_refunded_" . $charge->id, ["stripe_payments"], $lifetime = 60 * 60);
+                        $refund = $stripe->refunds->create(['charge' => $charge->id, 'amount' => $amountToRefund]);
+
+                        $humanReadable = $this->helper->addCurrencySymbol($amountToRefund / $cents, $currency);
+                        $msg = __('We refunded online %1 via Stripe. Charge ID: %2', $humanReadable, $charge->id);
+                        $this->helper->addOrderComment($msg, $order);
+
+                        $remainingAmount -= $amountToRefund;
+                        $refundedAmount += $amountToRefund;
+                    }
+
+                    if (!$this->checkIfWeCanRefundMore($refundedAmount, $remainingAmount, $requestedAmount, $order, $currency))
+                    {
+                        $this->setRefundedAmount($refundedAmount, $requestedAmount, $currency, $order);
+                        return $this;
+                    }
+                }
             }
+
+            if (!$this->checkIfWeCanRefundMore($refundedAmount, $remainingAmount, $requestedAmount, $order, $currency))
+            {
+                $this->setRefundedAmount($refundedAmount, $requestedAmount, $currency, $order);
+                return $this;
+            }
+
+            // 3. Refund amounts from subscription payments; there can be one or more depending on how many subscriptions were in the cart.
+            foreach ($paymentIntents as $paymentIntentId => $paymentIntent)
+            {
+                foreach ($paymentIntent->charges->data as $charge)
+                {
+                    if ($charge->captured && $charge->invoice)
+                    {
+                        $amountToRefund = min($remainingAmount, $charge->amount_captured - $charge->amount_refunded);
+                        if ($amountToRefund <= 0)
+                            continue;
+
+                        $this->cache->save($value = "1", $key = "admin_refunded_" . $charge->id, ["stripe_payments"], $lifetime = 60 * 60);
+                        $refund = $stripe->refunds->create(['charge' => $charge->id, 'amount' => $amountToRefund]);
+
+                        $humanReadable = $this->helper->addCurrencySymbol($amountToRefund / $cents, $currency);
+                        $msg = __('We refunded online %1 via Stripe. Charge ID: %2. Invoice ID: %3', $humanReadable, $charge->id, $charge->invoice);
+                        $this->helper->addOrderComment($msg, $order);
+
+                        $remainingAmount -= $amountToRefund;
+                        $refundedAmount += $amountToRefund;
+                    }
+
+                    if (!$this->checkIfWeCanRefundMore($refundedAmount, $remainingAmount, $requestedAmount, $order, $currency))
+                    {
+                        $this->setRefundedAmount($refundedAmount, $requestedAmount, $currency, $order);
+                        return $this;
+                    }
+                }
+            }
+
+            // We are calling checkIfWeCanRefundMore one last time in case an order comment/warning needs to be added
+            $this->checkIfWeCanRefundMore($refundedAmount, $remainingAmount, $requestedAmount, $order, $currency);
+            $this->setRefundedAmount($refundedAmount, $requestedAmount, $currency, $order);
         }
         catch (\Exception $e)
         {
-            $this->helper->dieWithError(__('Could not refund payment: %1', $e->getMessage()));
+            $this->helper->dieWithError(__('Could not refund payment: %1', $e->getMessage()), $e);
         }
 
         return $this;
@@ -278,18 +451,6 @@ class PaymentMethod extends \Magento\Payment\Model\Method\Adapter
             return false;
 
         return parent::isAvailable($quote);
-    }
-
-    // The reasoning for overwriting the payment action is that subscription invoices should not be generated at order time
-    // instead they should be generated upon an invoice.payment_succeeded webhook arrival
-    public function getConfigPaymentAction()
-    {
-        $action = parent::getConfigPaymentAction();
-
-        if ($this->helper->hasSubscriptions())
-            return \Magento\Payment\Model\Method\AbstractMethod::ACTION_AUTHORIZE;
-
-        return $action;
     }
 
     // Fixes https://github.com/magento/magento2/issues/5413 in Magento 2.1

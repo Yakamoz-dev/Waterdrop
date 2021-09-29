@@ -131,16 +131,6 @@ define(
                         return;
 
                     setTimeout(stripe.refreshSetupIntent, 0, false);
-
-                    trialingSubscriptions().refresh(quote);
-                });
-
-                quote.shippingAddress.subscribe(function(address)
-                {
-                    if (!address)
-                        return;
-
-                    trialingSubscriptions().refresh(quote);
                 });
 
                 quote.totals.subscribe(function (totals)

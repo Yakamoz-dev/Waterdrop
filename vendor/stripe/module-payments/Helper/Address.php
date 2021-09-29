@@ -7,9 +7,11 @@ use Magento\Framework\Exception\LocalizedException;
 class Address
 {
     public function __construct(
-        \Magento\Directory\Model\CountryFactory $countryFactory
+        \Magento\Directory\Model\CountryFactory $countryFactory,
+        \Magento\Directory\Helper\Data $directoryHelper
     ) {
         $this->countryFactory = $countryFactory;
+        $this->directoryHelper = $directoryHelper;
     }
 
     public function getStripeAddressFromMagentoAddress($address)
@@ -208,5 +210,10 @@ class Address
             unset($data[$key]);
 
         return $data;
+    }
+
+    public function isRegionRequired($countryCode)
+    {
+        return $this->directoryHelper->isRegionRequired($countryCode);
     }
 }

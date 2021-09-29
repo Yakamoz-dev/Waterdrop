@@ -41,7 +41,7 @@ $attributeData = $block->getAttributeData();
         <div class="block-title block-heading">
             <strong><?= $block->escapeHtml($helper->getConfig('codazon_shipping_cost_calculator/general/title')) ?></strong>
             <?php if ($displayFlag) : ?>
-            <img class="country-flag" data-role="country-flag" src="<?= $helper->getMediaUrl('codazon/flags/'.strtolower($currentCountry).'.jpg') ?>">
+            <img class="country-flag" data-role="country-flag" src="<?= $helper->getMediaUrl('codazon/flags/'.strtolower($currentCountry).'.jpg') ?>" alt="country flag">
             <?php endif ?>
             <div data-role="current-address" style="display:none" class="current-address"></div>
             <a href="javascript:void(0)" data-role="content-toggle" class="content-toggle"><?= $helper->getConfig('codazon_shipping_cost_calculator/general/action_label') ?></a>

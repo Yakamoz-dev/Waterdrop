@@ -91,8 +91,8 @@ class Webhooks
 
             $this->log("Received $eventType");
 
-            if ($this->cache->load($event['id']))
-                throw new WebhookException("Event with ID {$event['id']} has already been processed.", 202);
+            if ($this->cache->load($event['id']) && empty($this->request->getParam('dev')))
+                throw new WebhookException(__("Event with ID %1 has already been processed.", $event['id']), 202);
 
             $this->eventManager->dispatch($eventType, array(
                     'arrEvent' => $event,
@@ -158,7 +158,12 @@ class Webhooks
 
     public function log($msg)
     {
-        $this->webhooksLogger->addInfo($msg);
+        // Magento 2.0.0 - 2.4.3
+        if (method_exists($this->webhooksLogger, 'addInfo'))
+            $this->webhooksLogger->addInfo($msg);
+        // Magento 2.4.4+
+        else
+            $this->webhooksLogger->info($msg);
     }
 
     public function verifyWebhookSignature($storeId)
@@ -187,10 +192,6 @@ class Webhooks
 
     public function cache($event)
     {
-        // Don't cache or check requests in development
-        if (!empty($this->request->getQuery()->dev))
-            return;
-
         if (empty($event['id']))
             throw new WebhookException("No event ID specified");
 
@@ -541,13 +542,11 @@ class Webhooks
         $chargeId = $object['id'];
         $chargeAmount = $object['amount'];
         $currentRefund = $this->getCurrentRefundFrom($object);
-        $refundId = $currentRefund['id'];
         $refundAmount = $currentRefund['amount'];
         $currency = $object['currency'];
         $invoice = null;
         $baseToOrderRate = $order->getBaseToOrderRate();
         $payment = $order->getPayment();
-        $lastRefundId = $payment->getAdditionalInformation('last_refund_id');
         if (isset($object["payment_intent"]))
             $pi = $object["payment_intent"];
         else
@@ -572,22 +571,19 @@ class Webhooks
         {
             if ($order->canCancel())
             {
-                if (!$isPartialRefund) // Don't do anything on a partial refund, we expect a paynemt_intent.succeeded to arrive for the partial capture.
+                if (!$isPartialRefund)
                 {
                     $order->cancel();
                     $order->save();
+                }
+                else if ($isPartialRefund)
+                {
+                    // Don't do anything on a partial refund, we expect a paynemt_intent.succeeded to arrive for the partial capture.
                 }
                 return;
             }
 
             throw new WebhookException("Order #{$order->getIncrementId()} cannot be (or has already been) refunded.");
-        }
-
-        if (!empty($lastRefundId) && $lastRefundId == $refundId)
-        {
-            // This is the scenario where we issue a refund from the admin area, and a webhook comes back about the issued refund.
-            // Magento would have already created a credit memo, so we don't want to duplicate that. We just ignore the webhook.
-            return;
         }
 
         foreach($order->getInvoiceCollection() as $item)
@@ -623,8 +619,6 @@ class Webhooks
 
         $comment = __("We refunded %1 through Stripe.", $this->helper->addCurrencySymbol($refundAmount, $currency));
         $order->addStatusToHistory($status = false, $comment);
-
-        $payment->setAdditionalInformation('last_refund_id', $refundId);
 
         $dbTransaction->addObject($invoice)
             ->addObject($order)

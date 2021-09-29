@@ -5,6 +5,8 @@ use Aws\AwsClient;
 
 /**
  * This client is used to interact with the **AWS MediaTailor** service.
+ * @method \Aws\Result configureLogsForPlaybackConfiguration(array $args = [])
+ * @method \GuzzleHttp\Promise\Promise configureLogsForPlaybackConfigurationAsync(array $args = [])
  * @method \Aws\Result createChannel(array $args = [])
  * @method \GuzzleHttp\Promise\Promise createChannelAsync(array $args = [])
  * @method \Aws\Result createProgram(array $args = [])
@@ -39,6 +41,8 @@ use Aws\AwsClient;
  * @method \GuzzleHttp\Promise\Promise getChannelScheduleAsync(array $args = [])
  * @method \Aws\Result getPlaybackConfiguration(array $args = [])
  * @method \GuzzleHttp\Promise\Promise getPlaybackConfigurationAsync(array $args = [])
+ * @method \Aws\Result listAlerts(array $args = [])
+ * @method \GuzzleHttp\Promise\Promise listAlertsAsync(array $args = [])
  * @method \Aws\Result listChannels(array $args = [])
  * @method \GuzzleHttp\Promise\Promise listChannelsAsync(array $args = [])
  * @method \Aws\Result listPlaybackConfigurations(array $args = [])

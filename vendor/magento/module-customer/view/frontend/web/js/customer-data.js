@@ -159,7 +159,6 @@ define([
         update: function (sections) {
             var sectionId = 0,
                 sectionDataIds = $.cookieStorage.get('section_data_ids') || {};
-            if (typeof sectionDataIds == 'string') sectionDataIds = JSON.parse(sectionDataIds);
 
             _.each(sections, function (sectionData, sectionName) {
                 sectionId = sectionData['data_id'];
@@ -360,6 +359,31 @@ define([
         },
 
         /**
+         * Reload sections on ajax complete
+         *
+         * @param {Object} jsonResponse
+         * @param {Object} settings
+         */
+        onAjaxComplete: function (jsonResponse, settings) {
+            var sections,
+                redirects;
+
+            if (settings.type.match(/post|put|delete/i)) {
+                sections = sectionConfig.getAffectedSections(settings.url);
+
+                if (sections && sections.length) {
+                    this.invalidate(sections);
+                    redirects = ['redirect', 'backUrl'];
+
+                    if (_.isObject(jsonResponse) && !_.isEmpty(_.pick(jsonResponse, redirects))) { //eslint-disable-line
+                        return;
+                    }
+                    this.reload(sections, true);
+                }
+            }
+        },
+
+        /**
          * @param {Object} settings
          * @constructor
          */
@@ -377,22 +401,7 @@ define([
      * Events listener
      */
     $(document).on('ajaxComplete', function (event, xhr, settings) {
-        var sections,
-            redirects;
-
-        if (settings.type.match(/post|put|delete/i)) {
-            sections = sectionConfig.getAffectedSections(settings.url);
-
-            if (sections) {
-                customerData.invalidate(sections);
-                redirects = ['redirect', 'backUrl'];
-
-                if (_.isObject(xhr.responseJSON) && !_.isEmpty(_.pick(xhr.responseJSON, redirects))) { //eslint-disable-line
-                    return;
-                }
-                customerData.reload(sections, true);
-            }
-        }
+        customerData.onAjaxComplete(xhr.responseJSON, settings);
     });
 
     /**

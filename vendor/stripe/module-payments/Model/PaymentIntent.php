@@ -15,7 +15,7 @@ class PaymentIntent extends \Magento\Framework\Model\AbstractModel
     public $capture = null; // Overwrites default capture method
     public $savedCard = null;
 
-    const CAPTURED = "succeeded";
+    const SUCCEEDED = "succeeded";
     const AUTHORIZED = "requires_capture";
     const CAPTURE_METHOD_MANUAL = "manual";
     const CAPTURE_METHOD_AUTOMATIC = "automatic";
@@ -88,8 +88,16 @@ class PaymentIntent extends \Magento\Framework\Model\AbstractModel
                 $this->paymentIntent = $this->paymentIntentsCache[$paymentIntentId];
             else
             {
-                $this->loadPaymentIntent($paymentIntentId, $order);
-                $this->updateCache($quoteId);
+                try
+                {
+                    $this->loadPaymentIntent($paymentIntentId, $order);
+                    $this->updateCache($quoteId);
+                }
+                catch (\Exception $e)
+                {
+                    // If the Stripe API keys or the Mode was changed mid-checkout-session, we may get here
+                    return null;
+                }
             }
         }
         else
@@ -762,7 +770,7 @@ class PaymentIntent extends \Magento\Framework\Model\AbstractModel
         if (empty($paymentIntent))
             $paymentIntent = $this->paymentIntent;
 
-        return ($paymentIntent->status == PaymentIntent::CAPTURED ||
+        return ($paymentIntent->status == PaymentIntent::SUCCEEDED ||
             $paymentIntent->status == PaymentIntent::AUTHORIZED);
     }
 
@@ -900,7 +908,12 @@ class PaymentIntent extends \Magento\Framework\Model\AbstractModel
             $this->quote = $quote = $this->getQuote($order->getQuoteId());
 
         if (empty($quote) || !is_numeric($quote->getGrandTotal()))
-            $this->helper->dieWithError("Invalid quote used for Payment Intent");
+        {
+            if ($this->helper->isAdmin())
+                $this->helper->dieWithError(__("Sorry, this invoice cannot be manually captured."));
+            else
+                $this->helper->dieWithError(__("Invalid quote used for Payment Intent"));
+        }
 
         // Save the quote so that we don't lose the reserved order ID in the case of a payment error
         $quote->save();
@@ -916,6 +929,7 @@ class PaymentIntent extends \Magento\Framework\Model\AbstractModel
         if (!$this->paymentIntent // When capturing expired authorizations, we set $this->paymentIntent before confirming it with the order
             || $this->helper->isMultiShipping()
             || $this->isInvalid($params, $quote, $order, $this->paymentIntent)
+            || $this->differentFrom($params, $quote, $order)
             )
         {
             $this->paymentIntent = $this->create($params, $quote, $order); // Load or create the Payment Intent
@@ -931,22 +945,15 @@ class PaymentIntent extends \Magento\Framework\Model\AbstractModel
                 return $this->redirectToMultiShippingAuthorizationPage($payment, $paymentIntentId);
             }
 
-            // We may be buying a subscription which does not need a Payment Intent created manually
-            if ($this->paymentIntent)
-            {
-                $object = clone $this->paymentIntent;
-                $this->destroy($order->getQuoteId());
-            }
-            else
-                $object = null;
-
             $this->triggerAuthentication($piSecrets);
 
             // Let's save the Stripe customer ID on the order's payment in case the customer registers after placing the order
             if (!empty($this->subscriptionData['stripeCustomerId']))
                 $payment->setAdditionalInformation("customer_stripe_id", $this->subscriptionData['stripeCustomerId']);
 
-            return $object;
+            $payment->setLastTransId("cannot_capture_subscriptions");
+
+            return null;
         }
 
         if (!$this->paymentIntent)
@@ -968,7 +975,7 @@ class PaymentIntent extends \Magento\Framework\Model\AbstractModel
             catch (\Exception $e)
             {
                 $this->prepareRollback();
-                $this->helper->maskException($e);
+                return $this->helper->maskException($e);
             }
 
             if ($this->requiresAction())
@@ -1034,116 +1041,30 @@ class PaymentIntent extends \Magento\Framework\Model\AbstractModel
         // Let's save the Stripe customer ID on the order's payment in case the customer registers after placing the order
         if (!empty($paymentIntent->customer))
             $payment->setAdditionalInformation("customer_stripe_id", $paymentIntent->customer);
-
-        // Add some card details for the sales email
-        $card = $paymentIntent->charges->data[0]->payment_method_details->card;
-        $info = [
-            'Card' => __("%1 ending **** %2", ucfirst($card->brand), $card->last4),
-            'Expires' => "{$card->exp_month}/{$card->exp_year}"
-        ];
-        $payment->setAdditionalInformation('source_info', json_encode($info));
-    }
-
-    public function invoiceOrderOffline($order, $paymentIntent, $invoiceParams)
-    {
-        $invoice = $this->helper->invoiceOrder(
-            $order,
-            $paymentIntent->id,
-            \Magento\Sales\Model\Order\Invoice::CAPTURE_OFFLINE,
-            $invoiceParams,
-            false
-        );
-
-        if ($invoice)
-        {
-            $charge = $paymentIntent->charges->data[0];
-            if (!$charge->captured)
-                $invoice->setState(\Magento\Sales\Model\Order\Invoice::STATE_OPEN);
-
-            $order->addRelatedObject($invoice);
-        }
-    }
-
-    public function processTrialSubscriptionOrder($order, $invoice)
-    {
-        $comment = __("A payment for this order will not be collected.");
-        $order->addStatusToHistory($status = false, $comment, $isCustomerNotified = false);
-
-        $payment = $order->getPayment();
-        $payment->setIsTransactionClosed(1);
-        $payment->setIsFraudDetected(false);
-        $payment->setAdditionalInformation("invoice_id", $invoice->id);
-        $order->setGrandTotal(0);
-        $order->setBaseGrandTotal(0);
-        $invoice = $this->helper->cancelOrCloseOrder($order);
-    }
-
-    public function processAuthenticatedCheckoutOrder($order, $paymentIntent, $invoiceParams)
-    {
-        $this->setTransactionDetails($order, $paymentIntent);
-        $this->invoiceOrderOffline($order, $paymentIntent, $invoiceParams);
     }
 
     public function processAuthenticatedOrder($order, $paymentIntent)
     {
-        $subscriptions = $this->subscriptionsHelper->getSubscriptionsFromOrder($order);
         $this->setTransactionDetails($order, $paymentIntent);
-        $charge = $paymentIntent->charges->data[0];
 
-        if (!empty($subscriptions))
+        if (!empty($paymentIntent->charges->data[0]))
         {
-            $subscriptionsTax = 0;
-            $subscriptionsShipping = 0;
-            $subscriptionItemIds = [];
+            $order->getPayment()->setIsTransactionPending(false);
 
-            // For mixed subscription orders, invoice the non-subscription items at the checkout, and leave the rest for when invoice.payment_succeeded arrives
-            foreach ($subscriptions as $subscription)
-            {
-                $item = $subscription['order_item'];
-                $subscriptionItemIds[] = $item->getQuoteItemId();
-                $item->setQtyInvoiced($item->getQtyOrdered());
-
-                $subscriptionsShipping += $subscription['profile']['shipping_magento'];
-                $subscriptionsTax += $subscription['profile']['tax_amount_item'];
-                $subscriptionsTax += $subscription['profile']['tax_amount_shipping'];
-                $subscriptionsTax += $subscription['profile']['tax_amount_initial_fee'];
-            }
-
-            if ($this->config->useStoreCurrency())
-            {
-                $orderShipping = $order->getShippingAmount();
-                $orderTax = $order->getTaxAmount();
-            }
+            if ($paymentIntent->charges->data[0]->captured == false)
+                $order->getPayment()->setIsTransactionClosed(false);
             else
-            {
-                $orderShipping = $order->getBaseShippingAmount();
-                $orderTax = $order->getBaseTaxAmount();
-            }
-
-            $invoiceShipping = $orderShipping - $subscriptionsShipping;
-            $invoiceShipping = $this->helper->convertMagentoAmountToStripeAmount($invoiceShipping, $paymentIntent->currency);
-            $invoiceTax = $orderTax - $subscriptionsTax;
-            $invoiceTax = $this->helper->convertMagentoAmountToStripeAmount($invoiceTax, $paymentIntent->currency);
-
-            $items = $order->getAllItems();
-            foreach ($items as $item)
-            {
-                if (!in_array($item->getQuoteItemId(), $subscriptionItemIds))
-                    $item->setQtyInvoiced(0);
-            }
-
-            $params = [
-                "amount" => $paymentIntent->amount,
-                "currency" => $paymentIntent->currency,
-                "shipping" => $invoiceShipping,
-                "tax" => $invoiceTax
-            ];
-
-            $this->invoiceOrderOffline($order, $paymentIntent, $params);
+                $order->getPayment()->setIsTransactionClosed(true);
         }
-        else if (!$charge->captured && $this->config->isAutomaticInvoicingEnabled())
+        else
         {
             $order->getPayment()->setIsTransactionPending(true);
+        }
+
+        $shouldCreateInvoice = $this->config->isAuthorizeOnly() && $this->config->isAutomaticInvoicingEnabled();
+
+        if ($shouldCreateInvoice)
+        {
             $invoice = $order->prepareInvoice();
             $invoice->register();
             $order->addRelatedObject($invoice);

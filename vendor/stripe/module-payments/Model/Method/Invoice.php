@@ -181,7 +181,6 @@ class Invoice extends \Magento\Payment\Model\Method\Adapter
             {
                 $this->cache->save($value = "1", $key = "admin_refunded_" . $charge->id, ["stripe_payments"], $lifetime = 60 * 60);
                 $refund = $this->config->getStripeClient()->refunds->create(['charge' => $charge->id]);
-                $payment->setAdditionalInformation('last_refund_id', $refund->id);
             }
             else
             {

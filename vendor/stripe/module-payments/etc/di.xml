@@ -275,6 +275,11 @@
         <plugin name="setInitialFeeExtensionAfterLoad" type="StripeIntegration\Payments\Plugin\Order\LoadInitialFeeOnCollection" sortOrder="30"/>
     </type>
 
+    <!-- Disable manual invoice capturing -->
+    <type name="Magento\Sales\Model\Order\Invoice">
+        <plugin name="invoicePlugin" type="StripeIntegration\Payments\Plugin\Sales\Model\Invoice" sortOrder="30"/>
+    </type>
+
     <!-- Around order placement -->
     <type name="Magento\Sales\Model\Service\OrderService">
         <plugin name="stripePaymentsOrderService"

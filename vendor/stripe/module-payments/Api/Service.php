@@ -99,7 +99,7 @@ class Service implements ServiceInterface
     private $inputProcessor;
 
     /**
-     * @var \Magento\Quote\Api\Data\EstimateAddressInterfaceFactory
+     * @var \Magento\Quote\Api\Data\AddressInterface
      */
     private $estimatedAddressFactory;
 
@@ -154,7 +154,7 @@ class Service implements ServiceInterface
      * @param \StripeIntegration\Payments\Helper\Generic                     $stripeHelper
      * @param \StripeIntegration\Payments\Model\Config                       $config
      * @param ServiceInputProcessor                                        $inputProcessor
-     * @param \Magento\Quote\Api\Data\EstimateAddressInterfaceFactory      $estimatedAddressFactory
+     * @param \Magento\Quote\Api\Data\AddressInterfaceFactory              $estimatedAddressFactory
      * @param \Magento\Quote\Api\ShippingMethodManagementInterface         $shippingMethodManager
      * @param \Magento\Checkout\Api\ShippingInformationManagementInterface $shippingInformationManagement
      * @param ShippingInformationInterfaceFactory                          $shippingInformationFactory
@@ -177,8 +177,9 @@ class Service implements ServiceInterface
         \StripeIntegration\Payments\Helper\Generic $stripeHelper,
         \StripeIntegration\Payments\Model\Config $config,
         ServiceInputProcessor $inputProcessor,
-        \Magento\Quote\Api\Data\EstimateAddressInterfaceFactory $estimatedAddressFactory,
+        \Magento\Quote\Api\Data\AddressInterfaceFactory $estimatedAddressFactory,
         \Magento\Quote\Api\ShippingMethodManagementInterface $shippingMethodManager,
+        \Magento\Quote\Api\ShipmentEstimationInterface $shipmentEstimation,
         \Magento\Checkout\Api\ShippingInformationManagementInterface $shippingInformationManagement,
         ShippingInformationInterfaceFactory $shippingInformationFactory,
         \Magento\Quote\Api\CartRepositoryInterface $quoteRepository,
@@ -194,7 +195,8 @@ class Service implements ServiceInterface
         \StripeIntegration\Payments\Helper\SetupIntent $setupIntent,
         \StripeIntegration\Payments\Helper\Klarna $klarnaHelper,
         \StripeIntegration\Payments\Helper\Address $addressHelper,
-        \StripeIntegration\Payments\Helper\Locale $localeHelper
+        \StripeIntegration\Payments\Helper\Locale $localeHelper,
+        \StripeIntegration\Payments\Helper\Subscriptions $subscriptionsHelper
     ) {
         $this->logger = $logger;
         $this->scopeConfig = $scopeConfig;
@@ -212,6 +214,7 @@ class Service implements ServiceInterface
         $this->inputProcessor = $inputProcessor;
         $this->estimatedAddressFactory = $estimatedAddressFactory;
         $this->shippingMethodManager = $shippingMethodManager;
+        $this->shipmentEstimation = $shipmentEstimation;
         $this->shippingInformationManagement = $shippingInformationManagement;
         $this->shippingInformationFactory = $shippingInformationFactory;
         $this->quoteRepository = $quoteRepository;
@@ -228,6 +231,7 @@ class Service implements ServiceInterface
         $this->klarnaHelper = $klarnaHelper;
         $this->addressHelper = $addressHelper;
         $this->localeHelper = $localeHelper;
+        $this->subscriptionsHelper = $subscriptionsHelper;
     }
 
     public function chooseRedirectUrlBetween($externalUrl, $localUrl, $paymentMethod = null)
@@ -271,18 +275,6 @@ class Service implements ServiceInterface
         }
     }
 
-    protected function getPaymentIntentClientSecret()
-    {
-        $quote = $this->stripeHelper->getSessionQuote();
-        $params = $this->paymentIntent->getParamsFrom($quote);
-        $pi = $this->paymentIntent->create($params, $quote);
-
-        if ($pi)
-            return $pi->client_secret;
-        else
-            return null; // If the customer is buying a subscription product only, there will be no P.I.
-    }
-
     /**
      * Return URL
      * @param mixed $address
@@ -306,16 +298,8 @@ class Service implements ServiceInterface
                 //     ->setCollectShippingRates(true);
 
                 $this->quoteRepository->save($quote);
-                $address = $quote->getShippingAddress();
 
-                /** @var \Magento\Quote\Api\Data\EstimateAddressInterface $estimatedAddress */
-                $estimatedAddress = $this->estimatedAddressFactory->create();
-                $estimatedAddress->setCountryId($address->getCountryId());
-                $estimatedAddress->setPostcode($address->getPostcode());
-                $estimatedAddress->setRegion((string)$address->getRegion());
-                $estimatedAddress->setRegionId($address->getRegionId());
-
-                $rates = $this->shippingMethodManager->estimateByAddress($quote->getId(), $estimatedAddress);
+                $rates = $this->shipmentEstimation->estimateByExtendedAddress($quote->getId(), $quote->getShippingAddress());
 
                 $this->cart->save();
             }
@@ -337,7 +321,6 @@ class Service implements ServiceInterface
             }
 
             return \Zend_Json::encode([
-                "paymentIntent" => $this->getPaymentIntentClientSecret(),
                 "results" => $result
             ]);
         }
@@ -408,7 +391,6 @@ class Service implements ServiceInterface
             $result = $this->expressHelper->getCartItems($quote);
             unset($result["currency"]);
             return \Zend_Json::encode([
-                "paymentIntent" => $this->getPaymentIntentClientSecret(),
                 "results" => $result
             ]);
         } catch (\Exception $e) {
@@ -437,7 +419,6 @@ class Service implements ServiceInterface
         }
 
         return \Zend_Json::encode([
-            "paymentIntent" => $this->getPaymentIntentClientSecret(),
             "results" => null
         ]);
     }
@@ -470,6 +451,15 @@ class Service implements ServiceInterface
             {
                 // Set Shipping Address
                 $shippingAddress = $this->expressHelper->getShippingAddressFromResult($result);
+
+                if ($this->addressHelper->isRegionRequired($result["shippingAddress"]["country"]))
+                {
+                    if (empty($result["shippingAddress"]["region"]))
+                        throw new LocalizedException(__("Please specify a shipping address region/state."));
+
+                    if (empty($shippingAddress["region_id"]))
+                        throw new LocalizedException(__("Error: Could not find region %1 for country %2.", $result["shippingAddress"]["region"], $result["shippingAddress"]["country"]));
+                }
 
                 if (empty($shippingAddress["telephone"]) && !empty($billingAddress["telephone"]))
                     $shippingAddress["telephone"] = $billingAddress["telephone"];
@@ -651,7 +641,6 @@ class Service implements ServiceInterface
 
             $result = $this->expressHelper->getCartItems($quote);
             return \Zend_Json::encode([
-                "paymentIntent" => $this->getPaymentIntentClientSecret(),
                 "results" => $result
             ]);
         } catch (\Exception $e) {
@@ -757,10 +746,21 @@ class Service implements ServiceInterface
      */
     public function getApplePayParams($location = null)
     {
-        if ($location == "checkout")
-            $requestShipping = false;
-        else
-            $requestShipping = !$this->getQuote()->isVirtual();
+        $requestShipping = !$this->getQuote()->isVirtual();
+
+        if ($location == "checkout" && $requestShipping)
+        {
+            $shippingAddress = $this->getQuote()->getShippingAddress();
+            $address = $this->addressHelper->getStripeAddressFromMagentoAddress($shippingAddress);
+            if (!empty($address["address"]["line1"])
+                && !empty($address["address"]["city"])
+                && !empty($address["address"]["country"])
+                && !empty($address["address"]["postal_code"])
+                && !empty($address["name"])
+                && !empty($address["email"])
+            )
+                $requestShipping = false;
+        }
 
         return array_merge(
             [
@@ -931,7 +931,7 @@ class Service implements ServiceInterface
         $quote->collectTotals();
         $this->quoteRepository->save($quote);
 
-        $subscriptions = $this->stripeHelper->getTrialingSubscriptionsAmounts($quote);
+        $subscriptions = $this->subscriptionsHelper->getTrialingSubscriptionsAmounts($quote);
         return \Zend_Json::encode($subscriptions);
     }
 

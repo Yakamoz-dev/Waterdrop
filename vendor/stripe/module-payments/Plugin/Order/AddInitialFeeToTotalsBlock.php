@@ -44,6 +44,8 @@ class AddInitialFeeToTotalsBlock
 
         if ($subject->getInvoice())
             $items = $subject->getInvoice()->getAllItems();
+        else if ($subject->getCreditmemo())
+            $items = $subject->getCreditmemo()->getAllItems();
         else
             $items = $order->getAllItems();
 

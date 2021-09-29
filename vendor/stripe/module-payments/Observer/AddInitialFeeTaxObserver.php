@@ -8,13 +8,16 @@ use StripeIntegration\Payments\Helper\Logger;
 class AddInitialFeeTaxObserver implements ObserverInterface
 {
     public $helper = null;
+    public $taxHelper = null;
 
     public function __construct(
         \StripeIntegration\Payments\Helper\GenericFactory $paymentsHelper,
+        \StripeIntegration\Payments\Helper\TaxHelperFactory $taxHelperFactory,
         \StripeIntegration\Payments\Model\Config $config
     )
     {
         $this->paymentsHelperFactory = $paymentsHelper;
+        $this->taxHelperFactory = $taxHelperFactory;
         $this->config = $config;
     }
 
@@ -39,8 +42,12 @@ class AddInitialFeeTaxObserver implements ObserverInterface
 
         $baseExtraTax = 0;
         $extraTax = 0;
+
         if (!$this->helper)
             $this->helper = $this->paymentsHelperFactory->create();
+
+        if (!$this->taxHelper)
+            $this->taxHelper = $this->taxHelperFactory->create();
 
         foreach ($quote->getAllItems() as $item)
         {
@@ -57,7 +64,13 @@ class AddInitialFeeTaxObserver implements ObserverInterface
             $qty = $item->getQty();
             $baseExtraTaxableAmount = $qty * $baseInitialFee;
             $taxPercent = $item->getTaxPercent();
-            $baseExtraTax += $baseExtraTaxableAmount * ($taxPercent / 100);
+
+            if ($this->config->priceIncludesTax())
+                $taxAmount = $this->taxHelper->taxInclusiveTaxCalculator($baseExtraTaxableAmount, $taxPercent);
+            else
+                $taxAmount = $this->taxHelper->taxExclusiveTaxCalculator($baseExtraTaxableAmount, $taxPercent);
+
+            $baseExtraTax += $taxAmount;
         }
 
         $rate = $quote->getBaseToQuoteRate();

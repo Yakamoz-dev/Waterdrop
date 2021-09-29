@@ -50,15 +50,5 @@ module.exports = {
             'css/styles'
         ],
         dsl: 'less'
-    },
-    fastest: {
-        area: 'frontend',
-        name: 'Codazon/fastest_hightech',
-        locale: 'en_US',
-        files: [
-            'css/styles-m',
-            'css/styles-l'
-        ],
-        dsl: 'less'
-    },
+    }
 };

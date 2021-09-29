@@ -1,7 +1,7 @@
 // Copyright © Stripe, Inc
 //
 // @package    StripeIntegration_Payments
-// @version    2.6.1
+// @version    2.7.4
 
 var stripeTokens = {};
 
@@ -24,7 +24,7 @@ var initStripe = function(params, callback)
 var stripe =
 {
     // Properties
-    version: "2.6.1",
+    version: "2.7.4",
     quote: null, // Comes from the checkout js
     customer: null, // Comes from the checkout js
     multiShippingFormInitialized: false,
@@ -367,6 +367,16 @@ var stripe =
         return selected.value;
     },
 
+    getSelectedPaymentMethod: function()
+    {
+        var selectedMethod = $$("input:checked[name=payment[method]]");
+
+        if (selectedMethod.length === 0)
+            return null;
+
+        return selectedMethod[0].value;
+    },
+
     initPaymentFormValidation: function()
     {
         // Adjust validation if necessary
@@ -403,8 +413,7 @@ var stripe =
 
     placeAdminOrder: function()
     {
-        var radioButton = document.getElementById('p_method_stripe_payments');
-        if (radioButton && !radioButton.checked)
+        if (stripe.getSelectedPaymentMethod() != "stripe_payments")
             return order._submit();
 
         createStripeToken(function(err)
@@ -565,7 +574,7 @@ var stripe =
 
         if (box)
         {
-            box.innerHTML = '';
+            box.innerText = '';
             box.classList.remove('populated');
         }
     },
@@ -591,7 +600,7 @@ var stripe =
 
         if (box)
         {
-            box.innerHTML = message;
+            box.innerText = message;
             box.classList.add('populated');
         }
         else

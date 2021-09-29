@@ -1,5 +1,41 @@
 # Changelog
 
+## 2.7.4 - 2021-09-20
+
+- The default location of the Payment Request API (Apple Pay, Google Pay etc) is now above all payment methods.
+- The PRAPI works better with OneStepCheckout modules by requesting a shipping address if one is not set.
+- Subscription price migrations work with tax inclusive price settings and configurable subscriptions.
+- Updates to alternative/redirect based payment method refunds.
+
+## 2.7.3 - 2021-09-10
+
+- Updated CLI subscription price migration script to work with configurable subscriptions.
+- Fixed partial refunds
+
+## 2.7.2 - 2021-09-06
+
+- Fixed a Magento admin area javascript issue when the order grand total is zero.
+- Fixed Payment Intents not getting updated with new order details after they've been cached.
+
+## 2.7.1 - 2021-08-27
+
+- Implemented new refund strategy when refunding an order with subscriptions and multiple separate payments.
+- Subscription orders can be captured or canceled in Authorize Only mode, same as regular product orders.
+- Removed last 4 digits and expiry date from new order emails and the Magento admin order page.
+- Less API calls, better response times for the Payment Request API modal.
+- Fixed orders placed via the Payment Request API (Apple Pay, Google Pay, etc), not passing order data to Stripe (description, metadata, shipping address, affects 2.5.9 - 2.7.0).
+- Various fixes and improvements for tax inclusive catalog prices.
+- Fixed an installment plan selection issue with Mexico cards.
+
+## 2.7.0 - 2021-08-10
+
+- `MAJOR`: New flow with Stripe Checkout; adds support for complex and multiple cart discount rules.
+- Trial subscription orders will no longer be canceled. Both the initial trial order as well as the new order created upon payment can be used to ship the products.
+- Deprecated automatic invoicing of subscription items in Authorize Only mode. Invoices can be manually created upon product shipment.
+- Performance improvements.
+- Fixed a tax inclusive price calculation for subscriptions.
+- Fixed a shipping address error for Apple Pay in countries with optional region.
+
 ## 2.6.1 - 2021-07-23
 
 - Adobe Commerce gift cards are created in Stripe as Coupons when using the Stripe Checkout payment flow.
@@ -353,7 +389,7 @@
 - Improved support for various OneStepCheckout modules, adjustments for better display of payment form in 3-column layouts.
 - Payments which have only been authorized can now also be captured through cron jobs, not just from the admin area.
 - Fixed a bug where changes in the billing address would not be passed to the Stripe API.
-- India exports has been depreciated, performance optimizations after depreciation.
+- India exports has been deprecated, performance optimizations after depreciation.
 
 ## 1.4.0 - 2019-11-01
 
@@ -376,7 +412,7 @@
 - Added SCA MOTO Exemptions support in the Magento admin
 - Guest customers are now associated with their Stripe customer ID if they register immediately after placing an order
 - The Stripe.js locale is now overwritten based on the Magento store view locale configuration
-- Depreciated Email Receipt configuration option, this should now be disabled from the Stripe dashboard
+- Deprecated Email Receipt configuration option, this should now be disabled from the Stripe dashboard
 - Added a partner ID in the module's app info
 - Fixed placing subscription orders from the admin area
 - Fixed refunds through the Stripe dashboard (no credit memo was being created)
@@ -422,8 +458,8 @@
 ## 1.1.0 - 2019-05-28
 
 - `MAJOR`: Switched from automatic Payment Intents confirmation at the front-end to manual Payment Intents confirmation on the server side. Resolves reported issue with charges not being associated with a Magento order.
-- `MAJOR`: Replaced the Sources API with the new Payment Methods API. Depreciated all fallback scenarios to the Charges API.
-- Stripe.js v2 has been depreciated, Stripe Elements is now used everywhere.
+- `MAJOR`: Replaced the Sources API with the new Payment Methods API. Deprecated all fallback scenarios to the Charges API.
+- Stripe.js v2 has been deprecated, Stripe Elements is now used everywhere.
 - When Apple Pay is used on the checkout page, the order is now submitted automatically as soon as the paysheet closes.
 - Fixed: In the admin configuration, when the card saving option was set to "Always save cards", it wouldn't have the correct effect.
 - Fixed: In the admin configuration, when disabling Apple Pay on the product page or the cart, it wouldn't have the correct effect.

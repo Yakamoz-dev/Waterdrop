@@ -333,9 +333,6 @@ define(
                         response = JSON.parse(response);
                     }
 
-                    if (response.paymentIntent)
-                        stripe.paymentIntent = response.paymentIntent;
-
                     callback(null, response.results);
                 }
                 catch (e)

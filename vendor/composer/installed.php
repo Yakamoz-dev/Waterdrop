@@ -22,8 +22,8 @@
     ),
     'amzn/amazon-pay-and-login-magento-2-module' => 
     array (
-      'pretty_version' => '4.2.0',
-      'version' => '4.2.0.0',
+      'pretty_version' => '4.2.1',
+      'version' => '4.2.1.0',
       'aliases' => 
       array (
       ),
@@ -31,8 +31,8 @@
     ),
     'amzn/amazon-pay-and-login-with-amazon-core-module' => 
     array (
-      'pretty_version' => '4.2.0',
-      'version' => '4.2.0.0',
+      'pretty_version' => '4.2.1',
+      'version' => '4.2.1.0',
       'aliases' => 
       array (
       ),
@@ -40,8 +40,8 @@
     ),
     'amzn/amazon-pay-module' => 
     array (
-      'pretty_version' => '4.2.0',
-      'version' => '4.2.0.0',
+      'pretty_version' => '4.2.1',
+      'version' => '4.2.1.0',
       'aliases' => 
       array (
       ),
@@ -58,8 +58,8 @@
     ),
     'amzn/login-with-amazon-module' => 
     array (
-      'pretty_version' => '4.2.0',
-      'version' => '4.2.0.0',
+      'pretty_version' => '4.2.1',
+      'version' => '4.2.1.0',
       'aliases' => 
       array (
       ),
@@ -74,23 +74,32 @@
       ),
       'reference' => '9c66a2ceea2d4c82386e3fafd1db0303fa73bedb',
     ),
-    'aws/aws-sdk-php' => 
+    'aws/aws-crt-php' => 
     array (
-      'pretty_version' => '3.183.13',
-      'version' => '3.183.13.0',
+      'pretty_version' => 'v1.0.2',
+      'version' => '1.0.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => '0e0be404854482b7cae61ef9f707c7a876b43cdf',
+      'reference' => '3942776a8c99209908ee0b287746263725685732',
+    ),
+    'aws/aws-sdk-php' => 
+    array (
+      'pretty_version' => '3.194.5',
+      'version' => '3.194.5.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '33f755378debdbc7e010157811fc47aebf090c53',
     ),
     'bacon/bacon-qr-code' => 
     array (
-      'pretty_version' => '2.0.3',
-      'version' => '2.0.3.0',
+      'pretty_version' => '2.0.4',
+      'version' => '2.0.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '3e9d791b67d0a2912922b7b7c7312f4b37af41e4',
+      'reference' => 'f73543ac4e1def05f1a70bcd1525c8a157a1ad09',
     ),
     'beberlei/assert' => 
     array (
@@ -116,6 +125,24 @@
       array (
       ),
       'reference' => '6cf3447ecd0303caa6f2d4f22b653dc5c71b4589',
+    ),
+    'brick/math' => 
+    array (
+      'pretty_version' => '0.9.3',
+      'version' => '0.9.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'ca57d18f028f84f777b2168cd1911b0dee2343ae',
+    ),
+    'brick/varexporter' => 
+    array (
+      'pretty_version' => '0.3.5',
+      'version' => '0.3.5.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '05241f28dfcba2b51b11e2d750e296316ebbe518',
     ),
     'christian-riesen/base32' => 
     array (
@@ -187,12 +214,12 @@
     ),
     'composer/ca-bundle' => 
     array (
-      'pretty_version' => '1.2.9',
-      'version' => '1.2.9.0',
+      'pretty_version' => '1.2.10',
+      'version' => '1.2.10.0',
       'aliases' => 
       array (
       ),
-      'reference' => '78a0e288fdcebf92aa2318a8d3656168da6ac1a5',
+      'reference' => '9fdb22c2e97a614657716178093cd1da90a64aa8',
     ),
     'composer/composer' => 
     array (
@@ -239,6 +266,13 @@
       ),
       'reference' => '79cbf1341c22ec75643d841642dd5d6acd83bdb8',
     ),
+    'container-interop/container-interop-implementation' => 
+    array (
+      'provided' => 
+      array (
+        0 => '^1.2',
+      ),
+    ),
     'dasprid/enum' => 
     array (
       'pretty_version' => '1.0.3',
@@ -268,8 +302,8 @@
     ),
     'dotmailer/dotmailer-magento2-extension' => 
     array (
-      'pretty_version' => '4.10.0',
-      'version' => '4.10.0.0',
+      'pretty_version' => '4.12.0',
+      'version' => '4.12.0.0',
       'aliases' => 
       array (
       ),
@@ -277,23 +311,14 @@
     ),
     'dotmailer/dotmailer-magento2-extension-chat' => 
     array (
-      'pretty_version' => '1.3.0',
-      'version' => '1.3.0.0',
+      'pretty_version' => '1.5.0',
+      'version' => '1.5.0.0',
       'aliases' => 
       array (
       ),
       'reference' => NULL,
     ),
-    'dotmailer/dotmailer-magento2-extension-package' => 
-    array (
-      'pretty_version' => '4.10.0',
-      'version' => '4.10.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
-    'dotmailer/dotmailer-magento2-extension-sms' => 
+    'dotmailer/dotmailer-magento2-extension-chat-graph-ql' => 
     array (
       'pretty_version' => '1.0.0',
       'version' => '1.0.0.0',
@@ -302,14 +327,41 @@
       ),
       'reference' => NULL,
     ),
-    'elasticsearch/elasticsearch' => 
+    'dotmailer/dotmailer-magento2-extension-graph-ql' => 
     array (
-      'pretty_version' => 'v7.7.0',
-      'version' => '7.7.0.0',
+      'pretty_version' => '1.0.0',
+      'version' => '1.0.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '1d90a7ff4fb1936dc4376f09d723af75714f6f05',
+      'reference' => NULL,
+    ),
+    'dotmailer/dotmailer-magento2-extension-package' => 
+    array (
+      'pretty_version' => '4.12.0',
+      'version' => '4.12.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'dotmailer/dotmailer-magento2-extension-sms' => 
+    array (
+      'pretty_version' => '1.2.0',
+      'version' => '1.2.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'elasticsearch/elasticsearch' => 
+    array (
+      'pretty_version' => 'v7.11.0',
+      'version' => '7.11.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '277cd5e182827c59c23e146a836a30470c0f879d',
     ),
     'endroid/qr-code' => 
     array (
@@ -337,6 +389,15 @@
       array (
       ),
       'reference' => '0b78f89d8e0bb9e380046c31adfa40347e9f663b',
+    ),
+    'fgrosse/phpasn1' => 
+    array (
+      'pretty_version' => 'v2.3.0',
+      'version' => '2.3.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '20299033c35f4300eb656e7e8e88cf52d1d6694e',
     ),
     'google/recaptcha' => 
     array (
@@ -376,26 +437,26 @@
     ),
     'justinrainbow/json-schema' => 
     array (
-      'pretty_version' => '5.2.10',
-      'version' => '5.2.10.0',
+      'pretty_version' => '5.2.11',
+      'version' => '5.2.11.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2ba9c8c862ecd5510ed16c6340aa9f6eadb4f31b',
+      'reference' => '2ab6744b7296ded80f8cc4f9509abbff393399aa',
     ),
     'khanamiryan/qrcode-detector-decoder' => 
     array (
-      'pretty_version' => '1.0.5.1',
-      'version' => '1.0.5.1',
+      'pretty_version' => '1.0.5.2',
+      'version' => '1.0.5.2',
       'aliases' => 
       array (
       ),
-      'reference' => 'b96163d4f074970dfe67d4185e75e1f4541b30ca',
+      'reference' => '04fdd58d86a387065f707dc6d3cc304c719910c1',
     ),
     'klarna/m2-payments' => 
     array (
-      'pretty_version' => '8.2.1',
-      'version' => '8.2.1.0',
+      'pretty_version' => '8.3.2',
+      'version' => '8.3.2.0',
       'aliases' => 
       array (
       ),
@@ -403,8 +464,8 @@
     ),
     'klarna/module-core' => 
     array (
-      'pretty_version' => '6.1.1',
-      'version' => '6.1.1.0',
+      'pretty_version' => '6.2.2',
+      'version' => '6.2.2.0',
       'aliases' => 
       array (
       ),
@@ -412,8 +473,8 @@
     ),
     'klarna/module-kp' => 
     array (
-      'pretty_version' => '7.2.1',
-      'version' => '7.2.1.0',
+      'pretty_version' => '7.3.2',
+      'version' => '7.3.2.0',
       'aliases' => 
       array (
       ),
@@ -421,8 +482,8 @@
     ),
     'klarna/module-kp-graph-ql' => 
     array (
-      'pretty_version' => '0.9.1',
-      'version' => '0.9.1.0',
+      'pretty_version' => '0.9.3',
+      'version' => '0.9.3.0',
       'aliases' => 
       array (
       ),
@@ -430,8 +491,8 @@
     ),
     'klarna/module-onsitemessaging' => 
     array (
-      'pretty_version' => '1.0.3',
-      'version' => '1.0.3.0',
+      'pretty_version' => '1.0.5',
+      'version' => '1.0.5.0',
       'aliases' => 
       array (
       ),
@@ -439,8 +500,8 @@
     ),
     'klarna/module-ordermanagement' => 
     array (
-      'pretty_version' => '6.1.1',
-      'version' => '6.1.1.0',
+      'pretty_version' => '6.2.2',
+      'version' => '6.2.2.0',
       'aliases' => 
       array (
       ),
@@ -457,75 +518,57 @@
     ),
     'laminas/laminas-code' => 
     array (
-      'pretty_version' => '3.4.1',
-      'version' => '3.4.1.0',
+      'pretty_version' => '3.5.1',
+      'version' => '3.5.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '1cb8f203389ab1482bf89c0e70a04849bacd7766',
+      'reference' => 'b549b70c0bb6e935d497f84f750c82653326ac77',
     ),
     'laminas/laminas-config' => 
     array (
-      'pretty_version' => '2.6.0',
-      'version' => '2.6.0.0',
+      'pretty_version' => '3.6.0',
+      'version' => '3.6.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '71ba6d5dd703196ce66b25abc4d772edb094dae1',
-    ),
-    'laminas/laminas-console' => 
-    array (
-      'pretty_version' => '2.8.0',
-      'version' => '2.8.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '478a6ceac3e31fb38d6314088abda8b239ee23a5',
+      'reference' => '2f2273a6bdf966a9adf6042f8950b6c33199a3b7',
     ),
     'laminas/laminas-crypt' => 
     array (
-      'pretty_version' => '2.6.0',
-      'version' => '2.6.0.0',
+      'pretty_version' => '3.4.0',
+      'version' => '3.4.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '6f291fe90c84c74d737c9dc9b8f0ad2b55dc0567',
+      'reference' => 'a058eeb2fe57824b958ac56753faff790a649e18',
     ),
     'laminas/laminas-db' => 
     array (
-      'pretty_version' => '2.12.0',
-      'version' => '2.12.0.0',
+      'pretty_version' => '2.13.4',
+      'version' => '2.13.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '80cbba4e749f9eb7d8036172acb9ad41e8b6923f',
+      'reference' => 'cdabb4bfa669c2c0edb0cb4e014c15b41afd3fb1',
     ),
     'laminas/laminas-dependency-plugin' => 
     array (
-      'pretty_version' => '2.1.2',
-      'version' => '2.1.2.0',
+      'pretty_version' => '2.2.0',
+      'version' => '2.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'c5b4bf87729d6f38c73ca8ed22a5d62ec641d075',
+      'reference' => '73cfb63ddca9d6bfedad5e0a038f6d55063975a3',
     ),
     'laminas/laminas-di' => 
     array (
-      'pretty_version' => '2.6.1',
-      'version' => '2.6.1.0',
+      'pretty_version' => '3.3.0',
+      'version' => '3.3.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '239b22408a1f8eacda6fc2b838b5065c4cf1d88e',
-    ),
-    'laminas/laminas-diactoros' => 
-    array (
-      'pretty_version' => '1.8.7p2',
-      'version' => '1.8.7.0-patch2',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '6991c1af7c8d2c8efee81b22ba97024781824aaa',
+      'reference' => '83330af17fc2511231e805a3586d51883a452094',
     ),
     'laminas/laminas-escaper' => 
     array (
@@ -538,21 +581,21 @@
     ),
     'laminas/laminas-eventmanager' => 
     array (
-      'pretty_version' => '3.3.1',
-      'version' => '3.3.1.0',
+      'pretty_version' => '3.4.0',
+      'version' => '3.4.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '966c859b67867b179fde1eff0cd38df51472ce4a',
+      'reference' => 'a93fd278c97b2d41ebbce5ba048a24e3e6f580ba',
     ),
     'laminas/laminas-feed' => 
     array (
-      'pretty_version' => '2.12.3',
-      'version' => '2.12.3.0',
+      'pretty_version' => '2.14.1',
+      'version' => '2.14.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '3c91415633cb1be6f9d78683d69b7dcbfe6b4012',
+      'reference' => '463fdae515fba30633906098c258d3b2c733c15c',
     ),
     'laminas/laminas-filter' => 
     array (
@@ -563,15 +606,6 @@
       ),
       'reference' => '671724e163aa75c210e94d12b77a0f3f8240d4b2',
     ),
-    'laminas/laminas-form' => 
-    array (
-      'pretty_version' => '2.15.1',
-      'version' => '2.15.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '37c5f5ac9240159f5d93f52367d0e57fa96f9b22',
-    ),
     'laminas/laminas-http' => 
     array (
       'pretty_version' => '2.14.3',
@@ -581,149 +615,122 @@
       ),
       'reference' => 'bfaab8093e382274efed7fdc3ceb15f09ba352bb',
     ),
-    'laminas/laminas-hydrator' => 
-    array (
-      'pretty_version' => '2.4.2',
-      'version' => '2.4.2.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '4a0e81cf05f32edcace817f1f48cb4055f689d85',
-    ),
     'laminas/laminas-i18n' => 
     array (
-      'pretty_version' => '2.11.1',
-      'version' => '2.11.1.0',
+      'pretty_version' => '2.11.2',
+      'version' => '2.11.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => '5e85a8facc5534e856cc7f5b4326533eede84b8a',
-    ),
-    'laminas/laminas-inputfilter' => 
-    array (
-      'pretty_version' => '2.10.1',
-      'version' => '2.10.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'b29ce8f512c966468eee37ea4873ae5fb545d00a',
+      'reference' => '78adb53ebf6c0bc63f92273fd7809dabc554f786',
     ),
     'laminas/laminas-json' => 
     array (
-      'pretty_version' => '2.6.1',
-      'version' => '2.6.1.0',
+      'pretty_version' => '3.3.0',
+      'version' => '3.3.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'db58425b7f0eba44a7539450cc926af80915951a',
+      'reference' => '9a0ce9f330b7d11e70c4acb44d67e8c4f03f437f',
     ),
     'laminas/laminas-loader' => 
-    array (
-      'pretty_version' => '2.7.0',
-      'version' => '2.7.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'bcf8a566cb9925a2e7cc41a16db09235ec9fb616',
-    ),
-    'laminas/laminas-log' => 
-    array (
-      'pretty_version' => '2.12.0',
-      'version' => '2.12.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '4e92d841b48868714a070b10866e94be80fc92ff',
-    ),
-    'laminas/laminas-mail' => 
-    array (
-      'pretty_version' => '2.14.1',
-      'version' => '2.14.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '180c6c7baa37cba16fe9fd34af0f346e796cf1a1',
-    ),
-    'laminas/laminas-math' => 
-    array (
-      'pretty_version' => '2.7.1',
-      'version' => '2.7.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '8027b37e00accc43f28605c7d8fd081baed1f475',
-    ),
-    'laminas/laminas-mime' => 
     array (
       'pretty_version' => '2.8.0',
       'version' => '2.8.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '9a59704f33106427a384d0ae421f96043174093a',
+      'reference' => 'd0589ec9dd48365fd95ad10d1c906efd7711c16b',
+    ),
+    'laminas/laminas-mail' => 
+    array (
+      'pretty_version' => '2.15.1',
+      'version' => '2.15.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '70c3476913c74e9befd782ab665ad1b9ebac556e',
+    ),
+    'laminas/laminas-math' => 
+    array (
+      'pretty_version' => '3.3.2',
+      'version' => '3.3.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '188456530923a449470963837c25560f1fdd8a60',
+    ),
+    'laminas/laminas-mime' => 
+    array (
+      'pretty_version' => '2.9.1',
+      'version' => '2.9.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '72d21a1b4bb7086d4a4d7058c0abca180b209184',
     ),
     'laminas/laminas-modulemanager' => 
     array (
-      'pretty_version' => '2.9.0',
-      'version' => '2.9.0.0',
+      'pretty_version' => '2.10.2',
+      'version' => '2.10.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => '789bbd4ab391da9221f265f6bb2d594f8f11855b',
+      'reference' => '2068e0b300e87e139112016a6025be341ceaaf33',
     ),
     'laminas/laminas-mvc' => 
     array (
-      'pretty_version' => '2.7.15',
-      'version' => '2.7.15.0',
+      'pretty_version' => '3.2.0',
+      'version' => '3.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '7e7198b03556a57fb5fd3ed919d9e1cf71500642',
+      'reference' => '88da7200cf8f5a970c35d91717a5c4db94981e5e',
     ),
-    'laminas/laminas-psr7bridge' => 
+    'laminas/laminas-router' => 
     array (
-      'pretty_version' => '0.2.2',
-      'version' => '0.2.2.0',
+      'pretty_version' => '3.4.5',
+      'version' => '3.4.5.0',
       'aliases' => 
       array (
       ),
-      'reference' => '14780ef1d40effd59d77ab29c6d439b2af42cdfa',
+      'reference' => 'aaf2eb364eedeb5c4d5b9ee14cd2938d0f7e89b7',
     ),
     'laminas/laminas-serializer' => 
     array (
-      'pretty_version' => '2.10.0',
-      'version' => '2.10.0.0',
+      'pretty_version' => '2.10.1',
+      'version' => '2.10.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '1c57f1bdf05da078493b774c9e8d77ee8b46b4bb',
+      'reference' => '254cf6a17b46d98808c0810939268f63538dcc0c',
     ),
     'laminas/laminas-server' => 
     array (
-      'pretty_version' => '2.9.2',
-      'version' => '2.9.2.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'b91fd8aed71a6b45addc55eda4bb4c3adb21b698',
-    ),
-    'laminas/laminas-servicemanager' => 
-    array (
-      'pretty_version' => '2.7.11',
-      'version' => '2.7.11.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '841abb656c6018afebeec1f355be438426d6a3dd',
-    ),
-    'laminas/laminas-session' => 
-    array (
       'pretty_version' => '2.10.0',
       'version' => '2.10.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '921e6a9f807ee243a9a4f8a8a297929d0c2b50cd',
+      'reference' => 'e1fd6853223feed7a00555144d661e0a914124cd',
+    ),
+    'laminas/laminas-servicemanager' => 
+    array (
+      'pretty_version' => '3.10.0',
+      'version' => '3.10.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'e52b985909e0940bf22d34f322eb3f48bbef6bd1',
+    ),
+    'laminas/laminas-session' => 
+    array (
+      'pretty_version' => '2.12.0',
+      'version' => '2.12.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'fc538bba5196e3b5937ae7db3c713fc7c0829881',
     ),
     'laminas/laminas-soap' => 
     array (
@@ -736,21 +743,21 @@
     ),
     'laminas/laminas-stdlib' => 
     array (
-      'pretty_version' => '3.3.1',
-      'version' => '3.3.1.0',
+      'pretty_version' => '3.6.0',
+      'version' => '3.6.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'd81c7ffe602ed0e6ecb18691019111c0f4bf1efe',
+      'reference' => 'c53d8537f108fac3fae652677a19735db730ba46',
     ),
     'laminas/laminas-text' => 
     array (
-      'pretty_version' => '2.7.1',
-      'version' => '2.7.1.0',
+      'pretty_version' => '2.9.0',
+      'version' => '2.9.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '3601b5eacb06ed0a12f658df860cc0f9613cf4db',
+      'reference' => '8879e75d03e09b0d6787e6680cfa255afd4645a7',
     ),
     'laminas/laminas-uri' => 
     array (
@@ -763,57 +770,48 @@
     ),
     'laminas/laminas-validator' => 
     array (
-      'pretty_version' => '2.14.4',
-      'version' => '2.14.4.0',
+      'pretty_version' => '2.15.0',
+      'version' => '2.15.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'e370c4695db1c81e6dfad38d8c4dbdb37b23d776',
+      'reference' => '270380e87904f5a1a1fba3059989d4ca157e16a9',
     ),
     'laminas/laminas-view' => 
     array (
-      'pretty_version' => '2.11.5',
-      'version' => '2.11.5.0',
+      'pretty_version' => '2.12.0',
+      'version' => '2.12.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '16611035d7b3a6ef2c636a9268c213146123b663',
+      'reference' => '3ef103da6887809f08ecf52f42c31a76c9bf08b1',
     ),
     'laminas/laminas-zendframework-bridge' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.4.0',
+      'version' => '1.4.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '6cccbddfcfc742eb02158d6137ca5687d92cee32',
+      'reference' => 'bf180a382393e7db5c1e8d0f2ec0c4af9c724baf',
     ),
     'league/flysystem' => 
     array (
-      'pretty_version' => '1.1.3',
-      'version' => '1.1.3.0',
+      'pretty_version' => '2.3.0',
+      'version' => '2.3.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '9be3b16c877d477357c015cec057548cf9b2a14a',
+      'reference' => '499313f8b65f9a4dae1c779cd974d59a6fcf0f15',
     ),
     'league/flysystem-aws-s3-v3' => 
     array (
-      'pretty_version' => '1.0.29',
-      'version' => '1.0.29.0',
+      'pretty_version' => '2.1.0',
+      'version' => '2.1.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '4e25cc0582a36a786c31115e419c6e40498f6972',
-    ),
-    'league/flysystem-cached-adapter' => 
-    array (
-      'pretty_version' => '1.1.0',
-      'version' => '1.1.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'd1925efb2207ac4be3ad0c40b8277175f99ffaff',
+      'reference' => '8d8edfe2541d94e6607808e3dd8484734c86eb2a',
     ),
     'league/iso3166' => 
     array (
@@ -826,12 +824,12 @@
     ),
     'league/mime-type-detection' => 
     array (
-      'pretty_version' => '1.7.0',
-      'version' => '1.7.0.0',
+      'pretty_version' => '1.8.0',
+      'version' => '1.8.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '3b9dff8aaf7323590c1d2e443db701eb1f9aa0d3',
+      'reference' => 'b38b25d7b372e9fddb00335400467b223349fd7e',
     ),
     'lusitanian/oauth' => 
     array (
@@ -851,8 +849,8 @@
     ),
     'magento/adobe-ims' => 
     array (
-      'pretty_version' => '2.1.1',
-      'version' => '2.1.1.0',
+      'pretty_version' => '2.1.2',
+      'version' => '2.1.2.0',
       'aliases' => 
       array (
       ),
@@ -860,8 +858,8 @@
     ),
     'magento/adobe-stock-integration' => 
     array (
-      'pretty_version' => '2.1.1',
-      'version' => '2.1.1.0',
+      'pretty_version' => '2.1.2',
+      'version' => '2.1.2.0',
       'aliases' => 
       array (
       ),
@@ -878,8 +876,8 @@
     ),
     'magento/framework' => 
     array (
-      'pretty_version' => '103.0.2',
-      'version' => '103.0.2.0',
+      'pretty_version' => '103.0.3',
+      'version' => '103.0.3.0',
       'aliases' => 
       array (
       ),
@@ -905,8 +903,8 @@
     ),
     'magento/framework-message-queue' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -932,8 +930,8 @@
     ),
     'magento/inventory-metapackage' => 
     array (
-      'pretty_version' => '1.2.2',
-      'version' => '1.2.2.0',
+      'pretty_version' => '1.2.3',
+      'version' => '1.2.3.0',
       'aliases' => 
       array (
       ),
@@ -1013,14 +1011,23 @@
     ),
     'magento/magento2-base' => 
     array (
-      'pretty_version' => '2.4.2',
-      'version' => '2.4.2.0',
+      'pretty_version' => '2.4.3',
+      'version' => '2.4.3.0',
       'aliases' => 
       array (
       ),
       'reference' => NULL,
     ),
     'magento/module-admin-analytics' => 
+    array (
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-admin-notification' => 
     array (
       'pretty_version' => '100.4.2',
       'version' => '100.4.2.0',
@@ -1029,19 +1036,10 @@
       ),
       'reference' => NULL,
     ),
-    'magento/module-admin-notification' => 
-    array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
     'magento/module-adobe-ims' => 
     array (
-      'pretty_version' => '2.1.1',
-      'version' => '2.1.1.0',
+      'pretty_version' => '2.1.2',
+      'version' => '2.1.2.0',
       'aliases' => 
       array (
       ),
@@ -1085,8 +1083,8 @@
     ),
     'magento/module-adobe-stock-client' => 
     array (
-      'pretty_version' => '1.3.0',
-      'version' => '1.3.0.0',
+      'pretty_version' => '1.3.1',
+      'version' => '1.3.1.0',
       'aliases' => 
       array (
       ),
@@ -1103,8 +1101,8 @@
     ),
     'magento/module-adobe-stock-image' => 
     array (
-      'pretty_version' => '1.3.0',
-      'version' => '1.3.0.0',
+      'pretty_version' => '1.3.1',
+      'version' => '1.3.1.0',
       'aliases' => 
       array (
       ),
@@ -1112,8 +1110,8 @@
     ),
     'magento/module-adobe-stock-image-admin-ui' => 
     array (
-      'pretty_version' => '1.3.0',
-      'version' => '1.3.0.0',
+      'pretty_version' => '1.3.1',
+      'version' => '1.3.1.0',
       'aliases' => 
       array (
       ),
@@ -1130,8 +1128,8 @@
     ),
     'magento/module-advanced-pricing-import-export' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1166,8 +1164,8 @@
     ),
     'magento/module-analytics' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1175,8 +1173,8 @@
     ),
     'magento/module-asynchronous-operations' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1184,8 +1182,8 @@
     ),
     'magento/module-authorization' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1193,8 +1191,17 @@
     ),
     'magento/module-aws-s3' => 
     array (
-      'pretty_version' => '100.4.0',
-      'version' => '100.4.0.0',
+      'pretty_version' => '100.4.1',
+      'version' => '100.4.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-aws-s3-page-builder' => 
+    array (
+      'pretty_version' => '1.0.1',
+      'version' => '1.0.1.0',
       'aliases' => 
       array (
       ),
@@ -1202,8 +1209,8 @@
     ),
     'magento/module-backend' => 
     array (
-      'pretty_version' => '102.0.2',
-      'version' => '102.0.2.0',
+      'pretty_version' => '102.0.3',
+      'version' => '102.0.3.0',
       'aliases' => 
       array (
       ),
@@ -1211,8 +1218,8 @@
     ),
     'magento/module-backup' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1220,8 +1227,8 @@
     ),
     'magento/module-bundle' => 
     array (
-      'pretty_version' => '101.0.2',
-      'version' => '101.0.2.0',
+      'pretty_version' => '101.0.3',
+      'version' => '101.0.3.0',
       'aliases' => 
       array (
       ),
@@ -1229,8 +1236,8 @@
     ),
     'magento/module-bundle-graph-ql' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1238,8 +1245,8 @@
     ),
     'magento/module-bundle-import-export' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -1256,8 +1263,8 @@
     ),
     'magento/module-captcha' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1274,8 +1281,8 @@
     ),
     'magento/module-catalog' => 
     array (
-      'pretty_version' => '104.0.2',
-      'version' => '104.0.2.0',
+      'pretty_version' => '104.0.3',
+      'version' => '104.0.3.0',
       'aliases' => 
       array (
       ),
@@ -1301,8 +1308,8 @@
     ),
     'magento/module-catalog-customer-graph-ql' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1310,8 +1317,8 @@
     ),
     'magento/module-catalog-graph-ql' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1319,8 +1326,8 @@
     ),
     'magento/module-catalog-import-export' => 
     array (
-      'pretty_version' => '101.1.2',
-      'version' => '101.1.2.0',
+      'pretty_version' => '101.1.3',
+      'version' => '101.1.3.0',
       'aliases' => 
       array (
       ),
@@ -1328,8 +1335,8 @@
     ),
     'magento/module-catalog-inventory' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1344,10 +1351,19 @@
       ),
       'reference' => NULL,
     ),
+    'magento/module-catalog-page-builder-analytics' => 
+    array (
+      'pretty_version' => '1.6.1',
+      'version' => '1.6.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
     'magento/module-catalog-rule' => 
     array (
-      'pretty_version' => '101.2.2',
-      'version' => '101.2.2.0',
+      'pretty_version' => '101.2.3',
+      'version' => '101.2.3.0',
       'aliases' => 
       array (
       ),
@@ -1355,8 +1371,8 @@
     ),
     'magento/module-catalog-rule-configurable' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -1364,8 +1380,8 @@
     ),
     'magento/module-catalog-rule-graph-ql' => 
     array (
-      'pretty_version' => '100.4.0',
-      'version' => '100.4.0.0',
+      'pretty_version' => '100.4.1',
+      'version' => '100.4.1.0',
       'aliases' => 
       array (
       ),
@@ -1373,8 +1389,8 @@
     ),
     'magento/module-catalog-search' => 
     array (
-      'pretty_version' => '102.0.2',
-      'version' => '102.0.2.0',
+      'pretty_version' => '102.0.3',
+      'version' => '102.0.3.0',
       'aliases' => 
       array (
       ),
@@ -1382,8 +1398,8 @@
     ),
     'magento/module-catalog-url-rewrite' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1391,8 +1407,8 @@
     ),
     'magento/module-catalog-url-rewrite-graph-ql' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -1400,8 +1416,8 @@
     ),
     'magento/module-catalog-widget' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1409,8 +1425,8 @@
     ),
     'magento/module-checkout' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1418,8 +1434,8 @@
     ),
     'magento/module-checkout-agreements' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -1436,23 +1452,14 @@
     ),
     'magento/module-cms' => 
     array (
-      'pretty_version' => '104.0.2',
-      'version' => '104.0.2.0',
+      'pretty_version' => '104.0.3',
+      'version' => '104.0.3.0',
       'aliases' => 
       array (
       ),
       'reference' => NULL,
     ),
     'magento/module-cms-graph-ql' => 
-    array (
-      'pretty_version' => '100.4.0',
-      'version' => '100.4.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
-    'magento/module-cms-url-rewrite' => 
     array (
       'pretty_version' => '100.4.1',
       'version' => '100.4.1.0',
@@ -1461,10 +1468,28 @@
       ),
       'reference' => NULL,
     ),
+    'magento/module-cms-page-builder-analytics' => 
+    array (
+      'pretty_version' => '1.6.1',
+      'version' => '1.6.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-cms-url-rewrite' => 
+    array (
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
     'magento/module-cms-url-rewrite-graph-ql' => 
     array (
-      'pretty_version' => '100.4.0',
-      'version' => '100.4.0.0',
+      'pretty_version' => '100.4.1',
+      'version' => '100.4.1.0',
       'aliases' => 
       array (
       ),
@@ -1481,8 +1506,8 @@
     ),
     'magento/module-config' => 
     array (
-      'pretty_version' => '101.2.2',
-      'version' => '101.2.2.0',
+      'pretty_version' => '101.2.3',
+      'version' => '101.2.3.0',
       'aliases' => 
       array (
       ),
@@ -1490,8 +1515,8 @@
     ),
     'magento/module-configurable-import-export' => 
     array (
-      'pretty_version' => '100.4.0',
-      'version' => '100.4.0.0',
+      'pretty_version' => '100.4.1',
+      'version' => '100.4.1.0',
       'aliases' => 
       array (
       ),
@@ -1499,8 +1524,8 @@
     ),
     'magento/module-configurable-product' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1508,8 +1533,8 @@
     ),
     'magento/module-configurable-product-graph-ql' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1517,8 +1542,8 @@
     ),
     'magento/module-configurable-product-sales' => 
     array (
-      'pretty_version' => '100.4.0',
-      'version' => '100.4.0.0',
+      'pretty_version' => '100.4.1',
+      'version' => '100.4.1.0',
       'aliases' => 
       array (
       ),
@@ -1526,8 +1551,8 @@
     ),
     'magento/module-contact' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1535,8 +1560,8 @@
     ),
     'magento/module-cookie' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1544,8 +1569,8 @@
     ),
     'magento/module-cron' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1553,8 +1578,8 @@
     ),
     'magento/module-csp' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -1562,8 +1587,8 @@
     ),
     'magento/module-currency-symbol' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -1571,8 +1596,8 @@
     ),
     'magento/module-customer' => 
     array (
-      'pretty_version' => '103.0.2',
-      'version' => '103.0.2.0',
+      'pretty_version' => '103.0.3',
+      'version' => '103.0.3.0',
       'aliases' => 
       array (
       ),
@@ -1598,8 +1623,8 @@
     ),
     'magento/module-customer-graph-ql' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1607,8 +1632,8 @@
     ),
     'magento/module-customer-import-export' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1616,8 +1641,8 @@
     ),
     'magento/module-deploy' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1625,8 +1650,8 @@
     ),
     'magento/module-developer' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1634,8 +1659,8 @@
     ),
     'magento/module-dhl' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -1643,8 +1668,8 @@
     ),
     'magento/module-directory' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1661,8 +1686,8 @@
     ),
     'magento/module-downloadable' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1670,8 +1695,8 @@
     ),
     'magento/module-downloadable-graph-ql' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1679,8 +1704,8 @@
     ),
     'magento/module-downloadable-import-export' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -1688,8 +1713,8 @@
     ),
     'magento/module-eav' => 
     array (
-      'pretty_version' => '102.1.2',
-      'version' => '102.1.2.0',
+      'pretty_version' => '102.1.3',
+      'version' => '102.1.3.0',
       'aliases' => 
       array (
       ),
@@ -1697,8 +1722,8 @@
     ),
     'magento/module-eav-graph-ql' => 
     array (
-      'pretty_version' => '100.4.0',
-      'version' => '100.4.0.0',
+      'pretty_version' => '100.4.1',
+      'version' => '100.4.1.0',
       'aliases' => 
       array (
       ),
@@ -1706,8 +1731,8 @@
     ),
     'magento/module-elasticsearch' => 
     array (
-      'pretty_version' => '101.0.2',
-      'version' => '101.0.2.0',
+      'pretty_version' => '101.0.3',
+      'version' => '101.0.3.0',
       'aliases' => 
       array (
       ),
@@ -1715,8 +1740,8 @@
     ),
     'magento/module-elasticsearch-6' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1724,8 +1749,8 @@
     ),
     'magento/module-elasticsearch-7' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1733,8 +1758,8 @@
     ),
     'magento/module-email' => 
     array (
-      'pretty_version' => '101.1.2',
-      'version' => '101.1.2.0',
+      'pretty_version' => '101.1.3',
+      'version' => '101.1.3.0',
       'aliases' => 
       array (
       ),
@@ -1742,8 +1767,8 @@
     ),
     'magento/module-encryption-key' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -1751,8 +1776,8 @@
     ),
     'magento/module-fedex' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -1760,8 +1785,8 @@
     ),
     'magento/module-gift-message' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -1769,8 +1794,8 @@
     ),
     'magento/module-gift-message-graph-ql' => 
     array (
-      'pretty_version' => '100.4.0',
-      'version' => '100.4.0.0',
+      'pretty_version' => '100.4.1',
+      'version' => '100.4.1.0',
       'aliases' => 
       array (
       ),
@@ -1778,8 +1803,8 @@
     ),
     'magento/module-google-adwords' => 
     array (
-      'pretty_version' => '100.4.0',
-      'version' => '100.4.0.0',
+      'pretty_version' => '100.4.1',
+      'version' => '100.4.1.0',
       'aliases' => 
       array (
       ),
@@ -1796,8 +1821,8 @@
     ),
     'magento/module-google-optimizer' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -1805,8 +1830,8 @@
     ),
     'magento/module-graph-ql' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -1832,51 +1857,6 @@
     ),
     'magento/module-grouped-import-export' => 
     array (
-      'pretty_version' => '100.4.0',
-      'version' => '100.4.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
-    'magento/module-grouped-product' => 
-    array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
-    'magento/module-grouped-product-graph-ql' => 
-    array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
-    'magento/module-import-export' => 
-    array (
-      'pretty_version' => '101.0.2',
-      'version' => '101.0.2.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
-    'magento/module-indexer' => 
-    array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
-    'magento/module-instant-purchase' => 
-    array (
       'pretty_version' => '100.4.1',
       'version' => '100.4.1.0',
       'aliases' => 
@@ -1884,7 +1864,43 @@
       ),
       'reference' => NULL,
     ),
-    'magento/module-integration' => 
+    'magento/module-grouped-product' => 
+    array (
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-grouped-product-graph-ql' => 
+    array (
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-import-export' => 
+    array (
+      'pretty_version' => '101.0.3',
+      'version' => '101.0.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-indexer' => 
+    array (
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-instant-purchase' => 
     array (
       'pretty_version' => '100.4.2',
       'version' => '100.4.2.0',
@@ -1893,10 +1909,19 @@
       ),
       'reference' => NULL,
     ),
+    'magento/module-integration' => 
+    array (
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
     'magento/module-inventory' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -1904,8 +1929,8 @@
     ),
     'magento/module-inventory-admin-ui' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -1922,8 +1947,8 @@
     ),
     'magento/module-inventory-api' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -1949,8 +1974,8 @@
     ),
     'magento/module-inventory-bundle-product-admin-ui' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -1967,8 +1992,8 @@
     ),
     'magento/module-inventory-cache' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -1976,8 +2001,8 @@
     ),
     'magento/module-inventory-catalog' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -1985,8 +2010,8 @@
     ),
     'magento/module-inventory-catalog-admin-ui' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -1994,8 +2019,8 @@
     ),
     'magento/module-inventory-catalog-api' => 
     array (
-      'pretty_version' => '1.3.0',
-      'version' => '1.3.0.0',
+      'pretty_version' => '1.3.1',
+      'version' => '1.3.1.0',
       'aliases' => 
       array (
       ),
@@ -2003,8 +2028,8 @@
     ),
     'magento/module-inventory-catalog-frontend-ui' => 
     array (
-      'pretty_version' => '1.0.0',
-      'version' => '1.0.0.0',
+      'pretty_version' => '1.0.1',
+      'version' => '1.0.1.0',
       'aliases' => 
       array (
       ),
@@ -2012,32 +2037,14 @@
     ),
     'magento/module-inventory-catalog-search' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
       'reference' => NULL,
     ),
-    'magento/module-inventory-configurable-product' => 
-    array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
-    'magento/module-inventory-configurable-product-admin-ui' => 
-    array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
-    'magento/module-inventory-configurable-product-frontend-ui' => 
+    'magento/module-inventory-catalog-search-bundle-product' => 
     array (
       'pretty_version' => '1.0.0',
       'version' => '1.0.0.0',
@@ -2046,10 +2053,46 @@
       ),
       'reference' => NULL,
     ),
+    'magento/module-inventory-catalog-search-configurable-product' => 
+    array (
+      'pretty_version' => '1.0.0',
+      'version' => '1.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-inventory-configurable-product' => 
+    array (
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-inventory-configurable-product-admin-ui' => 
+    array (
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-inventory-configurable-product-frontend-ui' => 
+    array (
+      'pretty_version' => '1.0.1',
+      'version' => '1.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
     'magento/module-inventory-configurable-product-indexer' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -2057,8 +2100,8 @@
     ),
     'magento/module-inventory-configuration' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -2075,8 +2118,8 @@
     ),
     'magento/module-inventory-distance-based-source-selection' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -2138,8 +2181,8 @@
     ),
     'magento/module-inventory-grouped-product' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -2147,8 +2190,8 @@
     ),
     'magento/module-inventory-grouped-product-admin-ui' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -2156,8 +2199,8 @@
     ),
     'magento/module-inventory-grouped-product-indexer' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -2165,8 +2208,8 @@
     ),
     'magento/module-inventory-import-export' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -2201,8 +2244,8 @@
     ),
     'magento/module-inventory-in-store-pickup-frontend' => 
     array (
-      'pretty_version' => '1.1.0',
-      'version' => '1.1.0.0',
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
       'aliases' => 
       array (
       ),
@@ -2255,8 +2298,8 @@
     ),
     'magento/module-inventory-in-store-pickup-sales-admin-ui' => 
     array (
-      'pretty_version' => '1.1.0',
-      'version' => '1.1.0.0',
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
       'aliases' => 
       array (
       ),
@@ -2309,8 +2352,8 @@
     ),
     'magento/module-inventory-indexer' => 
     array (
-      'pretty_version' => '2.1.0',
-      'version' => '2.1.0.0',
+      'pretty_version' => '2.1.1',
+      'version' => '2.1.1.0',
       'aliases' => 
       array (
       ),
@@ -2327,8 +2370,8 @@
     ),
     'magento/module-inventory-low-quantity-notification-admin-ui' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -2354,8 +2397,17 @@
     ),
     'magento/module-inventory-product-alert' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-inventory-quote-graph-ql' => 
+    array (
+      'pretty_version' => '1.0.0',
+      'version' => '1.0.0.0',
       'aliases' => 
       array (
       ),
@@ -2363,8 +2415,8 @@
     ),
     'magento/module-inventory-requisition-list' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -2372,8 +2424,8 @@
     ),
     'magento/module-inventory-reservation-cli' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -2399,8 +2451,8 @@
     ),
     'magento/module-inventory-sales' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -2408,8 +2460,8 @@
     ),
     'magento/module-inventory-sales-admin-ui' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -2426,8 +2478,8 @@
     ),
     'magento/module-inventory-sales-frontend-ui' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -2444,8 +2496,8 @@
     ),
     'magento/module-inventory-shipping' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -2453,8 +2505,8 @@
     ),
     'magento/module-inventory-shipping-admin-ui' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -2462,8 +2514,8 @@
     ),
     'magento/module-inventory-source-deduction-api' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
@@ -2498,8 +2550,8 @@
     ),
     'magento/module-inventory-visual-merchandiser' => 
     array (
-      'pretty_version' => '1.1.0',
-      'version' => '1.1.0.0',
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
       'aliases' => 
       array (
       ),
@@ -2514,10 +2566,19 @@
       ),
       'reference' => NULL,
     ),
+    'magento/module-jwt-framework-adapter' => 
+    array (
+      'pretty_version' => '100.4.0',
+      'version' => '100.4.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
     'magento/module-layered-navigation' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -2525,8 +2586,8 @@
     ),
     'magento/module-login-as-customer' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -2534,8 +2595,8 @@
     ),
     'magento/module-login-as-customer-admin-ui' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -2552,8 +2613,8 @@
     ),
     'magento/module-login-as-customer-assistance' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -2561,8 +2622,8 @@
     ),
     'magento/module-login-as-customer-frontend-ui' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -2579,8 +2640,8 @@
     ),
     'magento/module-login-as-customer-log' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -2588,8 +2649,8 @@
     ),
     'magento/module-login-as-customer-page-cache' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -2597,15 +2658,6 @@
     ),
     'magento/module-login-as-customer-quote' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
-    'magento/module-login-as-customer-sales' => 
-    array (
       'pretty_version' => '100.4.2',
       'version' => '100.4.2.0',
       'aliases' => 
@@ -2613,10 +2665,19 @@
       ),
       'reference' => NULL,
     ),
+    'magento/module-login-as-customer-sales' => 
+    array (
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
     'magento/module-marketplace' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -2660,8 +2721,8 @@
     ),
     'magento/module-media-content-synchronization' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -2750,8 +2811,8 @@
     ),
     'magento/module-media-gallery-integration' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -2759,8 +2820,8 @@
     ),
     'magento/module-media-gallery-metadata' => 
     array (
-      'pretty_version' => '100.4.0',
-      'version' => '100.4.0.0',
+      'pretty_version' => '100.4.1',
+      'version' => '100.4.1.0',
       'aliases' => 
       array (
       ),
@@ -2777,8 +2838,8 @@
     ),
     'magento/module-media-gallery-renditions' => 
     array (
-      'pretty_version' => '100.4.0',
-      'version' => '100.4.0.0',
+      'pretty_version' => '100.4.1',
+      'version' => '100.4.1.0',
       'aliases' => 
       array (
       ),
@@ -2795,8 +2856,8 @@
     ),
     'magento/module-media-gallery-synchronization' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -2822,8 +2883,8 @@
     ),
     'magento/module-media-gallery-ui' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -2840,8 +2901,8 @@
     ),
     'magento/module-media-storage' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -2849,6 +2910,15 @@
     ),
     'magento/module-message-queue' => 
     array (
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-msrp' => 
+    array (
       'pretty_version' => '100.4.2',
       'version' => '100.4.2.0',
       'aliases' => 
@@ -2856,7 +2926,7 @@
       ),
       'reference' => NULL,
     ),
-    'magento/module-msrp' => 
+    'magento/module-msrp-configurable-product' => 
     array (
       'pretty_version' => '100.4.1',
       'version' => '100.4.1.0',
@@ -2865,19 +2935,10 @@
       ),
       'reference' => NULL,
     ),
-    'magento/module-msrp-configurable-product' => 
-    array (
-      'pretty_version' => '100.4.0',
-      'version' => '100.4.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
     'magento/module-msrp-grouped-product' => 
     array (
-      'pretty_version' => '100.4.0',
-      'version' => '100.4.0.0',
+      'pretty_version' => '100.4.1',
+      'version' => '100.4.1.0',
       'aliases' => 
       array (
       ),
@@ -2885,8 +2946,8 @@
     ),
     'magento/module-multishipping' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -2894,8 +2955,8 @@
     ),
     'magento/module-mysql-mq' => 
     array (
-      'pretty_version' => '100.4.0',
-      'version' => '100.4.0.0',
+      'pretty_version' => '100.4.1',
+      'version' => '100.4.1.0',
       'aliases' => 
       array (
       ),
@@ -2912,8 +2973,8 @@
     ),
     'magento/module-newsletter' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -2930,8 +2991,8 @@
     ),
     'magento/module-offline-payments' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -2939,8 +3000,35 @@
     ),
     'magento/module-offline-shipping' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-page-builder' => 
+    array (
+      'pretty_version' => '2.2.1',
+      'version' => '2.2.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-page-builder-admin-analytics' => 
+    array (
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-page-builder-analytics' => 
+    array (
+      'pretty_version' => '1.6.1',
+      'version' => '1.6.1.0',
       'aliases' => 
       array (
       ),
@@ -2948,8 +3036,8 @@
     ),
     'magento/module-page-cache' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -2957,8 +3045,8 @@
     ),
     'magento/module-payment' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -2966,8 +3054,8 @@
     ),
     'magento/module-paypal' => 
     array (
-      'pretty_version' => '101.0.2',
-      'version' => '101.0.2.0',
+      'pretty_version' => '101.0.3',
+      'version' => '101.0.3.0',
       'aliases' => 
       array (
       ),
@@ -2975,8 +3063,8 @@
     ),
     'magento/module-paypal-captcha' => 
     array (
-      'pretty_version' => '100.4.0',
-      'version' => '100.4.0.0',
+      'pretty_version' => '100.4.1',
+      'version' => '100.4.1.0',
       'aliases' => 
       array (
       ),
@@ -2993,8 +3081,8 @@
     ),
     'magento/module-persistent' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -3002,8 +3090,8 @@
     ),
     'magento/module-product-alert' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -3011,8 +3099,8 @@
     ),
     'magento/module-product-video' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -3020,8 +3108,8 @@
     ),
     'magento/module-quote' => 
     array (
-      'pretty_version' => '101.2.2',
-      'version' => '101.2.2.0',
+      'pretty_version' => '101.2.3',
+      'version' => '101.2.3.0',
       'aliases' => 
       array (
       ),
@@ -3029,8 +3117,8 @@
     ),
     'magento/module-quote-analytics' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -3065,8 +3153,8 @@
     ),
     'magento/module-quote-graph-ql' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -3074,8 +3162,8 @@
     ),
     'magento/module-re-captcha-admin-ui' => 
     array (
-      'pretty_version' => '1.1.0',
-      'version' => '1.1.0.0',
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
       'aliases' => 
       array (
       ),
@@ -3083,8 +3171,8 @@
     ),
     'magento/module-re-captcha-checkout' => 
     array (
-      'pretty_version' => '1.1.0',
-      'version' => '1.1.0.0',
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
       'aliases' => 
       array (
       ),
@@ -3101,8 +3189,8 @@
     ),
     'magento/module-re-captcha-customer' => 
     array (
-      'pretty_version' => '1.1.0',
-      'version' => '1.1.0.0',
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
       'aliases' => 
       array (
       ),
@@ -3110,8 +3198,8 @@
     ),
     'magento/module-re-captcha-frontend-ui' => 
     array (
-      'pretty_version' => '1.1.0',
-      'version' => '1.1.0.0',
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
       'aliases' => 
       array (
       ),
@@ -3119,8 +3207,8 @@
     ),
     'magento/module-re-captcha-migration' => 
     array (
-      'pretty_version' => '1.1.0',
-      'version' => '1.1.0.0',
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
       'aliases' => 
       array (
       ),
@@ -3128,8 +3216,8 @@
     ),
     'magento/module-re-captcha-newsletter' => 
     array (
-      'pretty_version' => '1.1.0',
-      'version' => '1.1.0.0',
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
       'aliases' => 
       array (
       ),
@@ -3137,8 +3225,8 @@
     ),
     'magento/module-re-captcha-paypal' => 
     array (
-      'pretty_version' => '1.1.0',
-      'version' => '1.1.0.0',
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
       'aliases' => 
       array (
       ),
@@ -3146,8 +3234,8 @@
     ),
     'magento/module-re-captcha-review' => 
     array (
-      'pretty_version' => '1.1.0',
-      'version' => '1.1.0.0',
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
       'aliases' => 
       array (
       ),
@@ -3155,8 +3243,17 @@
     ),
     'magento/module-re-captcha-send-friend' => 
     array (
-      'pretty_version' => '1.1.0',
-      'version' => '1.1.0.0',
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-re-captcha-store-pickup' => 
+    array (
+      'pretty_version' => '1.0.0',
+      'version' => '1.0.0.0',
       'aliases' => 
       array (
       ),
@@ -3164,8 +3261,8 @@
     ),
     'magento/module-re-captcha-ui' => 
     array (
-      'pretty_version' => '1.1.0',
-      'version' => '1.1.0.0',
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
       'aliases' => 
       array (
       ),
@@ -3173,8 +3270,8 @@
     ),
     'magento/module-re-captcha-user' => 
     array (
-      'pretty_version' => '1.1.0',
-      'version' => '1.1.0.0',
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
       'aliases' => 
       array (
       ),
@@ -3200,8 +3297,8 @@
     ),
     'magento/module-re-captcha-version-2-checkbox' => 
     array (
-      'pretty_version' => '2.0.0',
-      'version' => '2.0.0.0',
+      'pretty_version' => '2.0.1',
+      'version' => '2.0.1.0',
       'aliases' => 
       array (
       ),
@@ -3209,8 +3306,8 @@
     ),
     'magento/module-re-captcha-version-2-invisible' => 
     array (
-      'pretty_version' => '2.0.0',
-      'version' => '2.0.0.0',
+      'pretty_version' => '2.0.1',
+      'version' => '2.0.1.0',
       'aliases' => 
       array (
       ),
@@ -3218,8 +3315,44 @@
     ),
     'magento/module-re-captcha-version-3-invisible' => 
     array (
-      'pretty_version' => '2.0.0',
-      'version' => '2.0.0.0',
+      'pretty_version' => '2.0.1',
+      'version' => '2.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-re-captcha-webapi-api' => 
+    array (
+      'pretty_version' => '1.0.0',
+      'version' => '1.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-re-captcha-webapi-graph-ql' => 
+    array (
+      'pretty_version' => '1.0.0',
+      'version' => '1.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-re-captcha-webapi-rest' => 
+    array (
+      'pretty_version' => '1.0.0',
+      'version' => '1.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-re-captcha-webapi-ui' => 
+    array (
+      'pretty_version' => '1.0.0',
+      'version' => '1.0.0.0',
       'aliases' => 
       array (
       ),
@@ -3245,8 +3378,8 @@
     ),
     'magento/module-remote-storage' => 
     array (
-      'pretty_version' => '100.4.0',
-      'version' => '100.4.0.0',
+      'pretty_version' => '100.4.1',
+      'version' => '100.4.1.0',
       'aliases' => 
       array (
       ),
@@ -3254,8 +3387,8 @@
     ),
     'magento/module-reports' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -3272,8 +3405,8 @@
     ),
     'magento/module-review' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -3308,8 +3441,8 @@
     ),
     'magento/module-rss' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -3317,8 +3450,8 @@
     ),
     'magento/module-rule' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -3326,8 +3459,8 @@
     ),
     'magento/module-sales' => 
     array (
-      'pretty_version' => '103.0.2',
-      'version' => '103.0.2.0',
+      'pretty_version' => '103.0.3',
+      'version' => '103.0.3.0',
       'aliases' => 
       array (
       ),
@@ -3344,8 +3477,8 @@
     ),
     'magento/module-sales-graph-ql' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -3362,8 +3495,8 @@
     ),
     'magento/module-sales-rule' => 
     array (
-      'pretty_version' => '101.2.2',
-      'version' => '101.2.2.0',
+      'pretty_version' => '101.2.3',
+      'version' => '101.2.3.0',
       'aliases' => 
       array (
       ),
@@ -3389,8 +3522,8 @@
     ),
     'magento/module-search' => 
     array (
-      'pretty_version' => '101.1.2',
-      'version' => '101.1.2.0',
+      'pretty_version' => '101.1.3',
+      'version' => '101.1.3.0',
       'aliases' => 
       array (
       ),
@@ -3398,8 +3531,8 @@
     ),
     'magento/module-security' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -3416,8 +3549,8 @@
     ),
     'magento/module-send-friend' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -3434,8 +3567,8 @@
     ),
     'magento/module-shipping' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -3452,8 +3585,8 @@
     ),
     'magento/module-store' => 
     array (
-      'pretty_version' => '101.1.2',
-      'version' => '101.1.2.0',
+      'pretty_version' => '101.1.3',
+      'version' => '101.1.3.0',
       'aliases' => 
       array (
       ),
@@ -3470,8 +3603,8 @@
     ),
     'magento/module-swagger' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -3497,8 +3630,8 @@
     ),
     'magento/module-swatches' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -3506,8 +3639,8 @@
     ),
     'magento/module-swatches-graph-ql' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -3524,8 +3657,8 @@
     ),
     'magento/module-tax' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -3542,8 +3675,8 @@
     ),
     'magento/module-tax-import-export' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -3551,8 +3684,8 @@
     ),
     'magento/module-theme' => 
     array (
-      'pretty_version' => '101.1.2',
-      'version' => '101.1.2.0',
+      'pretty_version' => '101.1.3',
+      'version' => '101.1.3.0',
       'aliases' => 
       array (
       ),
@@ -3567,19 +3700,10 @@
       ),
       'reference' => NULL,
     ),
-    'magento/module-tinymce-3' => 
-    array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
     'magento/module-translation' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -3587,8 +3711,8 @@
     ),
     'magento/module-two-factor-auth' => 
     array (
-      'pretty_version' => '1.1.1',
-      'version' => '1.1.1.0',
+      'pretty_version' => '1.1.2',
+      'version' => '1.1.2.0',
       'aliases' => 
       array (
       ),
@@ -3596,14 +3720,32 @@
     ),
     'magento/module-ui' => 
     array (
-      'pretty_version' => '101.2.2',
-      'version' => '101.2.2.0',
+      'pretty_version' => '101.2.3',
+      'version' => '101.2.3.0',
       'aliases' => 
       array (
       ),
       'reference' => NULL,
     ),
     'magento/module-ups' => 
+    array (
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-url-rewrite' => 
+    array (
+      'pretty_version' => '102.0.2',
+      'version' => '102.0.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-url-rewrite-graph-ql' => 
     array (
       'pretty_version' => '100.4.2',
       'version' => '100.4.2.0',
@@ -3612,28 +3754,10 @@
       ),
       'reference' => NULL,
     ),
-    'magento/module-url-rewrite' => 
-    array (
-      'pretty_version' => '102.0.1',
-      'version' => '102.0.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
-    'magento/module-url-rewrite-graph-ql' => 
-    array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
     'magento/module-user' => 
     array (
-      'pretty_version' => '101.2.2',
-      'version' => '101.2.2.0',
+      'pretty_version' => '101.2.3',
+      'version' => '101.2.3.0',
       'aliases' => 
       array (
       ),
@@ -3641,8 +3765,8 @@
     ),
     'magento/module-usps' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -3650,8 +3774,8 @@
     ),
     'magento/module-variable' => 
     array (
-      'pretty_version' => '100.4.0',
-      'version' => '100.4.0.0',
+      'pretty_version' => '100.4.1',
+      'version' => '100.4.1.0',
       'aliases' => 
       array (
       ),
@@ -3659,8 +3783,8 @@
     ),
     'magento/module-vault' => 
     array (
-      'pretty_version' => '101.2.2',
-      'version' => '101.2.2.0',
+      'pretty_version' => '101.2.3',
+      'version' => '101.2.3.0',
       'aliases' => 
       array (
       ),
@@ -3686,8 +3810,8 @@
     ),
     'magento/module-webapi' => 
     array (
-      'pretty_version' => '100.4.1',
-      'version' => '100.4.1.0',
+      'pretty_version' => '100.4.2',
+      'version' => '100.4.2.0',
       'aliases' => 
       array (
       ),
@@ -3695,59 +3819,14 @@
     ),
     'magento/module-webapi-async' => 
     array (
-      'pretty_version' => '100.4.0',
-      'version' => '100.4.0.0',
+      'pretty_version' => '100.4.1',
+      'version' => '100.4.1.0',
       'aliases' => 
       array (
       ),
       'reference' => NULL,
     ),
     'magento/module-webapi-security' => 
-    array (
-      'pretty_version' => '100.4.0',
-      'version' => '100.4.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
-    'magento/module-weee' => 
-    array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
-    'magento/module-weee-graph-ql' => 
-    array (
-      'pretty_version' => '100.4.0',
-      'version' => '100.4.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
-    'magento/module-widget' => 
-    array (
-      'pretty_version' => '101.2.2',
-      'version' => '101.2.2.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
-    'magento/module-wishlist' => 
-    array (
-      'pretty_version' => '101.2.2',
-      'version' => '101.2.2.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => NULL,
-    ),
-    'magento/module-wishlist-analytics' => 
     array (
       'pretty_version' => '100.4.1',
       'version' => '100.4.1.0',
@@ -3756,7 +3835,43 @@
       ),
       'reference' => NULL,
     ),
-    'magento/module-wishlist-graph-ql' => 
+    'magento/module-weee' => 
+    array (
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-weee-graph-ql' => 
+    array (
+      'pretty_version' => '100.4.1',
+      'version' => '100.4.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-widget' => 
+    array (
+      'pretty_version' => '101.2.3',
+      'version' => '101.2.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-wishlist' => 
+    array (
+      'pretty_version' => '101.2.3',
+      'version' => '101.2.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/module-wishlist-analytics' => 
     array (
       'pretty_version' => '100.4.2',
       'version' => '100.4.2.0',
@@ -3765,10 +3880,28 @@
       ),
       'reference' => NULL,
     ),
+    'magento/module-wishlist-graph-ql' => 
+    array (
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'magento/page-builder' => 
+    array (
+      'pretty_version' => '1.7.0',
+      'version' => '1.7.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
     'magento/product-community-edition' => 
     array (
-      'pretty_version' => '2.4.2',
-      'version' => '2.4.2.0',
+      'pretty_version' => '2.4.3',
+      'version' => '2.4.3.0',
       'aliases' => 
       array (
       ),
@@ -3785,8 +3918,8 @@
     ),
     'magento/security-package' => 
     array (
-      'pretty_version' => '1.1.1',
-      'version' => '1.1.1.0',
+      'pretty_version' => '1.1.2',
+      'version' => '1.1.2.0',
       'aliases' => 
       array (
       ),
@@ -3794,8 +3927,8 @@
     ),
     'magento/theme-adminhtml-backend' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -3803,8 +3936,8 @@
     ),
     'magento/theme-frontend-blank' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -3812,8 +3945,8 @@
     ),
     'magento/theme-frontend-luma' => 
     array (
-      'pretty_version' => '100.4.2',
-      'version' => '100.4.2.0',
+      'pretty_version' => '100.4.3',
+      'version' => '100.4.3.0',
       'aliases' => 
       array (
       ),
@@ -3857,12 +3990,12 @@
     ),
     'mtdowling/jmespath.php' => 
     array (
-      'pretty_version' => '2.6.0',
-      'version' => '2.6.0.0',
+      'pretty_version' => '2.6.1',
+      'version' => '2.6.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '42dae2cbd13154083ca6d70099692fef8ca84bfb',
+      'reference' => '9b87907a81b87bc76d19a7fb2d61e61486ee9edb',
     ),
     'myclabs/deep-copy' => 
     array (
@@ -3879,12 +4012,21 @@
     ),
     'myclabs/php-enum' => 
     array (
-      'pretty_version' => '1.8.0',
-      'version' => '1.8.0.0',
+      'pretty_version' => '1.8.3',
+      'version' => '1.8.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => '46cf3d8498b095bd33727b13fd5707263af99421',
+      'reference' => 'b942d263c641ddb5190929ff840c68f78713e937',
+    ),
+    'nikic/php-parser' => 
+    array (
+      'pretty_version' => 'v4.13.0',
+      'version' => '4.13.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '50953a2691a922aa1769461637869a0a2faa3f53',
     ),
     'nordcomputer/showoutofstockprice' => 
     array (
@@ -3915,26 +4057,26 @@
     ),
     'paragonie/random_compat' => 
     array (
-      'pretty_version' => 'v9.99.99',
-      'version' => '9.99.99.0',
+      'pretty_version' => 'v9.99.100',
+      'version' => '9.99.100.0',
       'aliases' => 
       array (
       ),
-      'reference' => '84b4dfb120c6f9b4ff7b3685f9b8f1aa365a0c95',
+      'reference' => '996434e5492cb4c3edcb9168db6fbb1359ef965a',
     ),
     'paragonie/sodium_compat' => 
     array (
-      'pretty_version' => 'v1.16.1',
-      'version' => '1.16.1.0',
+      'pretty_version' => 'v1.17.0',
+      'version' => '1.17.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2e856afe80bfc968b47da1f4a7e1ea8f03d06b38',
+      'reference' => 'c59cac21abbcc0df06a3dd18076450ea4797b321',
     ),
     'paypal/module-braintree' => 
     array (
-      'pretty_version' => '4.2.1',
-      'version' => '4.2.1.0',
+      'pretty_version' => '4.2.4',
+      'version' => '4.2.4.0',
       'aliases' => 
       array (
       ),
@@ -3942,8 +4084,8 @@
     ),
     'paypal/module-braintree-core' => 
     array (
-      'pretty_version' => '4.2.1',
-      'version' => '4.2.1.0',
+      'pretty_version' => '4.2.4',
+      'version' => '4.2.4.0',
       'aliases' => 
       array (
       ),
@@ -3969,12 +4111,12 @@
     ),
     'pelago/emogrifier' => 
     array (
-      'pretty_version' => 'v3.1.0',
-      'version' => '3.1.0.0',
+      'pretty_version' => 'v5.0.1',
+      'version' => '5.0.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'f6a5c7d44612d86c3901c93f1592f5440e6b2cd8',
+      'reference' => '37595a9bb62c3c25969bdd9e8d7dd24c3ac62bc9',
     ),
     'phar-io/manifest' => 
     array (
@@ -4023,12 +4165,30 @@
     ),
     'phpdocumentor/type-resolver' => 
     array (
-      'pretty_version' => '1.4.0',
-      'version' => '1.4.0.0',
+      'pretty_version' => '1.5.0',
+      'version' => '1.5.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '6a467b8989322d92aa1c8bf2bebcc6e5c2ba55c0',
+      'reference' => '30f38bffc6f24293dadd1823936372dfa9e86e2f',
+    ),
+    'phpgt/cssxpath' => 
+    array (
+      'pretty_version' => 'v1.1.3',
+      'version' => '1.1.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '64813864ab00e52cbde2cd517d6c6235b7f9ac69',
+    ),
+    'phpgt/dom' => 
+    array (
+      'pretty_version' => 'v2.1.6',
+      'version' => '2.1.6.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'fceb86cdb32e846178f75b7f9806d2b77635a879',
     ),
     'phpmd/phpmd' => 
     array (
@@ -4050,12 +4210,12 @@
     ),
     'phpseclib/phpseclib' => 
     array (
-      'pretty_version' => '2.0.31',
-      'version' => '2.0.31.0',
+      'pretty_version' => '2.0.33',
+      'version' => '2.0.33.0',
       'aliases' => 
       array (
       ),
-      'reference' => '233a920cb38636a43b18d428f9a8db1f0a1a08f4',
+      'reference' => 'fb53b7889497ec7c1362c94e61d8127ac67ea094',
     ),
     'phpspec/prophecy' => 
     array (
@@ -4129,15 +4289,6 @@
       ),
       'reference' => 'cd1cf05c553ecfec36b170070573e540b67d3f1f',
     ),
-    'psr/cache' => 
-    array (
-      'pretty_version' => '1.0.1',
-      'version' => '1.0.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'd11b50ad223250cf17b86e38383413f5a6764bf8',
-    ),
     'psr/container' => 
     array (
       'pretty_version' => '1.1.1',
@@ -4151,8 +4302,18 @@
     array (
       'provided' => 
       array (
-        0 => '1.0',
+        0 => '^1.0',
+        1 => '1.0',
       ),
+    ),
+    'psr/event-dispatcher' => 
+    array (
+      'pretty_version' => '1.0.0',
+      'version' => '1.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'dbefd12671e8a14ec7f180cab83036ed26714bb0',
     ),
     'psr/event-dispatcher-implementation' => 
     array (
@@ -4160,6 +4321,24 @@
       array (
         0 => '1.0',
       ),
+    ),
+    'psr/http-client' => 
+    array (
+      'pretty_version' => '1.0.1',
+      'version' => '1.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '2dfb5f6c5eff0e91e20e913f8c5452ed95b86621',
+    ),
+    'psr/http-factory' => 
+    array (
+      'pretty_version' => '1.0.1',
+      'version' => '1.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '12ac7fcd07e5b077433f5f2bee95b3a771bf61be',
     ),
     'psr/http-message' => 
     array (
@@ -4191,7 +4370,7 @@
       'provided' => 
       array (
         0 => '1.0.0',
-        1 => '1.0',
+        1 => '1.0|2.0',
       ),
     ),
     'ralouphie/getallheaders' => 
@@ -4203,14 +4382,23 @@
       ),
       'reference' => '120b605dfeb996808c31b6477290a714d356e822',
     ),
-    'ramsey/uuid' => 
+    'ramsey/collection' => 
     array (
-      'pretty_version' => '3.8.0',
-      'version' => '3.8.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'd09ea80159c1929d75b3f9c60504d613aeb4a1e3',
+      'reference' => 'eaca1dc1054ddd10cbd83c1461907bee6fb528fa',
+    ),
+    'ramsey/uuid' => 
+    array (
+      'pretty_version' => '4.1.2',
+      'version' => '4.1.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '97d153506bedcab27aa3cc421c9f091d96cb61f8',
     ),
     'react/promise' => 
     array (
@@ -4225,7 +4413,7 @@
     array (
       'replaced' => 
       array (
-        0 => '3.8.0',
+        0 => '4.1.2',
       ),
     ),
     'sebastian/code-unit-reverse-lookup' => 
@@ -4356,12 +4544,12 @@
     ),
     'seld/phar-utils' => 
     array (
-      'pretty_version' => '1.1.1',
-      'version' => '1.1.1.0',
+      'pretty_version' => '1.1.2',
+      'version' => '1.1.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8674b1d84ffb47cc59a101f5d5a3b61e87d23796',
+      'reference' => '749042a2315705d2dfbbc59234dd9ceb22bf3ff0',
     ),
     'sparsh/buy-now-magento-2-extension' => 
     array (
@@ -4380,6 +4568,24 @@
       array (
       ),
       'reference' => NULL,
+    ),
+    'spomky-labs/aes-key-wrap' => 
+    array (
+      'pretty_version' => 'v6.0.0',
+      'version' => '6.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '97388255a37ad6fb1ed332d07e61fa2b7bb62e0d',
+    ),
+    'spomky-labs/base64url' => 
+    array (
+      'pretty_version' => 'v2.0.4',
+      'version' => '2.0.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '7752ce931ec285da4ed1f4c5aa27e45e097be61d',
     ),
     'spomky-labs/otphp' => 
     array (
@@ -4401,8 +4607,8 @@
     ),
     'stripe/module-payments' => 
     array (
-      'pretty_version' => '2.6.1',
-      'version' => '2.6.1.0',
+      'pretty_version' => '2.7.4',
+      'version' => '2.7.4.0',
       'aliases' => 
       array (
       ),
@@ -4410,8 +4616,8 @@
     ),
     'stripe/stripe-payments' => 
     array (
-      'pretty_version' => '2.6.1',
-      'version' => '2.6.1.0',
+      'pretty_version' => '2.7.4',
+      'version' => '2.7.4.0',
       'aliases' => 
       array (
       ),
@@ -4419,48 +4625,57 @@
     ),
     'stripe/stripe-php' => 
     array (
-      'pretty_version' => 'v7.92.0',
-      'version' => '7.92.0.0',
+      'pretty_version' => 'v7.97.0',
+      'version' => '7.97.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '4b549e6f7d3e7ffd877547a0f1e8bd01c363e268',
+      'reference' => 'ae41c309ce113362706f8d5f19cf0cf2c730bc4a',
     ),
     'symfony/config' => 
     array (
-      'pretty_version' => 'v4.4.25',
-      'version' => '4.4.25.0',
+      'pretty_version' => 'v4.4.30',
+      'version' => '4.4.30.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2803882bb10353d277d4539635dd688a053d571c',
+      'reference' => 'd9ea72de055cd822e5228ff898e2aad2f52f76b0',
     ),
     'symfony/console' => 
     array (
-      'pretty_version' => 'v4.4.25',
-      'version' => '4.4.25.0',
+      'pretty_version' => 'v4.4.30',
+      'version' => '4.4.30.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'a62acecdf5b50e314a4f305cd01b5282126f3095',
+      'reference' => 'a3f7189a0665ee33b50e9e228c46f50f5acbed22',
     ),
     'symfony/css-selector' => 
     array (
-      'pretty_version' => 'v5.3.0',
-      'version' => '5.3.0.0',
+      'pretty_version' => 'v5.3.4',
+      'version' => '5.3.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'fcd0b29a7a0b1bb5bfbedc6231583d77fea04814',
+      'reference' => '7fb120adc7f600a59027775b224c13a33530dd90',
+    ),
+    'symfony/debug' => 
+    array (
+      'pretty_version' => 'v4.4.27',
+      'version' => '4.4.27.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '2f9160e92eb64c95da7368c867b663a8e34e980c',
     ),
     'symfony/dependency-injection' => 
     array (
-      'pretty_version' => 'v4.4.25',
-      'version' => '4.4.25.0',
+      'pretty_version' => 'v4.4.27',
+      'version' => '4.4.27.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2ed2a0a6c960bf4e2e862ec77b2f2c558b83c64d',
+      'reference' => '52866e2cb314972ff36c5b3d405ba8f523e56f6e',
     ),
     'symfony/deprecation-contracts' => 
     array (
@@ -4471,14 +4686,23 @@
       ),
       'reference' => '5f38c8804a9e97d23e0c8d63341088cd8a22d627',
     ),
-    'symfony/event-dispatcher' => 
+    'symfony/error-handler' => 
     array (
-      'pretty_version' => 'v4.4.25',
-      'version' => '4.4.25.0',
+      'pretty_version' => 'v4.4.30',
+      'version' => '4.4.30.0',
       'aliases' => 
       array (
       ),
-      'reference' => '047773e7016e4fd45102cedf4bd2558ae0d0c32f',
+      'reference' => '51f98f7aa99f00f3b1da6bafe934e67ae6ba6dc5',
+    ),
+    'symfony/event-dispatcher' => 
+    array (
+      'pretty_version' => 'v4.4.30',
+      'version' => '4.4.30.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '2fe81680070043c4c80e7cedceb797e34f377bac',
     ),
     'symfony/event-dispatcher-contracts' => 
     array (
@@ -4498,30 +4722,57 @@
     ),
     'symfony/filesystem' => 
     array (
-      'pretty_version' => 'v4.4.25',
-      'version' => '4.4.25.0',
+      'pretty_version' => 'v4.4.27',
+      'version' => '4.4.27.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2d926ebd76f52352deb3c9577d8c1d4b96eae429',
+      'reference' => '517fb795794faf29086a77d99eb8f35e457837a7',
     ),
     'symfony/finder' => 
     array (
-      'pretty_version' => 'v5.3.0',
-      'version' => '5.3.0.0',
+      'pretty_version' => 'v5.3.7',
+      'version' => '5.3.7.0',
       'aliases' => 
       array (
       ),
-      'reference' => '0ae3f047bed4edff6fd35b26a9a6bfdc92c953c6',
+      'reference' => 'a10000ada1e600d109a6c7632e9ac42e8bf2fb93',
+    ),
+    'symfony/http-client-contracts' => 
+    array (
+      'pretty_version' => 'v2.4.0',
+      'version' => '2.4.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '7e82f6084d7cae521a75ef2cb5c9457bbda785f4',
+    ),
+    'symfony/http-foundation' => 
+    array (
+      'pretty_version' => 'v5.3.7',
+      'version' => '5.3.7.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'e36c8e5502b4f3f0190c675f1c1f1248a64f04e5',
+    ),
+    'symfony/http-kernel' => 
+    array (
+      'pretty_version' => 'v4.4.30',
+      'version' => '4.4.30.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '87f7ea4a8a7a30c967e26001de99f12943bf57ae',
     ),
     'symfony/options-resolver' => 
     array (
-      'pretty_version' => 'v5.3.0',
-      'version' => '5.3.0.0',
+      'pretty_version' => 'v5.3.7',
+      'version' => '5.3.7.0',
       'aliases' => 
       array (
       ),
-      'reference' => '162e886ca035869866d233a2bfef70cc28f9bbe5',
+      'reference' => '4b78e55b179003a42523a362cc0e8327f7a69b5e',
     ),
     'symfony/polyfill-ctype' => 
     array (
@@ -4534,12 +4785,12 @@
     ),
     'symfony/polyfill-intl-grapheme' => 
     array (
-      'pretty_version' => 'v1.23.0',
-      'version' => '1.23.0.0',
+      'pretty_version' => 'v1.23.1',
+      'version' => '1.23.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '24b72c6baa32c746a4d0840147c9715e42bb68ab',
+      'reference' => '16880ba9c5ebe3642d1995ab866db29270b36535',
     ),
     'symfony/polyfill-intl-idn' => 
     array (
@@ -4561,12 +4812,12 @@
     ),
     'symfony/polyfill-mbstring' => 
     array (
-      'pretty_version' => 'v1.23.0',
-      'version' => '1.23.0.0',
+      'pretty_version' => 'v1.23.1',
+      'version' => '1.23.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2df51500adbaebdc4c38dea4c89a2e131c45c8a1',
+      'reference' => '9174a3d80210dca8daa7f31fec659150bbeabfc6',
     ),
     'symfony/polyfill-php72' => 
     array (
@@ -4588,12 +4839,12 @@
     ),
     'symfony/polyfill-php80' => 
     array (
-      'pretty_version' => 'v1.23.0',
-      'version' => '1.23.0.0',
+      'pretty_version' => 'v1.23.1',
+      'version' => '1.23.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'eca0bf41ed421bed1b57c4958bab16aa86b757d0',
+      'reference' => '1100343ed1a92e3a38f9ae122fc0eb21602547be',
     ),
     'symfony/polyfill-php81' => 
     array (
@@ -4606,30 +4857,30 @@
     ),
     'symfony/process' => 
     array (
-      'pretty_version' => 'v4.4.25',
-      'version' => '4.4.25.0',
+      'pretty_version' => 'v4.4.30',
+      'version' => '4.4.30.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'cd61e6dd273975c6625316de9d141ebd197f93c9',
+      'reference' => '13d3161ef63a8ec21eeccaaf9a4d7f784a87a97d',
     ),
     'symfony/property-access' => 
     array (
-      'pretty_version' => 'v5.3.0',
-      'version' => '5.3.0.0',
+      'pretty_version' => 'v5.3.7',
+      'version' => '5.3.7.0',
       'aliases' => 
       array (
       ),
-      'reference' => '8988399a556cffb0fba9bb3603f8d1ba4543eceb',
+      'reference' => 'a4bbf09b8f3e2d2c89cc2c8b3d6682bf4c3d5589',
     ),
     'symfony/property-info' => 
     array (
-      'pretty_version' => 'v5.3.1',
-      'version' => '5.3.1.0',
+      'pretty_version' => 'v5.3.7',
+      'version' => '5.3.7.0',
       'aliases' => 
       array (
       ),
-      'reference' => '6f8bff281f215dbf41929c7ec6f8309cdc0912cf',
+      'reference' => '7202b6c93a07df5df83eb58e3757dffb77fc5d90',
     ),
     'symfony/service-contracts' => 
     array (
@@ -4649,21 +4900,30 @@
     ),
     'symfony/string' => 
     array (
-      'pretty_version' => 'v5.3.0',
-      'version' => '5.3.0.0',
+      'pretty_version' => 'v5.3.7',
+      'version' => '5.3.7.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'a9a0f8b6aafc5d2d1c116dcccd1573a95153515b',
+      'reference' => '8d224396e28d30f81969f083a58763b8b9ceb0a5',
+    ),
+    'symfony/var-dumper' => 
+    array (
+      'pretty_version' => 'v5.3.7',
+      'version' => '5.3.7.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '3ad5af4aed07d0a0201bbcfc42658fe6c5b2fb8f',
     ),
     'tedivm/jshrink' => 
     array (
-      'pretty_version' => 'v1.3.3',
-      'version' => '1.3.3.0',
+      'pretty_version' => 'v1.4.0',
+      'version' => '1.4.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '566e0c731ba4e372be2de429ef7d54f4faf4477a',
+      'reference' => '0513ba1407b1f235518a939455855e6952a48bbc',
     ),
     'temando/module-shipping' => 
     array (
@@ -4710,12 +4970,12 @@
     ),
     'theseer/tokenizer' => 
     array (
-      'pretty_version' => '1.2.0',
-      'version' => '1.2.0.0',
+      'pretty_version' => '1.2.1',
+      'version' => '1.2.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '75a63c33a8577608444246075ea0af0d052e452a',
+      'reference' => '34a41e998c2183e22995f158c581e7b5e755ab9e',
     ),
     'tinymce/tinymce' => 
     array (
@@ -4758,14 +5018,49 @@
     ),
     'vertex/module-address-validation' => 
     array (
-      'pretty_version' => '2.1.1',
-      'version' => '2.1.1.0',
+      'replaced' => 
+      array (
+        0 => '2.1.2',
+      ),
+    ),
+    'vertex/module-address-validation-api' => 
+    array (
+      'replaced' => 
+      array (
+        0 => '1.0.1',
+      ),
+    ),
+    'vertex/module-tax' => 
+    array (
+      'replaced' => 
+      array (
+        0 => '4.2.1',
+      ),
+    ),
+    'vertex/product-magento-module' => 
+    array (
+      'replaced' => 
+      array (
+        0 => '4.2.1',
+      ),
+    ),
+    'vertex/sdk' => 
+    array (
+      'replaced' => 
+      array (
+        0 => '1.2.7',
+      ),
+    ),
+    'vertexinc/module-address-validation' => 
+    array (
+      'pretty_version' => '2.1.2',
+      'version' => '2.1.2.0',
       'aliases' => 
       array (
       ),
       'reference' => NULL,
     ),
-    'vertex/module-address-validation-api' => 
+    'vertexinc/module-address-validation-api' => 
     array (
       'pretty_version' => '1.0.1',
       'version' => '1.0.1.0',
@@ -4774,25 +5069,50 @@
       ),
       'reference' => NULL,
     ),
-    'vertex/module-tax' => 
+    'vertexinc/module-request-logging' => 
     array (
-      'pretty_version' => '4.2.0',
-      'version' => '4.2.0.0',
+      'pretty_version' => '1.0.0',
+      'version' => '1.0.0.0',
       'aliases' => 
       array (
       ),
       'reference' => NULL,
     ),
-    'vertex/product-magento-module' => 
+    'vertexinc/module-request-logging-api' => 
     array (
-      'pretty_version' => '4.2.0',
-      'version' => '4.2.0.0',
+      'pretty_version' => '1.0.0',
+      'version' => '1.0.0.0',
       'aliases' => 
       array (
       ),
       'reference' => NULL,
     ),
-    'vertex/sdk' => 
+    'vertexinc/module-request-logging-api-implementation' => 
+    array (
+      'provided' => 
+      array (
+        0 => '1.0',
+      ),
+    ),
+    'vertexinc/module-tax' => 
+    array (
+      'pretty_version' => '4.2.1',
+      'version' => '4.2.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'vertexinc/product-magento-module' => 
+    array (
+      'pretty_version' => '4.2.1',
+      'version' => '4.2.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => NULL,
+    ),
+    'vertexinc/sdk' => 
     array (
       'pretty_version' => '1.2.7',
       'version' => '1.2.7.0',
@@ -4806,6 +5126,204 @@
       'replaced' => 
       array (
         0 => 'v2.10.1',
+      ),
+    ),
+    'web-token/encryption-pack' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-bundle' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-checker' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-console' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-core' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-easy' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-encryption' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-encryption-algorithm-aescbc' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-encryption-algorithm-aesgcm' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-encryption-algorithm-aesgcmkw' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-encryption-algorithm-aeskw' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-encryption-algorithm-dir' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-encryption-algorithm-ecdh-es' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-encryption-algorithm-experimental' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-encryption-algorithm-pbes2' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-encryption-algorithm-rsa' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-framework' => 
+    array (
+      'pretty_version' => 'v2.2.11',
+      'version' => '2.2.11.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '643cced197e32471418bd89e7a44b69fd04eb9de',
+    ),
+    'web-token/jwt-key-mgmt' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-nested-token' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-signature' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-signature-algorithm-ecdsa' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-signature-algorithm-eddsa' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-signature-algorithm-experimental' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-signature-algorithm-hmac' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-signature-algorithm-none' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-signature-algorithm-rsa' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/jwt-util-ecc' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
+      ),
+    ),
+    'web-token/signature-pack' => 
+    array (
+      'replaced' => 
+      array (
+        0 => 'v2.2.11',
       ),
     ),
     'webimpress/safe-writer' => 
@@ -4837,17 +5355,17 @@
     ),
     'wikimedia/less.php' => 
     array (
-      'pretty_version' => '1.8.2',
-      'version' => '1.8.2.0',
+      'pretty_version' => 'v3.1.0',
+      'version' => '3.1.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'e238ad228d74b6ffd38209c799b34e9826909266',
+      'reference' => 'a486d78b9bd16b72f237fc6093aa56d69ce8bd13',
     ),
     'yotpo/magento2-module-yotpo-reviews' => 
     array (
-      'pretty_version' => '3.1.3',
-      'version' => '3.1.3.0',
+      'pretty_version' => '3.2.0',
+      'version' => '3.2.0.0',
       'aliases' => 
       array (
       ),
@@ -4855,8 +5373,8 @@
     ),
     'yotpo/magento2-module-yotpo-reviews-bundle' => 
     array (
-      'pretty_version' => '3.1.3',
-      'version' => '3.1.3.0',
+      'pretty_version' => '3.2.0',
+      'version' => '3.2.0.0',
       'aliases' => 
       array (
       ),
@@ -4887,49 +5405,14 @@
     array (
       'replaced' => 
       array (
-        0 => '3.4.1',
-      ),
-    ),
-    'zendframework/zend-config' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '2.6.0',
-      ),
-    ),
-    'zendframework/zend-console' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '2.8.0',
+        0 => '^3.4.1',
       ),
     ),
     'zendframework/zend-crypt' => 
     array (
       'replaced' => 
       array (
-        0 => '2.6.0',
-      ),
-    ),
-    'zendframework/zend-db' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '^2.11.0',
-      ),
-    ),
-    'zendframework/zend-di' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '2.6.1',
-      ),
-    ),
-    'zendframework/zend-diactoros' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '~1.8.7.0',
+        0 => '^3.3.1',
       ),
     ),
     'zendframework/zend-escaper' => 
@@ -4937,13 +5420,6 @@
       'replaced' => 
       array (
         0 => '^2.6.1',
-      ),
-    ),
-    'zendframework/zend-eventmanager' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '^3.2.1',
       ),
     ),
     'zendframework/zend-feed' => 
@@ -4960,25 +5436,11 @@
         0 => '^2.9.2',
       ),
     ),
-    'zendframework/zend-form' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '^2.14.3',
-      ),
-    ),
     'zendframework/zend-http' => 
     array (
       'replaced' => 
       array (
         0 => '^2.11.2',
-      ),
-    ),
-    'zendframework/zend-hydrator' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '2.4.2',
       ),
     ),
     'zendframework/zend-i18n' => 
@@ -4988,53 +5450,11 @@
         0 => '^2.10.1',
       ),
     ),
-    'zendframework/zend-inputfilter' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '2.10.1',
-      ),
-    ),
-    'zendframework/zend-json' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '2.6.1',
-      ),
-    ),
-    'zendframework/zend-loader' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '^2.6.1',
-      ),
-    ),
-    'zendframework/zend-log' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '2.12.0',
-      ),
-    ),
-    'zendframework/zend-mail' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '^2.10.0',
-      ),
-    ),
     'zendframework/zend-math' => 
     array (
       'replaced' => 
       array (
-        0 => '2.7.1',
-      ),
-    ),
-    'zendframework/zend-mime' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '^2.7.2',
+        0 => '^3.2.0',
       ),
     ),
     'zendframework/zend-modulemanager' => 
@@ -5048,14 +5468,14 @@
     array (
       'replaced' => 
       array (
-        0 => '2.7.15',
+        0 => '^3.1.1',
       ),
     ),
-    'zendframework/zend-psr7bridge' => 
+    'zendframework/zend-router' => 
     array (
       'replaced' => 
       array (
-        0 => '0.2.2',
+        0 => '^3.3.0',
       ),
     ),
     'zendframework/zend-serializer' => 
@@ -5072,20 +5492,6 @@
         0 => '^2.8.1',
       ),
     ),
-    'zendframework/zend-servicemanager' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '2.7.11',
-      ),
-    ),
-    'zendframework/zend-session' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '^2.9.1',
-      ),
-    ),
     'zendframework/zend-soap' => 
     array (
       'replaced' => 
@@ -5093,32 +5499,11 @@
         0 => '^2.8.0',
       ),
     ),
-    'zendframework/zend-stdlib' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '^3.2.1',
-      ),
-    ),
-    'zendframework/zend-text' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '2.7.1',
-      ),
-    ),
     'zendframework/zend-uri' => 
     array (
       'replaced' => 
       array (
         0 => '^2.7.1',
-      ),
-    ),
-    'zendframework/zend-validator' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '^2.13.0',
       ),
     ),
     'zendframework/zend-view' => 

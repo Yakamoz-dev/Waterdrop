@@ -60,7 +60,7 @@ class UploadOrder implements ObserverInterface
                     $items[$key]->qty = json_encode($item->getQtyOrdered());
                 }
             }
-            $record['order_items'] = json_encode($items);
+            $record['order_items'] = json_encode(array_values($items));
             $result = $this->processOrder($record);
 
             $this->_logger->info("------Upload Order Result------");

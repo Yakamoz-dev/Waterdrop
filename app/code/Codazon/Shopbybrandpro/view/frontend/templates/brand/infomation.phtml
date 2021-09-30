@@ -51,14 +51,14 @@ $brand->setThumbnail($this->getThumbnailImage($brand, ['width' => 250]));
         ?>
         <div class="cover-section">
 			<div class="cover-wrap">
-				<img class="brand-cover" src="<?php echo $this->getCoverImage($brand, ['width' => 1200]); ?>" />
+				<img class="brand-cover" src="<?php echo $this->getCoverImage($brand, ['width' => 1200]); ?>" alt="brand cover" />
 			</div>
             <div class="after-cover">
                 <div class="row">
                     <?php if ($displayThumbnail) : ?>
                     <div class="col-xs-5 thumb-section">
                         <div class="brand-img-wrap">
-                            <img class="brand-image" itemprop="image" src="<?php echo $brand->getThumbnail(); ?>" />
+                            <img class="brand-image" itemprop="image" src="<?php echo $brand->getThumbnail(); ?>" alt="brand image" />
                         </div>
                     </div>
                     <?php endif ?>

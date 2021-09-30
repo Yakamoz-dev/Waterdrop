@@ -54,9 +54,11 @@ class UploadOrder implements ObserverInterface
             $record['is_completed'] = 0;
             $items = array();
             foreach ($orderItems as $key => $item) {
-                $items[$key] = new \stdClass();
-                $items[$key]->sku = $item->getSku();
-                $items[$key]->qty = json_encode($item->getQtyOrdered());
+                if($item->getProductType() == "simple") {
+                    $items[$key] = new \stdClass();
+                    $items[$key]->sku = $item->getSku();
+                    $items[$key]->qty = json_encode($item->getQtyOrdered());
+                }
             }
             $record['order_items'] = json_encode($items);
             $result = $this->processOrder($record);

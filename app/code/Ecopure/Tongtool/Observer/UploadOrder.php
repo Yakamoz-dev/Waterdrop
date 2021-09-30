@@ -60,19 +60,20 @@ class UploadOrder implements ObserverInterface
                     $items[$key]->qty = json_encode($item->getQtyOrdered());
                 }
             }
-            $record['order_items'] = json_encode($items);
-            $result = $this->processOrder($record);
-
-            $this->_logger->info("------Upload Order Result------");
-            $this->_logger->info(json_encode($result));
-            $this->_logger->info("------Upload Order Result------");
-
-            if (strpos($result, 'Success') === FALSE) {
-                $record['is_uploaded'] = 0;
-                $record['error'] = json_decode($result)->message;
-            } else {
-                $record['is_uploaded'] = 1;
-            }
+            $record['order_items'] = json_encode(array_values($items));
+//            $result = $this->processOrder($record);
+//
+//            $this->_logger->info("------Upload Order Result------");
+//            $this->_logger->info(json_encode($result));
+//            $this->_logger->info("------Upload Order Result------");
+//
+//            if (strpos($result, 'Success') === FALSE) {
+//                $record['is_uploaded'] = 0;
+//                $record['error'] = json_decode($result)->message;
+//            } else {
+//                $record['is_uploaded'] = 1;
+//            }
+            $record['is_uploaded'] = 1;
 
             $newOrder = $objectManager->create('Ecopure\Tongtool\Model\Tongtool');
             $newOrder->setData($record);

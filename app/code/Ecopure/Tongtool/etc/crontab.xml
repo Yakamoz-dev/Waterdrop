@@ -2,10 +2,10 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
     <group id="default">
         <job instance="Ecopure\Tongtool\Cron\Process" method="execute" name="ecopure_tongtool_cron_process">
-            <schedule>30 19,0,2,4 * * *</schedule>
+            <schedule>1 19,0,2,4 * * *</schedule>
         </job>
         <job instance="Ecopure\Tongtool\Cron\Get" method="execute" name="ecopure_tongtool_cron_get">
-            <schedule>1 19,0,2,4 * * *</schedule>
+            <schedule>30 19,0,2,4 * * *</schedule>
         </job>
     </group>
 </config>

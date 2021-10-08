@@ -100,16 +100,10 @@ class ConditionConverter
     {
         try {
             $dateObj = $this->localeDate->date($date, null, false);
-            list($year, $month, $day) = explode('-', $dateObj->format('Y-m-d'));
-
-            $dateObj->setTimezone(new \DateTimeZone($this->localeDate->getConfigTimezone()));
-
-            $dateObj->setDate((int)$year, (int)$month, (int)$day);
-
             if ($includeTime) {
                 $dateObj->setTime($hour, $minute, $second);
             }
-
+            $dateObj->setTimezone(new \DateTimeZone('UTC'));
             return $dateObj;
         } catch (\Exception $e) {
             return null;

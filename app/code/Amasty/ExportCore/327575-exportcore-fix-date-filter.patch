@@ -1,0 +1,23 @@
+Index: app/code/Amasty/ExportCore/Export/Filter/Type/Date/ConditionConverter.php
+===================================================================
+diff --git a/app/code/Amasty/ExportCore/Export/Filter/Type/Date/ConditionConverter.php b/app/code/Amasty/ExportCore/Export/Filter/Type/Date/ConditionConverter.php
+--- a/app/code/Amasty/ExportCore/Export/Filter/Type/Date/ConditionConverter.php
++++ b/app/code/Amasty/ExportCore/Export/Filter/Type/Date/ConditionConverter.php
+@@ -94,10 +94,16 @@
+     {
+         try {
+             $dateObj = $this->localeDate->date($date, null, false);
++            list($year, $month, $day) = explode('-', $dateObj->format('Y-m-d'));
++
++            $dateObj->setTimezone(new \DateTimeZone($this->localeDate->getConfigTimezone()));
++
++            $dateObj->setDate((int)$year, (int)$month, (int)$day);
++
+             if ($includeTime) {
+                 $dateObj->setTime($hour, $minute, $second);
+             }
+-            $dateObj->setTimezone(new \DateTimeZone('UTC'));
++
+             return $dateObj;
+         } catch (\Exception $e) {
+             return null;

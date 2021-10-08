@@ -10,18 +10,15 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
 namespace Aheadworks\Sarp2\Model\Product\Subscription\Details\Config;
 
+use Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\AbstractProvider;
 use Magento\Framework\ObjectManagerInterface;
 
-/**
- * Class ProviderFactory
- * @package Aheadworks\Sarp2\Model\Product\Subscription\Details\Config
- */
 class ProviderFactory
 {
     /**
@@ -41,16 +38,17 @@ class ProviderFactory
      * Create subscription details config provider instance
      *
      * @param string $className
-     * @return ProviderInterface
+     * @return AbstractProvider
      */
     public function create($className)
     {
         $instance = $this->objectManager->create($className);
-        if (!$instance instanceof ProviderInterface) {
+        if (!$instance instanceof AbstractProvider) {
             throw new \InvalidArgumentException(
-                $className . ' doesn\'t implement ' . ProviderInterface::class
+                $className . ' doesn\'t extend ' . AbstractProvider::class
             );
         }
+
         return $instance;
     }
 }

@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -175,7 +175,9 @@ class ForProfile implements ArgumentInterface
      */
     public function getInitialStartDate($profile)
     {
-        return $this->formatDate($profile->getStartDate());
+        return $this->formatDate(
+            $this->profileDateResolver->getInitialStartDate($profile->getProfileId())
+        );
     }
 
     /**

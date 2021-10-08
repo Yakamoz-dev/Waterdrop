@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -27,10 +27,6 @@ use Magento\Framework\Pricing\PriceCurrencyInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Quote\Model\Quote;
 
-/**
- * Class Update
- * @package Aheadworks\Sarp2\Block\Checkout\Cart\Subscription
- */
 class Update extends Template
 {
     /**
@@ -140,7 +136,9 @@ class Update extends Template
         return $this->priceCurrency->format(
             $total,
             true,
-            2
+            2,
+            null,
+            $nearestProfile->getProfileCurrencyCode()
         );
     }
 

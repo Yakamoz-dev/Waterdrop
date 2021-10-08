@@ -10,12 +10,13 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
 namespace Aheadworks\Sarp2\Engine\Payment\Processor\Handler\AfterPlaceOrder;
 
+use Aheadworks\Sarp2\Api\Data\ProfileInterface;
 use Aheadworks\Sarp2\Api\ProfileRepositoryInterface;
 use Aheadworks\Sarp2\Engine\Payment\Processor\Handler\HandlerInterface;
 use Aheadworks\Sarp2\Engine\PaymentInterface;
@@ -60,6 +61,9 @@ class DeleteOneOffItems implements HandlerInterface
         try {
             $profile = $this->profileRepository->get($payment->getProfileId());
             $this->itemManagement->deleteOneOffItems($profile);
+            //TODO: disable profile validation when saving profile.
+            //      Improved solution needs to be found.
+            $profile->setOrigData(ProfileInterface::STATUS, $profile->getStatus());
             $this->profileRepository->save($profile);
         } catch (\Exception $exception) {
         }

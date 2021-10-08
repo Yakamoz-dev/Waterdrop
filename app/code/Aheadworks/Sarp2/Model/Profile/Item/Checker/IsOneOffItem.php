@@ -10,13 +10,14 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
 namespace Aheadworks\Sarp2\Model\Profile\Item\Checker;
 
 use Aheadworks\Sarp2\Api\Data\ProfileItemInterface;
+use Aheadworks\Sarp2\Model\Product\Attribute\Source\SubscriptionType;
 use Aheadworks\Sarp2\Model\Profile\Item;
 
 /**
@@ -37,7 +38,6 @@ class IsOneOffItem
 
         return isset($productOptions['info_buyRequest'][Item::ONE_OFF_ITEM_OPTION])
             || (!isset($productOptions['info_buyRequest']['aw_sarp2_subscription_option'])
-                && !isset($productOptions['aw_sarp2_subscription_option']['option_id'])
-                && !isset($productOptions['info_buyRequest']['aw_sarp2_subscription_type']));
+                && !isset($productOptions['aw_sarp2_subscription_option']['option_id']));
     }
 }

@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -60,7 +60,9 @@ class AdvancedPricingValueResolver
         $product = $this->productRepository->getById($productId);
 
         $isUsedAdvancedPricing = $product->getData(AttributeName::AW_SARP2_IS_USED_ADVANCED_PRICING);
-        if ($isUsedAdvancedPricing == Boolean::VALUE_USE_CONFIG) {
+        if (Boolean::VALUE_USE_CONFIG == $isUsedAdvancedPricing
+            || null == $isUsedAdvancedPricing
+        ) {
             $isUsedAdvancedPricing = $this->config->isUsedAdvancedPricing();
         }
 

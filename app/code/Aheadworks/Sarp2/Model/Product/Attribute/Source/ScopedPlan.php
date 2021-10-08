@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -19,7 +19,8 @@ namespace Aheadworks\Sarp2\Model\Product\Attribute\Source;
 use Aheadworks\Sarp2\Api\Data\PlanInterface;
 use Aheadworks\Sarp2\Api\PlanRepositoryInterface;
 use Aheadworks\Sarp2\Model\Plan\Source\Status;
-use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\SubscriptionPriceCalculator as PriceCalculation;
+use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\Input\Factory as CalculationInputFactory;
+use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\PeriodPriceCalculator as PriceCalculation;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Model\Locator\LocatorInterface;
 use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
@@ -39,9 +40,14 @@ class ScopedPlan implements OptionSourceInterface
     private $planRepository;
 
     /**
+     * @var CalculationInputFactory
+     */
+    private $calculationInputFactory;
+
+    /**
      * @var PriceCalculation
      */
-    private $priceCalculator;
+    private $periodPriceCalculator;
 
     /**
      * @var SearchCriteriaBuilder
@@ -65,6 +71,7 @@ class ScopedPlan implements OptionSourceInterface
 
     /**
      * @param PlanRepositoryInterface $planRepository
+     * @param CalculationInputFactory $calculationInputFactory
      * @param PriceCalculation $priceCalculation
      * @param SearchCriteriaBuilder $searchCriteriaBuilder
      * @param SortOrderBuilder $sortOrderBuilder
@@ -72,13 +79,15 @@ class ScopedPlan implements OptionSourceInterface
      */
     public function __construct(
         PlanRepositoryInterface $planRepository,
+        CalculationInputFactory $calculationInputFactory,
         PriceCalculation $priceCalculation,
         SearchCriteriaBuilder $searchCriteriaBuilder,
         SortOrderBuilder $sortOrderBuilder,
         LocatorInterface $locator
     ) {
         $this->planRepository = $planRepository;
-        $this->priceCalculator = $priceCalculation;
+        $this->calculationInputFactory = $calculationInputFactory;
+        $this->periodPriceCalculator = $priceCalculation;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->sortOrderBuilder = $sortOrderBuilder;
         $this->locator = $locator;
@@ -173,9 +182,12 @@ class ScopedPlan implements OptionSourceInterface
         if ($product->getTypeId() == Configurable::TYPE_CODE) {
             return __('%1 of orig. price', $this->formatPercent($plan->getTrialPricePatternPercent()));
         } else {
-            $productId = $product->getId();
-            return $productId
-                ? $this->priceCalculator->calculateTrialPrice($productId, $plan->getPlanId(), 1, $useAdvanced)
+            return $product->getId()
+                ? $this->periodPriceCalculator->calculateTrialPrice(
+                    $this->calculationInputFactory->create($product, 1),
+                    $plan->getPlanId(),
+                    $useAdvanced
+                )
                 : '';
         }
     }
@@ -195,9 +207,12 @@ class ScopedPlan implements OptionSourceInterface
         if ($product->getTypeId() == Configurable::TYPE_CODE) {
             return __('%1 of orig. price', $this->formatPercent($plan->getRegularPricePatternPercent()));
         } else {
-            $productId = $product->getId();
-            return $productId
-                ? $this->priceCalculator->calculateRegularPrice($productId, $plan->getPlanId(), 1, $useAdvanced)
+            return $product->getId()
+                ? $this->periodPriceCalculator->calculateRegularPrice(
+                    $this->calculationInputFactory->create($product, 1),
+                    $plan->getPlanId(),
+                    $useAdvanced
+                )
                 : '';
         }
     }

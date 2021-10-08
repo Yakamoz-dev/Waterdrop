@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -30,13 +30,13 @@ use Aheadworks\Sarp2\Engine\Profile\Action\Validation\ResultFactory;
 use Aheadworks\Sarp2\Engine\Profile\Action\Validation\ValidatorComposite;
 use Aheadworks\Sarp2\Engine\Profile\ActionInterface;
 use Aheadworks\Sarp2\Model\Config;
-use Aheadworks\Sarp2\Model\Profile\Item as ProfileItem;
 use Aheadworks\Sarp2\Model\Profile\ItemManagement;
 use Aheadworks\Sarp2\Model\Profile\ToQuote;
 use Aheadworks\Sarp2\Model\Quote\Item\ToProfileItem;
 use Aheadworks\Sarp2\Model\ResourceModel\Profile as ProfileResourceModel;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Directory\Model\CurrencyFactory;
 use Magento\Framework\DataObject;
 use Magento\Framework\DataObjectFactory;
 use Magento\Framework\Exception\CouldNotSaveException;
@@ -48,8 +48,6 @@ use Magento\Quote\Model\Quote\Item;
 
 /**
  * Class Applier
- *
- * @package Aheadworks\Sarp2\Engine\Profile\Action\Type\ChangeProductItem
  */
 class Applier implements ApplierInterface
 {
@@ -124,6 +122,11 @@ class Applier implements ApplierInterface
     private $validator;
 
     /**
+     * @var CurrencyFactory
+     */
+    private $currencyFactory;
+
+    /**
      * @var string[]
      */
     private $listOfCopiedProductOptions = [
@@ -152,6 +155,7 @@ class Applier implements ApplierInterface
      * @param CartRepositoryInterface $quoteRepository
      * @param Config $config
      * @param ValidatorComposite $validator
+     * @param CurrencyFactory $currencyFactory
      * @param array $listOfCopiedProductOptions
      * @param array $listOfCopiedItemFields
      */
@@ -170,6 +174,7 @@ class Applier implements ApplierInterface
         CartRepositoryInterface $quoteRepository,
         Config $config,
         ValidatorComposite $validator,
+        CurrencyFactory $currencyFactory,
         array $listOfCopiedProductOptions = [],
         array $listOfCopiedItemFields = []
     ) {
@@ -187,6 +192,7 @@ class Applier implements ApplierInterface
         $this->quoteRepository = $quoteRepository;
         $this->config = $config;
         $this->validator = $validator;
+        $this->currencyFactory = $currencyFactory;
         $this->listOfCopiedProductOptions = array_merge(
             $this->listOfCopiedProductOptions,
             $listOfCopiedProductOptions
@@ -222,6 +228,13 @@ class Applier implements ApplierInterface
 
         $quote = $this->profileToQuote->convert($profile);
         $quoteItem = $this->addProductToQuote($quote, $product, $buyRequest);
+
+        $forcedCurrency = $this->currencyFactory
+            ->create()
+            ->load($profile->getProfileCurrencyCode());
+        $quote->setForcedCurrency($forcedCurrency);
+
+
         $this->quoteRepository->save($quote);
 
         $newProfileItem = $this->quoteItemToProfileItem->convert($quoteItem);

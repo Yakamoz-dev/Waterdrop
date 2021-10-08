@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -102,6 +102,35 @@ class ChildOfConfigurableSubscriptionOptions extends AbstractModifier
             if ($subscriptionTypePath) {
                 $meta = $this->arrayManager->merge(
                     $subscriptionTypePath . '/arguments/data/config',
+                    $meta,
+                    [
+                        'visible' => false
+                    ]
+                );
+            }
+
+            $advancedPricingPath = $this->arrayManager->findPath(
+                Attribute::AW_SARP2_IS_USED_ADVANCED_PRICING,
+                $meta,
+                null,
+                'children'
+            );
+            $useConfigAdvancedPricingPath = $this->arrayManager->findPath(
+                'use_config_' . Attribute::AW_SARP2_IS_USED_ADVANCED_PRICING,
+                $meta,
+                null,
+                'children'
+            );
+            if ($advancedPricingPath && $useConfigAdvancedPricingPath) {
+                $meta = $this->arrayManager->merge(
+                    $advancedPricingPath . '/arguments/data/config',
+                    $meta,
+                    [
+                        'visible' => false
+                    ]
+                );
+                $meta = $this->arrayManager->merge(
+                    $useConfigAdvancedPricingPath . '/arguments/data/config',
                     $meta,
                     [
                         'visible' => false

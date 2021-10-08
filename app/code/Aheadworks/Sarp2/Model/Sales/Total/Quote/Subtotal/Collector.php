@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -18,6 +18,7 @@ namespace Aheadworks\Sarp2\Model\Sales\Total\Quote\Subtotal;
 
 use Aheadworks\Sarp2\Model\Quote\Item\Checker\IsSubscription;
 use Aheadworks\Sarp2\Model\Sales\Total\GroupInterface;
+use Aheadworks\Sarp2\Model\Sales\Total\PopulatorInterface;
 use Aheadworks\Sarp2\Model\Sales\Total\Quote\Grand\Summator;
 use Magento\Framework\DataObject\Factory;
 use Magento\Quote\Api\Data\AddressInterface;
@@ -33,7 +34,6 @@ use Magento\Quote\Model\Quote\Address\Total\AbstractTotal;
 
 /**
  * Class Collector
- * @package Aheadworks\Sarp2\Model\Sales\Total\Quote\Subtotal
  */
 class Collector extends AbstractTotal
 {
@@ -96,6 +96,10 @@ class Collector extends AbstractTotal
         /** @var Address $address */
         $address = $shippingAssignment->getShipping()->getAddress();
         $items = $shippingAssignment->getItems();
+        $currencyForConvert = $quote->getForcedCurrency()
+            ? $quote->getForcedCurrency()->getCode()
+            : null;
+
         if ($items) {
             $baseSubtotal = 0;
             $subtotal = 0;
@@ -125,7 +129,9 @@ class Collector extends AbstractTotal
                                 'price' => $basePrice,
                                 'row_total' => $baseRowTotal
                             ]
-                        )
+                        ),
+                        PopulatorInterface::CURRENCY_OPTION_CONVERT,
+                        $currencyForConvert
                     );
 
                 $baseSubtotal += $baseRowTotal;
@@ -138,12 +144,16 @@ class Collector extends AbstractTotal
             $this->totalsGroup->getPopulator(CartInterface::class)
                 ->populate(
                     $quote,
-                    $this->dataObjectFactory->create(['subtotal' => $baseSubtotal])
+                    $this->dataObjectFactory->create(['subtotal' => $baseSubtotal]),
+                    PopulatorInterface::CURRENCY_OPTION_CONVERT,
+                    $currencyForConvert
                 );
             $this->totalsGroup->getPopulator(AddressInterface::class)
                 ->populate(
                     $address,
-                    $this->dataObjectFactory->create(['subtotal' => $baseSubtotal])
+                    $this->dataObjectFactory->create(['subtotal' => $baseSubtotal]),
+                    PopulatorInterface::CURRENCY_OPTION_CONVERT,
+                    $currencyForConvert
                 );
             $this->grandSummator->setAmount(
                 $this->totalsGroup->getCode() . '_subtotal',

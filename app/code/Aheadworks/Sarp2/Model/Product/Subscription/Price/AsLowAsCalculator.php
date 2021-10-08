@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -18,11 +18,12 @@ namespace Aheadworks\Sarp2\Model\Product\Subscription\Price;
 
 use Aheadworks\Sarp2\Api\Data\SubscriptionOptionInterface;
 use Aheadworks\Sarp2\Api\PlanRepositoryInterface;
-use Aheadworks\Sarp2\Api\SubscriptionPriceCalculationInterface;
+use Aheadworks\Sarp2\Api\SubscriptionPriceCalculatorInterface;
 use Aheadworks\Sarp2\Model\Plan\Period\Formatter as PeriodFormatter;
 use Aheadworks\Sarp2\Model\Plan\Source\BillingPeriod;
 use Aheadworks\Sarp2\Model\Product\Subscription\Option\Calculator\CatalogPriceCalculator;
 use Aheadworks\Sarp2\Model\Product\Subscription\Price\AsLowAsCalculator\OptionProvider as OptionProviderPool;
+use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\Input\Factory as CalculationInputFactory;
 use Magento\Tax\Helper\Data as TaxHelper;
 
 /**
@@ -43,7 +44,12 @@ class AsLowAsCalculator
     private $planRepository;
 
     /**
-     * @var SubscriptionPriceCalculationInterface
+     * @var CalculationInputFactory
+     */
+    private $calculationInputFactory;
+
+    /**
+     * @var SubscriptionPriceCalculatorInterface
      */
     private $subscriptionPriceCalculation;
 
@@ -76,7 +82,8 @@ class AsLowAsCalculator
     /**
      * @param OptionProviderPool $optionProvider
      * @param PlanRepositoryInterface $planRepository
-     * @param SubscriptionPriceCalculationInterface $priceCalculation
+     * @param CalculationInputFactory $calculationInputFactory
+     * @param SubscriptionPriceCalculatorInterface $priceCalculation
      * @param CatalogPriceCalculator $catalogPriceCalculator
      * @param TaxHelper $taxHelper
      * @param PeriodFormatter $periodFormatter
@@ -85,7 +92,8 @@ class AsLowAsCalculator
     public function __construct(
         OptionProviderPool $optionProvider,
         PlanRepositoryInterface $planRepository,
-        SubscriptionPriceCalculationInterface $priceCalculation,
+        CalculationInputFactory $calculationInputFactory,
+        SubscriptionPriceCalculatorInterface $priceCalculation,
         CatalogPriceCalculator $catalogPriceCalculator,
         TaxHelper $taxHelper,
         PeriodFormatter $periodFormatter,
@@ -93,6 +101,7 @@ class AsLowAsCalculator
     ) {
         $this->optionProvider = $optionProvider;
         $this->planRepository = $planRepository;
+        $this->calculationInputFactory = $calculationInputFactory;
         $this->subscriptionPriceCalculation = $priceCalculation;
         $this->catalogPriceCalculator = $catalogPriceCalculator;
         $this->taxHelper = $taxHelper;
@@ -156,8 +165,7 @@ class AsLowAsCalculator
     {
         $productId = $option->getProduct()->getId();
         $baseRegularPrice = $this->subscriptionPriceCalculation->getRegularPrice(
-            $productId,
-            1,
+            $this->calculationInputFactory->create($option->getProduct(), 1),
             $option
         );
 

@@ -10,14 +10,15 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
 namespace Aheadworks\Sarp2\Model\Product\Subscription\Option\Calculator;
 
 use Aheadworks\Sarp2\Api\Data\SubscriptionOptionInterface;
-use Aheadworks\Sarp2\Api\SubscriptionPriceCalculationInterface;
+use Aheadworks\Sarp2\Api\SubscriptionPriceCalculatorInterface;
+use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\Input\Factory as CalculationInputFactory;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Pricing\Price\TierPrice;
@@ -32,7 +33,12 @@ use Magento\Framework\Pricing\PriceCurrencyInterface;
 class TierPriceCalculator
 {
     /**
-     * @var SubscriptionPriceCalculationInterface
+     * @var CalculationInputFactory
+     */
+    private $calculationInputFactory;
+
+    /**
+     * @var SubscriptionPriceCalculatorInterface
      */
     private $subscriptionPriceCalculator;
 
@@ -47,15 +53,18 @@ class TierPriceCalculator
     private $priceCurrency;
 
     /**
-     * @param SubscriptionPriceCalculationInterface $calculation
+     * @param CalculationInputFactory $calculationInputFactory
+     * @param SubscriptionPriceCalculatorInterface $calculation
      * @param Format $localeFormat
      * @param PriceCurrencyInterface $priceCurrency
      */
     public function __construct(
-        SubscriptionPriceCalculationInterface $calculation,
+        CalculationInputFactory $calculationInputFactory,
+        SubscriptionPriceCalculatorInterface $calculation,
         Format $localeFormat,
         PriceCurrencyInterface $priceCurrency
     ) {
+        $this->calculationInputFactory = $calculationInputFactory;
         $this->subscriptionPriceCalculator = $calculation;
         $this->localeFormat = $localeFormat;
         $this->priceCurrency = $priceCurrency;
@@ -105,15 +114,13 @@ class TierPriceCalculator
         foreach ($tierPricesList as $tierPrice) {
             $qty = $tierPrice['price_qty'];
             $price = $this->subscriptionPriceCalculator->getRegularPrice(
-                $product->getId(),
-                $qty,
+                $this->calculationInputFactory->create($product, $qty),
                 $option
             );
 
             // recalculate percent
             $basePrice = $this->subscriptionPriceCalculator->getRegularPrice(
-                $product->getId(),
-                1,
+                $this->calculationInputFactory->create($product, 1),
                 $option
             );
             if ($basePrice > 0) {

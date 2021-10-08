@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -23,8 +23,6 @@ use Magento\Catalog\Model\Product;
 
 /**
  * Class ProductsAvailable
- *
- * @package Aheadworks\Sarp2\Engine\Profile\Checker
  */
 class ProductsAvailable
 {
@@ -58,7 +56,11 @@ class ProductsAvailable
                     $productId = $item->getProductId();
                 }
                 /** @var Product $product */
-                $product = $this->productRepository->getById($productId);
+                $product = $this->productRepository->getById(
+                    $productId,
+                    false,
+                    $profile->getStoreId()
+                );
                 $isAllowed = $product->isSalable();
             } catch (\Exception $exception) {
                 $isAllowed = false;

@@ -10,14 +10,14 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
 namespace Aheadworks\Sarp2\Model\Sales\Total\Group;
 
 use Aheadworks\Sarp2\Api\SubscriptionOptionRepositoryInterface;
-use Aheadworks\Sarp2\Api\SubscriptionPriceCalculationInterface;
+use Aheadworks\Sarp2\Api\SubscriptionPriceCalculatorInterface;
 use Aheadworks\Sarp2\Model\Sales\Total\GroupInterface;
 use Aheadworks\Sarp2\Model\Sales\Total\PopulatorInterface;
 use Aheadworks\Sarp2\Model\Sales\Total\PopulatorFactory;
@@ -36,9 +36,9 @@ abstract class AbstractGroup implements GroupInterface
     protected $optionRepository;
 
     /**
-     * @var SubscriptionPriceCalculationInterface
+     * @var SubscriptionPriceCalculatorInterface
      */
-    protected $priceCalculation;
+    protected $priceCalculator;
 
     /**
      * @var PriceCurrencyInterface
@@ -67,7 +67,7 @@ abstract class AbstractGroup implements GroupInterface
 
     /**
      * @param SubscriptionOptionRepositoryInterface $optionRepository
-     * @param SubscriptionPriceCalculationInterface $priceCalculation
+     * @param SubscriptionPriceCalculatorInterface $priceCalculation
      * @param PriceCurrencyInterface $priceCurrency
      * @param PopulatorFactory $populatorFactory
      * @param ProviderInterface $provider
@@ -75,14 +75,14 @@ abstract class AbstractGroup implements GroupInterface
      */
     public function __construct(
         SubscriptionOptionRepositoryInterface $optionRepository,
-        SubscriptionPriceCalculationInterface $priceCalculation,
+        SubscriptionPriceCalculatorInterface $priceCalculation,
         PriceCurrencyInterface $priceCurrency,
         PopulatorFactory $populatorFactory,
         ProviderInterface $provider,
         array $populateMaps = []
     ) {
         $this->optionRepository = $optionRepository;
-        $this->priceCalculation = $priceCalculation;
+        $this->priceCalculator = $priceCalculation;
         $this->priceCurrency = $priceCurrency;
         $this->populatorFactory = $populatorFactory;
         $this->provider = $provider;

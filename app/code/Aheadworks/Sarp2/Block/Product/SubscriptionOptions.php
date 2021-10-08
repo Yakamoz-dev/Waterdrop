@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -155,10 +155,8 @@ class SubscriptionOptions extends Template
     public function getConfigData()
     {
         $productTypeId = $this->getProduct()->getTypeId();
-        $configData = $this->configProviderPool->getConfigProvider($productTypeId)
-            ->getConfig($this->getProductId(), $productTypeId);
-
-        return $configData;
+        return $this->configProviderPool->getConfigProvider($productTypeId)
+            ->getConfig($this->getProductId());
     }
 
     /**

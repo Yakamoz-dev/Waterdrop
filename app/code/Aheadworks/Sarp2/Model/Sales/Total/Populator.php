@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -23,7 +23,6 @@ use Magento\Framework\Pricing\PriceCurrencyInterface;
 
 /**
  * Class Populator
- * @package Aheadworks\Sarp2\Model\Sales\Total
  */
 class Populator implements PopulatorInterface
 {
@@ -83,7 +82,8 @@ class Populator implements PopulatorInterface
     public function populate(
         $entity,
         DataObject $totalsDetails,
-        $currencyOption = self::CURRENCY_OPTION_CONVERT
+        $currencyOption = self::CURRENCY_OPTION_CONVERT,
+        $currency = null
     ) {
         $amountsMap = $this->getAmountsMap();
         $map = $currencyOption != self::CURRENCY_OPTION_USE_STORE
@@ -91,7 +91,7 @@ class Populator implements PopulatorInterface
             : $amountsMap;
         Mapper::accumulateByMap($totalsDetails, $entity, $map);
         if ($currencyOption == self::CURRENCY_OPTION_CONVERT) {
-            $convertedDetails = $this->convert($totalsDetails);
+            $convertedDetails = $this->convert($totalsDetails, $currency);
             Mapper::accumulateByMap($convertedDetails, $entity, $amountsMap);
         }
         $nonAmountsMap = $this->getNonAmountsMap();
@@ -165,14 +165,15 @@ class Populator implements PopulatorInterface
      * Convert totals details
      *
      * @param DataObject $totalsDetails
+     * @param mixed $currency
      * @return DataObject
      */
-    private function convert(DataObject $totalsDetails)
+    private function convert(DataObject $totalsDetails, $currency = null)
     {
         $convertedData = [];
         foreach ($totalsDetails->getData() as $key => $value) {
             if (isset($this->map[$key])) {
-                $convertedData[$key] = $this->priceCurrency->convert($value);
+                $convertedData[$key] = $this->priceCurrency->convert($value, null, $currency);
             }
         }
         return $this->dataObjectFactory->create($convertedData);

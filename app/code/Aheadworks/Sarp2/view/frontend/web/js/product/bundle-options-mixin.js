@@ -58,6 +58,7 @@ define([
 
             _.each(changes, function (price, key) {
                 if (regExp.test(key)) {
+                    self._cancelAdvancedPrices(price);
                     let priceCopy = utils.deepClone(price);
 
                     self._applyPercent(priceCopy, trialPercent);
@@ -138,6 +139,7 @@ define([
 
             _.each(this.options.optionConfig.options, function (option) {
                 _.each(option.selections, function (selection) {
+                    self._cancelAdvancedPrices(selection.prices);
                     self._applyPercent(selection.prices, regularPercent);
                 });
             });
@@ -186,6 +188,20 @@ define([
                     });
                 }
             });
+        },
+
+        /**
+         * Cancel advanced prices
+         * @param priceBoxObject
+         * @private
+         */
+        _cancelAdvancedPrices: function (priceBoxObject) {
+            var isUsedAdvancePricing = sarpConfigProvider.isUsedAdvancedPricing();
+
+            if (!_.isEmpty(priceBoxObject) && !isUsedAdvancePricing && this._getSubscriptionOptionId()) {
+                priceBoxObject.basePrice = utils.deepClone(priceBoxObject.oldPrice);
+                priceBoxObject.finalPrice = utils.deepClone(priceBoxObject.oldPrice);
+            }
         },
 
         /**

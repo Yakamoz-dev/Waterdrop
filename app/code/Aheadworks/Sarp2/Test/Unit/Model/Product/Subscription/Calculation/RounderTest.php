@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -21,9 +21,9 @@ use Aheadworks\Sarp2\Api\PlanRepositoryInterface;
 use Aheadworks\Sarp2\Model\Plan\Resolver\ByPeriod\StrategyInterface;
 use Aheadworks\Sarp2\Model\Plan\Resolver\ByPeriod\StrategyPool;
 use Aheadworks\Sarp2\Model\Plan\Source\PriceRounding;
-use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\Calculator;
+use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\PlanPriceCalculator;
 use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\Rounder;
-use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\SubscriptionPriceCalculator as PriceCalculation;
+use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\PeriodPriceCalculator as PriceCalculation;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 

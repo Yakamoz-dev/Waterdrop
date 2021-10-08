@@ -10,13 +10,11 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
 namespace Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Group;
-
-use Aheadworks\Sarp2\Model\Plan\Resolver\ByPeriod\StrategyPool;
 
 /**
  * Class Regular
@@ -41,25 +39,14 @@ class Regular extends AbstractProfileGroup
         $result = 0.0;
         $option = $this->getItemOption($item);
         if ($option) {
-            $product = $this->getProduct($item);
+            $calculationInput = $this->createCalculationInput($item);
 
-            $baseItemPrice = $this->priceCalculation->getRegularPrice(
-                $product->getEntityId(),
-                $item->getQty(),
-                $option
-            );
+            $baseItemPrice = $this->priceCalculator->getRegularPrice($calculationInput, $option);
             $result = $useBaseCurrency
                 ? $baseItemPrice
                 : $this->priceCurrency->convert($baseItemPrice);
 
             $result = $this->customOptionCalculator->applyOptionsPrice($item, $result, $useBaseCurrency, false);
-            $result = $this->bundleOptionCalculator->applyBundlePrice(
-                $item,
-                $result,
-                $option->getPlanId(),
-                $useBaseCurrency,
-                StrategyPool::TYPE_REGULAR
-            );
         } else {
             $result = $item->getRegularPrice();
         }

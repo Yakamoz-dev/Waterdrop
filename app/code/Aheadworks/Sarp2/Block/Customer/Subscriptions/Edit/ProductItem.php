@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -161,7 +161,7 @@ class ProductItem extends ProductViewBlock
                 ? $this->getProfileItem()
                 : null;
             $configData = $this->configProviderPool->getConfigProvider($productTypeId)
-                ->getConfig($product->getId(), $productTypeId, $item);
+                ->getConfig($product->getId(), $item);
 
             return $this->_jsonEncoder->encode($configData);
         } catch (\Exception $exception) {

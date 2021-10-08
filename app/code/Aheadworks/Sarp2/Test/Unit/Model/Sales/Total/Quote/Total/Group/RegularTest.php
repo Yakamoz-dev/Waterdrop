@@ -10,27 +10,26 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
 namespace Aheadworks\Sarp2\Test\Unit\Model\Sales\Total\Quote\Total\Group;
 
-use Aheadworks\Sarp2\Api\Data\PlanInterface;
 use Aheadworks\Sarp2\Api\Data\SubscriptionOptionInterface;
 use Aheadworks\Sarp2\Api\SubscriptionOptionRepositoryInterface;
-use Aheadworks\Sarp2\Api\SubscriptionPriceCalculationInterface;
-use Aheadworks\Sarp2\Model\Plan\Resolver\ByPeriod\StrategyPool;
-use Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Group\BundleOptionCalculator;
-use Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Group\CustomOptionCalculator;
-use Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Group\Regular;
+use Aheadworks\Sarp2\Api\SubscriptionPriceCalculatorInterface;
+use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\Input;
+use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\Input\Factory as CalculationFactory;
 use Aheadworks\Sarp2\Model\Sales\Total\PopulatorFactory;
 use Aheadworks\Sarp2\Model\Sales\Total\ProviderInterface;
-use Magento\Framework\Pricing\PriceCurrencyInterface;
-use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
+use Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Group\CustomOptionCalculator;
+use Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Group\Regular;
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\Product\Configuration\Item\ItemInterface;
 use Magento\Catalog\Model\Product\Configuration\Item\Option\OptionInterface;
+use Magento\Framework\Pricing\PriceCurrencyInterface;
+use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use Magento\Quote\Model\Quote\Item;
 
 /**
@@ -54,7 +53,7 @@ class RegularTest extends \PHPUnit\Framework\TestCase
     private $optionRepositoryMock;
 
     /**
-     * @var SubscriptionPriceCalculationInterface|\PHPUnit_Framework_MockObject_MockObject
+     * @var SubscriptionPriceCalculatorInterface|\PHPUnit_Framework_MockObject_MockObject
      */
     private $priceCalculationMock;
 
@@ -79,9 +78,9 @@ class RegularTest extends \PHPUnit\Framework\TestCase
     private $customOptionCalculatorMock;
 
     /**
-     * @var BundleOptionCalculator|\PHPUnit_Framework_MockObject_MockObject
+     * @var CalculationFactory|\PHPUnit_Framework_MockObject_MockObject
      */
-    private $bundleOptionsCalculatorMock;
+    private $calculationInputFactoryMock;
 
     /**
      * Init mocks for tests
@@ -93,12 +92,12 @@ class RegularTest extends \PHPUnit\Framework\TestCase
         $objectManager = new ObjectManager($this);
 
         $this->optionRepositoryMock = $this->createMock(SubscriptionOptionRepositoryInterface::class);
-        $this->priceCalculationMock = $this->createMock(SubscriptionPriceCalculationInterface::class);
+        $this->priceCalculationMock = $this->createMock(SubscriptionPriceCalculatorInterface::class);
         $this->priceCurrencyMock = $this->createMock(PriceCurrencyInterface::class);
         $this->populatorFactoryMock = $this->createMock(PopulatorFactory::class);
         $this->providerMock = $this->createMock(ProviderInterface::class);
         $this->customOptionCalculatorMock = $this->createMock(CustomOptionCalculator::class);
-        $this->bundleOptionsCalculatorMock = $this->createMock(BundleOptionCalculator::class);
+        $this->calculationInputFactoryMock = $this->createMock(CalculationFactory::class);
 
         $this->totalGroup = $objectManager->getObject(
             Regular::class,
@@ -109,7 +108,7 @@ class RegularTest extends \PHPUnit\Framework\TestCase
                 'populatorFactory' => $this->populatorFactoryMock,
                 'provider' => $this->providerMock,
                 'customOptionCalculator' => $this->customOptionCalculatorMock,
-                'bundleOptionsCalculator' => $this->bundleOptionsCalculatorMock
+                'calculationInputFactory' => $this->calculationInputFactoryMock
             ]
         );
     }
@@ -125,8 +124,6 @@ class RegularTest extends \PHPUnit\Framework\TestCase
         $expectedResult
     ) {
         $subscriptionOptionId = 1;
-        $productId = 2;
-        $planId = 1;
         $qty = 1;
 
         /** @var ItemInterface|\PHPUnit_Framework_MockObject_MockObject $itemMock */
@@ -134,6 +131,7 @@ class RegularTest extends \PHPUnit\Framework\TestCase
         $optionMock = $this->createMock(OptionInterface::class);
         $subscriptionOptionMock = $this->createMock(SubscriptionOptionInterface::class);
         $productMock = $this->createMock(Product::class);
+        $calculationInputMock = $this->createMock(Input::class);
 
         $itemMock->expects($this->once())
             ->method('getOptionByCode')
@@ -146,18 +144,22 @@ class RegularTest extends \PHPUnit\Framework\TestCase
             ->method('get')
             ->with($subscriptionOptionId)
             ->willReturn($subscriptionOptionMock);
-        $subscriptionOptionMock->expects($this->once())
-            ->method('getPlanId')
-            ->willReturn($planId);
         $itemMock->expects($this->once())
             ->method('getQty')
             ->willReturn($qty);
         $itemMock->expects($this->once())
             ->method('getProduct')
             ->willReturn($productMock);
-        $productMock->expects($this->once())
-            ->method('getEntityId')
-            ->willReturn($productId);
+        $itemMock->expects($this->once())
+            ->method('getParentItem')
+            ->willReturn(false);
+        $itemMock->expects($this->any())
+            ->method('isChildrenCalculated')
+            ->willReturn(false);
+        $this->calculationInputFactoryMock->expects($this->once())
+            ->method('create')
+            ->with($productMock, $qty)
+            ->willReturn($calculationInputMock);
         $this->priceCalculationMock->expects($this->once())
             ->method('getRegularPrice')
             ->willReturn(self::CALCULATION_PRICE);
@@ -165,10 +167,6 @@ class RegularTest extends \PHPUnit\Framework\TestCase
             ->method('applyOptionsPrice')
             ->with($itemMock, self::CALCULATION_PRICE, $useBaseCurrency)
             ->willReturn(self::CALCULATION_PRICE);
-        $this->bundleOptionsCalculatorMock->expects($this->once())
-            ->method('applyBundlePrice')
-            ->with($itemMock, self::CALCULATION_PRICE, $planId, $useBaseCurrency, StrategyPool::TYPE_REGULAR)
-            ->willReturn($expectedResult);
 
         if (!$useBaseCurrency) {
             $this->priceCurrencyMock->expects($this->once())

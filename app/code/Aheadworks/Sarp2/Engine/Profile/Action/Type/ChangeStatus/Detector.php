@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -48,7 +48,7 @@ class Detector implements DetectorInterface
     {
         $status = $profile->getStatus();
         /** @var Profile $profile */
-        if ($profile->getOrigData('status') != $status) {
+        if ($profile->getOrigData(ProfileInterface::STATUS) != $status) {
             return $this->actionFactory->create(
                 [
                     'type' => ActionInterface::ACTION_TYPE_CHANGE_STATUS,

@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -29,7 +29,6 @@ use Magento\Quote\Model\ShippingFactory;
 
 /**
  * Class TotalsCollector
- * @package Aheadworks\Sarp2\Model\Quote\Repository
  */
 class TotalsCollector
 {

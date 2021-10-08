@@ -10,19 +10,15 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
 namespace Aheadworks\Sarp2\Plugin\Payment\Ui\Listing;
 
-use Magento\Framework\Exception\LocalizedException;
+use Magento\Payment\Helper\Data;
+use Magento\Payment\Ui\Component\Listing\Column\Method\Options;
 
-/**
- * Class PaymentMethodOptionsPlugin
- *
- * @package Aheadworks\Sarp2\Plugin\Payment\Ui\Listing
- */
 class PaymentMethodOptionsPlugin
 {
     /**
@@ -31,26 +27,27 @@ class PaymentMethodOptionsPlugin
     private $options;
 
     /**
-     * @var \Magento\Payment\Helper\Data
+     * @var Data
      */
     private $paymentHelper;
 
     /**
-     * @param \Magento\Payment\Helper\Data $paymentHelper
+     * @param Data $paymentHelper
      */
     public function __construct(
-        \Magento\Payment\Helper\Data $paymentHelper
+        Data $paymentHelper
     ) {
         $this->paymentHelper = $paymentHelper;
     }
 
     /**
-     * @param \Magento\Payment\Ui\Component\Listing\Column\Method\Options $subject
+     * @param Options $subject
      * @param callable $proceed
-     * @return bool
+     * @return array
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function aroundToOptionArray(
-        \Magento\Payment\Ui\Component\Listing\Column\Method\Options $subject,
+        Options $subject,
         callable $proceed
     ) {
         if ($this->options === null) {
@@ -68,7 +65,7 @@ class PaymentMethodOptionsPlugin
                                 'label' => $title
                             ];
                         }
-                    } catch (LocalizedException $exception) {
+                    } catch (\Exception $exception) {
                         continue;
                     }
                 }

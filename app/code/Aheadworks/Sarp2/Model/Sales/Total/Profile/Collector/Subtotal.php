@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -27,7 +27,6 @@ use Magento\Framework\DataObject\Factory;
 
 /**
  * Class Subtotal
- * @package Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector
  */
 class Subtotal implements CollectorInterface
 {
@@ -69,6 +68,7 @@ class Subtotal implements CollectorInterface
         $baseSubtotal = 0;
         $itemQty = 0;
         $currencyOptionConvert = PopulatorInterface::CURRENCY_OPTION_CONVERT;
+        $profileCurrency = $profile->getProfileCurrencyCode();
 
         foreach ($profile->getItems() as $item) {
             $itemBasePrice = $this->totalsGroup->getItemPrice($item, true);
@@ -80,7 +80,7 @@ class Subtotal implements CollectorInterface
                 ]
             );
             $this->totalsGroup->getPopulator(ProfileItemInterface::class)
-                ->populate($item, $totalsDetails, $currencyOptionConvert);
+                ->populate($item, $totalsDetails, $currencyOptionConvert, $profileCurrency);
 
             $baseSubtotal += $baseRowTotal;
             $itemQty += $item->getQty();
@@ -89,7 +89,7 @@ class Subtotal implements CollectorInterface
             if ($item->hasChildItems() && $item->getProductType() != BundleType::TYPE_CODE) {
                 foreach ($item->getChildItems() as &$child) {
                     $this->totalsGroup->getPopulator(ProfileItemInterface::class)
-                        ->populate($child, $totalsDetails, $currencyOptionConvert);
+                        ->populate($child, $totalsDetails, $currencyOptionConvert, $profileCurrency);
                 }
             }
         }
@@ -99,7 +99,8 @@ class Subtotal implements CollectorInterface
             ->populate(
                 $profile,
                 $this->dataObjectFactory->create(['subtotal' => $baseSubtotal]),
-                $currencyOptionConvert
+                $currencyOptionConvert,
+                $profileCurrency
             );
         $this->grandSummator->setAmount(
             $this->totalsGroup->getCode() . '_subtotal',

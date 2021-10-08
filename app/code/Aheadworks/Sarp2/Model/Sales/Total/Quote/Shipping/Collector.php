@@ -10,13 +10,14 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
 namespace Aheadworks\Sarp2\Model\Sales\Total\Quote\Shipping;
 
 use Aheadworks\Sarp2\Model\Sales\Total\GroupInterface;
+use Aheadworks\Sarp2\Model\Sales\Total\PopulatorInterface;
 use Aheadworks\Sarp2\Model\Sales\Total\Quote\Grand\Summator;
 use Aheadworks\Sarp2\Model\Sales\Total\Quote\Shipping\RateRequest\DataCollector;
 use Aheadworks\Sarp2\Model\Shipping\RatesCollector;
@@ -30,7 +31,6 @@ use Magento\Quote\Model\Quote\Address\Total\AbstractTotal;
 
 /**
  * Class Collector
- * @package Aheadworks\Sarp2\Model\Sales\Total\Quote\Shipping
  */
 class Collector extends AbstractTotal
 {
@@ -96,6 +96,9 @@ class Collector extends AbstractTotal
         /** @var Address $address */
         $address = $shipping->getAddress();
         $method = $shipping->getMethod();
+        $currencyForConvert = $quote->getForcedCurrency()
+            ? $quote->getForcedCurrency()->getCode()
+            : null;
 
         if (count($shippingAssignment->getItems()) && $method) {
             $rates = $this->ratesCollector->collect(
@@ -112,7 +115,9 @@ class Collector extends AbstractTotal
         $this->totalsGroup->getPopulator(AddressInterface::class)
             ->populate(
                 $address,
-                $this->dataObjectFactory->create(['shipping_amount' => $baseAmount])
+                $this->dataObjectFactory->create(['shipping_amount' => $baseAmount]),
+                PopulatorInterface::CURRENCY_OPTION_CONVERT,
+                $currencyForConvert
             );
         $this->grandSummator->setAmount(
             $this->totalsGroup->getCode() . '_shipping',

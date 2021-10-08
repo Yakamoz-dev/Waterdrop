@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -22,11 +22,9 @@ use Aheadworks\Sarp2\Model\Plan\Resolver\ByPeriod\StrategyPool;
 use Aheadworks\Sarp2\Model\Plan\Source\PriceRounding;
 
 /**
- * Class Calculator
- *
- * @package Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation
+ * Class PlanPriceCalculator
  */
-class Calculator
+class PlanPriceCalculator
 {
     /**
      * @var PlanRepositoryInterface
@@ -91,7 +89,7 @@ class Calculator
      * @param int $roundingType
      * @return float
      */
-    public function calculate($amount, $percent, $roundingType)
+    private function calculate($amount, $percent, $roundingType)
     {
         return $this->rounding->round(
             $amount * $percent / 100,

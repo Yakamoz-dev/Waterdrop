@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -24,9 +24,6 @@ use Aheadworks\Sarp2\Model\Sales\Total\PopulatorInterface;
 use Aheadworks\Sarp2\Model\Sales\Total\Profile\CollectorInterface;
 use Magento\Framework\DataObject\Factory;
 
-/**
- * Class InitialFee
- */
 class InitialFee implements CollectorInterface
 {
     /**
@@ -66,18 +63,20 @@ class InitialFee implements CollectorInterface
     {
         $baseFeeTotal = 0;
         $currencyOptionConvert = PopulatorInterface::CURRENCY_OPTION_CONVERT;
+        $profileCurrencyCode = $profile->getProfileCurrencyCode();
 
         if ($profile->getPlanDefinition()->getIsInitialFeeEnabled()) {
             foreach ($profile->getItems() as $item) {
                 if (!$item->getParentItem()) {
-                    $option = $this->optionExtractor->getSubscriptionOption($item);
+                    $option = $this->optionExtractor->getSubscriptionOptionFromItem($item);
                     if ($option) {
                         $baseFee = $option->getInitialFee();
                         $this->totalsGroup->getPopulator(ProfileItemInterface::class)
                             ->populate(
                                 $item,
                                 $this->dataObjectFactory->create(['fee' => $baseFee]),
-                                $currencyOptionConvert
+                                $currencyOptionConvert,
+                                $profileCurrencyCode
                             );
 
                         $baseFeeTotal += $baseFee;
@@ -89,7 +88,8 @@ class InitialFee implements CollectorInterface
                 ->populate(
                     $profile,
                     $this->dataObjectFactory->create(['fee' => $baseFeeTotal]),
-                    $currencyOptionConvert
+                    $currencyOptionConvert,
+                    $profileCurrencyCode
                 );
         }
     }

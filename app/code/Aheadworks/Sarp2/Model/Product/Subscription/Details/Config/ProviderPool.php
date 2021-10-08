@@ -10,69 +10,55 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
 namespace Aheadworks\Sarp2\Model\Product\Subscription\Details\Config;
 
-use Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Generic;
+use Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\AbstractProvider;
 
-/**
- * Class ProviderPool
- *
- * @package Aheadworks\Sarp2\Model\Product\Subscription\Details\Config
- */
 class ProviderPool
 {
     /**
-     * @var ProviderInterface[]
+     * @var AbstractProvider[]
      */
     private $providerInstances = [];
 
     /**
-     * @var array
-     */
-    private $providers = [];
-
-    /**
-     * @var Generic
-     */
-    private $defaultProvider;
-
-    /**
-     * @var ProviderFactory
+     * @var AbstractProviderFactory
      */
     private $providerFactory;
 
     /**
+     * @var string[]
+     */
+    private $providers;
+
+    /**
      * @param ProviderFactory $providerFactory
-     * @param Generic $defaultProvider
-     * @param array $providers
+     * @param string[] $providers
      */
     public function __construct(
         ProviderFactory $providerFactory,
-        Generic $defaultProvider,
         array $providers = []
     ) {
         $this->providerFactory = $providerFactory;
-        $this->defaultProvider = $defaultProvider;
-        $this->providers = array_merge($this->providers, $providers);
+        $this->providers = $providers;
     }
 
     /**
-     * Get regular price config provider instance
+     * Get subscription details config provider
      *
      * @param string $typeId
-     * @return ProviderInterface
-     * @throws \Exception
+     * @return AbstractProvider
      */
     public function getConfigProvider($typeId)
     {
         if (!isset($this->providerInstances[$typeId])) {
             $this->providerInstances[$typeId] = isset($this->providers[$typeId])
                 ? $this->providerFactory->create($this->providers[$typeId])
-                : $this->defaultProvider;
+                : $this->providerFactory->create($this->providers['generic']);
         }
         return $this->providerInstances[$typeId];
     }

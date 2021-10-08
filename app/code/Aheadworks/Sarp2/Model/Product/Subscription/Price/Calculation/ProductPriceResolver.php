@@ -10,21 +10,21 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
 namespace Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation;
 
 use Aheadworks\Sarp2\Model\Config\AdvancedPricingValueResolver;
-use Magento\Catalog\Api\ProductRepositoryInterface;
+use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\PriceResolver\ResolverPool;
 
 /**
- * Class PriceResolver
+ * Class ProductPriceResolver
  *
  * @package Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation
  */
-class PriceResolver
+class ProductPriceResolver
 {
     /**
      * @var AdvancedPricingValueResolver
@@ -32,42 +32,43 @@ class PriceResolver
     private $advancedPricingValueResolver;
 
     /**
-     * @var ProductRepositoryInterface
+     * @var ResolverPool
      */
-    private $productRepository;
+    private $resolverPool;
 
     /**
      * PriceProvider constructor.
      *
      * @param AdvancedPricingValueResolver $advancedPricingValueResolver
-     * @param ProductRepositoryInterface $productRepository
+     * @param ResolverPool $resolverPool
      */
     public function __construct(
         AdvancedPricingValueResolver $advancedPricingValueResolver,
-        ProductRepositoryInterface $productRepository
+        ResolverPool $resolverPool
     ) {
         $this->advancedPricingValueResolver = $advancedPricingValueResolver;
-        $this->productRepository = $productRepository;
+        $this->resolverPool = $resolverPool;
     }
 
     /**
      * Get product price
      *
-     * @param int $productId
-     * @param float $qty
+     * @param Input $subject
      * @param bool|null $forceUseAdvancedConfig
      * @return float
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getPrice($productId, $qty, $forceUseAdvancedConfig = null)
+    public function getPrice(Input $subject, $forceUseAdvancedConfig = null)
     {
-        $product = $this->productRepository->getById($productId);
-        $isUsedAdvancePricing = $this->advancedPricingValueResolver->isUsedAdvancePricing($product->getId());
+        $isUsedAdvancePricing = $this->advancedPricingValueResolver->isUsedAdvancePricing(
+            $subject->getProduct()->getId()
+        );
         if (null !== $forceUseAdvancedConfig) {
             $isUsedAdvancePricing = $forceUseAdvancedConfig;
         }
-        return $isUsedAdvancePricing
-            ? $product->getFinalPrice($qty)
-            : $product->getPrice();
+
+        $resolver = $this->resolverPool->getResolver($subject);
+
+        return $resolver->resolveProductPrice($subject, $isUsedAdvancePricing);
     }
 }

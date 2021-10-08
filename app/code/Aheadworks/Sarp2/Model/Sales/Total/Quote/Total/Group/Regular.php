@@ -10,23 +10,22 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
 namespace Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Group;
 
+use Aheadworks\Sarp2\Api\Data\ProfileItemInterface;
 use Aheadworks\Sarp2\Api\SubscriptionOptionRepositoryInterface;
-use Aheadworks\Sarp2\Api\SubscriptionPriceCalculationInterface;
-use Aheadworks\Sarp2\Model\Plan\Resolver\ByPeriod\StrategyPool;
+use Aheadworks\Sarp2\Api\SubscriptionPriceCalculatorInterface;
+use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\Input as CalculationInput;
+use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\Input\Factory;
 use Aheadworks\Sarp2\Model\Sales\Total\Group\AbstractGroup;
 use Aheadworks\Sarp2\Model\Sales\Total\PopulatorFactory;
 use Aheadworks\Sarp2\Model\Sales\Total\ProviderInterface;
-use Magento\Bundle\Model\Product\Type as BundleType;
-use Magento\Catalog\Api\Data\ProductInterface;
-use Magento\Catalog\Model\Product;
 use Magento\Framework\Pricing\PriceCurrencyInterface;
-use Magento\Quote\Model\Quote\Item\AbstractItem;
+use Magento\Quote\Api\Data\CartItemInterface;
 
 /**
  * Class Regular
@@ -40,28 +39,28 @@ class Regular extends AbstractGroup
     private $customOptionsCalculator;
 
     /**
-     * @var BundleOptionCalculator
+     * @var Factory
      */
-    private $bundleOptionsCalculator;
+    private $calculationInputFactory;
 
     /**
      * @param SubscriptionOptionRepositoryInterface $optionRepository
-     * @param SubscriptionPriceCalculationInterface $priceCalculation
+     * @param SubscriptionPriceCalculatorInterface $priceCalculation
      * @param PriceCurrencyInterface $priceCurrency
      * @param PopulatorFactory $populatorFactory
      * @param ProviderInterface $provider
      * @param CustomOptionCalculator $customOptionCalculator
-     * @param BundleOptionCalculator $bundleOptionCalculator
+     * @param Factory $calculationInputFactory
      * @param array $populateMaps
      */
     public function __construct(
         SubscriptionOptionRepositoryInterface $optionRepository,
-        SubscriptionPriceCalculationInterface $priceCalculation,
+        SubscriptionPriceCalculatorInterface $priceCalculation,
         PriceCurrencyInterface $priceCurrency,
         PopulatorFactory $populatorFactory,
         ProviderInterface $provider,
         CustomOptionCalculator $customOptionCalculator,
-        BundleOptionCalculator $bundleOptionCalculator,
+        Factory $calculationInputFactory,
         array $populateMaps = []
     ) {
         parent::__construct(
@@ -73,7 +72,7 @@ class Regular extends AbstractGroup
             $populateMaps
         );
         $this->customOptionsCalculator = $customOptionCalculator;
-        $this->bundleOptionsCalculator = $bundleOptionCalculator;
+        $this->calculationInputFactory = $calculationInputFactory;
     }
 
     /**
@@ -93,24 +92,12 @@ class Regular extends AbstractGroup
         $optionId = $item->getOptionByCode('aw_sarp2_subscription_type');
         if ($optionId) {
             $option = $this->optionRepository->get($optionId->getValue());
-            $product = $this->getProduct($item);
+            $calculationInput = $this->createCalculationInput($item);
 
-            $baseItemPrice = $this->priceCalculation->getRegularPrice(
-                $product->getEntityId(),
-                $item->getQty(),
-                $option
-            );
+            $baseItemPrice = $this->priceCalculator->getRegularPrice($calculationInput, $option);
             $result = $useBaseCurrency
                 ? $baseItemPrice
                 : $this->priceCurrency->convert($baseItemPrice);
-
-            $result = $this->bundleOptionsCalculator->applyBundlePrice(
-                $item,
-                $result,
-                $option->getPlanId(),
-                $useBaseCurrency,
-                StrategyPool::TYPE_REGULAR
-            );
         }
 
         $result = $this->customOptionsCalculator->applyOptionsPrice($item, $result, $useBaseCurrency, false);
@@ -119,23 +106,27 @@ class Regular extends AbstractGroup
     }
 
     /**
-     * Get product
+     * Create calculation subject from cart item
      *
-     * @param ItemInterface|AbstractItem $item
-     * @return ProductInterface|Product
+     * @param CartItemInterface|ProfileItemInterface $item
+     * @return CalculationInput
      */
-    private function getProduct($item)
+    private function createCalculationInput($item)
     {
-        if ($item instanceof AbstractItem
-            && $item->getHasChildren()
-            && $item->getProductType() != BundleType::TYPE_CODE
-        ) {
-            $children = $item->getChildren();
-            $child = reset($children);
-            $product = $child->getProduct();
+        if ($item->getParentItem() && $item->isChildrenCalculated()) {
+            $calculationInput = $this->calculationInputFactory->create(
+                $item->getParentItem()->getProduct(),
+                $item->getParentItem()->getQty(),
+                $item->getProduct(),
+                $item->getQty()
+            );
         } else {
-            $product = $item->getProduct();
+            $calculationInput = $this->calculationInputFactory->create(
+                $item->getProduct(),
+                $item->getQty()
+            );
         }
-        return $product;
+
+        return $calculationInput;
     }
 }

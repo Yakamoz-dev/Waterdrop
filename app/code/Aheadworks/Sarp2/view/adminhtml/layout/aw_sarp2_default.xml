@@ -33,7 +33,7 @@
                     <arguments>
                         <argument name="label" xsi:type="string">Readme</argument>
                         <argument name="link_attributes" xsi:type="array">
-                            <item name="href" xsi:type="string">https://aheadworks.atlassian.net/wiki/spaces/EUDOC/pages/1228079296/Advanced+Subscription+Products+-+Magento+2</item>
+                            <item name="href" xsi:type="string">https://aheadworks.com/resources/subscriptions-and-recurring-payments/user-manual-subscriptions-and-recurring-payments</item>
                             <item name="target" xsi:type="string">_blank</item>
                             <item name="class" xsi:type="string">separator</item>
                         </argument>
@@ -43,7 +43,7 @@
                     <arguments>
                         <argument name="label" xsi:type="string">Get Support</argument>
                         <argument name="link_attributes" xsi:type="array">
-                            <item name="href" xsi:type="string">http://ecommerce.aheadworks.com/contacts/</item>
+                            <item name="href" xsi:type="string">https://aheadworks.com/contact</item>
                             <item name="target" xsi:type="string">_blank</item>
                         </argument>
                     </arguments>

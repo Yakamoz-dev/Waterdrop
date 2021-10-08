@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -21,6 +21,7 @@ use Aheadworks\Sarp2\Model\Config;
 use Aheadworks\Sarp2\Model\Profile\Address\ToQASubstitute;
 use Aheadworks\Sarp2\Model\Profile\Item;
 use Aheadworks\Sarp2\Model\Sales\Total\GroupInterface;
+use Aheadworks\Sarp2\Model\Sales\Total\PopulatorInterface;
 use Aheadworks\Sarp2\Model\Sales\Total\Profile\CollectorInterface;
 use Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Grand\Summator;
 use Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Shipping\Adapter\FreeShipping;
@@ -33,7 +34,6 @@ use Magento\Quote\Model\Quote\Address\Rate;
 
 /**
  * Class Shipping
- * @package Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector
  */
 class Shipping implements CollectorInterface
 {
@@ -230,7 +230,9 @@ class Shipping implements CollectorInterface
                         'shipping_method' => $shippingMethod,
                         'shipping_description' => $shippingDescription
                     ]
-                )
+                ),
+                PopulatorInterface::CURRENCY_OPTION_CONVERT,
+                $profile->getProfileCurrencyCode()
             );
         $this->grandSummator->setAmount(
             $this->totalsGroup->getCode() . '_shipping',

@@ -27,7 +27,7 @@
     <preference for="Aheadworks\Sarp2\Api\PaymentTokenRepositoryInterface" type="Aheadworks\Sarp2\Model\Payment\TokenRepository" />
     <preference for="Aheadworks\Sarp2\Api\AccessTokenRepositoryInterface" type="Aheadworks\Sarp2\Model\Access\TokenRepository" />
     <preference for="Aheadworks\Sarp2\Api\SubscriptionOptionRepositoryInterface" type="Aheadworks\Sarp2\Model\Product\Subscription\OptionRepository" />
-    <preference for="Aheadworks\Sarp2\Api\SubscriptionPriceCalculationInterface" type="Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation" />
+    <preference for="Aheadworks\Sarp2\Api\SubscriptionPriceCalculatorInterface" type="Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculator" />
     <preference for="Aheadworks\Sarp2\Api\PaymentInfoManagementInterface" type="Aheadworks\Sarp2\Model\Checkout\PaymentInfo\PaymentInfoManagement" />
     <preference for="Aheadworks\Sarp2\Api\GuestPaymentInfoManagementInterface" type="Aheadworks\Sarp2\Model\Checkout\PaymentInfo\GuestPaymentInfoManagement" />
 
@@ -1597,28 +1597,58 @@
         </arguments>
     </type>
 
+    <type name="Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\ProviderPool">
+        <arguments>
+            <argument name="providers" xsi:type="array">
+                <item name="bundle" xsi:type="string">Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Bundle</item>
+                <item name="configurable" xsi:type="string">Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Configurable</item>
+                <item name="generic" xsi:type="string">Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Generic</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Generic"
+                 type="Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\AbstractProvider">
+        <arguments>
+            <argument name="configComposite" xsi:type="array">
+                <item name="regularPrices" xsi:type="object">Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Generic\RegularPrices</item>
+                <item name="subscriptionDetails" xsi:type="object">Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Generic\SubscriptionDetails</item>
+                <item name="installmentsMode" xsi:type="object">Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Generic\InstallmentsMode</item>
+                <item name="isUsedAdvancedPricing" xsi:type="object">Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Generic\IsUsedAdvancedPricing</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Bundle"
+                 type="Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Generic">
+        <arguments>
+            <argument name="configComposite" xsi:type="array">
+                <item name="regularPrices" xsi:type="object">Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Bundle\RegularPrices</item>
+                <item name="optionPlanData" xsi:type="object">
+                    Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Bundle\PlanData
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Configurable"
+                 type="Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Generic">
+        <arguments>
+            <argument name="processorComposite" xsi:type="object">Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Processor\Configurable</argument>
+            <argument name="configComposite" xsi:type="array">
+                <item name="regularPrices" xsi:type="object">Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Configurable\RegularPrices</item>
+                <item name="subscriptionDetails" xsi:type="object">Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Configurable\SubscriptionDetails</item>
+                <item name="installmentsMode" xsi:type="object">Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Configurable\InstallmentsMode</item>
+                <item name="isUsedAdvancedPricing" xsi:type="object">Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Configurable\IsUsedAdvancedPricing</item>
+                <item name="asLowAsPrice" xsi:type="object">Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Configurable\AsLowAs</item>
+            </argument>
+        </arguments>
+    </virtualType>
     <virtualType name="Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Processor\Configurable"
                  type="Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\ProcessorComposite">
         <arguments>
             <argument name="processors" xsi:type="array">
-                <item name="asLowAs-select-option" xsi:type="object">Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Processor\AsLowAs</item>
+                <item name="asLowAs-select-option" xsi:type="object">Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Processor\Configurable\AsLowAs</item>
             </argument>
         </arguments>
     </virtualType>
-    <type name="Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Configurable">
-        <arguments>
-            <argument name="processor" xsi:type="object">Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Processor\Configurable</argument>
-        </arguments>
-    </type>
-
-    <type name="Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\ProviderPool">
-        <arguments>
-            <argument name="providers" xsi:type="array">
-                <item name="configurable" xsi:type="string">Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Configurable</item>
-                <item name="bundle" xsi:type="string">Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Provider\Bundle</item>
-            </argument>
-        </arguments>
-    </type>
 
     <virtualType name="Aheadworks\Sarp2\Engine\Logger\Handler\Exception" type="Magento\Framework\Logger\Handler\Base">
         <arguments>
@@ -1917,4 +1947,18 @@
     <type name="Magento\Vault\Model\PaymentTokenManagement">
         <plugin name="AwSarp2PaymentTokenManagementPlugin" type="Aheadworks\Sarp2\Plugin\Vault\PaymentTokenManagementPlugin"/>
     </type>
+
+    <type name="\Magento\Catalog\Model\Product">
+        <plugin name="AwSarp2BundleProductPlugin" type="Aheadworks\Sarp2\Plugin\Product\ProductPlugin"/>
+    </type>
+
+    <type name="Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\PriceResolver\ResolverPool">
+        <arguments>
+            <argument name="resolverMap" xsi:type="array">
+                <item name="configurable" xsi:type="string">Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\PriceResolver\Type\Configurable</item>
+                <item name="bundle" xsi:type="string">Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\PriceResolver\Type\Bundle</item>
+            </argument>
+        </arguments>
+    </type>
+
 </config>

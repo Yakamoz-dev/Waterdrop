@@ -10,20 +10,16 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2Stripe
- * @version    1.0.5
+ * @version    1.0.6
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
 namespace Aheadworks\Sarp2Stripe\Plugin\Controller;
 
 use Magento\Framework\App\ResponseInterface;
+use Aheadworks\Sarp2\Plugin\Vault\DeleteStoredPaymentPlugin as Sarp2DeleteStoredPaymentPlugin;
 
-/**
- * Class DeleteStoredPaymentPlugin
- *
- * @package Aheadworks\Sarp2Stripe\Plugin\Controller
- */
-class DeleteStoredPaymentPlugin extends \Aheadworks\Sarp2\Plugin\Vault\DeleteStoredPaymentPlugin
+class DeleteStoredPaymentPlugin extends Sarp2DeleteStoredPaymentPlugin
 {
     /**
      * @param \StripeIntegration\Payments\Controller\Customer\Cards $subject
@@ -33,7 +29,7 @@ class DeleteStoredPaymentPlugin extends \Aheadworks\Sarp2\Plugin\Vault\DeleteSto
      */
     public function afterDeleteCard($subject, $result, $stripeToken)
     {
-        $this->performProcessing($stripeToken);
+        $this->performProcessingByVaultTokenValue($stripeToken);
 
         return $result;
     }

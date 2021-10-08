@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -24,7 +24,6 @@ use Magento\Framework\DataObject\Factory;
 use Magento\Quote\Api\Data\AddressInterface;
 use Magento\Quote\Api\Data\ShippingAssignmentInterface;
 use Magento\Quote\Model\Quote;
-use Magento\Quote\Model\Quote\Item;
 use Magento\Quote\Model\Quote\Address;
 use Magento\Quote\Model\Quote\Address\Total;
 use Magento\Quote\Model\Quote\Address\Total\AbstractTotal;
@@ -34,7 +33,6 @@ use Magento\Tax\Model\Config;
 
 /**
  * Class Collector
- * @package Aheadworks\Sarp2\Model\Sales\Total\Quote\Tax\Shipping
  */
 class Collector extends AbstractTotal
 {
@@ -119,7 +117,7 @@ class Collector extends AbstractTotal
                 ->build();
             if ($quoteDetails) {
                 $taxDetails = $this->taxCalculation->calculateTax($quoteDetails, $storeId);
-                $this->processTaxDetails($taxDetails, $address, false);
+                $this->processTaxDetails($taxDetails, $address, $quote, false);
             }
 
             $baseQuoteDetails = $this->quoteDetailsBuilder->setItemsType('shipping')
@@ -131,7 +129,7 @@ class Collector extends AbstractTotal
                 ->build();
             if ($baseQuoteDetails) {
                 $baseTaxDetails = $this->taxCalculation->calculateTax($baseQuoteDetails, $storeId);
-                $this->processTaxDetails($baseTaxDetails, $address, true);
+                $this->processTaxDetails($baseTaxDetails, $address, $quote, true);
             }
         }
     }
@@ -141,12 +139,17 @@ class Collector extends AbstractTotal
      *
      * @param TaxDetailsInterface $taxDetails
      * @param Address $address
+     * @param Quote $quote
      * @param bool $isBaseCurrency
      * @return $this
      */
-    private function processTaxDetails($taxDetails, $address, $isBaseCurrency)
+    private function processTaxDetails($taxDetails, $address, $quote, $isBaseCurrency)
     {
         $taxDetailsItem = $taxDetails->getItems()['shipping'];
+        $currencyForConvert = $quote->getForcedCurrency()
+            ? $quote->getForcedCurrency()->getCode()
+            : null;
+
         $this->totalsGroup->getPopulator(AddressInterface::class)
             ->populate(
                 $address,
@@ -159,7 +162,8 @@ class Collector extends AbstractTotal
                 ),
                 $isBaseCurrency
                     ? PopulatorInterface::CURRENCY_OPTION_USE_BASE
-                    : PopulatorInterface::CURRENCY_OPTION_USE_STORE
+                    : PopulatorInterface::CURRENCY_OPTION_USE_STORE,
+                $currencyForConvert
             );
         if ($isBaseCurrency) {
             $this->grandSummator->setAmount(

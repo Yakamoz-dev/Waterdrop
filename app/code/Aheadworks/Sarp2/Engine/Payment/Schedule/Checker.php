@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -114,5 +114,16 @@ class Checker
     {
         return $this->isNoNextRegularPayment($schedule)
             && $schedule->getMembershipCount() < $schedule->getMembershipTotalCount();
+    }
+
+    /**
+     * Check if no payments
+     *
+     * @param ScheduleInterface $schedule
+     * @return bool
+     */
+    public function isNoPayments(ScheduleInterface $schedule)
+    {
+        return $schedule->getTrialCount() + $schedule->getRegularCount() < 1;
     }
 }

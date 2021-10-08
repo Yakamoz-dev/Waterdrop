@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -38,12 +38,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Model\QuoteRepository;
-use Magento\Store\Model\StoreManagerInterface;
 
-/**
- * Class Applier
- * @package Aheadworks\Sarp2\Engine\Profile\Action\Type\AddItemsFromQuoteToNearest
- */
 class Applier implements ApplierInterface
 {
     /**
@@ -107,11 +102,6 @@ class Applier implements ApplierInterface
     private $validator;
 
     /**
-     * @var StoreManagerInterface
-     */
-    private $storeManager;
-
-    /**
      * @param ResultFactory $validationResultFactory
      * @param ToProfileItem $toProfileItem
      * @param ItemManagement $itemManagement
@@ -136,7 +126,6 @@ class Applier implements ApplierInterface
         Persistence $paymentPersistence,
         ProfileManagement $profileManagement,
         QuoteRepository $quoteRepository,
-        StoreManagerInterface $storeManager,
         Processor $quoteProcessor,
         ValidatorComposite $validator
     ) {
@@ -152,7 +141,6 @@ class Applier implements ApplierInterface
         $this->profileManagement = $profileManagement;
         $this->quoteRepository = $quoteRepository;
         $this->validator = $validator;
-        $this->storeManager = $storeManager;
     }
 
     /**
@@ -166,13 +154,9 @@ class Applier implements ApplierInterface
         $customerId = $action->getData()->getCustomerId();
         $storeId = $action->getData()->getStoreId();
         $quote = $this->getActiveQuote($customerId, $storeId);
-        $currencyCode = $this->storeManager->getStore($storeId)->getCurrentCurrency()->getCode();
 
         $this->processOneOffItems($profile, $quote);
         $this->processSubscriptionItems($profile, $quote);
-        $profile
-            ->setProfileCurrencyCode($currencyCode)
-            ->setBaseCurrencyCode($currencyCode);
         $this->profileRepository->save($profile, true);
         $this->updatePayments($profile);
         $quote->setIsActive(false);

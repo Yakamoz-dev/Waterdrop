@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -20,7 +20,7 @@ use Aheadworks\Sarp2\Api\Data\PlanInterface;
 use Aheadworks\Sarp2\Api\Data\PlanInterfaceFactory;
 use Aheadworks\Sarp2\Model\Plan\Resolver\ByPeriod\StrategyPool;
 use Aheadworks\Sarp2\Model\Plan\Source\PriceRounding;
-use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\Calculator;
+use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\PlanPriceCalculator;
 use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\Serialize\Serializer\Json;
 
@@ -47,7 +47,7 @@ class BundleOptionPriceProcessor
     private $serializer;
 
     /**
-     * @var Calculator
+     * @var PlanPriceCalculator
      */
     private $priceCalculator;
 
@@ -55,13 +55,13 @@ class BundleOptionPriceProcessor
      * @param PlanInterfaceFactory $planFactory
      * @param DataObjectHelper $dataObjectHelper
      * @param Json $serializer
-     * @param Calculator $priceCalculator
+     * @param PlanPriceCalculator $priceCalculator
      */
     public function __construct(
         PlanInterfaceFactory $planFactory,
         DataObjectHelper $dataObjectHelper,
         Json $serializer,
-        Calculator $priceCalculator
+        PlanPriceCalculator $priceCalculator
     ) {
         $this->planFactory = $planFactory;
         $this->dataObjectHelper = $dataObjectHelper;

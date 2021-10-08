@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -18,13 +18,13 @@ namespace Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector;
 
 use Aheadworks\Sarp2\Api\Data\ProfileInterface;
 use Aheadworks\Sarp2\Model\Sales\Total\GroupInterface;
+use Aheadworks\Sarp2\Model\Sales\Total\PopulatorInterface;
 use Aheadworks\Sarp2\Model\Sales\Total\Profile\CollectorInterface;
 use Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Grand\Summator;
 use Magento\Framework\DataObject\Factory;
 
 /**
  * Class Grand
- * @package Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector
  */
 class Grand implements CollectorInterface
 {
@@ -67,7 +67,9 @@ class Grand implements CollectorInterface
         $this->totalsGroup->getPopulator(ProfileInterface::class)
             ->populate(
                 $profile,
-                $this->dataObjectFactory->create(['grand_total' => $baseGrandTotal])
+                $this->dataObjectFactory->create(['grand_total' => $baseGrandTotal]),
+                PopulatorInterface::CURRENCY_OPTION_CONVERT,
+                $profile->getProfileCurrencyCode()
             );
     }
 }

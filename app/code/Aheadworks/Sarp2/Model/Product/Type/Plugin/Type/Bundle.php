@@ -10,22 +10,24 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
 namespace Aheadworks\Sarp2\Model\Product\Type\Plugin\Type;
 
+use Aheadworks\Sarp2\Model\Config\AdvancedPricingValueResolver;
 use Aheadworks\Sarp2\Model\Product\Checker\IsSubscription;
+use Aheadworks\Sarp2\Model\Product\Type\Bundle\PriceModelSubstitute;
 use Aheadworks\Sarp2\Model\Product\Type\Processor\CartCandidatesProcessor;
 use Aheadworks\Sarp2\Model\Product\Type\Processor\OrderOptionsProcessor;
+use Aheadworks\Sarp2\Model\Profile\Item\Options\Extractor;
 use Magento\Bundle\Model\Product\Type as BundleProductType;
 use Magento\Catalog\Model\Product;
 use Magento\Framework\DataObject;
 
 /**
  * Class Bundle
- * @package Aheadworks\Sarp2\Model\Product\Type\Plugin\Type
  */
 class Bundle
 {
@@ -45,18 +47,34 @@ class Bundle
     private $orderOptionsProcessor;
 
     /**
+     * @var AdvancedPricingValueResolver
+     */
+    private $advancedPricingValueResolver;
+
+    /**
+     * @var Extractor
+     */
+    private $subscriptionOptionExtractor;
+
+    /**
      * @param IsSubscription $isSubscriptionChecker
      * @param CartCandidatesProcessor $cartCandidatesProcessor
      * @param OrderOptionsProcessor $orderOptionsProcessor
+     * @param AdvancedPricingValueResolver $advancedPricingValueResolver
+     * @param Extractor $subscriptionOptionExtractor
      */
     public function __construct(
         IsSubscription $isSubscriptionChecker,
         CartCandidatesProcessor $cartCandidatesProcessor,
-        OrderOptionsProcessor $orderOptionsProcessor
+        OrderOptionsProcessor $orderOptionsProcessor,
+        AdvancedPricingValueResolver $advancedPricingValueResolver,
+        Extractor $subscriptionOptionExtractor
     ) {
         $this->isSubscriptionChecker = $isSubscriptionChecker;
         $this->cartCandidatesProcessor = $cartCandidatesProcessor;
         $this->orderOptionsProcessor = $orderOptionsProcessor;
+        $this->advancedPricingValueResolver = $advancedPricingValueResolver;
+        $this->subscriptionOptionExtractor = $subscriptionOptionExtractor;
     }
 
     /**
@@ -91,6 +109,7 @@ class Bundle
      * @param null|string $processMode
      * @return array|string
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function aroundPrepareForCartAdvanced(
         BundleProductType $subject,
@@ -99,7 +118,13 @@ class Bundle
         $product,
         $processMode = null
     ) {
+        $optionId = $this->subscriptionOptionExtractor->getSubscriptionOptionIdFromBuyRequest($buyRequest);
+        if ($optionId && !$this->advancedPricingValueResolver->isUsedAdvancePricing($product->getId())) {
+            $product->setData(PriceModelSubstitute::DO_NOT_USE_ADVANCED_PRICES_FOR_BUNDLE, true);
+        }
+
         $candidates = $proceed($buyRequest, $product, $processMode);
+
         $candidates = $this->cartCandidatesProcessor->process($buyRequest, $candidates);
         $subscriptionType = $this->getSubscriptionTypeFromParent($candidates);
         if ($subscriptionType) {
@@ -152,13 +177,21 @@ class Bundle
      * @param Product $product
      * @return array|string
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function aroundGetOrderOptions(
         BundleProductType $subject,
         \Closure $proceed,
         $product
     ) {
+        if ($product->getCustomOption('aw_sarp2_subscription_type')
+            && !$this->advancedPricingValueResolver->isUsedAdvancePricing($product->getId())
+        ) {
+            $product->setData(PriceModelSubstitute::DO_NOT_USE_ADVANCED_PRICES_FOR_BUNDLE, true);
+        }
+
         $options = $proceed($product);
+
         $this->orderOptionsProcessor->process($product, $options);
 
         return $options;

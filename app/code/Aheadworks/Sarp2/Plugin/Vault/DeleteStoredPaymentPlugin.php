@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -21,11 +21,10 @@ use Aheadworks\Sarp2\Model\Vault\Data\BackupManagement as VaultBackupManagement;
 use Magento\Framework\Message\ManagerInterface as MessageManager;
 use Magento\Framework\UrlInterface;
 use Magento\Vault\Api\Data\PaymentTokenInterface;
+use Magento\Vault\Api\PaymentTokenRepositoryInterface;
 
 /**
  * Class DeleteStoredPaymentPlugin
- *
- * @package Aheadworks\Sarp2\Plugin\Vault
  */
 class DeleteStoredPaymentPlugin
 {
@@ -68,37 +67,50 @@ class DeleteStoredPaymentPlugin
     }
 
     /**
-     * @param \Magento\Vault\Api\PaymentTokenRepositoryInterface $subject
+     * @param PaymentTokenRepositoryInterface $subject
      * @param bool $result
      * @param PaymentTokenInterface $vaultToken
      * @return bool
      */
     public function afterDelete(
-        \Magento\Vault\Api\PaymentTokenRepositoryInterface $subject,
+        PaymentTokenRepositoryInterface $subject,
         $result,
         PaymentTokenInterface $vaultToken
     ) {
         if ($result) {
-            $this->performProcessing($vaultToken);
+            $this->performProcessingByVaultTokenObject($vaultToken);
         }
 
         return $result;
     }
 
     /**
-     * Perform un activate tokens
+     * Deactivate token vault token object
      *
-     * @param PaymentTokenInterface $vault
+     * @param PaymentTokenInterface $token
      */
-    private function performProcessing($vault)
+    protected function performProcessingByVaultTokenObject($token)
     {
-        $gatewayToken = $vault->getGatewayToken();
+        $gatewayToken = $token->getGatewayToken();
         $profiles = $this->tokenUnActivateProcessor->unActivateTokenAndSuspendRelatedProfiles($gatewayToken);
-
-        $backupedGatewayTokens = $this->vaultBackupManagement->getBackupedGatewayTokens($vault);
+        $backupedGatewayTokens = $this->vaultBackupManagement->getBackupedGatewayTokens($token);
         foreach ($backupedGatewayTokens as $backupGatewayToken) {
             $profiles += $this->tokenUnActivateProcessor->unActivateTokenAndSuspendRelatedProfiles($backupGatewayToken);
         }
+
+        if ($profiles) {
+            $this->createWarningMessage();
+        }
+    }
+
+    /**
+     * Deactivate token vault token value
+     *
+     * @param string $token
+     */
+    protected function performProcessingByVaultTokenValue($token)
+    {
+        $profiles = $this->tokenUnActivateProcessor->unActivateTokenAndSuspendRelatedProfiles($token);
 
         if ($profiles) {
             $this->createWarningMessage();

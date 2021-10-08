@@ -29,7 +29,7 @@ class UploadOrder implements ObserverInterface
             $street = $order->getShippingAddress()->getStreet();
             $address1 = isset($street[0]) ? trim($street[0]) : "";
             $address2 = isset($street[1]) ? trim($street[1]) : "";
-            $shippingMethod = $order->getShippingMethod();
+            $shippingMethod = $order->getShippingDescription();
             $country = trim($order->getShippingAddress()->getData('country_id'));
             $zipCode = trim($order->getShippingAddress()->getData('postcode'));
             $stateId = trim($order->getShippingAddress()->getData('region_id'));

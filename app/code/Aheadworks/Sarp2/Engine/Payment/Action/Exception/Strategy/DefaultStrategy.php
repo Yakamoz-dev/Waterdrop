@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -31,7 +31,7 @@ class DefaultStrategy implements StrategyInterface
     public function apply($exception)
     {
         $exceptionClass = get_class($exception);
-        $message = __('Exception ' . $exceptionClass . ' has been raised with message: ' . $exception->getMessage());
+        $message = __('"' . $exceptionClass . '" has been raised with message: ' . $exception->getMessage());
 
         throw new ScheduledPaymentException(
             $message,

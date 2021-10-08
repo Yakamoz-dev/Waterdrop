@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -107,6 +107,45 @@ class PaymentsList
         if ($ids) {
             $collection->addFieldToFilter('item_id', ['in' => $ids]);
         }
+        return $collection->getItems();
+    }
+
+    /**
+     * Get first scheduled payment of profile
+     *
+     * @param int $profileId
+     * @param DataObject[] $additionalFilters
+     * @return PaymentInterface[]
+     */
+    public function getFirstScheduledOrPaid($profileId, $additionalFilters = [])
+    {
+        /** @var Collection $collection */
+        $collection = $this->collectionFactory->create();
+        $collection->addFieldToFilter(
+            'profile_id',
+            ['eq' => $profileId]
+        )->addTypeStatusMapFilter(
+            [
+                PaymentInterface::TYPE_PLANNED => [PaymentInterface::STATUS_PLANNED, PaymentInterface::STATUS_PAID],
+                PaymentInterface::TYPE_LAST_PERIOD_HOLDER => [
+                    PaymentInterface::STATUS_PLANNED,
+                    PaymentInterface::STATUS_PAID
+                ],
+                PaymentInterface::TYPE_ACTUAL => [PaymentInterface::STATUS_PENDING, PaymentInterface::STATUS_PAID],
+                PaymentInterface::TYPE_REATTEMPT => [
+                    PaymentInterface::STATUS_PENDING,
+                    PaymentInterface::STATUS_RETRYING,
+                    PaymentInterface::STATUS_PAID
+                ],
+                PaymentInterface::TYPE_OUTSTANDING => [
+                    PaymentInterface::STATUS_OUTSTANDING,
+                    PaymentInterface::STATUS_PAID
+                ]
+            ]
+        )->setOrder('scheduled_at', Collection::SORT_ORDER_ASC);
+
+        $this->addFilterArrayToCollection($collection, $additionalFilters);
+
         return $collection->getItems();
     }
 

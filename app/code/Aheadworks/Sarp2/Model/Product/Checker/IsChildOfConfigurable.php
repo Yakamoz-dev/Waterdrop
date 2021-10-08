@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -20,11 +20,6 @@ use Aheadworks\Sarp2\Model\Product\Type\Configurable\ParentProductResolver;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\ConfigurableProduct\Model\Product\Type\Configurable as ConfigurableType;
 
-/**
- * Class IsChildOfConfigurable
- *
- * @package Aheadworks\Sarp2\Model\Product\Checker
- */
 class IsChildOfConfigurable
 {
     /**
@@ -49,11 +44,10 @@ class IsChildOfConfigurable
      */
     public function check($product)
     {
-        if ($product->getTypeId() != ConfigurableType::TYPE_CODE) {
+        if ($product->getId() && $product->getTypeId() !== ConfigurableType::TYPE_CODE) {
             $parentProduct = $this->configurableParentProductResolver->resolveParentProduct($product->getId());
-            return $parentProduct != null;
         }
 
-        return false;
+        return isset($parentProduct);
     }
 }

@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -25,7 +25,6 @@ use Aheadworks\Sarp2\Model\Sales\Total\Profile\CollectorInterface;
 use Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Grand\Summator;
 use Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Tax\QuoteDetails\Builder;
 use Aheadworks\Sarp2\Model\Sales\Total\Quote\Tax\Keyer;
-use Magento\Framework\DataObject;
 use Magento\Framework\DataObject\Factory;
 use Magento\Tax\Api\Data\TaxDetailsInterface;
 use Magento\Tax\Api\TaxCalculationInterface;
@@ -33,7 +32,6 @@ use Magento\Tax\Model\Config;
 
 /**
  * Class TaxSubtotal
- * @package Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector
  */
 class TaxSubtotal implements CollectorInterface
 {
@@ -144,6 +142,7 @@ class TaxSubtotal implements CollectorInterface
         $tax = 0;
         $subtotalInclTax = 0;
 
+        $profileCurrency = $profile->getProfileCurrencyCode();
         $currencyOption = $isBaseCurrency
             ? PopulatorInterface::CURRENCY_OPTION_USE_BASE
             : PopulatorInterface::CURRENCY_OPTION_USE_STORE;
@@ -166,7 +165,8 @@ class TaxSubtotal implements CollectorInterface
                                 'tax_percent' => $item->getTaxPercent()
                             ]
                         ),
-                        $currencyOption
+                        $currencyOption,
+                        $profileCurrency
                     );
 
                 if (!$profileItem->getParentItem()) {
@@ -186,7 +186,8 @@ class TaxSubtotal implements CollectorInterface
                         'tax' => $tax
                     ]
                 ),
-                $currencyOption
+                $currencyOption,
+                $profileCurrency
             );
         if ($isBaseCurrency) {
             $this->grandSummator->setAmount(

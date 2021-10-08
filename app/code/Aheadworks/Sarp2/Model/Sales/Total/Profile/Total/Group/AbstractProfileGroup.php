@@ -10,23 +10,26 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
 namespace Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Group;
 
-use Aheadworks\Sarp2\Api\Data\SubscriptionOptionInterface;
+use Aheadworks\Sarp2\Api\Data\ProfileItemInterface;
 use Aheadworks\Sarp2\Api\Data\SubscriptionOptionInterfaceFactory;
 use Aheadworks\Sarp2\Api\SubscriptionOptionRepositoryInterface;
-use Aheadworks\Sarp2\Api\SubscriptionPriceCalculationInterface;
+use Aheadworks\Sarp2\Api\SubscriptionPriceCalculatorInterface;
+use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\Input as CalculationInput;
+use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\Input\Factory as CalculationInputFactory;
+use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\BuyRequestProductConfigurator;
 use Aheadworks\Sarp2\Model\Profile\Item;
+use Aheadworks\Sarp2\Model\Profile\Item\Checker\IsChildrenCalculated;
 use Aheadworks\Sarp2\Model\Profile\Item\Options\Extractor as OptionExtractor;
 use Aheadworks\Sarp2\Model\Sales\Total\Group\AbstractGroup;
 use Aheadworks\Sarp2\Model\Sales\Total\PopulatorFactory;
 use Aheadworks\Sarp2\Model\Sales\Total\ProviderInterface;
-use Magento\Bundle\Model\Product\Type as BundleType;
-use Magento\Catalog\Api\Data\ProductInterface;
+use Magento\Catalog\Model\Product;
 use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\Pricing\PriceCurrencyInterface;
 
@@ -47,14 +50,24 @@ abstract class AbstractProfileGroup extends AbstractGroup
     protected $dataObjectHelper;
 
     /**
+     * @var BuyRequestProductConfigurator
+     */
+    protected $buyRequestConfigurator;
+
+    /**
      * @var CustomOptionCalculator
      */
     protected $customOptionCalculator;
 
     /**
-     * @var BundleOptionCalculator
+     * @var CalculationInputFactory
      */
-    protected $bundleOptionCalculator;
+    protected $calculationInputFactory;
+
+    /**
+     * @var IsChildrenCalculated
+     */
+    protected $isChildrenCalculatedChecker;
 
     /**
      * @var OptionExtractor
@@ -63,27 +76,31 @@ abstract class AbstractProfileGroup extends AbstractGroup
 
     /**
      * @param SubscriptionOptionRepositoryInterface $optionRepository
-     * @param SubscriptionPriceCalculationInterface $priceCalculation
+     * @param SubscriptionPriceCalculatorInterface $priceCalculation
      * @param PriceCurrencyInterface $priceCurrency
      * @param PopulatorFactory $populatorFactory
      * @param ProviderInterface $provider
      * @param SubscriptionOptionInterfaceFactory $subscriptionOptionFactory
      * @param DataObjectHelper $dataObjectHelper
      * @param CustomOptionCalculator $customOptionCalculator
-     * @param BundleOptionCalculator $bundleOptionCalculator
+     * @param BuyRequestProductConfigurator $buyRequestConfigurator
+     * @param CalculationInputFactory $calculationInputFactory
+     * @param IsChildrenCalculated $isChildrenCalculated
      * @param OptionExtractor $subscriptionOptionExtractor
      * @param array $populateMaps
      */
     public function __construct(
         SubscriptionOptionRepositoryInterface $optionRepository,
-        SubscriptionPriceCalculationInterface $priceCalculation,
+        SubscriptionPriceCalculatorInterface $priceCalculation,
         PriceCurrencyInterface $priceCurrency,
         PopulatorFactory $populatorFactory,
         ProviderInterface $provider,
         SubscriptionOptionInterfaceFactory $subscriptionOptionFactory,
         DataObjectHelper $dataObjectHelper,
         CustomOptionCalculator $customOptionCalculator,
-        BundleOptionCalculator $bundleOptionCalculator,
+        BuyRequestProductConfigurator $buyRequestConfigurator,
+        CalculationInputFactory $calculationInputFactory,
+        IsChildrenCalculated $isChildrenCalculated,
         OptionExtractor $subscriptionOptionExtractor,
         array $populateMaps = []
     ) {
@@ -98,7 +115,9 @@ abstract class AbstractProfileGroup extends AbstractGroup
         $this->subscriptionOptionFactory = $subscriptionOptionFactory;
         $this->dataObjectHelper = $dataObjectHelper;
         $this->customOptionCalculator = $customOptionCalculator;
-        $this->bundleOptionCalculator = $bundleOptionCalculator;
+        $this->buyRequestConfigurator = $buyRequestConfigurator;
+        $this->calculationInputFactory = $calculationInputFactory;
+        $this->isChildrenCalculatedChecker = $isChildrenCalculated;
         $this->optionExtractor = $subscriptionOptionExtractor;
     }
 
@@ -111,26 +130,49 @@ abstract class AbstractProfileGroup extends AbstractGroup
      */
     protected function getItemOption($item)
     {
-        return $this->optionExtractor->getSubscriptionOption($item);
+        return $this->optionExtractor->getSubscriptionOptionFromItem($item);
     }
 
     /**
-     * Get product
+     * Create calculation subject from profile item
      *
-     * @param Item $item
-     * @return ProductInterface
+     * @param ProfileItemInterface $item
+     * @return CalculationInput
      */
-    protected function getProduct($item)
+    protected function createCalculationInput($item)
     {
-        if ($item->hasChildItems()
-            && $item->getProductType() != BundleType::TYPE_CODE
-        ) {
-            $children = $item->getChildItems();
-            $child = reset($children);
-            $product = $child->getProduct();
+        if ($item->getParentItem() && $this->isChildrenCalculatedChecker->check($item)) {
+            $product = $this->configureProduct($item->getParentItem()->getProduct(), $item->getParentItem());
+            $childProduct = $this->configureProduct($item->getProduct(), $item);
+            $calculationInput = $this->calculationInputFactory->create(
+                $product,
+                $item->getParentItem()->getQty(),
+                $childProduct,
+                $item->getQty()
+            );
         } else {
-            $product = $item->getProduct();
+            $product = $this->configureProduct($item->getProduct(), $item);
+            $calculationInput = $this->calculationInputFactory->create(
+                $product,
+                $item->getQty()
+            );
         }
+
+        return $calculationInput;
+    }
+
+    /**
+     * Perform product configuration
+     *
+     * @param Product $product
+     * @param ProfileItemInterface $item
+     * @return Product
+     */
+    private function configureProduct($product, $item)
+    {
+        $buyRequest = $item->getProductOptions()['info_buyRequest'] ?? [];
+        $this->buyRequestConfigurator->configure($product, $buyRequest);
+
         return $product;
     }
 }

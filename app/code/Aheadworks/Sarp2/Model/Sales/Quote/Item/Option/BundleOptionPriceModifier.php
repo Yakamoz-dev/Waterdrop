@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -20,7 +20,7 @@ use Aheadworks\Sarp2\Api\Data\SubscriptionOptionInterface;
 use Aheadworks\Sarp2\Api\SubscriptionOptionRepositoryInterface;
 use Aheadworks\Sarp2\Model\Plan\Resolver\ByPeriod\StrategyPool;
 use Aheadworks\Sarp2\Model\Plan\Source\PriceRounding;
-use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\Calculator;
+use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\PlanPriceCalculator;
 use Magento\Catalog\Model\Product\Configuration\Item\ItemInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -38,17 +38,17 @@ class BundleOptionPriceModifier
     private $optionRepository;
 
     /**
-     * @var Calculator
+     * @var PlanPriceCalculator
      */
     private $priceCalculator;
 
     /**
      * @param SubscriptionOptionRepositoryInterface $optionRepository
-     * @param Calculator $priceCalculator
+     * @param PlanPriceCalculator $priceCalculator
      */
     public function __construct(
         SubscriptionOptionRepositoryInterface $optionRepository,
-        Calculator $priceCalculator
+        PlanPriceCalculator $priceCalculator
     ) {
         $this->optionRepository = $optionRepository;
         $this->priceCalculator = $priceCalculator;

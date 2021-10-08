@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -28,14 +28,11 @@ use Aheadworks\Sarp2\Model\Sales\Total\Profile\CollectorList;
 use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
-use Magento\Framework\App\Area;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Store\Model\App\Emulation as AppEmulation;
 
 /**
  * Class ProfileRepository
- * @package Aheadworks\Sarp2\Model
  */
 class ProfileRepository implements ProfileRepositoryInterface
 {
@@ -80,11 +77,6 @@ class ProfileRepository implements ProfileRepositoryInterface
     private $extensionAttributesJoinProcessor;
 
     /**
-     * @var AppEmulation
-     */
-    private $appEmulation;
-
-    /**
      * @param ProfileResource $resource
      * @param ProfileInterfaceFactory $profileFactory
      * @param CollectorList $totalCollectorList
@@ -92,7 +84,6 @@ class ProfileRepository implements ProfileRepositoryInterface
      * @param CollectionFactory $collectionFactory
      * @param DataObjectHelper $dataObjectHelper
      * @param JoinProcessorInterface $extensionAttributesJoinProcessor
-     * @param AppEmulation $appEmulation
      */
     public function __construct(
         ProfileResource $resource,
@@ -101,8 +92,7 @@ class ProfileRepository implements ProfileRepositoryInterface
         ProfileSearchResultsInterfaceFactory $searchResultsFactory,
         CollectionFactory $collectionFactory,
         DataObjectHelper $dataObjectHelper,
-        JoinProcessorInterface $extensionAttributesJoinProcessor,
-        AppEmulation $appEmulation
+        JoinProcessorInterface $extensionAttributesJoinProcessor
     ) {
         $this->resource = $resource;
         $this->profileFactory = $profileFactory;
@@ -111,7 +101,6 @@ class ProfileRepository implements ProfileRepositoryInterface
         $this->collectionFactory = $collectionFactory;
         $this->dataObjectHelper = $dataObjectHelper;
         $this->extensionAttributesJoinProcessor = $extensionAttributesJoinProcessor;
-        $this->appEmulation = $appEmulation;
     }
 
     /**
@@ -120,11 +109,9 @@ class ProfileRepository implements ProfileRepositoryInterface
     public function save(ProfileInterface $profile, $recollectTotals = true)
     {
         if ($recollectTotals) {
-            $this->appEmulation->startEnvironmentEmulation($profile->getStoreId(), Area::AREA_FRONTEND);
             foreach ($this->totalCollectorList->getCollectors() as $collector) {
                 $collector->collect($profile);
             }
-            $this->appEmulation->stopEnvironmentEmulation();
         }
         try {
             $this->resource->save($profile);

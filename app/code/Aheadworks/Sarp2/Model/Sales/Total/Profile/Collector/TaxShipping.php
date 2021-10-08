@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -30,7 +30,6 @@ use Magento\Tax\Model\Config;
 
 /**
  * Class TaxShipping
- * @package Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector
  */
 class TaxShipping implements CollectorInterface
 {
@@ -154,7 +153,8 @@ class TaxShipping implements CollectorInterface
                 ),
                 $isBaseCurrency
                     ? PopulatorInterface::CURRENCY_OPTION_USE_BASE
-                    : PopulatorInterface::CURRENCY_OPTION_USE_STORE
+                    : PopulatorInterface::CURRENCY_OPTION_USE_STORE,
+                $profile->getProfileCurrencyCode()
             );
         if ($isBaseCurrency) {
             $this->grandSummator->setAmount(

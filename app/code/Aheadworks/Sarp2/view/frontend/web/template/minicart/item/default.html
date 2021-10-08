@@ -48,17 +48,15 @@
                     <strong class="subtitle"><!-- ko i18n: 'Options Details' --><!-- /ko --></strong>
                     <dl class="product options list">
                         <!-- ko foreach: { data: options, as: 'option' } -->
-                        <div class="minicart-option">
-                            <dt class="label"><!-- ko text: option.label --><!-- /ko --></dt>:
-                            <dd class="values">
-                                <!-- ko if: Array.isArray(option.value) -->
-                                    <span data-bind="html: option.value.join('<br>')"></span>
-                                <!-- /ko -->
-                                <!-- ko ifnot: Array.isArray(option.value) -->
-                                    <span data-bind="html: option.value"></span>
-                                <!-- /ko -->
-                            </dd>
-                        </div>
+                        <dt class="label"><!-- ko text: option.label --><!-- /ko --></dt>
+                        <dd class="values">
+                            <!-- ko if: Array.isArray(option.value) -->
+                                <span data-bind="html: option.value.join('<br>')"></span>
+                            <!-- /ko -->
+                            <!-- ko ifnot: Array.isArray(option.value) -->
+                                <span data-bind="html: option.value"></span>
+                            <!-- /ko -->
+                        </dd>
                         <!-- /ko -->
                     </dl>
                 </div>
@@ -82,7 +80,6 @@
                 <div class="details-qty qty">
                     <label class="label" data-bind="i18n: 'Qty', attr: {
                            for: 'cart-item-'+item_id+'-qty'}"></label>
-                    <div class="minicart-id-qty-plus"></div>
                     <input data-bind="attr: {
                            id: 'cart-item-'+item_id+'-qty',
                            'data-cart-item': item_id,
@@ -92,7 +89,6 @@
                            type="number"
                            size="4"
                            class="item-qty cart-item-qty">
-                    <div class="minicart-id-qty-minus"></div>
                     <button data-bind="attr: {
                            id: 'update-cart-item-'+item_id,
                            'data-cart-item': item_id,

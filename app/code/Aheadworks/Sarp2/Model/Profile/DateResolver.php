@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -19,6 +19,7 @@ namespace Aheadworks\Sarp2\Model\Profile;
 use Aheadworks\Sarp2\Api\ProfileRepositoryInterface;
 use Aheadworks\Sarp2\Engine\DataResolver\NextPaymentDate;
 use Aheadworks\Sarp2\Engine\Payment\PaymentsList;
+use Aheadworks\Sarp2\Engine\Payment\Schedule\Checker as ScheduleChecker;
 use Aheadworks\Sarp2\Engine\Payment\Schedule\Persistence;
 use Aheadworks\Sarp2\Engine\PaymentInterface;
 use Aheadworks\Sarp2\Model\ResourceModel\Engine\Payment\CollectionFactory;
@@ -38,6 +39,9 @@ class DateResolver
      * @var Persistence
      */
     private $schedulePersistence;
+    
+    
+    private $scheduleChecker;
 
     /**
      * @var PaymentsList
@@ -67,6 +71,7 @@ class DateResolver
     /**
      * @param ProfileRepositoryInterface $profileRepository
      * @param Persistence $schedulePersistence
+     * @param ScheduleChecker $scheduleChecker
      * @param NextPaymentDate $nextPaymentDate
      * @param PaymentsList $paymentsList
      * @param CollectionFactory $collectionFactory
@@ -75,6 +80,7 @@ class DateResolver
     public function __construct(
         ProfileRepositoryInterface $profileRepository,
         Persistence $schedulePersistence,
+        ScheduleChecker $scheduleChecker,
         NextPaymentDate $nextPaymentDate,
         PaymentsList $paymentsList,
         CollectionFactory $collectionFactory,
@@ -82,6 +88,7 @@ class DateResolver
     ) {
         $this->profileRepository = $profileRepository;
         $this->schedulePersistence = $schedulePersistence;
+        $this->scheduleChecker = $scheduleChecker;
         $this->nextPaymentDate = $nextPaymentDate;
         $this->paymentsList = $paymentsList;
         $this->collectionFactory = $collectionFactory;
@@ -98,6 +105,39 @@ class DateResolver
     public function getStartDate($profileId)
     {
         return $this->getProfile($profileId)->getCreatedAt();
+    }
+
+    /**
+     * Retrieve initial period starting date
+     * 
+     * @param int $profileId
+     * @return string|null
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function getInitialStartDate($profileId) {
+        $profile = $this->getProfile($profileId);
+        $startDate = $profile->getStartDate();
+
+        $schedule = $this->getSchedule($profileId);
+        $filter = $this->createFilter('payment_period', ['in' => [
+            PaymentInterface::PERIOD_INITIAL,
+            PaymentInterface::PERIOD_TRIAL,
+            PaymentInterface::PERIOD_REGULAR
+        ]]);
+
+        if ($this->scheduleChecker->isNoPayments($schedule)) {
+            $firstScheduledOrPaidPaymentDate = $this->getFirstScheduledOrPaidPaymentDate($profileId, $filter);
+            if ($firstScheduledOrPaidPaymentDate) {
+                $startDate = $firstScheduledOrPaidPaymentDate;
+            }
+        } else {
+            $firstPaid = $this->paymentsList->getFirstPaid($profileId, $filter);
+            if ($firstPaid->getId()) {
+                $startDate = $firstPaid->getPaidAt();
+            }
+        }
+
+        return $startDate;
     }
 
     /**
@@ -375,7 +415,7 @@ class DateResolver
     }
 
     /**
-     * Retrieve last scheduled payment date
+     * Retrieve first scheduled payment date
      *
      * @param int $profileId
      * @param \Magento\Framework\DataObject $filter
@@ -383,8 +423,27 @@ class DateResolver
      */
     private function getLastScheduledPaymentDate($profileId, $filter)
     {
-        $lastScheduled = $this->paymentsList->getLastScheduled($profileId, $filter);
+        $lastScheduled = $this->paymentsList->getFirstPaid($profileId, $filter);
         foreach ($lastScheduled as $payment) {
+            return $payment->getType() == PaymentInterface::TYPE_REATTEMPT
+                ? $payment->getRetryAt()
+                : $payment->getScheduledAt();
+        }
+
+        return null;
+    }
+
+    /**
+     * Retrieve last scheduled payment date
+     *
+     * @param int $profileId
+     * @param \Magento\Framework\DataObject $filter
+     * @return string|null
+     */
+    private function getFirstScheduledOrPaidPaymentDate($profileId, $filter)
+    {
+        $firstScheduledOrPaid = $this->paymentsList->getFirstScheduledOrPaid($profileId, $filter);
+        foreach ($firstScheduledOrPaid as $payment) {
             return $payment->getType() == PaymentInterface::TYPE_REATTEMPT
                 ? $payment->getRetryAt()
                 : $payment->getScheduledAt();

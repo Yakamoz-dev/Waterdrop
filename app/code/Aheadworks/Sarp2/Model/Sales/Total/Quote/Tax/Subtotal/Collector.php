@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -31,12 +31,12 @@ use Magento\Quote\Model\Quote\Item;
 use Magento\Quote\Model\Quote\Address\Total;
 use Magento\Quote\Model\Quote\Address\Total\AbstractTotal;
 use Magento\Tax\Api\Data\TaxDetailsInterface;
+use Magento\Tax\Api\Data\TaxDetailsItemInterface;
 use Magento\Tax\Api\TaxCalculationInterface;
 use Magento\Tax\Model\Config;
 
 /**
  * Class Collector
- * @package Aheadworks\Sarp2\Model\Sales\Total\Quote\Tax\Subtotal
  */
 class Collector extends AbstractTotal
 {
@@ -156,16 +156,19 @@ class Collector extends AbstractTotal
         $currencyOption = $isBaseCurrency
             ? PopulatorInterface::CURRENCY_OPTION_USE_BASE
             : PopulatorInterface::CURRENCY_OPTION_USE_STORE;
+        $currencyForConvert = $quote->getForcedCurrency()
+            ? $quote->getForcedCurrency()->getCode()
+            : null;
 
         /** @var Item $keyedItems */
         $keyedItems = $this->keyer->keyBy($shippingAssignment->getItems(), 'getTaxCalculationItemId');
         foreach ($taxDetails->getItems() as $item) {
             $quoteItem = $keyedItems[$item->getCode()];
             if ($item->getType() == 'product') {
-                $this->populate($quoteItem, $item, $currencyOption);
+                $this->populate($quoteItem, $item, $currencyOption, $currencyForConvert);
                 $parentQuoteItem = $quoteItem->getParentItem();
                 if ($parentQuoteItem) {
-                    $this->populate($parentQuoteItem, $item, $currencyOption);
+                    $this->populate($parentQuoteItem, $item, $currencyOption, $currencyForConvert);
                 }
 
                 if (!($quoteItem->getHasChildren() && $quoteItem->isChildrenCalculated())) {
@@ -179,7 +182,8 @@ class Collector extends AbstractTotal
             ->populate(
                 $quote,
                 $this->dataObjectFactory->create(['subtotal' => $subtotal]),
-                $currencyOption
+                $currencyOption,
+                $currencyForConvert
             );
         $this->totalsGroup->getPopulator(AddressInterface::class)
             ->populate(
@@ -191,7 +195,8 @@ class Collector extends AbstractTotal
                         'tax' => $tax
                     ]
                 ),
-                $currencyOption
+                $currencyOption,
+                $currencyForConvert
             );
         if ($isBaseCurrency) {
             $this->grandSummator->setAmount(
@@ -214,11 +219,12 @@ class Collector extends AbstractTotal
     /**
      * Populate quote item
      *
-     * @param $quoteItem
-     * @param $item
-     * @param $currencyOption
+     * @param Item $quoteItem
+     * @param TaxDetailsItemInterface $item
+     * @param string $currencyOption
+     * @param string $currency
      */
-    private function populate($quoteItem, $item, $currencyOption)
+    private function populate($quoteItem, $item, $currencyOption, $currency)
     {
         $this->totalsGroup->getPopulator(CartItemInterface::class)
             ->populate(
@@ -233,7 +239,8 @@ class Collector extends AbstractTotal
                         'tax_percent' => $item->getTaxPercent()
                     ]
                 ),
-                $currencyOption
+                $currencyOption,
+                $currency
             );
     }
 }

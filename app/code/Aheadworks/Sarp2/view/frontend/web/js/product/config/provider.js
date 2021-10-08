@@ -261,6 +261,10 @@ define([
                 : 100;
         },
 
+        /**
+         * @param subscriptionOptionId
+         * @return {number}
+         */
         getOptionPlanRegularPercent: function (subscriptionOptionId) {
             return getProvider()
                 ? getProvider().getOptionPlanRegularPercent(subscriptionOptionId, this.config.optionPlanData)

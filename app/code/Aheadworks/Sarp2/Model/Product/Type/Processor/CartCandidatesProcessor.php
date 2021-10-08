@@ -10,13 +10,14 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
 namespace Aheadworks\Sarp2\Model\Product\Type\Processor;
 
 use Aheadworks\Sarp2\Model\Product\Checker\IsSubscription;
+use Aheadworks\Sarp2\Model\Profile\Item\Options\Extractor as OptionExtractor;
 use Magento\Catalog\Model\Product;
 use Magento\Framework\DataObject;
 
@@ -33,11 +34,20 @@ class CartCandidatesProcessor
     private $isSubscriptionChecker;
 
     /**
-     * @param IsSubscription $isSubscriptionChecker
+     * @var OptionExtractor
      */
-    public function __construct(IsSubscription $isSubscriptionChecker)
-    {
+    private $optionExtractor;
+
+    /**
+     * @param IsSubscription $isSubscriptionChecker
+     * @param OptionExtractor $optionExtractor
+     */
+    public function __construct(
+        IsSubscription $isSubscriptionChecker,
+        OptionExtractor $optionExtractor
+    ) {
         $this->isSubscriptionChecker = $isSubscriptionChecker;
+        $this->optionExtractor = $optionExtractor;
     }
 
     /**
@@ -52,7 +62,7 @@ class CartCandidatesProcessor
         if (is_array($candidates)) {
             foreach ($candidates as $candidate) {
                 if ($this->isSubscriptionChecker->check($candidate)) {
-                    $optionId = $this->getOptionId($buyRequest);
+                    $optionId = $this->optionExtractor->getSubscriptionOptionIdFromBuyRequest($buyRequest);
                     if ($optionId) {
                         $candidate->addCustomOption('aw_sarp2_subscription_type', $optionId);
                     } elseif ($this->isSubscriptionChecker->check($candidate, true)) {
@@ -64,24 +74,5 @@ class CartCandidatesProcessor
             }
         }
         return $candidates;
-    }
-
-    /**
-     * Get option id from buyRequest
-     *
-     * @param DataObject $buyRequest
-     * @return int|null
-     */
-    private function getOptionId($buyRequest)
-    {
-        if ($buyRequest->getData('aw_sarp2_subscription_type') != null) {
-            return (int)$buyRequest->getData('aw_sarp2_subscription_type');
-        } elseif (isset($buyRequest->getData('options')['aw_sarp2_subscription_type']) &&
-            $buyRequest->getData('options')['aw_sarp2_subscription_type'] != null
-        ) {
-            return (int)$buyRequest->getData('options')['aw_sarp2_subscription_type'];
-        }
-
-        return null;
     }
 }

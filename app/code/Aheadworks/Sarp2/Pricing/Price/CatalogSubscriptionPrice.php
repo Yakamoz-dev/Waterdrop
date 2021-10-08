@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -18,6 +18,9 @@ namespace Aheadworks\Sarp2\Pricing\Price;
 
 use Aheadworks\Sarp2\Api\Data\SubscriptionOptionInterface;
 use Aheadworks\Sarp2\Api\PlanRepositoryInterface;
+use Aheadworks\Sarp2\Api\SubscriptionPriceCalculatorInterface as PriceCalculation;
+use Aheadworks\Sarp2\Model\Product\Subscription\Option\Finder as OptionFinder;
+use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\Input\Factory as CalculationInputFactory;
 use Aheadworks\Sarp2\Model\Profile\Details\Formatter;
 use Magento\Catalog\Model\Product;
 use Magento\Framework\Exception\LocalizedException;
@@ -25,14 +28,17 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Pricing\Adjustment\Calculator;
 use Magento\Framework\Pricing\Price\AbstractPrice;
 use Magento\Framework\Pricing\PriceCurrencyInterface;
-use Aheadworks\Sarp2\Api\SubscriptionPriceCalculationInterface as PriceCalculation;
-use Aheadworks\Sarp2\Model\Product\Subscription\Option\Finder as OptionFinder;
 
 /**
  * Class CatalogSubscriptionPrice
  */
 class CatalogSubscriptionPrice extends AbstractPrice
 {
+    /**
+     * @var CalculationInputFactory
+     */
+    private $calculationInputFactory;
+
     /**
      * @var PriceCalculation
      */
@@ -61,6 +67,7 @@ class CatalogSubscriptionPrice extends AbstractPrice
     /**
      * @param Product $saleableItem
      * @param float $quantity
+     * @param CalculationInputFactory $calculationInputFactory
      * @param Calculator $calculator
      * @param PriceCurrencyInterface $priceCurrency
      * @param PriceCalculation $priceCalculation
@@ -71,6 +78,7 @@ class CatalogSubscriptionPrice extends AbstractPrice
     public function __construct(
         Product $saleableItem,
         $quantity,
+        CalculationInputFactory $calculationInputFactory,
         Calculator $calculator,
         PriceCurrencyInterface $priceCurrency,
         PriceCalculation $priceCalculation,
@@ -79,6 +87,7 @@ class CatalogSubscriptionPrice extends AbstractPrice
         OptionFinder $finder
     ) {
         parent::__construct($saleableItem, $quantity, $calculator, $priceCurrency);
+        $this->calculationInputFactory = $calculationInputFactory;
         $this->priceCalculation = $priceCalculation;
         $this->finder = $finder;
         $this->planRepository = $planRepository;
@@ -104,12 +113,16 @@ class CatalogSubscriptionPrice extends AbstractPrice
     public function getPeriod()
     {
         $subscriptionOption = $this->getFirstSubscriptionOption($this->product->getId());
-        try {
-            $plan = $this->planRepository->get($subscriptionOption->getPlanId());
-            return $this->detailsFormatter->getFormattedPeriod($plan->getDefinition());
-        } catch (\Exception $exception) {
-            return '';
+        if ($subscriptionOption) {
+            try {
+                $plan = $this->planRepository->get($subscriptionOption->getPlanId());
+                return $this->detailsFormatter->getFormattedPeriod($plan->getDefinition());
+            } catch (\Exception $exception) {
+                return '';
+            }
         }
+
+        return '';
     }
 
     /**
@@ -123,7 +136,7 @@ class CatalogSubscriptionPrice extends AbstractPrice
         $basePrice = 0;
         $subscriptionOption = $this->getFirstSubscriptionOption($this->product->getId());
         if ($subscriptionOption) {
-            $basePrice = $this->getBaseRegularPrice($subscriptionOption);
+            $basePrice = $this->priceCurrency->convert($this->getBaseRegularPrice($subscriptionOption));
         }
 
         return $basePrice;
@@ -139,8 +152,7 @@ class CatalogSubscriptionPrice extends AbstractPrice
     private function getBaseRegularPrice($option)
     {
         return $this->priceCalculation->getRegularPrice(
-            $option->getProduct()->getId(),
-            1,
+            $this->calculationInputFactory->create($option->getProduct(), 1),
             $option
         );
     }

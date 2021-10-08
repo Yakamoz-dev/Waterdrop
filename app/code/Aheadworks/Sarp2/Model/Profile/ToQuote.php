@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -79,7 +79,9 @@ class ToQuote
         $quote
             ->setIsActive(false)
             ->setCustomerIsGuest(0)
-            ->setIsVirtual($profile->getIsVirtual());
+            ->setIsVirtual($profile->getIsVirtual())
+            ->setBaseGrandTotal($profile->getBaseRegularGrandTotal())
+            ->setGrandTotal($profile->getRegularGrandTotal());
 
         $quoteBillingAddress = $this->profileAddressToQuoteAddress->convert($profile->getBillingAddress());
         $quote->setBillingAddress($quoteBillingAddress);

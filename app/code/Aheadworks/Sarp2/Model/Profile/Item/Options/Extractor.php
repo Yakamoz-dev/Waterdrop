@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -22,6 +22,7 @@ use Aheadworks\Sarp2\Api\Data\SubscriptionOptionInterfaceFactory;
 use Aheadworks\Sarp2\Api\SubscriptionOptionRepositoryInterface;
 use Aheadworks\Sarp2\Model\Profile\Item;
 use Magento\Framework\Api\DataObjectHelper;
+use Magento\Framework\DataObject;
 
 /**
  * Class Extractor
@@ -67,7 +68,7 @@ class Extractor
      * @return \Aheadworks\Sarp2\Api\Data\SubscriptionOptionInterface|null
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function getSubscriptionOption($item)
+    public function getSubscriptionOptionFromItem($item)
     {
         $option = null;
         $productOptions = $item->getProductOptions();
@@ -92,5 +93,24 @@ class Extractor
         }
 
         return $option;
+    }
+
+    /**
+     * Get option id from buyRequest
+     *
+     * @param DataObject $buyRequest
+     * @return int|null
+     */
+    public function getSubscriptionOptionIdFromBuyRequest($buyRequest)
+    {
+        if ($buyRequest->getData('aw_sarp2_subscription_type') != null) {
+            return (int)$buyRequest->getData('aw_sarp2_subscription_type');
+        } elseif (isset($buyRequest->getData('options')['aw_sarp2_subscription_type']) &&
+            $buyRequest->getData('options')['aw_sarp2_subscription_type'] != null
+        ) {
+            return (int)$buyRequest->getData('options')['aw_sarp2_subscription_type'];
+        }
+
+        return null;
     }
 }

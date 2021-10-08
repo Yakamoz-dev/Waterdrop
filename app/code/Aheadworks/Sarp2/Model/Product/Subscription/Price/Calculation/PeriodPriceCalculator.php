@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -18,13 +18,15 @@ namespace Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation;
 
 use Aheadworks\Sarp2\Api\PlanRepositoryInterface;
 use Aheadworks\Sarp2\Model\Plan\Resolver\ByPeriod\StrategyPool;
+use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\Input;
+use Magento\Catalog\Api\Data\ProductInterface;
+use Magento\Catalog\Model\Product;
+use Magento\Framework\Exception\LocalizedException as LocalizedExceptionAlias;
 
 /**
- * Class SubscriptionPriceCalculator
- *
- * @package Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation
+ * Class PeriodPriceCalculator
  */
-class SubscriptionPriceCalculator
+class PeriodPriceCalculator
 {
     /**
      * @var PlanRepositoryInterface
@@ -32,24 +34,24 @@ class SubscriptionPriceCalculator
     private $planRepository;
 
     /**
-     * @var Calculator
+     * @var PlanPriceCalculator
      */
     private $baseCalculator;
 
     /**
-     * @var PriceResolver
+     * @var ProductPriceResolver
      */
     private $priceResolver;
 
     /**
      * @param PlanRepositoryInterface $planRepository
-     * @param Calculator $amountCalculator
-     * @param PriceResolver $priceResolver
+     * @param PlanPriceCalculator $amountCalculator
+     * @param ProductPriceResolver $priceResolver
      */
     public function __construct(
         PlanRepositoryInterface $planRepository,
-        Calculator $amountCalculator,
-        PriceResolver $priceResolver
+        PlanPriceCalculator $amountCalculator,
+        ProductPriceResolver $priceResolver
     ) {
         $this->planRepository = $planRepository;
         $this->baseCalculator = $amountCalculator;
@@ -57,44 +59,36 @@ class SubscriptionPriceCalculator
     }
 
     /**
-     * Calculate subscription price for trial subscription period
-     *
-     * @param int $productId
+     * @param Input $input
      * @param int $planId
-     * @param float $qty
      * @param null $forceUseAdvancedConfig
      * @return float
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedExceptionAlias
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function calculateTrialPrice($productId, $planId, $qty, $forceUseAdvancedConfig = null)
+    public function calculateTrialPrice($input, $planId, $forceUseAdvancedConfig = null)
     {
         return $this->calculatePrice(
-            $productId,
+            $input,
             $planId,
-            $qty,
             StrategyPool::TYPE_TRIAL,
             $forceUseAdvancedConfig
         );
     }
 
     /**
-     * Calculate subscription price for regular subscription period
-     *
-     * @param int $productId
+     * @param Input $input
      * @param int $planId
-     * @param float $qty
      * @param null $forceUseAdvancedConfig
      * @return float
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedExceptionAlias
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function calculateRegularPrice($productId, $planId, $qty, $forceUseAdvancedConfig = null)
+    public function calculateRegularPrice($input, $planId, $forceUseAdvancedConfig = null)
     {
         return $this->calculatePrice(
-            $productId,
+            $input,
             $planId,
-            $qty,
             StrategyPool::TYPE_REGULAR,
             $forceUseAdvancedConfig
         );
@@ -103,20 +97,19 @@ class SubscriptionPriceCalculator
     /**
      * Calculate subscription price for trial/regular subscription period
      *
-     * @param int $productId
+     * @param Input $input
      * @param int $planId
-     * @param float $qty
      * @param string $dataResolverStartegyType
      * @param null $forceUseAdvancedConfig
      * @return float
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws LocalizedExceptionAlias
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function calculatePrice($productId, $planId, $qty, $dataResolverStartegyType, $forceUseAdvancedConfig = null)
+    private function calculatePrice($input, $planId, $dataResolverStartegyType, $forceUseAdvancedConfig = null)
     {
-        $basePrice = $this->priceResolver->getPrice($productId, $qty, $forceUseAdvancedConfig);
+        $productPrice = $this->priceResolver->getPrice($input, $forceUseAdvancedConfig);
         $subscriptionPrice = $this->baseCalculator->calculateAccordingPlan(
-            $basePrice,
+            $productPrice,
             $planId,
             $dataResolverStartegyType
         );

@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -20,7 +20,6 @@ use Magento\Framework\DataObject;
 
 /**
  * Interface PopulatorInterface
- * @package Aheadworks\Sarp2\Model\Sales\Total
  */
 interface PopulatorInterface
 {
@@ -38,11 +37,13 @@ interface PopulatorInterface
      * @param object $entity
      * @param DataObject $totalsDetails
      * @param string $currencyOption
+     * @param string|null $currency
      * @return void
      */
     public function populate(
         $entity,
         DataObject $totalsDetails,
-        $currencyOption = self::CURRENCY_OPTION_CONVERT
+        $currencyOption = self::CURRENCY_OPTION_CONVERT,
+        $currency = null
     );
 }

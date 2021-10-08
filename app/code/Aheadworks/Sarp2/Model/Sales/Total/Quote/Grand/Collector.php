@@ -10,26 +10,25 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
 namespace Aheadworks\Sarp2\Model\Sales\Total\Quote\Grand;
 
 use Aheadworks\Sarp2\Model\Sales\Total\GroupInterface;
+use Aheadworks\Sarp2\Model\Sales\Total\PopulatorInterface;
 use Magento\Framework\DataObject\Factory;
 use Magento\Quote\Api\Data\AddressInterface;
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Api\Data\ShippingAssignmentInterface;
 use Magento\Quote\Model\Quote;
-use Magento\Quote\Model\Quote\Item;
 use Magento\Quote\Model\Quote\Address;
 use Magento\Quote\Model\Quote\Address\Total;
 use Magento\Quote\Model\Quote\Address\Total\AbstractTotal;
 
 /**
  * Class Collector
- * @package Aheadworks\Sarp2\Model\Sales\Total\Quote\Grand
  */
 class Collector extends AbstractTotal
 {
@@ -76,16 +75,23 @@ class Collector extends AbstractTotal
         /** @var Address $address */
         $address = $shippingAssignment->getShipping()->getAddress();
         $baseGrandTotal = $this->grandSummator->getSum($this->totalsGroup->getCode());
+        $currencyForConvert = $quote->getForcedCurrency()
+            ? $quote->getForcedCurrency()->getCode()
+            : null;
 
         $this->totalsGroup->getPopulator(CartInterface::class)
             ->populate(
                 $quote,
-                $this->dataObjectFactory->create(['grand_total' => $baseGrandTotal])
+                $this->dataObjectFactory->create(['grand_total' => $baseGrandTotal]),
+                PopulatorInterface::CURRENCY_OPTION_CONVERT,
+                $currencyForConvert
             );
         $this->totalsGroup->getPopulator(AddressInterface::class)
             ->populate(
                 $address,
-                $this->dataObjectFactory->create(['grand_total' => $baseGrandTotal])
+                $this->dataObjectFactory->create(['grand_total' => $baseGrandTotal]),
+                PopulatorInterface::CURRENCY_OPTION_CONVERT,
+                $currencyForConvert
             );
     }
 

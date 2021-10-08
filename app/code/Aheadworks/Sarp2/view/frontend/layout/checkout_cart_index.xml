@@ -17,6 +17,7 @@
                                     <item name="component"  xsi:type="string">Aheadworks_Sarp2/js/checkout/view/summary/grand-total</item>
                                     <item name="config" xsi:type="array">
                                         <item name="template" xsi:type="string">Aheadworks_Sarp2/cart/totals/grand-total</item>
+                                        <item name="basicCurrencyMessage" xsi:type="string" translate="true">You will be charged for</item>
                                     </item>
                                 </item>
                             </item>

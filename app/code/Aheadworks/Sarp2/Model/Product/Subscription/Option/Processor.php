@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -19,18 +19,18 @@ namespace Aheadworks\Sarp2\Model\Product\Subscription\Option;
 use Aheadworks\Sarp2\Api\Data\PlanDefinitionInterface;
 use Aheadworks\Sarp2\Api\Data\ProfileItemInterface;
 use Aheadworks\Sarp2\Api\Data\SubscriptionOptionInterface;
-use Aheadworks\Sarp2\Api\SubscriptionPriceCalculationInterface;
+use Aheadworks\Sarp2\Api\SubscriptionPriceCalculatorInterface;
 use Aheadworks\Sarp2\Model\Config;
+use Aheadworks\Sarp2\Model\Config\AdvancedPricingValueResolver;
 use Aheadworks\Sarp2\Model\Plan\DateResolver as PlanDateResolver;
 use Aheadworks\Sarp2\Model\Plan\Period\Formatter as PeriodFormatter;
-use Aheadworks\Sarp2\Model\Plan\Resolver\ByPeriod\StrategyPool;
 use Aheadworks\Sarp2\Model\Product\Subscription\Option\Calculator\CatalogPriceCalculator;
 use Aheadworks\Sarp2\Model\Product\Subscription\Option\Calculator\TierPriceCalculator;
-use Aheadworks\Sarp2\Model\Config\AdvancedPricingValueResolver;
+use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\BuyRequestProductConfigurator;
+use Aheadworks\Sarp2\Model\Product\Subscription\Price\Calculation\Input\Factory;
 use Aheadworks\Sarp2\Model\Profile;
 use Aheadworks\Sarp2\Model\Profile\Details\Formatter as DetailsFormatter;
 use Aheadworks\Sarp2\Model\Profile\Item as ProfileItem;
-use Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Group\BundleOptionCalculator;
 use Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Group\CustomOptionCalculator;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Model\Product;
@@ -54,7 +54,7 @@ class Processor
     /**#@-*/
 
     /**
-     * @var SubscriptionPriceCalculationInterface
+     * @var SubscriptionPriceCalculatorInterface
      */
     private $subscriptionPriceCalculation;
 
@@ -82,11 +82,6 @@ class Processor
      * @var CustomOptionCalculator
      */
     private $customOptionCalculator;
-
-    /**
-     * @var BundleOptionCalculator
-     */
-    private $bundleOptionCalculator;
 
     /**
      * @var PlanDateResolver
@@ -119,36 +114,48 @@ class Processor
     private $advancedPricingConfigValueResolver;
 
     /**
+     * @var Factory
+     */
+    private $calculationInputFactory;
+
+    /**
+     * @var BuyRequestProductConfigurator
+     */
+    private $buyRequestConfigurator;
+
+    /**
      * Processor constructor.
      *
-     * @param SubscriptionPriceCalculationInterface $priceCalculation
+     * @param SubscriptionPriceCalculatorInterface $priceCalculation
      * @param PeriodFormatter $periodFormatter
      * @param PriceCurrencyInterface $priceCurrency
      * @param LocaleFormat $localeFormat
      * @param CatalogPriceCalculator $catalogPriceCalculator
      * @param CustomOptionCalculator $customOptionCalculator
-     * @param BundleOptionCalculator $bundleOptionCalculator
      * @param PlanDateResolver $planDateResolver
      * @param TimezoneInterface $localeDate
      * @param DetailsFormatter $detailsFormatter
      * @param Config $config
      * @param TierPriceCalculator $tierPriceProcessor
      * @param AdvancedPricingValueResolver $advancedPricingConfigValueResolver
+     * @param Factory $calculationInputFactory
+     * @param BuyRequestProductConfigurator $buyRequestConfigurator
      */
     public function __construct(
-        SubscriptionPriceCalculationInterface $priceCalculation,
+        SubscriptionPriceCalculatorInterface $priceCalculation,
         PeriodFormatter $periodFormatter,
         PriceCurrencyInterface $priceCurrency,
         LocaleFormat $localeFormat,
         CatalogPriceCalculator $catalogPriceCalculator,
         CustomOptionCalculator $customOptionCalculator,
-        BundleOptionCalculator $bundleOptionCalculator,
         PlanDateResolver $planDateResolver,
         TimezoneInterface $localeDate,
         DetailsFormatter $detailsFormatter,
         Config $config,
         TierPriceCalculator $tierPriceProcessor,
-        AdvancedPricingValueResolver $advancedPricingConfigValueResolver
+        AdvancedPricingValueResolver $advancedPricingConfigValueResolver,
+        Factory $calculationInputFactory,
+        BuyRequestProductConfigurator $buyRequestConfigurator
     ) {
         $this->subscriptionPriceCalculation = $priceCalculation;
         $this->periodFormatter = $periodFormatter;
@@ -156,13 +163,14 @@ class Processor
         $this->localeFormat = $localeFormat;
         $this->catalogPriceCalculator = $catalogPriceCalculator;
         $this->customOptionCalculator = $customOptionCalculator;
-        $this->bundleOptionCalculator = $bundleOptionCalculator;
         $this->planDateResolver = $planDateResolver;
         $this->localeDate = $localeDate;
         $this->detailsFormatter = $detailsFormatter;
         $this->config = $config;
         $this->tierPriceCalculation = $tierPriceProcessor;
         $this->advancedPricingConfigValueResolver = $advancedPricingConfigValueResolver;
+        $this->calculationInputFactory = $calculationInputFactory;
+        $this->buyRequestConfigurator = $buyRequestConfigurator;
     }
 
     /**
@@ -618,15 +626,15 @@ class Processor
     private function getBaseTrialPrice($option, $item)
     {
         $qty = $item ? $item->getQty() : 1;
+        $product = $item ? $this->configureProduct($option->getProduct(), $item) : $option->getProduct();
+
         $baseTrialPrice = $this->subscriptionPriceCalculation->getTrialPrice(
-            $option->getProduct()->getId(),
-            $qty,
+            $this->calculationInputFactory->create($product, $qty),
             $option
         );
 
         if ($item) {
             $baseTrialPrice += $this->calculateCustomOptionsPrice($item, $option->getId(), true);
-            $baseTrialPrice += $this->calculateBundleOptionsPrice($item, $option, StrategyPool::TYPE_TRIAL);
         }
 
         return $baseTrialPrice;
@@ -643,18 +651,33 @@ class Processor
     private function getBaseRegularPrice($option, $item = null)
     {
         $qty = $item ? $item->getQty() : 1;
+        $product = $item ? $this->configureProduct($option->getProduct(), $item) : $option->getProduct();
+
         $baseRegularPrice = $this->subscriptionPriceCalculation->getRegularPrice(
-            $option->getProduct()->getId(),
-            $qty,
+            $this->calculationInputFactory->create($product, $qty),
             $option
         );
 
         if ($item) {
             $baseRegularPrice += $this->calculateCustomOptionsPrice($item, $option->getId(), false);
-            $baseRegularPrice += $this->calculateBundleOptionsPrice($item, $option, StrategyPool::TYPE_REGULAR);
         }
 
         return $baseRegularPrice;
+    }
+
+    /**
+     * Perform product configuration
+     *
+     * @param Product|ProductInterface $product
+     * @param ProfileItemInterface $item
+     * @return Product
+     */
+    private function configureProduct($product, $item)
+    {
+        $buyRequest = $item->getProductOptions()['info_buyRequest'] ?? [];
+        $this->buyRequestConfigurator->configure($product, $buyRequest);
+
+        return $product;
     }
 
     /**
@@ -675,28 +698,6 @@ class Processor
         $itemClone->setProductOptions($productOptions);
 
         return $this->customOptionCalculator->applyOptionsPrice($itemClone, 0, true, $forTrial);
-    }
-
-    /**
-     * Calculate bundle option price
-     *
-     * @param ProfileItem|null $item
-     * @param $option
-     * @param string $dataResolverStartegyType
-     * @return float
-     * @throws \Magento\Framework\Exception\LocalizedException
-     */
-    private function calculateBundleOptionsPrice($item, $option, $dataResolverStartegyType)
-    {
-        $itemClone = clone $item;
-
-        return $this->bundleOptionCalculator->applyBundlePrice(
-            $itemClone,
-            0,
-            $option->getPlanId(),
-            true,
-            $dataResolverStartegyType
-        );
     }
 
     /**

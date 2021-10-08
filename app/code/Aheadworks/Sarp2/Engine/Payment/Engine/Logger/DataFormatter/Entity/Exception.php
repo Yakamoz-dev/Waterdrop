@@ -10,7 +10,7 @@
  * https://aheadworks.com/end-user-license-agreement/
  *
  * @package    Sarp2
- * @version    2.15.0
+ * @version    2.15.3
  * @copyright  Copyright (c) 2021 Aheadworks Inc. (https://aheadworks.com/)
  * @license    https://aheadworks.com/end-user-license-agreement/
  */
@@ -35,7 +35,7 @@ class Exception implements DataFormatterInterface
             return $subject instanceof ScheduledPaymentException
                 ? $subject->getMessage()
                 : sprintf(
-                    'Exception %s has been raised with message \'%s\'',
+                    '"%s" has been raised with message \'%s\'',
                     get_class($subject),
                     $subject->getMessage()
                 );

@@ -74,6 +74,8 @@ class Block implements ObserverInterface
             $oscRoute = $this->helperData->getOscRoute();
             $html = $transport->getHtml();
             $html .= '<script> window.oscRoute = ' . $this->helperData->jsonEncodeData($oscRoute) . '</script>';
+            $isEnableAmazonPayCv2 = $this->helperData->isEnableAmazonPayCv2() ? 1 : 'false';
+            $html .= '<script> window.isEnableAmazonPayCv2 = ' . $isEnableAmazonPayCv2 . '</script>';
             if (!$this->isSet && $block->getLayout()->isBlock('require.js')) {
                 $transport->setHtml($html);
                 $this->isSet = true;

@@ -1,1 +1,1 @@
-mirasvit-module-fraud-check-1.1.4-b99209-53792-NTM3OTI=
+mirasvit-module-fraud-check-1.1.5-f6f2e2-53792-NTM3OTI=

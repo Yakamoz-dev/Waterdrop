@@ -30,4 +30,7 @@
     <event name="view_block_abstract_to_html_after">
         <observer name="add_route" instance="Mageplaza\Osc\Observer\Block"/>
     </event>
+    <event name="social_manager_get_login_redirect">
+        <observer name="prevent_social_login_redirect" instance="Mageplaza\Osc\Observer\SocialLogin"/>
+    </event>
 </config>

@@ -9,7 +9,7 @@
  *
  * @category  Mirasvit
  * @package   mirasvit/module-core
- * @version   1.2.124
+ * @version   1.2.125
  * @copyright Copyright (C) 2021 Mirasvit (https://mirasvit.com/)
  */
 
@@ -17,17 +17,15 @@
 
 namespace Mirasvit\Core\Service;
 
-use Zend\Serializer\Serializer as ZendSerializer;
-
 class SerializeService
 {
     /**
-     * @var ZendSerializer | \Magento\Framework\Serialize\Serializer\Serialize
+     * @var \Magento\Framework\Serialize\Serializer\Serialize
      */
     private static $serializer;
 
     /**
-     * @var ZendSerializer | \Magento\Framework\Serialize\Serializer\Json
+     * @var \Magento\Framework\Serialize\Serializer\Json
      */
     private static $jsoner;
 
@@ -36,8 +34,8 @@ class SerializeService
     public static function init()
     {
         if (self::isOldVersion()) {
-            self::$serializer = ZendSerializer::factory('PhpSerialize');
-            self::$jsoner     = ZendSerializer::factory('Json');
+            self::$serializer = \Zend\Serializer\Serializer::factory('PhpSerialize');
+            self::$jsoner     = \Zend\Serializer\Serializer::factory('Json');
         } else {
             /** @var \Magento\Framework\Serialize\Serializer\Serialize $serializer */
             self::$serializer = \Magento\Framework\App\ObjectManager::getInstance()->get(

@@ -212,6 +212,7 @@ class DefaultConfigProvider implements ConfigProviderInterface
             ]),
             'isDisplaySocialLogin'    => $this->isDisplaySocialLogin(),
             'isPopupSlideSocialLogin' => $this->isPopupSlideSocialLogin(),
+            'isPopupQuickLogin'       => $this->isPopupQuickLogin(),
             'isUsedMaterialDesign'    => $this->_oscHelper->isUsedMaterialDesign(),
             'isAmazonAccountLoggedIn' => false,
             'geoIpOptions'            => [
@@ -354,6 +355,14 @@ class DefaultConfigProvider implements ConfigProviderInterface
     private function isPopupSlideSocialLogin()
     {
         return $this->isDisplaySocialLogin() && $this->_oscHelper->getConfigValue('sociallogin/general/popup_login') === 'popup_slide';
+    }
+
+    /**
+     * @return bool
+     */
+    private function isPopupQuickLogin()
+    {
+        return $this->isDisplaySocialLogin() && $this->_oscHelper->getConfigValue('sociallogin/general/popup_login') === 'quick_login';
     }
 
     /**

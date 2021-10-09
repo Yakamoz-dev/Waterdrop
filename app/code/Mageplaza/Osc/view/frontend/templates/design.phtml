@@ -1033,6 +1033,23 @@ $placeOrder = '#' . trim($design['place_order_button'], '#');
     }
 
     <?php } ?>
+
+    /*===================================================================
+    |                         Show Footer Copyright                     |
+    ====================================================================*/
+    .onestepcheckout-index-index .page-footer {
+        display: block;
+    }
+    .onestepcheckout-index-index .page-footer .footer-container-wrapper {
+        display: none;
+    }
+    .onestepcheckout-index-index .page-footer .bottom-footer-wrapper {
+        background: #F4F4F4;
+        border: none;
+    }
+    .onestepcheckout-index-index .page-footer .bottom-footer-wrapper .copyright .f-left, .onestepcheckout-index-index .page-footer .bottom-footer-wrapper .copyright .footer-span a {
+        color: #999999 !important;
+    }
 </style>
 
 <?php if ($design['page_design'] == 'material') { ?>

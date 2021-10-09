@@ -33,7 +33,7 @@
                             <div class="attribute-label">
                                 <span><?= $block->escapeHtml($field->getFrontendLabel()) ?></span>
                                 <div class="attribute-required">
-                                    <input type="checkbox" title="<?= $block->escapeQuote(__('Is Required?')) ?>"
+                                    <input type="checkbox" title="<?= __('Is Required?') ?>"
                                         <?php if ($field->getIsRequired()) {
                                             echo ' checked';
                                         } ?>>
@@ -47,13 +47,13 @@
                 <ul class="sortable-list ui-sortable">
                     <?php foreach ($block->getSortedFields() as $field): ?>
                         <li class="sortable-item <?= $block->escapeQuote($field->getColStyle()) ?>"
-                            id="<?= $block->escapeQuote($field->getId()) ?>"
-                            data-code="<?= $block->escapeQuote($field->getAttributeCode()) ?>">
+                            id="<?= $field->getId() ?>"
+                            data-code="<?= $field->getAttributeCode() ?>">
                             <div class="attribute-label">
                                 <span><?= $block->escapeHtml($field->getFrontendLabel()) ?></span>
                                 <?php if ($field->getId()): ?>
                                     <div class="attribute-required">
-                                        <input type="checkbox" title="<?= $block->escapeQuote(__('Is Required?')) ?>"
+                                        <input type="checkbox" title="<?= __('Is Required?') ?>"
                                             <?php if ($field->getIsRequiredMp()) {
                                                 echo ' checked';
                                             } ?>>

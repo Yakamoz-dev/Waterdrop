@@ -95,9 +95,17 @@
     <type name="Magento\Checkout\Controller\Cart\Addgroup">
         <plugin name="mposc_redirect_to_one_step_checkout" type="Mageplaza\Osc\Model\Plugin\Checkout\Cart\Addgroup" />
     </type>
+    <type name="Magento\Customer\Model\AttributeMetadataDataProvider">
+        <plugin name="mposc_filter_customer_attribute" type="Mageplaza\Osc\Model\Plugin\CustomerAttributes\AttributeMetadataDataProviderPlugin" />
+    </type>
 
     <!-- Process OSC Custom Field on Magento EE 2.3.x -->
     <type name="Magento\CustomerCustomAttributes\Block\Checkout\LayoutProcessor">
         <plugin name="mposc_process_custom_field" type="Mageplaza\Osc\Model\Plugin\CustomerCustomAttributes\Checkout\LayoutProcessorPlugin" />
+    </type>
+
+    <!-- Prevent redirect while login by social login -->
+    <type name="Mageplaza\SocialLogin\Block\Popup\Social">
+        <plugin name="add_onestepcheckout_url" type="Mageplaza\Osc\Model\Plugin\SocialLogin\Social" />
     </type>
 </config>

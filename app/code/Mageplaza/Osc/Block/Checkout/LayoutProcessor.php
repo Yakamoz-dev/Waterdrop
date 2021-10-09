@@ -173,8 +173,46 @@ class LayoutProcessor implements LayoutProcessorInterface
         }
 
         $this->applyOAFieldPosition($jsLayout);
+        $this->isUseGiftMessage($jsLayout);
+        $this->disableOAComponent($jsLayout);
 
         return $jsLayout;
+    }
+
+    /**
+     * Disable Gift Message component
+     *
+     * @param $jsLayout
+     * @throws LocalizedException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function isUseGiftMessage(&$jsLayout)
+    {
+        $giftMessage = &$jsLayout['components']['checkout']['children']['sidebar']
+        ['children']['place-order-information-left']
+        ['children']['addition-information']
+        ['children']['gift-message'];
+
+        $quote = $this->checkoutSession->getQuote();
+
+        if ($quote->getId() && $quote->isVirtual()) {
+            $giftMessage['config']['componentDisabled'] = true;
+        }
+    }
+
+    /**
+     * @param $jsLayout
+     */
+    public function disableOAComponent(&$jsLayout)
+    {
+        if (!isset($jsLayout['components']['checkout']['children']['sidebar']['children']
+            ['place-order-information-left']['children']['addition-information']['children']
+            ['mpOrderAttributes']['children']))
+        {
+            $jsLayout['components']['checkout']['children']['sidebar']['children']
+            ['place-order-information-left']['children']['addition-information']['children']
+            ['mpOrderAttributes']['config']['componentDisabled'] = true;
+        }
     }
 
     /**

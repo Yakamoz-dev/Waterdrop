@@ -67,6 +67,11 @@ define([
                 return item.request_path;
             }
 
+            if (item.hasOwnProperty('extension_attributes') && item.extension_attributes) {
+                var mposc = JSON.parse(item.extension_attributes.mposc);
+                return mposc.product_url;
+            }
+
             if (quoteItem && quoteItem.hasOwnProperty('product') && quoteItem.product.request_path) {
                 return url.build(quoteItem.product.request_path);
             }
@@ -415,6 +420,13 @@ define([
             }
 
             return '';
+        },
+
+        getOptions: function (item) {
+            if (item.hasOwnProperty('options')) {
+                return JSON.parse(item.options);
+            }
+            return [];
         },
 
         /**

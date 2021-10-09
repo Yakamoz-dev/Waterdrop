@@ -73,4 +73,7 @@
     <type name="Magento\Sales\Api\OrderRepositoryInterface">
         <plugin name="mposc_add_order_comment_to_order_api" type="Mageplaza\Osc\Model\Plugin\Api\OrderComment"/>
     </type>
+    <type name="Magento\Quote\Model\Cart\Totals\ItemConverter">
+        <plugin name="mpsoc_add_configurable_options" type="Mageplaza\Osc\Model\Plugin\Cart\ItemConverterPlugin"/>
+    </type>
 </config>

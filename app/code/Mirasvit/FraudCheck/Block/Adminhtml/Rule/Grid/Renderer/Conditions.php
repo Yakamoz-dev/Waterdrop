@@ -9,7 +9,7 @@
  *
  * @category  Mirasvit
  * @package   mirasvit/module-fraud-check
- * @version   1.1.4
+ * @version   1.1.5
  * @copyright Copyright (C) 2021 Mirasvit (https://mirasvit.com/)
  */
 

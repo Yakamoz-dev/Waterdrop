@@ -28,6 +28,8 @@
             <module name="Magento_Customer"/>
             <module name="Magento_Sales"/>
             <module name="Magento_Catalog"/>
+            <module name="Mageplaza_SocialLogin"/>
+            <module name="Mageplaza_SocialLoginPro"/>
         </sequence>
     </module>
 </config>

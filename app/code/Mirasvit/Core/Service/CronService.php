@@ -9,7 +9,7 @@
  *
  * @category  Mirasvit
  * @package   mirasvit/module-core
- * @version   1.2.124
+ * @version   1.2.125
  * @copyright Copyright (C) 2021 Mirasvit (https://mirasvit.com/)
  */
 
@@ -196,7 +196,7 @@ class CronService implements CronServiceInterface
      */
     private function isScheduleInTimeFrame(Schedule $schedule)
     {
-        $jobTimestamp = strtotime($schedule->getExecutedAt()); //in store timezone
+        $jobTimestamp = strtotime($schedule->getExecutedAt() ? $schedule->getExecutedAt() : $schedule->getFinishedAt()); //in store timezone
         $timestamp    = strtotime($this->dateTime->gmtDate()); //in store timezone
 
         if (abs($timestamp - $jobTimestamp) > self::LIMIT_HOURS * 60 * 60) {

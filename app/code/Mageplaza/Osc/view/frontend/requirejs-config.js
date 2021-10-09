@@ -21,6 +21,9 @@
 var config = {};
 if (typeof window.oscRoute !== 'undefined' && window.location.href.indexOf(window.oscRoute) !== -1) {
     config = {
+        paths: {
+            socialPopupForm: 'Mageplaza_Osc/js/social-login-popup'
+        },
         map: {
             '*': {
                 'Magento_Checkout/js/model/shipping-rate-service': 'Mageplaza_Osc/js/model/shipping-rate-service',
@@ -65,6 +68,12 @@ if (typeof window.oscRoute !== 'undefined' && window.location.href.indexOf(windo
             }
         }
     };
+
+    if (window.isEnableAmazonPayCv2 === 1) {
+        config.config.mixins['Mageplaza_Osc/js/view/shipping-address/address-renderer/default'] = {
+            'Amazon_Pay/js/view/shipping-address/address-renderer/default': true
+        };
+    }
 
     if (window.location.href.indexOf('#') !== -1) {
         window.history.pushState("", document.title, window.location.pathname);

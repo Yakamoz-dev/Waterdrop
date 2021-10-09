@@ -61,7 +61,7 @@ class PaypalPrepareItems implements ObserverInterface
     {
         /** @var Cart $cart */
         $cart = $observer->getEvent()->getCart();
-        $giftWrap = $this->checkoutSession->getQuote()->getShippingAddress()->getOscGiftWrapAmount();
+        $giftWrap = $this->checkoutSession->getQuote()->getShippingAddress()->getBaseOscGiftWrapAmount();
         if ($giftWrap > 0.0001) {
             $cart->addCustomItem(__('Gift Wrap'), 1, $giftWrap);
         }

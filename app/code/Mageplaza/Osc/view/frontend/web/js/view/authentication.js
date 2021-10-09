@@ -65,7 +65,7 @@ define(
 
             /** Init popup login window */
             setModalElement: function (element) {
-                if (window.checkoutConfig.oscConfig.isPopupSlideSocialLogin) {
+                if (window.checkoutConfig.oscConfig.isPopupSlideSocialLogin || window.checkoutConfig.oscConfig.isPopupQuickLogin) {
                     return;
                 }
 

@@ -830,6 +830,14 @@ class Data extends AbstractData
     /**
      * @return bool
      */
+    public function isEnableAmazonPayCv2()
+    {
+        return $this->isModuleOutputEnabled('Amazon_Pay');
+    }
+
+    /**
+     * @return bool
+     */
     public function isEnableCustomerAttributes()
     {
         return $this->isModuleOutputEnabled('Mageplaza_CustomerAttributes');

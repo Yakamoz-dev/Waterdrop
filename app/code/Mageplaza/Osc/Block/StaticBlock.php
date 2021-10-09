@@ -73,7 +73,7 @@ class StaticBlock extends Template
 
         $result = [];
 
-        $config = $this->_oscHelper->isEnableStaticBlock() ? $this->_oscHelper->getStaticBlockList() : [];
+        $config = $this->_oscHelper->isEnabled() && $this->_oscHelper->isEnableStaticBlock() ? $this->_oscHelper->getStaticBlockList() : [];
         foreach ($config as $key => $row) {
             /** @var Block $block */
             $block = $layout->createBlock(Block::class)->setBlockId($row['block'])->toHtml();

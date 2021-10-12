@@ -54,7 +54,7 @@
     <div class="product-downloads s-wysiwyg">
         <?php foreach($downloads as $download) : ?>
             <a class="product-downloads-a" href="<?php echo $block->getDownloadUrl($download); ?>" target="_blank">
-                <img class="product-downloads-img" src="<?php echo $mediaUrl ?>manual.png" /><span>User Manual</span>
+                <img class="product-downloads-img" src="<?php echo $mediaUrl ?>manual.png" alt="User Manual" /><span>User Manual</span>
             </a>
         <?php break; ?>
         <?php endforeach; ?>

@@ -254,6 +254,9 @@
                         margin-bottom: 0;
                     }
                 }
+                .price-label {
+                    display: none;
+                }
             }
             .price-including-tax + .price-excluding-tax,
             .weee + .price-excluding-tax,
@@ -273,6 +276,9 @@
                 .price-wrapper .price {
                     .lib-css(font, @f_h2);
                     font-weight: @font-weight__light;
+                }
+                .price-label {
+                    display: inline-block;
                 }
             }
             .special-price {

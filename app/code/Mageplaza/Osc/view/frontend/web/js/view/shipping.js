@@ -117,7 +117,7 @@ define(
                         ? true
                         : this.currentMethod.carrier_code + "_" + this.currentMethod.method_code;
 
-                    if ($.type(newValue) === 'object' && isMethodChange !== newValue.carrier_code + "_" + newValue.method_code) {
+                    if ($.type(newValue) === 'object') {
                         setShippingInformationAction();
                     } else if (shippingRateService.isAddressChange) {
                         shippingRateService.isAddressChange = false;

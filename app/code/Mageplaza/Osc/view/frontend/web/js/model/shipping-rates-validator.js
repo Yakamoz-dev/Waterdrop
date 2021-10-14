@@ -1,6 +1,7 @@
 /**
  * Mageplaza
  *
+ *
  * NOTICE OF LICENSE
  *
  * This source file is subject to the Mageplaza.com license that is
@@ -11,6 +12,7 @@
  *
  * Do not edit or add to this file if you wish to upgrade this extension to newer
  * version in the future.
+ *
  *
  * @category    Mageplaza
  * @package     Mageplaza_Osc
@@ -54,7 +56,7 @@ define(
             postcodeElementName = 'postcode',
             observedElements = [],
             observableElements,
-            defaultRules = {'rate': {'postcode': {'required': true}, 'country_id': {'required': true}}},
+            defaultRules = {'rate': {'postcode': {'required': false}, 'country_id': {'required': true}, 'region_id': {'required': false}, 'region_id_input': {'required': false}}},
             addressFields = window.checkoutConfig.oscConfig.addressFields;
 
         return _.extend(Validator, {
@@ -65,7 +67,7 @@ define(
             getValidationRules: function () {
                 var rules = shippingRatesValidationRules.getRules();
 
-                return _.isEmpty(rules) ? defaultRules : rules;
+                return _.extend(rules, defaultRules);
             },
 
             oscValidateAddressData: function (field, address) {
@@ -126,6 +128,16 @@ define(
                 if ($.inArray(postcodeElementName, observableElements) === -1) {
                     // Add postcode field to observables if not exist for zip code validation support
                     observableElements.push(postcodeElementName);
+                }
+
+                if ($.inArray('region_id', observableElements) === -1) {
+                    // Add postcode field to observables if not exist for zip code validation support
+                    observableElements.push('region_id');
+                }
+
+                if ($.inArray('region_id_input', observableElements) === -1) {
+                    // Add postcode field to observables if not exist for zip code validation support
+                    observableElements.push('region_id_input');
                 }
 
                 $.each(addressFields, function (index, field) {

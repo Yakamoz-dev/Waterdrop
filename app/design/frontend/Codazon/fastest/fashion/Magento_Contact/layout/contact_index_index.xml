@@ -6,15 +6,16 @@
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <head>    	
-        <title>Contact Us</title>
+    <head>
+        <title>Contact Us - Whatever you need, we're here to help</title>
+        <meta name="description" content="We offer 30-day money back guarantee,a 1-year manufacturer warranty, and lifetime tech support for all our products! Register and enjoy the warranty service!"/>
     </head>
     <body>
 	  <referenceBlock name="page.main.title">
             <action method="setPageTitle">
                 <argument name="title" translate="true" xsi:type="string">Contact Us</argument>
             </action>
-        </referenceBlock>      
+        </referenceBlock>
         <referenceBlock name="content">
         	  <block class="Magento\Framework\View\Element\Template" name="contact.map" before="-" template="Magento_Contact::store_map.phtml">
             </block>
@@ -30,7 +31,7 @@
 					<block class="Magento\Framework\View\Element\Template" name="contact.map" before="-" template="Magento_Contact::store_map.phtml">
 					</block>
 				</container>
-				
+
 			</container>
         </referenceContainer>
     </body>

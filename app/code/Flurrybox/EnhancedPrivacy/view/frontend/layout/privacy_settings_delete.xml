@@ -24,7 +24,7 @@
     <body>
         <referenceContainer name="content">
             <block class="Flurrybox\EnhancedPrivacy\Block\Customer\Privacy\Delete" name="privacy_delete"
-                   cacheable="false"/>
+                   cacheable="true"/>
         </referenceContainer>
     </body>
 </page>

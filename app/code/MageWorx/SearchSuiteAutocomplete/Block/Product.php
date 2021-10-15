@@ -1,32 +1,12 @@
 <?php
-/**
- * Copyright © 2016 MageWorx. All rights reserved.
- * See LICENSE.txt for license details.
- */
 
 namespace MageWorx\SearchSuiteAutocomplete\Block;
-
-use \Magento\Catalog\Block\Product\Context as ProductContext;
 
 /**
  * Product class
  */
 class Product extends \Magento\Catalog\Block\Product\AbstractProduct
 {
-    /**
-     * Product constructor.
-     *
-     * @param ProductContext $context
-     * @param array $data
-     */
-    public function __construct(
-        ProductContext $context,
-        array $data = []
-    ) {
-
-        parent::__construct($context, $data);
-    }
-
     /**
      * Return HTML block with tier price
      *
@@ -48,7 +28,7 @@ class Product extends \Magento\Catalog\Block\Product\AbstractProduct
 
         /** @var \Magento\Framework\Pricing\Render $priceRender */
         $priceRender = $this->getPriceRender();
-        $price = '';
+        $price       = '';
 
         if ($priceRender) {
             $price = $priceRender->render(
@@ -57,6 +37,7 @@ class Product extends \Magento\Catalog\Block\Product\AbstractProduct
                 $arguments
             );
         }
+
         return $price;
     }
 

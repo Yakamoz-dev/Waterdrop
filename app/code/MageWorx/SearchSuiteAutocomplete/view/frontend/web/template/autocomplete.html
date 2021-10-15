@@ -1,10 +1,3 @@
-<!--
-/**
- * Copyright © 2016 MageWorx. All rights reserved.
- * See LICENSE.txt for license details.
- */
--->
-
 <div id="searchsuite-autocomplete" class="searchsuite-autocomplete" data-bind="visible: showPopup()">
 
     <div data-bind="visible: anyResultCount()">
@@ -49,7 +42,7 @@
                                 <input type="hidden" data-bind="attr: { name: paramNameUrlEncoded, value: urlEncoded}">
                                 <input name="form_key" type="hidden" data-bind="attr: { value: formKey}">
                                 <button type="submit" title="Add to Cart" class="action tocart primary">
-                                    <span> Add to Cart </span>
+                                    <span> <!-- ko i18n: 'Add to Cart'--><!-- /ko --> </span>
                                 </button>
                             </form>
                         </div>

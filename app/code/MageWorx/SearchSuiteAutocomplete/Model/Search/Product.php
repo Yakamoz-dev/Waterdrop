@@ -1,11 +1,8 @@
 <?php
-/**
- * Copyright © 2016 MageWorx. All rights reserved.
- * See LICENSE.txt for license details.
- */
 
 namespace MageWorx\SearchSuiteAutocomplete\Model\Search;
 
+use Magento\Store\Model\StoreManagerInterface;
 use \MageWorx\SearchSuiteAutocomplete\Helper\Data as HelperData;
 use \Magento\Search\Helper\Data as SearchHelper;
 use \Magento\Catalog\Model\Layer\Resolver as LayerResolver;
@@ -13,6 +10,7 @@ use \Magento\Framework\ObjectManagerInterface as ObjectManager;
 use \Magento\Search\Model\QueryFactory;
 use \MageWorx\SearchSuiteAutocomplete\Model\Source\AutocompleteFields;
 use \MageWorx\SearchSuiteAutocomplete\Model\Source\ProductFields;
+use \Magento\Review\Model\ResourceModel\Review\SummaryFactory;
 
 /**
  * Product model. Return product data used in search autocomplete
@@ -45,8 +43,20 @@ class Product implements \MageWorx\SearchSuiteAutocomplete\Model\SearchInterface
     private $queryFactory;
 
     /**
+     * @var SummaryFactory
+     */
+    private $sumResourceFactory;
+
+    /**
+     * @var StoreManagerInterface
+     */
+    protected $storeManager;
+
+    /**
      * Product constructor.
      *
+     * @param StoreManagerInterface $storeManager
+     * @param SummaryFactory $sumResourceFactory
      * @param HelperData $helperData
      * @param SearchHelper $searchHelper
      * @param LayerResolver $layerResolver
@@ -54,18 +64,21 @@ class Product implements \MageWorx\SearchSuiteAutocomplete\Model\SearchInterface
      * @param QueryFactory $queryFactory
      */
     public function __construct(
+        StoreManagerInterface $storeManager,
+        SummaryFactory $sumResourceFactory,
         HelperData $helperData,
         SearchHelper $searchHelper,
         LayerResolver $layerResolver,
         ObjectManager $objectManager,
         QueryFactory $queryFactory
     ) {
-    
-        $this->helperData = $helperData;
-        $this->searchHelper = $searchHelper;
-        $this->layerResolver = $layerResolver;
-        $this->objectManager = $objectManager;
-        $this->queryFactory = $queryFactory;
+        $this->storeManager       = $storeManager;
+        $this->sumResourceFactory = $sumResourceFactory;
+        $this->helperData         = $helperData;
+        $this->searchHelper       = $searchHelper;
+        $this->layerResolver      = $layerResolver;
+        $this->objectManager      = $objectManager;
+        $this->queryFactory       = $queryFactory;
     }
 
     /**
@@ -80,18 +93,27 @@ class Product implements \MageWorx\SearchSuiteAutocomplete\Model\SearchInterface
             return $responseData;
         }
 
-        $queryText = $this->queryFactory->get()->getQueryText();
-        $productResultFields = $this->helperData->getProductResultFieldsAsArray();
+        $query                 = $this->queryFactory->get();
+        $queryText             = $query->getQueryText();
+        $productResultFields   = $this->helperData->getProductResultFieldsAsArray();
         $productResultFields[] = ProductFields::URL;
 
         $productCollection = $this->getProductCollection($queryText);
 
         foreach ($productCollection as $product) {
-            $responseData['data'][] = array_intersect_key($this->getProductData($product), array_flip($productResultFields));
+            $responseData['data'][] = array_intersect_key(
+                $this->getProductData($product),
+                array_flip($productResultFields)
+            );
         }
 
         $responseData['size'] = $productCollection->getSize();
-        $responseData['url'] = ($productCollection->getSize() > 0) ? $this->searchHelper->getResultUrl($queryText) : '';
+        $responseData['url']  = ($productCollection->getSize() > 0) ? $this->searchHelper->getResultUrl(
+            $queryText
+        ) : '';
+
+        $query->saveNumResults($responseData['size']);
+        $query->saveIncrementalPopularity();
 
         return $responseData;
     }
@@ -99,7 +121,7 @@ class Product implements \MageWorx\SearchSuiteAutocomplete\Model\SearchInterface
     /**
      * Retrive product collection by query text
      *
-     * @param  string $queryText
+     * @param string $queryText
      * @return mixed
      */
     protected function getProductCollection($queryText)
@@ -109,27 +131,34 @@ class Product implements \MageWorx\SearchSuiteAutocomplete\Model\SearchInterface
         $this->layerResolver->create(LayerResolver::CATALOG_LAYER_SEARCH);
 
         $productCollection = $this->layerResolver->get()
-            ->getProductCollection()
-            ->addAttributeToSelect([ProductFields::DESCRIPTION, ProductFields::SHORT_DESCRIPTION])
-            ->addSearchFilter($queryText);
-        
-        /* custom */
-        $request =  $this->objectManager->get('\Magento\Framework\App\Request\Http');
-        if ($catId = $request->getParam('cat')) {
-            //$category = $this->objectManager->create('Magento\Catalog\Model\Category')->load($catId);
-            $category = $this->objectManager->create('Magento\Catalog\Model\ResourceModel\Category\Collection')
-                ->addFieldToFilter('entity_id', $catId)
-                ->addAttributeToSelect(['is_anchor'])
-                ->getFirstItem();
-            if ($category) {
-                $productCollection->addCategoryFilter($category);
-            }
-        }
-        /* custom */
+                                                 ->getProductCollection()
+                                                 ->addAttributeToSelect(
+                                                     [ProductFields::DESCRIPTION, ProductFields::SHORT_DESCRIPTION]
+                                                 )
+                                                 ->setPageSize($productResultNumber)
+                                                 ->addAttributeToSort('relevance')
+                                                 ->setOrder('relevance')
+                                                 ->addSearchFilter($queryText);
+        /** @var \Magento\Review\Model\ResourceModel\Review\Summary $sumResource */
+        $sumResource = $this->sumResourceFactory->create();
 
-        $productCollection->getSelect()->limit($productResultNumber);
+        $sumResource->appendSummaryFieldsToCollection(
+            $productCollection,
+            $this->getStoreId(),
+            \Magento\Review\Model\Review::ENTITY_PRODUCT_CODE
+        );
+
 
         return $productCollection;
+    }
+
+    /**
+     * @return int
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function getStoreId()
+    {
+        return $this->storeManager->getStore()->getId();
     }
 
     /**
@@ -140,21 +169,26 @@ class Product implements \MageWorx\SearchSuiteAutocomplete\Model\SearchInterface
      */
     protected function getProductData($product)
     {
-        /** @var \MageWorx\SearchSuiteAutocomplete\Block\Autocomplete\Product $product */
-        $product = $this->objectManager->create('MageWorx\SearchSuiteAutocomplete\Block\Autocomplete\ProductAgregator')
-            ->setProduct($product);
+        /** @var \MageWorx\SearchSuiteAutocomplete\Block\Autocomplete\ProductAgregator $productAgregator */
+        $productAgregator = $this->objectManager->create(
+            'MageWorx\SearchSuiteAutocomplete\Block\Autocomplete\ProductAgregator'
+        )
+                                                ->setProduct($product);
 
         $data = [
-            ProductFields::NAME => $product->getName(),
-            ProductFields::SKU => $product->getSku(),
-            ProductFields::IMAGE => $product->getSmallImage(),
-            ProductFields::REVIEWS_RATING => $product->getReviewsRating(),
-            ProductFields::SHORT_DESCRIPTION => $product->getShortDescription(),
-            ProductFields::DESCRIPTION => $product->getDescription(),
-            ProductFields::PRICE => $product->getPrice(),
-            ProductFields::ADD_TO_CART => $product->getAddToCartData(),
-            ProductFields::URL => $product->getUrl()
+            ProductFields::NAME              => $productAgregator->getName(),
+            ProductFields::SKU               => $productAgregator->getSku(),
+            ProductFields::IMAGE             => $productAgregator->getSmallImage(),
+            ProductFields::REVIEWS_RATING    => $productAgregator->getReviewsRating(),
+            ProductFields::SHORT_DESCRIPTION => $productAgregator->getShortDescription(),
+            ProductFields::DESCRIPTION       => $productAgregator->getDescription(),
+            ProductFields::PRICE             => $productAgregator->getPrice(),
+            ProductFields::URL               => $productAgregator->getUrl()
         ];
+
+        if ($product->getData('is_salable')) {
+            $data[ProductFields::ADD_TO_CART] = $productAgregator->getAddToCartData();
+        }
 
         return $data;
     }

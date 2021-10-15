@@ -39,8 +39,7 @@ class Suggested implements \MageWorx\SearchSuiteAutocomplete\Model\SearchInterfa
         SearchHelper $searchHelper,
         AutocompleteInterface $autocomplete
     ) {
-    
-        $this->helperData = $helperData;
+        $this->helperData   = $helperData;
         $this->searchHelper = $searchHelper;
         $this->autocomplete = $autocomplete;
     }
@@ -62,8 +61,8 @@ class Suggested implements \MageWorx\SearchSuiteAutocomplete\Model\SearchInterfa
         $autocompleteData = $this->autocomplete->getItems();
         $autocompleteData = array_slice($autocompleteData, 0, $suggestResultNumber);
         foreach ($autocompleteData as $item) {
-            $item = $item->toArray();
-            $item['url'] = $this->searchHelper->getResultUrl($item['title']);
+            $item                   = $item->toArray();
+            $item['url']            = $this->searchHelper->getResultUrl($item['title']);
             $responseData['data'][] = $item;
         }
 

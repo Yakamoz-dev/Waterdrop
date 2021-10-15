@@ -24,7 +24,7 @@
     <body>
         <referenceContainer name="content">
             <block class="Flurrybox\EnhancedPrivacy\Block\Customer\Privacy\Settings" name="privacy_settings"
-                   cacheable="false"/>
+                   cacheable="true"/>
         </referenceContainer>
     </body>
 </page>

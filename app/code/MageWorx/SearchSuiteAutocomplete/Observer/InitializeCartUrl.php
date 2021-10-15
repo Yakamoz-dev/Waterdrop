@@ -1,8 +1,4 @@
 <?php
-/**
- * Copyright © 2016 MageWorx. All rights reserved.
- * See LICENSE.txt for license details.
- */
 
 namespace MageWorx\SearchSuiteAutocomplete\Observer;
 
@@ -26,7 +22,6 @@ class InitializeCartUrl implements ObserverInterface
     public function __construct(
         \Magento\Framework\UrlInterface $url
     ) {
-    
         $this->url = $url;
     }
 
@@ -39,8 +34,7 @@ class InitializeCartUrl implements ObserverInterface
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-
-        $request = $observer->getEvent()->getRequest();
+        $request                   = $observer->getEvent()->getRequest();
         $isSearchSuiteAutocomplete = $request->getParam('mageworx_searchsuiteautocomplete', false);
 
         if ($isSearchSuiteAutocomplete) {

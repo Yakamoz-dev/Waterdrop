@@ -5,7 +5,7 @@
  */
 
 
-return [
+$config = [
     'router' => [
         'routes' => [
             'literal' => [
@@ -63,6 +63,50 @@ return [
                     ],
                 ],
             ],
+            'landing' => [
+                'type'    => 'Segment',
+                'options' => [
+                    'route'    => '[/landing[/:action]]',
+                    'defaults' => [
+                        '__NAMESPACE__' => 'Codazon\Setup\Controller',
+                        'controller'    => 'Landing',
+                        'action'        => 'index',
+                    ],
+                    'constraints' => [
+                        'controller' => 'Landing',
+                        'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ],
+                ],
+            ],
         ],
     ],
 ];
+
+$file = dirname(dirname(__DIR__))."/composer.lock";
+$json = file_get_contents($file);
+$data = json_decode($json, true);
+$version = '';
+foreach($data['packages'] as $item){
+    if($item['name'] == 'magento/magento2-base'){
+        $version = $item['version'];break;
+    }
+}
+$vs = explode('.',$version);
+if($vs[1] >= 4){
+    $config['router']['routes']['navigation'] = [
+        'type'    => 'Segment',
+        'options' => [
+            'route'    => '[/navigation[/:action]]',
+            'defaults' => [
+                '__NAMESPACE__' => 'Codazon\Setup\Controller',
+                'controller'    => 'Navigation24',
+                'action'        => 'index',
+            ],
+            'constraints' => [
+                'controller' => 'Navigation24',
+                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+            ],
+        ],
+    ];
+}
+return $config;

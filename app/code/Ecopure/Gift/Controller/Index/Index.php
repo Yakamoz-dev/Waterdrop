@@ -14,7 +14,8 @@ class Index extends \Magento\Framework\App\Action\Action
         $resultPage = $this->_resultPageFactory->create();
 
         // Add page title
-        $resultPage->getConfig()->getTitle()->set(__('Warranty'));
+        $resultPage->getConfig()->getTitle()->set(__('Warranty - Protect your every order'));
+        $resultPage->getConfig()->setDescription(__('We offer 30-day money back guarantee,a 1-year manufacturer warranty, and lifetime tech support for all our products! Register and enjoy the warranty service!'));
 
         // Add breadcrumb
         /** @var \Magento\Theme\Block\Html\Breadcrumbs */

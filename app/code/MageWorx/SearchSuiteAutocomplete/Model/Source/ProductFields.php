@@ -1,8 +1,4 @@
 <?php
-/**
- * Copyright © 2016 MageWorx. All rights reserved.
- * See LICENSE.txt for license details.
- */
 
 namespace MageWorx\SearchSuiteAutocomplete\Model\Source;
 
@@ -42,7 +38,7 @@ class ProductFields
             ['value' => self::PRICE, 'label' => __('Price')],
             ['value' => self::ADD_TO_CART, 'label' => __('Add to Cart Button')],
         ];
-   
+
         return $this->options;
     }
 }

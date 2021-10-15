@@ -1,17 +1,17 @@
 <?php
-/**
- * Copyright © 2016 MageWorx. All rights reserved.
- * See LICENSE.txt for license details.
- */
 
 namespace MageWorx\SearchSuiteAutocomplete\Block\Autocomplete;
 
 use \MageWorx\SearchSuiteAutocomplete\Block\Product as ProductBlock;
-use \Magento\Catalog\Helper\Product as CatalogProductHelper;
+use \Magento\Catalog\Helper\Output as CatalogHelperOutput;
 use \Magento\Catalog\Block\Product\ReviewRendererInterface;
 use \Magento\Framework\Stdlib\StringUtils;
 use \Magento\Framework\Url\Helper\Data as UrlHelper;
 use \Magento\Framework\Data\Form\FormKey;
+use \Magento\Framework\View\Asset\Repository;
+use \Magento\Framework\Escaper;
+use Magento\Catalog\Helper\ImageFactory;
+
 
 /**
  * ProductAgregator class for autocomplete data
@@ -34,31 +34,57 @@ class ProductAgregator extends \Magento\Framework\DataObject
      * @var \Magento\Framework\Data\Form\FormKey
      */
     protected $formKey;
-    
+
     /**
-     * Product constructor.
+     * @var \Magento\Framework\View\Asset\Repository
+     */
+    protected $assetRepo;
+
+    /**
+     * @var CatalogHelperOutput
+     */
+    protected $catalogHelperOutput;
+
+    /**
+     * @var \Magento\Framework\Escaper
+     */
+    protected $escaper;
+
+    /**
+     * @var ImageFactory
+     */
+    private $imageFactory;
+
+    /**
+     * ProductAgregator constructor.
      *
-     * @param CatalogProductHelper $catalogHelperProduct
+     * @param ImageFactory $imageFactory
+     * @param ProductBlock $productBlock
      * @param StringUtils $string
      * @param UrlHelper $urlHelper
+     * @param Repository $assetRepo
+     * @param CatalogHelperOutput $catalogHelperOutput
      * @param FormKey $formKey
-     * @param ProductContext $context
-     * @param array $data
+     * @param Escaper $escaper
      */
     public function __construct(
+        ImageFactory $imageFactory,
         ProductBlock $productBlock,
-        CatalogProductHelper $catalogHelperProduct,
         StringUtils $string,
         UrlHelper $urlHelper,
+        Repository $assetRepo,
+        CatalogHelperOutput $catalogHelperOutput,
         FormKey $formKey,
-        \Magento\Catalog\Helper\Image $productImageHelper
+        Escaper $escaper
     ) {
-        $this->productBlock = $productBlock;
-        $this->catalogHelperProduct = $catalogHelperProduct;
-        $this->string = $string;
-        $this->urlHelper = $urlHelper;
-        $this->formKey = $formKey;
-        $this->productImageHelper = $productImageHelper;
+        $this->imageFactory        = $imageFactory;
+        $this->productBlock        = $productBlock;
+        $this->string              = $string;
+        $this->urlHelper           = $urlHelper;
+        $this->assetRepo           = $assetRepo;
+        $this->catalogHelperOutput = $catalogHelperOutput;
+        $this->formKey             = $formKey;
+        $this->escaper             = $escaper;
     }
 
     /**
@@ -68,7 +94,7 @@ class ProductAgregator extends \Magento\Framework\DataObject
      */
     public function getName()
     {
-        return html_entity_decode($this->getProduct()->getName());
+        return strip_tags(html_entity_decode($this->getProduct()->getName()));
     }
 
     /**
@@ -88,8 +114,11 @@ class ProductAgregator extends \Magento\Framework\DataObject
      */
     public function getSmallImage()
     {
-        return $this->productImageHelper->init($this->getProduct(),'category_page_grid')->resize(65,65)->getUrl();
-        //return $this->catalogHelperProduct->getSmallImageUrl($this->getProduct());
+        $product   = $this->getProduct();
+
+        $image = $this->imageFactory->create()->init($product, 'product_small_image');
+
+        return $image->getUrl();
     }
 
     /**
@@ -113,7 +142,7 @@ class ProductAgregator extends \Magento\Framework\DataObject
      */
     public function getShortDescription()
     {
-        $shortDescription = $this->getProduct()->getShortDescription();
+        $shortDescription = html_entity_decode($this->getProduct()->getShortDescription());
 
         return $this->cropDescription($shortDescription);
     }
@@ -125,7 +154,7 @@ class ProductAgregator extends \Magento\Framework\DataObject
      */
     public function getDescription()
     {
-        $description = $this->getProduct()->getDescription();
+        $description = html_entity_decode($this->getProduct()->getDescription());
 
         return $this->cropDescription($description);
     }
@@ -133,19 +162,15 @@ class ProductAgregator extends \Magento\Framework\DataObject
     /**
      * Crop description to 50 symbols
      *
-     * @param string|html $data
+     * @param string $html
      * @return string
      */
-    protected function cropDescription($data)
+    protected function cropDescription($html)
     {
-        if (!$data) {
-            return '';
-        }
+        $string = strip_tags($html);
+        $string = (strlen($string) > 50) ? $this->string->substr($string, 0, 50) . '...' : $string;
 
-        $data = strip_tags($data);
-        $data = (strlen($data) > 50) ? $this->string->substr($data, 0, 50) . '...' : $data;
-
-        return $data;
+        return $string;
     }
 
     /**
@@ -155,7 +180,10 @@ class ProductAgregator extends \Magento\Framework\DataObject
      */
     public function getPrice()
     {
-        return $this->productBlock->getProductPrice($this->getProduct(), \Magento\Catalog\Pricing\Price\FinalPrice::PRICE_CODE);
+        return $this->productBlock->getProductPrice(
+            $this->getProduct(),
+            \Magento\Catalog\Pricing\Price\FinalPrice::PRICE_CODE
+        );
     }
 
     /**
@@ -177,18 +205,21 @@ class ProductAgregator extends \Magento\Framework\DataObject
      */
     public function getAddToCartData()
     {
-        $formUrl = $this->productBlock->getAddToCartUrl($this->getProduct(), ['mageworx_searchsuiteautocomplete' => true]);
-        $productId = $this->getProduct()->getEntityId();
+        $formUrl             = $this->productBlock->getAddToCartUrl(
+            $this->getProduct(),
+            ['mageworx_searchsuiteautocomplete' => true]
+        );
+        $productId           = $this->getProduct()->getEntityId();
         $paramNameUrlEncoded = \Magento\Framework\App\ActionInterface::PARAM_NAME_URL_ENCODED;
-        $urlEncoded = $this->urlHelper->getEncodedUrl($formUrl);
-        $formKey = $this->formKey->getFormKey();
+        $urlEncoded          = $this->urlHelper->getEncodedUrl($formUrl);
+        $formKey             = $this->formKey->getFormKey();
 
         $addToCartData = [
-            'formUrl' => $formUrl,
-            'productId' => $productId,
+            'formUrl'             => $formUrl,
+            'productId'           => $productId,
             'paramNameUrlEncoded' => $paramNameUrlEncoded,
-            'urlEncoded' => $urlEncoded,
-            'formKey' => $formKey
+            'urlEncoded'          => $urlEncoded,
+            'formKey'             => $formKey
         ];
 
         return $addToCartData;

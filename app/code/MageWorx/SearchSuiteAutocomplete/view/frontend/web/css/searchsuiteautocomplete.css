@@ -1,8 +1,3 @@
-/**
- * Copyright © 2016 MageWorx. All rights reserved.
- * See LICENSE.txt for license details.
- */
-
 form.minisearch.loading .control input[type="text"] {
     box-shadow: none;
     -webkit-animation-name: search-loading; /* Chrome, Safari, Opera */

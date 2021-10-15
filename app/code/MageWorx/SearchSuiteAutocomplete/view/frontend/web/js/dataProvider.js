@@ -1,8 +1,3 @@
-/**
- * Copyright © 2016 MageWorx. All rights reserved.
- * See LICENSE.txt for license details.
- */
-
 define([
     'jquery',
     'uiComponent',
@@ -33,10 +28,6 @@ define([
         defaults: {
             localStorage: $.initNamespaceStorage('searchsuiteautocomplete').localStorage,
             searchText: ''
-        },
-
-        initialize: function () {
-            this._super();
         },
 
         load: function () {
@@ -123,7 +114,8 @@ define([
 
             if (!_.isUndefined(productsData.data)) {
                 products = $.map(productsData.data, function (product) {
-                    return new $.Product(product) });
+                    return new $.Product(product)
+                });
             }
 
             registry.get('searchsuiteautocomplete_form', function (autocomplete) {
@@ -135,13 +127,15 @@ define([
 
         loadFromLocalSorage: function (queryText) {
             if (!this.localStorage) {
-                return; }
+                return;
+            }
 
             var hash = this._hash(queryText);
             var data = this.localStorage.get(hash);
 
             if (!data) {
-                return false; }
+                return false;
+            }
 
             this.parseData(data);
 
@@ -150,7 +144,8 @@ define([
 
         saveToLocalSorage: function (data, queryText) {
             if (!this.localStorage) {
-                return; }
+                return;
+            }
 
             var hash = this._hash(queryText);
 

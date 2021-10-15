@@ -1,13 +1,9 @@
 <?php
-/**
- * Copyright © 2016 MageWorx. All rights reserved.
- * See LICENSE.txt for license details.
- */
 
 namespace MageWorx\SearchSuiteAutocomplete\Block;
 
 /**
- * Autocomplete class used to paste config data
+ * Autocomplete class used for transport config data
  */
 class Autocomplete extends \Magento\Framework\View\Element\Template
 {
@@ -28,13 +24,13 @@ class Autocomplete extends \Magento\Framework\View\Element\Template
         \Magento\Framework\View\Element\Template\Context $context,
         array $data = []
     ) {
-    
+
         $this->helperData = $helperData;
         parent::__construct($context, $data);
     }
 
     /**
-     * Retrieve search delay in miliseconds (500 by default)
+     * Retrieve search delay in milliseconds (500 by default)
      *
      * @return int
      */

@@ -1,9 +1,4 @@
-<?php
-/**
- * Copyright © 2016 MageWorx. All rights reserved.
- * See LICENSE.txt for license details.
- */
-?>
+<?php /**@var MageWorx\SearchSuiteAutocomplete\Block\Autocomplete $block  */?>
 
 <div data-bind="scope: 'searchsuiteautocomplete_form'">
     <!-- ko template: getTemplate() --><!-- /ko -->
@@ -23,13 +18,13 @@
                         "searchFormSelector": "#search_mini_form",
                         "searchButtonSelector": "button.search",
                         "inputSelector": "#search, #mobile_search, .minisearch input[type=\"text\"]",
-                        "searchDelay": "<?php echo $block->getSearchDelay() ?>"
+                        "searchDelay": "<?php echo $block->escapeHtml($block->getSearchDelay()) ?>"
                     }
                 },
                 "searchsuiteautocompleteDataProvider": {
                     "component": "MageWorx_SearchSuiteAutocomplete/js/dataProvider",
                     "config": {
-                        "url": "<?php echo $block->getSearchUrl() ?>"
+                        "url": "<?php echo $block->escapeUrl($block->getSearchUrl()) ?>"
                     }
                 }
             }

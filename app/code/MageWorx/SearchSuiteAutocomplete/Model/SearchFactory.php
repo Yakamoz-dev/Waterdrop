@@ -1,8 +1,5 @@
 <?php
-/**
- * Copyright © 2016 MageWorx. All rights reserved.
- * See LICENSE.txt for license details.
- */
+
 
 namespace MageWorx\SearchSuiteAutocomplete\Model;
 
@@ -34,7 +31,7 @@ class SearchFactory
         array $map = []
     ) {
         $this->objectManager = $objectManager;
-        $this->map = $map;
+        $this->map           = $map;
     }
 
     /**
@@ -49,14 +46,20 @@ class SearchFactory
         if (isset($this->map[$param])) {
             $instance = $this->objectManager->create($this->map[$param], $arguments);
         } else {
-            $instance = $this->objectManager->create('\MageWorx\SearchSuiteAutocomplete\Model\Search\Suggested', $arguments);
+            $instance = $this->objectManager->create(
+                '\MageWorx\SearchSuiteAutocomplete\Model\Search\Suggested',
+                $arguments
+            );
         }
 
         if (!$instance instanceof \MageWorx\SearchSuiteAutocomplete\Model\SearchInterface) {
             throw new \UnexpectedValueException(
-                'Class ' . get_class($instance) . ' should be an instance of \MageWorx\SearchSuiteAutocomplete\Model\SearchInterface'
+                'Class ' . get_class(
+                    $instance
+                ) . ' should be an instance of \MageWorx\SearchSuiteAutocomplete\Model\SearchInterface'
             );
         }
+
         return $instance;
     }
 }

@@ -11,6 +11,26 @@
 @filter-quantity: @main_note_text;
 & when (@media-common = true) {
     .filter {
+        .select_filter {
+            &:before {
+                display: inline-block;
+                font-family: icomoon;
+                line-height: 1;
+                content: '\e926';
+                font-size: 16px;
+                color: #155DA4;
+            }
+        }
+        .no_select_filter {
+            &:before {
+                display: inline-block;
+                font-family: icomoon;
+                line-height: 1;
+                content: '\e925';
+                font-size: 16px;
+                color: #E1E1E1;
+            }
+        }
         &.block {
             margin-bottom: 0;
         }
@@ -52,7 +72,7 @@
             font-weight: normal;
             font-family: 'roboto-medium';
             line-height: 1em;
-            padding: @indent__s @indent__s @indent__base;
+            padding: 24px 0 0;
 			display:none;
         }
         &-subtitle {
@@ -61,7 +81,7 @@
         &-current {
             margin: 0;
             .items {
-                padding: @indent__xs @indent__s;
+                padding: 0;
             }
             .item {
                 padding-left: 17px;
@@ -71,7 +91,7 @@
             .filter &-subtitle {
                 border: none;
                 display: block;
-                padding-bottom: @indent__s;
+                padding-bottom: 4px;
             }
             .action.remove {
                 &:extend(.abs-remove-button-for-blocks all);
@@ -91,7 +111,7 @@
             }
         }
         &-value {
-            .lib-css(color, @filter-quantity);
+            color: #666666;
         }
 		&-options{
 			display: none;
@@ -105,8 +125,8 @@
 			margin: 0;
             &-item,
 			dt{
-                border-bottom: @border-width__base dashed @main_border;
-                padding-bottom: @indent__s + 5px;
+                border-bottom: 1px solid #E1E1E1;
+                padding-bottom: 12px;
 				&:last-child{
 					border-bottom:0;
 				}
@@ -117,7 +137,7 @@
                 //font-weight: @font-weight__semibold;
                 margin: 0;
                 overflow: hidden;
-                padding: 15px 40px 0 0;
+                padding: 24px 40px 0 0;
                 position: relative;
                 text-transform: none;
                 word-break: break-all;
@@ -129,6 +149,9 @@
                 @_icon-font-position: after,
                 @_icon-font-display: block
                 );
+                font-size: 14px;
+                font-family: roboto-medium;
+                margin-bottom: 4px;
 
                 &:after {
                     position: absolute;
@@ -157,19 +180,11 @@
             &-content,
 			dd {
                 margin: 0;
-                padding: @indent__s 0;
+                padding: 0;
 				ol, ul{ padding-left:0; margin-bottom:0}
                 .item {
                     margin: @indent__s 0;
                     line-height: 1.5em;
-					&:before{
-						.abs-iconfont('\f105', 14px);
-					}
-					.rtl-layout &{
-						&:before{
-						content:'\f104';
-						}
-					}
                 }
                 a {
                     .lib-css(color, @filter-link);
@@ -218,8 +233,9 @@
                     &:extend(.abs-visually-hidden all);
                 }
 				.price-slider-container{
+                    padding: 12px 0;
 					.price-slider{
-						margin-bottom: 10px;
+						margin-bottom: 15px;
 						margin-right: 7px;
 						margin-left: 7px;
 					}
@@ -436,11 +452,15 @@
         }
         &-content {
             .item {
-                margin: @indent__s 0;
+                margin: 12px 0;
             }
         }
         &-actions {
-            margin-bottom: @indent__l;
+            margin-top: 4px;
+            padding: 0;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #E1E1E1;
+            margin-bottom: 0;
         }
         &.active &-options,
         &-options {
@@ -543,8 +563,11 @@
 					 .lib-css(font, @f_note);
 					 cursor: pointer;
 					 &:before{
-						.abs-iconfont('\f0b0', 14px);
-						margin-right:10px;
+                         display: inline-block;
+                         font-family: 'icomoon';
+                         content: '\e910';
+                         font-size: 14px;
+                         margin-right: 4px;
 					 }
 					 &:hover{
 						.abs-cssall(@btn_default_text, @btn_default_border, @btn_default_background);
@@ -717,8 +740,11 @@
 				text-transform:none;
 				font:@f_note !important;
 				&:before{
-				.abs-iconfont('\f0b0', 14px);
-				margin-right:10px;
+                    display: inline-block;
+                    font-family: 'icomoon';
+                    content: '\e910';
+                    font-size: 14px;
+                    margin-right: 4px;
 				}
 				&:hover{
 					border:@_btnline solid @btn_default_border !important;

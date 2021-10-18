@@ -18,7 +18,7 @@ $ampHelper = $this->helper(\Codazon\GoogleAmpManager\Helper\Data::class);
         <form class="cdz-amp-form cdz-subscribe-form" action-xhr="<?= $ampHelper->filterUrl($block->escapeUrl($block->getUrl('amp/amphandle_newsletter_subscriber/new'))) ?>" method="post" id="cdz-subscribe-form" on="submit-success: AMP.setState({page_message: event.response.message, page_message_type: event.response.message_type}), cdz-page-message-popup.show, cdz-subscribe-form.clear">
             <div class="field newsletter">
                 <div class="control">
-                    <input name="email" type="email" id="cdz-subscribe-email" placeholder="<?= $block->escapeHtmlAttr(__('Enter your email address')) ?>" class="input-large" required />
+                    <input name="email" type="email" id="cdz-subscribe-email" placeholder="<?= $block->escapeHtmlAttr(__('Enter email address')) ?>" class="input-large" required />
                 </div>
             </div>
             <div class="actions">

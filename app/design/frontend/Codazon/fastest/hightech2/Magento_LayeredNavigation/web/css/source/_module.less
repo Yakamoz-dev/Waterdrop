@@ -11,6 +11,26 @@
 @filter-quantity: @main_note_text;
 & when (@media-common = true) {
     .filter {
+        .select_filter {
+            &:before {
+                display: inline-block;
+                font-family: icomoon;
+                line-height: 1;
+                content: '\e926';
+                font-size: 16px;
+                color: #155DA4;
+            }
+        }
+        .no_select_filter {
+            &:before {
+                display: inline-block;
+                font-family: icomoon;
+                line-height: 1;
+                content: '\e925';
+                font-size: 16px;
+                color: #E1E1E1;
+            }
+        }
         &.block {
             margin-bottom: 0;
         }
@@ -129,6 +149,8 @@
                 @_icon-font-position: after,
                 @_icon-font-display: block
                 );
+                font-size: 14px;
+                font-family: roboto-medium;
 
                 &:after {
                     position: absolute;
@@ -162,14 +184,6 @@
                 .item {
                     margin: @indent__s 0;
                     line-height: 1.5em;
-					&:before{
-						.abs-iconfont('\f105', 14px);
-					}
-					.rtl-layout &{
-						&:before{
-						content:'\f104';
-						}
-					}
                 }
                 a {
                     .lib-css(color, @filter-link);
@@ -537,8 +551,11 @@
 					 .lib-css(font, @f_note);
 					 cursor: pointer;
 					 &:before{
-						.abs-iconfont('\f0b0', 14px);
-						margin-right:10px;
+                         display: inline-block;
+                         font-family: 'icomoon';
+                         content: '\e910';
+                         font-size: 14px;
+                         margin-right: 4px;
 					 }
 					 &:hover{
 						.abs-cssall(@btn_default_text, @btn_default_border, @btn_default_background);
@@ -719,8 +736,11 @@
 				font:@f_note !important;
                 font-size: 14px !important;
 				&:before{
-				.abs-iconfont('\f0b0', 14px);
-				margin-right:10px;
+                    display: inline-block;
+                    font-family: 'icomoon';
+                    content: '\e910';
+                    font-size: 14px;
+                    margin-right: 4px;
 				}
 				//&:hover{
 				//	border:@_btnline solid @btn_default_border !important;

@@ -1771,7 +1771,27 @@ strong#block-related-heading:before {
     top: 1px;
     font-family: 'icomoon';
     content: "\e932";
-    padding-right: 13px;
+    padding-right: 5px;
+    color: #155DA4;
+}
+.wrapper-breadcrums .breadcrumbs .items li {
+    display: none;
+}
+.wrapper-breadcrums .breadcrumbs .items li:nth-last-child(2) {
+    display: block;
+}
+.wrapper-breadcrums .breadcrumbs .items{
+    padding: 13px 0 0;
+}
+.wrapper-breadcrums .breadcrumbs .item:not(:last-child):after{
+    display: none;
+}
+.wrapper-breadcrums .breadcrumbs .item:not(:last-child):before{
+    position: relative;
+    top: 1px;
+    font-family: 'icomoon';
+    content: "\e932";
+    padding-right: 5px;
     color: #155DA4;
 }
 .product-main-content {

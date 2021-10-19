@@ -1,0 +1,17 @@
+<?php if($block->getProduct()->getCouponInfo()): ?>
+    <style>
+        .coupon-info {
+            color: #EC1D1D;
+            font-size: 14px;
+            line-height: 16px;
+            padding-top: 4px;
+        }
+        @media screen and (max-width: 767px) {
+            .coupon-info {
+                font-size: 16px;
+                line-height: 19px;
+            }
+        }
+    </style>
+    <div class="coupon-info"><?php echo $block->getProduct()->getCouponInfo(); ?></div>
+<?php endif; ?>

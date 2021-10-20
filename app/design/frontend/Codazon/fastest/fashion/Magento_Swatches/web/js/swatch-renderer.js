@@ -442,7 +442,7 @@ define([
                     label +=
                         '<span id="' + controlLabelId + '" class="' + classes.attributeLabelClass + '">' +
                         $('<i></i>').text(item.label).html() +
-                        '</span>' +
+                        ':</span>' +
                         '<span class="' + classes.attributeSelectedOptionLabelClass + '"></span>';
                 }
 

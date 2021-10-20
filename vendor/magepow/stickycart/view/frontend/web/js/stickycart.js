@@ -27,7 +27,7 @@ define([
 	        $(window).scroll(function() {
 				var y = $(this).scrollTop();
 				var hiddenBottom = options.hiddenBottom ? (y + $(this).height() == $(document).height()) : '';
-			
+
 				if (y > scrollHeight && !hiddenBottom) {
 					body.addClass('show-add-cart-bottom');
 					stickyCart.addClass("sticky_show_atc");
@@ -50,13 +50,13 @@ define([
 	        });
 	        qty.change(function(){
 	        	qtySticky.val(this.value);
-	        });	
+	        });
 	        qtySticky.change(function(){
 	        	if(groupQty.length){
 	        		groupQty.val(this.value);
 	        	}
 	        	qty.val(this.value);
-	        });        
+	        });
 	        groupQty.change(function() {
 	        	qtySticky.val(this.value);
 	        });
@@ -67,6 +67,7 @@ define([
 	        	$this.attr("disabled", "disabled");
 	        	setTimeout(function() {
 	        		$this.removeAttr("disabled");
+                    $('#back-top a').trigger('click');
 	          	}, 1500);
 	          	if($this.hasClass('customize')){
 	          		buttonBundle.click();

@@ -1,17 +1,191 @@
-<?php if($block->getProduct()->getCouponInfo()): ?>
+<?php if($block->getProduct()->getCouponCode()): ?>
+<?php $mediaUrl = $block->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA); ?>
     <style>
-        .coupon-info {
-            color: #EC1D1D;
-            font-size: 14px;
-            line-height: 16px;
-            padding-top: 4px;
+        .mg-product-code {
+            position: relative;
+            margin-top: 20px;
         }
-        @media screen and (max-width: 767px) {
-            .coupon-info {
-                font-size: 16px;
-                line-height: 19px;
+
+        .mg-product-code span {
+            display: block;
+        }
+
+        .mg-product-code-content {
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .mg-product-code-content-left {
+            width: 94px;
+            height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .mg-product-code-content-right {
+            width: 194px;
+            height: 80px;
+            padding: 12px 12px 12px 16px;
+        }
+
+        .mg-product-code-content-box {
+            display: flex;
+        }
+
+        .mg-product-code-content-top-half {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .mg-product-code-content-copy-button {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .mg-product-code-bgimg {
+            display: block;
+            height: 80px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .mg-product-code-content-price {
+            font-family: 'Roboto-Bold';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 22px;
+            line-height: 24px;
+            color: #FFFFFF;
+            text-align: center;
+        }
+
+        .mg-product-code-content-off {
+            font-family: 'Roboto-Regular';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 18px;
+            line-height: 20px;
+            color: #FFFFFF;
+            text-align: center;
+        }
+
+        .mg-product-code-content-box span {
+            font-family: 'Roboto-Bold';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 18px;
+            line-height: 20px;
+            color: #333333;
+        }
+
+        .mg-product-code-content-date {
+            font-family: 'Roboto-Regular';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 130%;
+            color: #666666;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
+        .mg-product-code-copy-icon-1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #fff;
+            z-index: 1;
+        }
+        .mg-product-code-copy-icon-2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #fff;
+            z-index: 2;
+            display: none;
+        }
+        .mg-product-code-content-number {
+            border: 0;
+            width: 90px;
+            font-family: 'Roboto-Bold';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 18px;
+            line-height: 20px;
+            color: #333333;
+        }
+        .mg-product-code-content-number:focus {
+            box-shadow: none !important;
+        }
+        @media(max-width: 768px) {
+            .mg-product-code {
+                width: 277px;
+            }
+        }
+        @media(max-width: 767px) {
+            .mg-product-code {
+                width: auto;
             }
         }
     </style>
-    <div class="coupon-info"><?php echo $block->getProduct()->getCouponInfo(); ?></div>
+    <div class="mg-product-code">
+        <img class="mg-product-code-bgimg" src="<?php echo $mediaUrl ?>mg-product-code-bg-img.png" alt="">
+        <div class="mg-product-code-content">
+            <div class="mg-product-code-content-left">
+                <span class="mg-product-code-content-price"><?php echo $block->getProduct()->getCouponPrice(); ?></span>
+                <span class="mg-product-code-content-off">OFF</span>
+            </div>
+            <div class="mg-product-code-content-right">
+                <div class="mg-product-code-content-top-half">
+                    <div class="mg-product-code-content-box">
+                        <span class="mg-product-code-content-title">Code:&nbsp;</span>
+                        <input class="mg-product-code-content-number" value="<?php echo $block->getProduct()->getCouponCode(); ?>" readonly />
+                    </div>
+                    <div class="mg-product-code-content-copy-button">
+                        <svg class="mg-product-code-copy-icon-1" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M16.4071 1.66667C16.9177 1.66722 17.4073 1.87029 17.7684 2.23132C18.1295 2.59235 18.3327 3.08187 18.3334 3.59251V14.3242C18.3327 14.8348 18.1295 15.3243 17.7684 15.6854C17.4073 16.0464 16.9177 16.2495 16.4071 16.25H13.75V16.4075C13.7495 16.9181 13.5464 17.4076 13.1853 17.7687C12.8243 18.1297 12.3348 18.3328 11.8242 18.3333H3.59252C3.08193 18.3328 2.5924 18.1297 2.23136 17.7687C1.87032 17.4076 1.66724 16.9181 1.66669 16.4075V5.67584C1.66724 5.16525 1.87032 4.67572 2.23136 4.31468C2.5924 3.95363 3.08193 3.75056 3.59252 3.75001H6.25002V3.59251C6.25068 3.08187 6.45385 2.59235 6.81496 2.23132C7.17607 1.87029 7.66564 1.66722 8.17627 1.66667H16.4071ZM3.59294 17.0833H11.8238C12.003 17.083 12.1747 17.0117 12.3014 16.8851C12.4282 16.7584 12.4996 16.5867 12.5 16.4075V5.67584C12.5 5.30334 12.1967 5.00001 11.8242 5.00001H3.59294C3.22044 5.00001 2.91669 5.30334 2.91669 5.67584V16.4075C2.91669 16.7804 3.22044 17.0833 3.59294 17.0833ZM17.0834 14.3242V3.59251C17.0834 3.22001 16.7796 2.91667 16.4071 2.91667H8.17627C7.80377 2.91667 7.50002 3.22001 7.50002 3.59251V3.75001H11.8242C12.3348 3.75056 12.8243 3.95363 13.1853 4.31468C13.5464 4.67572 13.7495 5.16525 13.75 5.67584V15H16.4071C16.7796 15 17.0834 14.6971 17.0834 14.3242ZM10.2084 7.50001C10.3741 7.50001 10.5331 7.56585 10.6503 7.68306C10.7675 7.80027 10.8334 7.95925 10.8334 8.12501C10.8334 8.29077 10.7675 8.44974 10.6503 8.56695C10.5331 8.68416 10.3741 8.75001 10.2084 8.75001H5.20835C5.04259 8.75001 4.88362 8.68416 4.76641 8.56695C4.6492 8.44974 4.58335 8.29077 4.58335 8.12501C4.58335 7.95925 4.6492 7.80027 4.76641 7.68306C4.88362 7.56585 5.04259 7.50001 5.20835 7.50001H10.2084ZM10.2084 10.4167C10.3741 10.4167 10.5331 10.4825 10.6503 10.5997C10.7675 10.7169 10.8334 10.8759 10.8334 11.0417C10.8334 11.2074 10.7675 11.3664 10.6503 11.4836C10.5331 11.6008 10.3741 11.6667 10.2084 11.6667H5.20835C5.04259 11.6667 4.88362 11.6008 4.76641 11.4836C4.6492 11.3664 4.58335 11.2074 4.58335 11.0417C4.58335 10.8759 4.6492 10.7169 4.76641 10.5997C4.88362 10.4825 5.04259 10.4167 5.20835 10.4167H10.2084ZM8.54169 13.3333C8.70745 13.3333 8.86642 13.3992 8.98363 13.5164C9.10084 13.6336 9.16669 13.7926 9.16669 13.9583C9.16669 14.1241 9.10084 14.2831 8.98363 14.4003C8.86642 14.5175 8.70745 14.5833 8.54169 14.5833H5.20835C5.04259 14.5833 4.88362 14.5175 4.76641 14.4003C4.6492 14.2831 4.58335 14.1241 4.58335 13.9583C4.58335 13.7926 4.6492 13.6336 4.76641 13.5164C4.88362 13.3992 5.04259 13.3333 5.20835 13.3333H8.54169Z"
+                                fill="#155DA4" />
+                        </svg>
+                        <svg class="mg-product-code-copy-icon-2" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.1569 9.99999C17.1569 6.04736 13.9526 2.84313 10 2.84313C6.04739 2.84313 2.84316 6.04736 2.84316 9.99999C2.84316 13.9526 6.04739 17.1569 10 17.1569C13.9526 17.1569 17.1569 13.9526 17.1569 9.99999ZM18.3334 9.99999C18.3334 14.6024 14.6024 18.3333 10 18.3333C5.39765 18.3333 1.66669 14.6024 1.66669 9.99999C1.66669 5.39762 5.39765 1.66666 10 1.66666C14.6024 1.66666 18.3334 5.39762 18.3334 9.99999ZM14.6533 7.74607C14.8704 7.50441 14.8505 7.13249 14.6088 6.91537C14.3672 6.69824 13.9953 6.71813 13.7781 6.95979L8.90824 12.38L5.80865 9.27249C5.57922 9.04248 5.20677 9.04201 4.97676 9.27144C4.74675 9.50087 4.74628 9.87331 4.9757 10.1033L8.51407 13.6507C8.62819 13.7651 8.78435 13.8275 8.94589 13.8233C9.10742 13.8191 9.26011 13.7486 9.36811 13.6284L14.6533 7.74607Z" fill="#155DA4"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="mg-product-code-content-date">
+                    <span><?php echo $block->getProduct()->getCouponInfo(); ?></span>
+                </div>
+            </div>
+        </div>
+    </div>
 <?php endif; ?>
+
+<script>
+    require(['jquery'],function($){
+        $('[data-block="minicart"]').on('contentLoading', function (event) {
+            $('[data-block="minicart"]').on('contentUpdated', function () {
+                $('html, body').animate({scrollTop:0}, 'slow');
+            });
+        });
+
+        $('.mg-product-code-copy-icon-1').click(function () {
+            $('.mg-product-code-content-number').select();
+            document.execCommand("Copy");
+            window.getSelection().empty();
+            $('.mg-product-code-copy-icon-2').show();
+            setTimeout(function () {
+                $('.mg-product-code-copy-icon-2').hide();
+            }, 3000);
+        });
+    });
+</script>

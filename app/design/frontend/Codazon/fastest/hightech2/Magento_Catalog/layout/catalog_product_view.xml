@@ -15,7 +15,7 @@
         <move element="product.info.review" destination="page.main.title" after="product.info.sku"/>
         <move element="product.info.stock.sku" destination="product.info.main" after="page.main.title"/>
 	<referenceBlock name="catalog.leftnav" remove="true"/>
-	<move element="product.info.overview" destination="product.info.main" after="product.info.review" />
+
 
     <referenceBlock name="page.main.title">
         <block class="Magento\Catalog\Block\Product\View\Description" name="product.subtitle" template="product/view/subtitle.phtml" />
@@ -49,7 +49,11 @@
 	</referenceContainer>
 	<move element="product.info.media" destination="product.info.left" before='-'/>
 	<move element="product.info.main" destination="product.info.left" />
-    <move element="catalog.product.related" destination="content" after="product.main.content" />
+    <move element="product.info" destination="content" after="product.main.content" />
+    <move element="product.info.social" destination="content" after="product.info" />
+    <move element="product.info.overview" destination="content" after="product.info.social" />
+    <move element="catalog.product.related" destination="content" after="product.info.overview" />
+
     <move element="downloads.tab" destination="product.info.social" after="-" />
 
     <referenceBlock name="catalog.compare.sidebar" remove="true" />

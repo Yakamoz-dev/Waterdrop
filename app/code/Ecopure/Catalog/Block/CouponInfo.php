@@ -4,6 +4,7 @@ namespace Ecopure\Catalog\Block;
 class CouponInfo extends \Magento\Framework\View\Element\Template
 {
     protected $_coreRegistry = null;
+    public $_storeManager;
 
     public function __construct(
         \Magento\Framework\View\Element\Template\Context $context,

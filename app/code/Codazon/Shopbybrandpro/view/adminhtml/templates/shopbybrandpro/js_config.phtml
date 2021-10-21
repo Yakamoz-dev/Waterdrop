@@ -25,7 +25,7 @@ Codazon.mediaUrl = '<?php echo $mediaUrl; ?>';
 require(['jquery', 'Codazon_Shopbybrandpro/js/browser'], function($) {
     var mediaUrl = Codazon.mediaUrl;
     var defaultThumbnail = '<?php echo $defaultThumbnail ?>';
-    window.changePreviewImage = function(obj) {
+    var changePreviewImage = function(obj) {
         var $_input = $(obj);
         if ($_input.parent().find('.attached_image img').length > 0) {
             var $_img = $_input.parent().find('.attached_image img').first();
@@ -33,6 +33,10 @@ require(['jquery', 'Codazon_Shopbybrandpro/js/browser'], function($) {
         }
         $_input.prop('disabled', false);
     };
+    window.changePreviewImage = changePreviewImage;
+    $('body').on('change', '.js-change-preview', function() {
+        changePreviewImage(this);
+    });
     window.clearValue = function(obj) {
         $_btn = $(obj);
         if ($_btn.parent().find('.input-image').length > 0) {

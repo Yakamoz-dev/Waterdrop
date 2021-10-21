@@ -93,6 +93,14 @@
                        source_model="Magento\Config\Model\Config\Source\Yesno" sort_order="40">
                 <label translate="true">Loop</label>
             </parameter>
+            <parameter name="slider_autoplay" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno" sort_order="45">
+                <label translate="true">Slider Autoplay</label>
+            </parameter>
+            <parameter name="slider_autoplay_timeout" xsi:type="text" visible="true" sort_order="45">
+                <label translate="true">Slider Autoplay Timeout (milliseconds)</label>
+                <value>5000</value>
+            </parameter>
             <parameter name="slider_margin" xsi:type="text" visible="true" sort_order="50">
             	<label translate="true">Slide Margin</label>
                 <value>20</value>

@@ -17,4 +17,7 @@
             </argument>
         </arguments>
     </type>
+    <type name="Codazon\Shopbybrandpro\Controller\Index\Index">
+        <plugin name="shopbybrand_controller_index_index" type="Codazon\Shopbybrandpro\Plugin\Controller\Index\Index" sortOrder="100" disabled="false" />
+    </type>
 </config>

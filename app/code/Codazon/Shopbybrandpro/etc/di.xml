@@ -57,11 +57,8 @@
 			</argument>
 		</arguments>
 	</type>
-	<type name="Magento\Sitemap\Model\ItemProvider\Composite">
-        <arguments>
-            <argument name="itemProviders" xsi:type="array">
-                <item name="brandProvider" xsi:type="object">Codazon\Shopbybrandpro\Model\Sitemap\ItemProvider\Brand</item>
-            </argument>
-        </arguments>
+    
+    <type name="Magento\Framework\Search\Request\Config\FilesystemReader">
+        <plugin name="codazon_shopbybrand_search_request_config_reader"  type="Codazon\Shopbybrandpro\Plugin\Search\Request\ConfigReader" />
     </type>
 </config>

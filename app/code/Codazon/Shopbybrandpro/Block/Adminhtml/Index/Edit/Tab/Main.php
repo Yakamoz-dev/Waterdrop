@@ -84,13 +84,13 @@ class Main extends Generic implements TabInterface
 		$field = $fieldset->addField(
 			'brand_thumbnail',
 			'hidden',
-			['name' => 'brand_thumbnail', 'label' => __('Thumbnail Image'), 'title' => __('Thumbnail Image'), 'required' => false, 'class' => 'input-image', 'onchange' => 'changePreviewImage(this)']
+			['name' => 'brand_thumbnail', 'label' => __('Thumbnail Image'), 'title' => __('Thumbnail Image'), 'required' => false, 'class' => 'input-image js-change-preview']
 		);
 		$field->setRenderer($renderer);
 		$field = $fieldset->addField(
 			'brand_cover',
 			'hidden',
-			['name' => 'brand_cover', 'label' => __('Cover Image'), 'title' => __('Cover Image'), 'required' => false, 'class' => 'input-image', 'onchange' => 'changePreviewImage(this)']
+			['name' => 'brand_cover', 'label' => __('Cover Image'), 'title' => __('Cover Image'), 'required' => false, 'class' => 'input-image js-change-preview']
 		);
 		$field->setRenderer($renderer);		
 	

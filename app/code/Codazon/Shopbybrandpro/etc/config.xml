@@ -36,6 +36,16 @@
                 <meta_description>Initially founded in 1991, until now, we cooperate with more than 50 big famous brands of fashion field. With a large range of activities, we always provide best products and solutions to customers.</meta_description>
                 <display_featured_brands>1</display_featured_brands>
                 <display_brand_search>1</display_brand_search>
+                <default_sort_by>sort_order</default_sort_by>
+                <remember_pagination>0</remember_pagination>
+                <brand_img_width>200</brand_img_width>
+                <brand_img_height>200</brand_img_height>
+                <list_mode>grid</list_mode>
+                <grid_per_page_values>24,32,64</grid_per_page_values>
+                <grid_per_page>24</grid_per_page>
+                <list_per_page_values>5,10,15,20,25</list_per_page_values>
+                <list_per_page>10</list_per_page>
+                <list_allow_all>0</list_allow_all>
             </all_brand_page>
 			<brand_page>
 				<display_cover>1</display_cover>

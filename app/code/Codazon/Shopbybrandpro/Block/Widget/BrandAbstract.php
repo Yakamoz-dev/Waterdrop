@@ -71,9 +71,6 @@ class BrandAbstract extends Template implements \Magento\Widget\Block\BlockInter
     {
         $finalFilters = [];
         $registryName = 'cdz_brand_' . $orderBy . '_' . $order . '_' . (string)$onlyFeaturedBrands . '_' . (string)$limit;
-        if ($this->_coreRegistry->registry($registryName)) {
-            $this->_coreRegistry->unregister($registryName);
-        }
         $brandObject = $this->_coreRegistry->registry($registryName);
 		if (!$brandObject) {
             $brandObject = [];

@@ -97,7 +97,7 @@ define(['jquery', 'jquery-ui-modules/widget', 'owlslider'], function($, owlCarou
             self.brandGroups = {};
             self.$items.each(function() {
                 var $item = $(this);
-                var firstChar = $item.data('label')[0].toUpperCase();
+                var firstChar = $item.data('label')[0];
                 if (typeof self.brandGroups[firstChar] == 'undefined') {
                     self.brandGroups[firstChar] = [];
                 }
@@ -328,9 +328,6 @@ define(['jquery', 'jquery-ui-modules/widget', 'owlslider'], function($, owlCarou
                     var margin = conf.margin, subtrahend = conf.margin;
                 }
                 var marginBottom = conf.marginBottom ? conf.marginBottom : margin;
-                if ($(window).width() > 375 && $(window).width() <= 428) {
-                    marginBottom = 24;
-                }
                 width = 100/itemsPerRow[i].items;
                 css += '@media (min-width: ' + itemsPerRow[i].breakPoint + 'px)';
                 if (typeof itemsPerRow[i + 1] != 'undefined') {
@@ -344,10 +341,10 @@ define(['jquery', 'jquery-ui-modules/widget', 'owlslider'], function($, owlCarou
             return css;
         }
     });
-
+    
     $.widget('codazon.brands', {
         options: {
-
+            
         },
         _create: function(){
             var self = this;

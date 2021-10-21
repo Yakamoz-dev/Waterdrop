@@ -33,6 +33,18 @@ class Index extends \Magento\Framework\App\Action\Action
         $this->_attributeCode = $helper->getStoreBrandCode();
     }
 
+    public function initBrands()
+    {
+        if (!$this->_coreRegistry->registry('brand_collection')) {
+            $this->_coreRegistry->register('brand_collection', $this->_helper->getBrandCollection(
+                null,
+                null,
+                $this->_helper->getAttributesInList()
+            ));
+        }
+        return $this->_coreRegistry->registry('brand_collection');
+    }
+
     protected function _initBrandPage()
     {
         if (!$this->_coreRegistry->registry('all_brands_info')) {
@@ -55,8 +67,12 @@ class Index extends \Magento\Framework\App\Action\Action
     {
         $page = $this->resultPageFactory->create();
         $brand = $this->_initBrandPage();
+        $this->initBrands();
         $pageConfig = $page->getConfig();
-
+        $pageConfig->addRemotePageAsset($this->_storeManager->getStore()->getCurrentUrl(false),
+            'canonical',
+            ['attributes' => ['rel' => 'canonical']]
+        );
         $pageConfig->addBodyClass('cdz-all-brands');
 
         $title = $brand->getData('title');

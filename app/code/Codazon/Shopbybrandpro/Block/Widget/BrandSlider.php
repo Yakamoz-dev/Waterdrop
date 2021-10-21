@@ -22,7 +22,9 @@ class BrandSlider extends \Codazon\Shopbybrandpro\Block\Widget\BrandAbstract
                 'nav'           => (bool)$this->getData('slider_nav'),
                 'dots'          => (bool)$this->getData('slider_dots'),
                 'loop'          => (bool)$this->getData('slider_loop'),
+                'autoplay'      => (bool)$this->getData('slider_autoplay'),
                 'stagePadding'  => (float)$this->getData('stage_padding'),
+                'autoplayTimeout' => (float)$this->getData('slider_autoplay_timeout'),
                 'lazyLoad'      => true
             ];
             $adapts = array('1900', '1600', '1420', '1280','980','768','480','320','0');
@@ -43,8 +45,10 @@ class BrandSlider extends \Codazon\Shopbybrandpro\Block\Widget\BrandAbstract
             'slider_nav'        => 1,
             'slider_dots'       => 0,
             'slider_loop'       => 0,
+            'slider_autoplay_timeout' => 5000,
             'stage_padding'     => 0,
             'slider_margin'     => 10,
+            'slider_autoplay'   => 0,
             'items_1900'        => 8,
             'items_1600'        => 7,
             'items_1420'        => 7,

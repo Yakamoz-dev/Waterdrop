@@ -19,6 +19,8 @@ class SearchBrands extends \Magento\Framework\App\Action\Action
     
     protected $_viewRoute;
     
+    protected $_helper;
+    
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Framework\Registry $coreRegistry,
@@ -37,6 +39,7 @@ class SearchBrands extends \Magento\Framework\App\Action\Action
         $this->_imageHelper = $helper->getImageHelper();
         $this->_attributeCode = $helper->getStoreBrandCode();
         $this->_viewRoute = $helper->getViewRoute();
+        $this->_helper = $helper;
     }
     
     public function getUrl($urlKey, $params = null)
@@ -44,66 +47,15 @@ class SearchBrands extends \Magento\Framework\App\Action\Action
         return $this->_urlManager->getUrl($urlKey, $params);
     }
     
-    public function getAllBrandsArray($query = false, $orderBy = 'brand_label', $order = 'asc')
+    public function getBrandCollection($query = false, $orderBy = 'name', $orderDir = 'asc')
     {
         if (!$this->_brandObject) {
-            $this->_brandObject = [];
-			$brand = $this->_brandFactory->create();		
-			$col = $brand->getCollection();
-			$connection = $col->getConnection();
-            $defaultStoreId = \Magento\Store\Model\Store::DEFAULT_STORE_ID;
-            $storeId = $this->_storeManager->getStore()->getId();
-            
-			$select = $connection->select();
-			$select->from(['main_table' => $col->getTable('eav_attribute_option') ], ['option_id', 'attribute_id', 'sort_order'])
-				->joinLeft([ 'cea' => $col->getTable('catalog_eav_attribute') ],'main_table.attribute_id = cea.attribute_id')
-				->joinLeft([ 'ea' => $col->getTable('eav_attribute') ],'cea.attribute_id = ea.attribute_id', ['attribute_code'])
-				->joinLeft([ 'eaov' => $col->getTable('eav_attribute_option_value') ], 'eaov.option_id = main_table.option_id', ['brand_label' => 'value', 'store_id'])
-				->where("ea.attribute_code = '{$this->_attributeCode}'")
-                ->where("eaov.store_id IN ({$defaultStoreId}, {$storeId})")
-				->group("main_table.option_id")
-				->order($orderBy.' '.$order);
-                
+            $collection = $this->_helper->getBrandCollection(null, null, ['brand_url_key', 'brand_thumbnail']);
+            $collection->setOrder($orderBy, $orderDir);
             if ($query) {
-                $select->where("value LIKE '%{$query}%'");
+                $collection->addFieldToFilter('name', ['like' => "%{$query}%"]);
             }
-            
-			$rows = $connection->fetchAll($select);
-            
-            if (count($rows) > 0) {
-                $optionIds = [];
-                foreach ($rows as $row) {
-                    $optionIds[] = $row['option_id'];
-                }
-                $brandItems = $this->_brandFactory
-                    ->create()
-                    ->getCollection()->setStore($storeId)
-                    ->addFieldToFilter('option_id', ['in' => $optionIds])
-                    ->addAttributeToSelect(['brand_thumbnail','brand_url_key'])->getItems();
-                $brands = [];
-                foreach ($brandItems as $brandItem) {
-                    $brands[$brandItem->getData('option_id')] = $brandItem;
-                }
-				foreach ($rows as $row) {
-                    $optionId = $row['option_id'];
-                    if (isset($brands[$optionId])) {
-                        if (isset($brands[$optionId]['is_active'])) {
-                            if ($brands[$optionId]['is_active'] == 0) {
-                                continue;
-                            }
-                        }
-                        $brandModel = $brands[$optionId]->addData($row);
-                    } else {                    
-                        $brandModel = new \Magento\Framework\DataObject($row);
-					}
-                    if ($brandModel->getData('brand_url_key')) {
-                        $brandModel->setUrl($this->getUrl($this->_viewRoute) . $brandModel->getData('brand_url_key'));
-                    } else {
-                        $brandModel->setUrl($this->getUrl($this->_viewRoute).urlencode(str_replace(' ','-',strtolower(trim($brandModel->getData('brand_label'))))));
-                    }
-                    $this->_brandObject[] = $brandModel;
-				}
-			}
+            $this->_brandObject = $collection;
 		}
 		return $this->_brandObject;
     }
@@ -112,13 +64,13 @@ class SearchBrands extends \Magento\Framework\App\Action\Action
     {
         $brandLabels = [];
         $query = $this->getRequest()->getParam('term', false);
-        $brandData = $this->getAllBrandsArray($query);
+        $brandData = $this->getBrandCollection($query);
         if (count($brandData)) {
             foreach ($brandData as $brand) {
                 $brandLabels[] = [
-                    'label' => $brand->getData('brand_label'),
-                    'value' => $brand->getData('brand_label'),
-                    'url'   => $brand->getData('url'),
+                    'label' => $brand->getData('name'),
+                    'value' => $brand->getData('name'),
+                    'url'   => $this->_helper->getBrandUrl($brand),
                     'img'   => $this->getThumbnailImage($brand, ['width' => 50, 'height' => 50])
                 ];
             }
@@ -135,7 +87,7 @@ class SearchBrands extends \Magento\Framework\App\Action\Action
                 $options['width'] = null;
             if(!isset($options['height']))
                 $options['height'] = null;
-            return $this->_imageHelper->init($brandThumb)->resize($options['width'],$options['height'])->__toString();
+            return $this->_imageHelper->init($brandThumb)->resize($options['width'], $options['height'])->__toString();
         } else {
             return $this->_mediaUrl.$brandThumb;
         }

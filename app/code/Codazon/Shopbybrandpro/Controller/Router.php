@@ -41,6 +41,7 @@ class Router implements \Magento\Framework\App\RouterInterface
      */
     public function match(\Magento\Framework\App\RequestInterface $request)
     {
+        
         $pathInfo = trim($request->getPathInfo(), '/');
         $urlKey = explode('/', $pathInfo);
         $storeId = $this->_storeManager->getStore()->getId();
@@ -60,7 +61,7 @@ class Router implements \Magento\Framework\App\RouterInterface
             $select->joinLeft([ 'eao' => $brandCollection->getTable('eav_attribute_option') ], 'main_table.option_id = eao.option_id', ['attribute_id']);
             $select->joinLeft([ 'ea' => $brandCollection->getTable('eav_attribute') ], 'eao.attribute_id = ea.attribute_id', ['attribute_code']);
             $select->where('main_table.store_id IN ('.$defaultStoreId.', '.$storeId.')')
-                ->where("LOWER(REPLACE(REPLACE(RTRIM(main_table.value), ' ', '-'), \"'\", '-')) = \"{$urlKey}\"")
+                ->where('LOWER(REPLACE(REPLACE(RTRIM(main_table.value), " ", "-"), "\'", "-")) = ?', $urlKey)
                 ->where("ea.attribute_code = '{$this->_attributeCode}'")
                 ->order('main_table.store_id DESC')
                 ->limit(1);

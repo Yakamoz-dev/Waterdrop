@@ -47,6 +47,10 @@ class View extends \Magento\Framework\View\Element\Template implements \Magento\
                 $pageMainTitle->setPageTitle($title);
             }
             
+            $this->pageConfig->addRemotePageAsset($brand->getUrl(),
+                'canonical', 
+                ['attributes' => ['rel' => 'canonical']]
+            );
             /* facebook meta tag */
             $this->pageConfig->setMetadata('og:url', $brand->getUrl());
             $this->pageConfig->setMetadata('og:type', 'article');
@@ -79,6 +83,13 @@ class View extends \Magento\Framework\View\Element\Template implements \Magento\
                         'title' => $title
                     ]
                 );
+            }
+            
+            if (class_exists('\Magento\LayeredNavigation\ViewModel\Layer\Filter')) {
+                if ($catalogNav = $this->getLayout()->getBlock('catalog.navigation.renderer')) {
+                    $catalogNav->setData('product_layer_view_model', \Magento\Framework\App\ObjectManager::getInstance()
+                        ->create(\Magento\LayeredNavigation\ViewModel\Layer\Filter::class));
+                }
             }
 		}
         return $this;

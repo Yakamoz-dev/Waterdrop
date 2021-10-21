@@ -39,9 +39,8 @@ class SelectedBrands extends \Magento\Framework\Model\ResourceModel\Db\AbstractD
 		$eavAttributeTable = $this->getTable('eav_attribute');
 		$select->from(['maintable' => $mainTable])
 			->joinLeft( [ 'ea' => $eavAttributeTable ], 'maintable.attribute_id = ea.attribute_id', ['attribute_code', 'frontend_label'])
-			->where('ea.frontend_input = "select" 
-                AND ((ea.source_model is NULL) OR (ea.source_model = "Magento\\\\Eav\\\\Model\\\\Entity\\\\Attribute\\\\Source\\\\Table"))'
-             );
+			->where('((ea.frontend_input = "select") OR (ea.frontend_input = "multiselect")) AND (is_user_defined = 1)')
+            ->limit(1000);
 
 		$attributes = $this->getConnection()->fetchAll($select);
         

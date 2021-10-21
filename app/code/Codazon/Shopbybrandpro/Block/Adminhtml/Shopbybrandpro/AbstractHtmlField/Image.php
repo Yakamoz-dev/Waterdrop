@@ -73,7 +73,7 @@ class Image extends \Codazon\Shopbybrandpro\Block\Adminhtml\Shopbybrandpro\Abstr
 				'onclick' => "CdzMediabrowserUtility.openDialog(this, '" . $this->getUrl('cms/wysiwyg_images/index',
 					['target_element_id' => $elementId])
 					. "', null, null,'" . $this->escapeQuote(
-						__('Upload Images'), true) . "');",
+						(string)__('Upload Images'), true) . "');",
 				'disabled' => $element->getDisabled()
 			]
 		);

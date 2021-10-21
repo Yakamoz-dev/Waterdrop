@@ -11,7 +11,16 @@
             <block class="Codazon\Shopbybrandpro\Block\Brand\AllBrands" name="all_brands" template="Codazon_Shopbybrandpro::brand/all_brands.phtml">
                 <block class="Codazon\Shopbybrandpro\Block\Widget\BrandSearch" name="brand_search" template="Codazon_Shopbybrandpro::brand/brand_search.phtml" />
                 <block class="Codazon\Shopbybrandpro\Block\Widget\BrandSlider" name="featured_brands" template="Codazon_Shopbybrandpro::brand/featured_brands.phtml" />
-                <block class="Codazon\Shopbybrandpro\Block\Widget\BrandSlider" name="brand_alphabet_list" template="Codazon_Shopbybrandpro::widget/alphabet_list.phtml"/>
+                <block class="Codazon\Shopbybrandpro\Block\Brand\AllBrands" name="brand_alphabet_list" template="Codazon_Shopbybrandpro::brand/list-container.phtml">
+                    <block class="Codazon\Shopbybrandpro\Block\Brand\BrandList" name="brand_list" template="Codazon_Shopbybrandpro::brand/list.phtml">
+                        <block class="Codazon\Shopbybrandpro\Block\Brand\BrandList\Toolbar" name="brand_list_toolbar" template="Codazon_Shopbybrandpro::brand/list/toolbar.phtml">
+                            <block class="Magento\Theme\Block\Html\Pager" name="brand_list_toolbar_pager"/>
+                        </block>
+                        <action method="setToolbarBlockName">
+                            <argument name="name" xsi:type="string">brand_list_toolbar</argument>
+                        </action>
+                    </block>
+                </block>
             </block>
         </referenceContainer>
     </body>

@@ -193,10 +193,16 @@ class View extends \Magento\Framework\App\Action\Action
                 $this->layerResolver->create(Resolver::CATALOG_LAYER_CATEGORY);
             }
             $optionId = (int)$this->getRequest()->getParam($this->_attributeCode, false);
+            $collection = $this->layerResolver->get(Resolver::CATALOG_LAYER_CATEGORY)->getProductCollection();
+            if (get_class($collection) === 'Smile\ElasticsuiteCatalog\Model\ResourceModel\Product\Fulltext\Collection\Interceptor') {
+                $brand = $this->_coreRegistry->registry('current_brand');
+                $this->getRequest()->setParam($this->_attributeCode, $brand->getData('brand_label'));
+                $this->getRequest()->setQueryValue($this->_attributeCode, $brand->getData('brand_label'));
+            } else {
+                $collection->addFieldToFilter($this->_attributeCode, $optionId);
+            }
             
-            $this->layerResolver->get(Resolver::CATALOG_LAYER_CATEGORY)->getProductCollection()->addFieldToFilter(
-                $this->_attributeCode, $optionId
-            );
+            
             $this->getRequest()->setParam('cdz_disable_' . $this->_attributeCode, true);
             $settings = $this->_catalogDesign->getDesignSettings($category);
 
@@ -209,9 +215,10 @@ class View extends \Magento\Framework\App\Action\Action
 
             $page = $this->resultPageFactory->create();
             // apply custom layout (page) template once the blocks are generated
-            if ($settings->getPageLayout()) {
+            /* if ($settings->getPageLayout()) {
                 $page->getConfig()->setPageLayout($settings->getPageLayout());
-            }
+            } */
+            
 
             $hasChildren = $category->hasChildren();
             $type = $hasChildren ? 'layered' : 'default_without_children';

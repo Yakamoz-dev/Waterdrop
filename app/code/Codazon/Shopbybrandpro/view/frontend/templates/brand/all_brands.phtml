@@ -48,7 +48,7 @@ $displayBrandSearch = (bool)$pageInfo->getData('display_brand_search');
     <div class="brand-main">
         <div class="block">
             <div class="block-title">
-                <strong class="label"><?= $pageInfo->getData('title')?:__('All brands') ?></strong>
+                <strong class="label"><?= __('All brands') ?></strong>
                 <?php if ((!$displayFeaturedBrands) && $displayBrandSearch) : ?>
                 <div class="brand-search-wrap" data-mage-init='<?= json_encode($searchWidget) ?>'>
                     <div class="brand-form" data-role="brand-form">

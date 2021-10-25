@@ -430,6 +430,9 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
 
 	}
 	.product-list-style02{
+        .save-price-info {
+            display: none;
+        }
 		.product-items  .product-item-details{
 			margin-left:90px;
 			position:relative;
@@ -440,7 +443,45 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
 			.product-item-name{
 			    white-space: normal;
 				overflow: visible;
+                line-height: 15.6px;
 			}
+            .price-box {
+                font-size: 12px;
+                line-height: 14px;
+                margin: 0;
+                padding: 8px 0 0;
+                .price {
+                    font-weight: normal !important;
+                    font-size: 12px;
+                    line-height: 14px;
+                }
+            }
+            .old-price {
+                display: none;
+            }
+            .product-reviews-summary {
+                height: auto;
+                line-height: 16px;
+                vertical-align: text-bottom;
+                display: block;
+                .rating-summary {
+                    height: 16px;
+                    .rating-result {
+                        width: 77px;
+                        &:before {
+                            font-size: 14px;
+                            line-height: 14px;
+                        }
+                    }
+                }
+                .reviews-actions {
+                    font-size: 14px;
+                    line-height: 16px;
+                    a {
+                        color: #666666;
+                    }
+                }
+            }
 		}
 	}
 }
@@ -451,14 +492,13 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
 	//.lib-css(border, 1px solid #E1E1E1);
 	.block-title{
 		.lib-css(border-bottom, 1px solid #E1E1E1);
-		padding: 11px 20px 0;
+		padding: 20px 16px 0;
 		margin-bottom:0;
 		.b-title{
 			text-transform:none;
 			display:inline-block;
 			border-bottom:3px solid @main_hover_text;
-			padding-bottom: 8px;
-			margin-bottom: -1px;
+			padding-bottom: 10px;
 			.lib-css(color, @main_title_text);
             font-family: 'roboto-medium';
             font-size: 16px;
@@ -502,15 +542,44 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
 	}
 }
 .product-style05 .products-grid{
+    .save-price-info {
+        display: none;
+    }
 	.item.product-item .product-item-info .cdz-product-bottom:not(.non-hover){
 		top:50%
 	}
 	.product-item-link{
 		font-size:14px !important;
 	}
-	.product-item .price-box .price{
-		font-size:16px
-	}
+    .product-item {
+        .price-box .price {
+            font-size: 16px;
+        }
+        .old-price {
+            display: none;
+        }
+        .product-reviews-summary {
+            vertical-align: text-bottom;
+            height: auto;
+            line-height: 16px;
+            .rating-summary {
+                height: 16px;
+                .rating-result {
+                    &:before {
+                        font-size: 14px;
+                        line-height: 14px;
+                    }
+                }
+            }
+            .reviews-actions {
+                font-size: 14px;
+                line-height: 16px;
+                a {
+                    color: #666666;
+                }
+            }
+        }
+    }
 	.product-item-info .product-item-details{
 		padding:0;
 		display: flex;
@@ -686,7 +755,13 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
                 transform: translateX(-50%);
             }
 			&:last-child{
-				border-bottom:0
+				border-bottom:0;
+                &:after {
+                    content: " ";
+                    width: unset;
+                    height: unset;
+                    background: transparent;
+                }
 			}
 			.product-item-details{
 				position:relative;
@@ -1425,8 +1500,8 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
 
     .product-list-style02 {
         .block-title {
-            border-bottom: 1px solid #E1E1E1;
-            padding: 11px 20px 0 !important;
+            border-bottom: 1px solid #E1E1E1 !important;
+            padding: 20px 16px 0 !important;
             margin-bottom: 0 !important;
             color: #333333 !important;
             background: #ffffff !important;
@@ -1435,7 +1510,7 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
                 font-size: 16px;
                 line-height: 19px;
                 border-bottom: 3px solid #155da4;
-                padding-bottom: 8px;
+                padding-bottom: 10px;
                 display: inline-block;
                 font-family: 'roboto-medium';
             }
@@ -1478,8 +1553,8 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
 
     .our-brands {
         .block-title {
-            border-bottom: 1px solid #E1E1E1;
-            padding: 11px 20px 0 !important;
+            border-bottom: 1px solid #E1E1E1 !important;
+            padding: 20px 16px 0 !important;
             margin-bottom: 0 !important;
             color: #333333 !important;
             background: #ffffff !important;
@@ -1488,7 +1563,7 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
                 font-size: 16px;
                 line-height: 19px;
                 border-bottom: 3px solid #155da4;
-                padding-bottom: 8px;
+                padding-bottom: 10px;
                 display: inline-block;
                 font-family: 'roboto-medium';
             }
@@ -1566,6 +1641,9 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
 	.product-style05 .products-grid .product-item .price-box .price {
 		font-size: 14px;
 	}
+    .product-list-style02 .products-grid .product-item .price-box .price {
+        font-size: 16px;
+    }
 	.owl-carousel .owl-nav{
 		position:absolute;
 		[class*='owl-']{

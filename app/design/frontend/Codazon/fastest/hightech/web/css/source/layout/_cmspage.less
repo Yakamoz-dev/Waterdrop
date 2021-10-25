@@ -210,7 +210,30 @@
 #map_canvas{ width:100% !important}
 
 //About us
-.cms-about-us .wrapper-breadcrums{ display:none;}
+.cms-about-us, .cms-return-refund-policy, .cms-shipping-policy {
+    .wrapper-breadcrums {
+        display:none;
+    }
+    .page-main {
+        padding-top: 24px;
+    }
+    .page-title-wrapper .page-title {
+        padding: 0 0 24px;
+        margin: 0;
+    }
+}
+@media(max-width: 767px) {
+    .cms-about-us, .cms-return-refund-policy, .cms-shipping-policy {
+        .page-main {
+            padding-top: 0;
+        }
+        .page-title-wrapper .page-title {
+            padding: 24px 16px;
+            margin: 0;
+        }
+    }
+}
+
 .aboutus-page{
 	.aboutus-box{
 		margin-bottom:60px;

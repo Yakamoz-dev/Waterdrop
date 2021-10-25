@@ -2105,7 +2105,7 @@ fotoramaVersion = '4.6.4';
                 classes.remove.push(selectClass);
 
                 $arrs.toggle(!!opts.arrows);
-            } else if (size == 1) {
+            } else if (size == 1 && !MOBILE) {
                 o_nav = opts.nav = 'thumbs';
                 opts.navdir = 'vertical';
                 o_navTop = opts.navposition === 'top';

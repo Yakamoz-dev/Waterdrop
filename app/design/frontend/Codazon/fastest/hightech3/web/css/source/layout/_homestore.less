@@ -466,6 +466,9 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
 
 	}
 	.product-list-style02{
+        .save-price-info {
+            display: none;
+        }
 		.product-items  .product-item-details{
 			margin-left:90px;
 			position:relative;
@@ -476,7 +479,45 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
 			.product-item-name{
 			    white-space: normal;
 				overflow: visible;
+                line-height: 15.6px;
 			}
+            .price-box {
+                font-size: 12px;
+                line-height: 14px;
+                margin: 0;
+                padding: 8px 0 0;
+                .price {
+                    font-weight: normal !important;
+                    font-size: 12px;
+                    line-height: 14px;
+                }
+            }
+            .old-price {
+                display: none;
+            }
+            .product-reviews-summary {
+                height: auto;
+                line-height: 16px;
+                vertical-align: text-bottom;
+                display: block;
+                .rating-summary {
+                    height: 16px;
+                    .rating-result {
+                        width: 77px;
+                        &:before {
+                            font-size: 14px;
+                            line-height: 14px;
+                        }
+                    }
+                }
+                .reviews-actions {
+                    font-size: 14px;
+                    line-height: 16px;
+                    a {
+                        color: #666666;
+                    }
+                }
+            }
 		}
 	}
 }
@@ -539,6 +580,9 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
 	}
 }
 .product-style05 .products-grid{
+    .save-price-info {
+        display: none;
+    }
 	.item.product-item .product-item-info .cdz-product-bottom:not(.non-hover){
 		top:50%
 	}
@@ -547,8 +591,34 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
         -webkit-line-clamp: 2;
         margin-top: 10px;
 	}
-	.product-item .price-box .price{
-		font-size:16px
+	.product-item {
+        .price-box .price {
+            font-size: 16px;
+        }
+        .old-price {
+            display: none;
+        }
+        .product-reviews-summary {
+            vertical-align: text-bottom;
+            height: auto;
+            line-height: 16px;
+            .rating-summary {
+                height: 16px;
+                .rating-result {
+                    &:before {
+                        font-size: 14px;
+                        line-height: 14px;
+                    }
+                }
+            }
+            .reviews-actions {
+                font-size: 14px;
+                line-height: 16px;
+                a {
+                    color: #666666;
+                }
+            }
+        }
 	}
 	.product-item-info .product-item-details{
 		padding:0;

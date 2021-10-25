@@ -49,7 +49,7 @@
 /*.modes-mode:before{.lib-css(color, @main_price_text);}*/
 div[class^="swatch-opt-"] > div{ vertical-align: top;}
 .swatch-option{
-	.lib-css(border, 1px solid @main_border);
+	.lib-css(border, 1px solid #E1E1E1);
 	.abs-scale(1);
 	.abs-transition();
 }
@@ -85,7 +85,7 @@ div[class^="swatch-opt-"] > div{ vertical-align: top;}
 .swatch-option:hover,
 .swatch-option.selected{
 	outline:none;
-	.lib-css(border, 1px solid @main_border);
+	.lib-css(border, 1px solid #E1E1E1);
 	&:after{
 		position:absolute;
 		bottom:-6px;
@@ -98,7 +98,7 @@ div[class^="swatch-opt-"] > div{ vertical-align: top;}
 }
 .swatch-option.text:not(.disabled):hover, .swatch-option.image:not(.disabled):hover, .swatch-option.color:not(.disabled):hover{
 	outline:none;
-	.lib-css(border, 1px solid @main_border);
+	.lib-css(border, 1px solid #E1E1E1);
 	.abs-scale(~'1, 1');
 }
 .swatch-attribute.size .swatch-option,
@@ -108,7 +108,7 @@ div[class^="swatch-opt-"] > div{ vertical-align: top;}
 	}
 }
 .swatch-attribute.size .swatch-option.selected, .swatch-attribute.manufacturer .swatch-option.selected{
-	.lib-css(border, 1px solid @main_border);
+	.lib-css(border, 1px solid #E1E1E1);
 	&:after{
 		width:22px;
 	}

@@ -19,11 +19,11 @@
       height: 61px;
       #parentQtySticky {
         height: 43px;
-        margin-right: 72px;
+        margin-right: 80px;
       }
       #timerSticky {
         position: relative;
-        width: 450px;
+        width: 415px;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
@@ -32,7 +32,6 @@
         margin-right: 317px;
       }
       .clSticky {
-        padding: 0 8px 0 0;
         .quantity {
           text-align: left;
           margin-right: 0;
@@ -62,6 +61,7 @@
           display: flex;
           justify-content: center;
           align-items: center;
+          margin-right: 8px;
           .borderImg {
             width: 40px;
             height: 40px;
@@ -76,26 +76,33 @@
           }
         }
       }
-      #btnSticky {
-        background-color: transparent;
-        min-height: 42px;
-        border-color: #fff;
-      }
-      #btnSticky:hover {
-        background-color: #b59677;
-        color: #fff;
-      }
       .contentShow {
         #btnSticky {
             color: #fff;
             border: none;
             border-radius: 4px;
             background: #155da4;
-            font-size: 16px;
-            line-height: 16px;
-            padding: 12px 28.5px;
+            font-size: 14px;
+            line-height: 20px;
+            padding: 10px 30.5px;
             margin-bottom: 0;
+            span {
+                &:before {
+                    display: inline-block;
+                    font-family: icomoon;
+                    font-style: normal;
+                    font-weight: normal;
+                    content: '\e913';
+                    font-size: 20px;
+                    color: #ffffff;
+                    margin-right: 8px;
+                    vertical-align: bottom;
+                }
+            }
         }
+      }
+      #btnSticky:hover {
+          background-color: #4F85BB;
       }
     }
     .btn-plus {
@@ -145,10 +152,32 @@
           .stickyChild {
               #timerSticky {
                   width: 30vw;
-                  margin-right: 10.5vw;
+                  margin-right: 14.5vw;
               }
               #parentQtySticky {
-                  margin-right: 10.5vw;
+                  margin-right: 13.5vw;
+              }
+              #btnSticky:hover {
+                  background-color: #155da4 !important;
+              }
+          }
+      }
+  }
+  @media only screen and (max-width: 768px) {
+      .stickyCart {
+          .stickyChild {
+              justify-content: start;
+              #timerSticky {
+                  width: 30.4vw;
+                  margin-right: 8.2vw;
+              }
+              #parentQtySticky {
+                  margin-right: 8.2vw;
+              }
+              .clSticky {
+                  .imgBorder {
+                      margin-left: 20px;
+                  }
               }
           }
       }
@@ -161,17 +190,28 @@
         width: 100%;
         #btnSticky {
             width: 100%;
-            padding: 16px 28.5px !important;
+            padding: 12px 0 !important;
             margin: 0;
+            font-size: 16px !important;
+            line-height: 24px !important;
+            &:hover {
+                background-color: #155da4 !important;
+            }
+            span {
+                &:before {
+                    font-size: 24px !important;
+                    margin-right: 12px !important;
+                }
+            }
         }
         .clSticky {
-            padding: 0 16px 14px 16px !important;
+            padding: 9px 16px 16px 16px !important;
         }
     }
     .stickyCart {
-        height: 91px;
+        height: 73px;
         .stickyChild {
-            height: 91px;
+            height: 73px;
         }
     }
   }

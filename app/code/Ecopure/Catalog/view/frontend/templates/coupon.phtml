@@ -173,9 +173,9 @@
 <script>
     require(['jquery'],function($){
         $('[data-block="minicart"]').on('contentLoading', function (event) {
-            $('[data-block="minicart"]').on('contentUpdated', function () {
+            setTimeout(function() {
                 $('html, body').animate({scrollTop:0}, 'slow');
-            });
+            }, 2000);
         });
 
         $('.mg-product-code-copy-icon-1').click(function () {

@@ -499,6 +499,7 @@ fotoramaVersion = '4.6.4';
         FULLSCREEN = fullScreenApi.ok,
 
         MOBILE = navigator.userAgent.match(/Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone/i),
+        PAD =navigator.userAgent.match( /(tablet|ipad|playbook|silk)|(android(?!.*mobile))/i),
         SLOW = !CSS3 || MOBILE,
 
         MS_POINTER = navigator.msPointerEnabled,
@@ -2105,7 +2106,7 @@ fotoramaVersion = '4.6.4';
                 classes.remove.push(selectClass);
 
                 $arrs.toggle(!!opts.arrows);
-            } else if (size == 1 && !MOBILE) {
+            } else if (size == 1 && (!MOBILE || PAD)) {
                 o_nav = opts.nav = 'thumbs';
                 opts.navdir = 'vertical';
                 o_navTop = opts.navposition === 'top';

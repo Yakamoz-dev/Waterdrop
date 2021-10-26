@@ -26,7 +26,7 @@ define([
 	        var body 			= $('body');
 	        $(window).scroll(function() {
 				var y = $(this).scrollTop();
-				var hiddenBottom = options.hiddenBottom ? (y + $(this).height() == $(document).height()) : '';
+				var hiddenBottom = options.hiddenBottom ? (y + $(this).height() + 100 >= $(document).height()) : '';
 
 				if (y > scrollHeight && !hiddenBottom) {
 					body.addClass('show-add-cart-bottom');
@@ -63,11 +63,9 @@ define([
 
 	        buttonSticky.click(function() {
 	        	var $this = $(this);
-	        	$this.text(buttonAddToCart.text());
 	        	$this.attr("disabled", "disabled");
 	        	setTimeout(function() {
 	        		$this.removeAttr("disabled");
-                    $('#back-top a').trigger('click');
 	          	}, 1500);
 	          	if($this.hasClass('customize')){
 	          		buttonBundle.click();

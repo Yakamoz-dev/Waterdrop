@@ -875,6 +875,13 @@ body.rtl-layout .sidebar .product-style13 .product-items .product-item-info .pro
     background: #F4FAFF;
     padding: 0 20px;
     height: 80px;
+    .row {
+        &::-webkit-scrollbar{
+            display: none;
+            width: 0;
+            height: 0;
+        }
+    }
 	.text-area{
 		.abs-transition;
 		position:relative; padding: 10px 0 10px 50px;

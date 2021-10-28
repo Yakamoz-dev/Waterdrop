@@ -15,13 +15,22 @@
                 <mfmodule>Blog</mfmodule>
                 <mftype>1</mftype>
             </general>
+            <design>
+                <format_date>F d, Y</format_date>
+                <publication_date>1</publication_date>
+            </design>
             <index_page>
                 <title>Blog</title>
                 <display_mode>0></display_mode>
+                <template></template>
             </index_page>
             <post_view>
+                <design>
+                    <template></template>
+                </design>
                 <related_posts>
                     <enabled>1</enabled>
+                    <template></template>
                     <number_of_posts>5</number_of_posts>
                 </related_posts>
                 <related_products>
@@ -29,17 +38,21 @@
                     <number_of_products>5</number_of_products>
                 </related_products>
                 <comments>
-                    <type>facebook</type>
+                    <type>magefan</type>
                     <number_of_comments>5</number_of_comments>
                     <number_of_replies>5</number_of_replies>
                     <guest_comments>1</guest_comments>
+                    <fb_app_id_header>1</fb_app_id_header>
                     <display_privacy_policy_checkbox>0</display_privacy_policy_checkbox>
+                    <format_date>M d, Y H:i</format_date>
                 </comments>
                 <nextprev>
                     <enabled>1</enabled>
+                    <template></template>
                 </nextprev>
             </post_view>
             <post_list>
+                <template></template>
                 <shortcotent_length>1000</shortcotent_length>
                 <posts_per_page>10</posts_per_page>
                 <lazyload_padding>200</lazyload_padding>
@@ -68,22 +81,35 @@
                 </categories>
                 <recent_posts>
                     <enabled>1</enabled>
+                    <display_image>1</display_image>
                     <posts_per_page>5</posts_per_page>
                     <sort_order>30</sort_order>
                 </recent_posts>
                 <featured_posts>
                     <enabled>0</enabled>
+                    <display_image>1</display_image>
                     <posts_ids></posts_ids>
                     <sort_order>35</sort_order>
                 </featured_posts>
+                <popular_posts>
+                    <enabled>0</enabled>
+                    <display_image>1</display_image>
+                    <posts_per_page>5</posts_per_page>
+                    <sort_order>36</sort_order>
+                </popular_posts>
                 <archive>
                     <enabled>1</enabled>
                     <sort_order>40</sort_order>
+                    <format_date>F Y</format_date>
                 </archive>
                 <tag_claud>
                     <enabled>1</enabled>
                     <!-- <max_tags_number>10</max_tags_number> -->
+                    <animated>0</animated>
+                    <text_highlight_color>006bb4</text_highlight_color>
+                    <cloud_height>250</cloud_height>
                     <sort_order>45</sort_order>
+                    <tag_count>50</tag_count>
                 </tag_claud>
                 <rss_feed>
                     <title>Blog Rss</title>
@@ -111,7 +137,7 @@
             </seo>
             <social>
                 <add_this_enabled>1</add_this_enabled>
-                <add_this_pubid>ra-4def63cd3cf37569</add_this_pubid>
+                <add_this_pubid>ra-608baa0f7d533322</add_this_pubid>
                 <add_this_language>en</add_this_language>
             </social>
             <top_menu>

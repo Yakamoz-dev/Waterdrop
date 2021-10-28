@@ -11,6 +11,10 @@
     <update handle="blog_default"/>
     <update handle="blog_post_list"/>
     <body>
+        <referenceContainer name="columns.top">
+            <block class="Magefan\Blog\Block\TopBanner" name="blog.posts.topbanner" template="post/topbanner.phtml" before="content" />
+            <block class="Magefan\Blog\Block\MidCategories" name="blog.posts.midcategories" template="post/midcategories.phtml" />
+        </referenceContainer>
         <referenceContainer name="content">
             <block class="Magefan\Blog\Block\Category\Info" name="blog.posts.info" template="Magefan_Blog::category/info.phtml" before="blog.posts.list" />
             <block class="Magefan\Blog\Block\Category\SubCategoryLinks" name="blog.category.subcategory.links" template="Magefan_Blog::category/subcategory-links.phtml"  before="blog.posts.list" />

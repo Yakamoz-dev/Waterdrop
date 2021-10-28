@@ -29,7 +29,7 @@
 .post-holder .post-header .post-info {padding: 0 0 10px 0;}
 .post-holder .post-header .post-info .item,
 .post-holder .post-header .post-info .dash {display: inline-block;}
-.post-holder .post-header .post-info .label {font-weight: 700;}
+.post-holder .post-header .post-info .label {font-weight: normal;}
 .post-holder .post-header .post-info .value {font-style: italic;}
 
 
@@ -42,7 +42,24 @@
 .post-list .post-content .post-read-more {padding-top:10px; float:right;}
 
 .blog-category-view .category-content {padding-left: 40px;}
+.post-content .post-description p{
+    position: static;
+    width: 475px;
+    left: calc(50% - 475px/2);
+    top: 62.89%;
+    bottom: 0%;
 
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 170%;
+    color: #333333;
+    flex: none;
+    order: 2;
+    align-self: stretch;
+    flex-grow: 0;
+}
 .post-content .post-description img {margin:0 15px 0 15px;}
 .post-content .post-description ul,
 .post-content .post-description ol {list-style-position: inside;}
@@ -166,21 +183,6 @@
     font-weight: 400;
 }
 
-.widget.blog-search .action.search:before {
-    -webkit-font-smoothing: antialiased;
-    font-size: 16px;
-    line-height: 32px;
-    color: #8f8f8f;
-    content: '\e615';
-    font-family: 'luma-icons';
-    margin: 0;
-    vertical-align: top;
-    display: inline-block;
-    font-weight: normal;
-    overflow: hidden;
-    speak: none;
-    text-align: center;
-}
 
 .widget.blog-search .action.search > span {
     border: 0;
@@ -229,6 +231,30 @@
 .mfblog-autoloader {text-align: center;}
 .mfblog-autoloader .mfblog-show-onload {display: none;}
 
+
+.pages .pages-items {
+    position: static;
+    width: 184px;
+    height: 24px;
+}
+.pages .pages-items .item a{
+    border: none;
+    border-radius: 3px;
+    color: #000;
+}
+.pages .action.previous:before {
+    color: #000 !important;
+    content: '\e617';
+    font-family: 'luma-icons';
+
+}
+.pages .action.next:before {
+    color: #000 !important;
+}
+.pages strong.page {
+    border-radius: 3px;
+    border: none !important;
+}
 
 @media (max-width: 420px) {
   #mfblog_gcomments {max-width:345px; overflow-y: scroll;}

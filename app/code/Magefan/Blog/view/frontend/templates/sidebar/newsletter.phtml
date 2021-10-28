@@ -1,0 +1,28 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog sidebar categories template
+ *
+ * @var \Magento\Newsletter\Block\Subscribe $block
+ */
+?>
+<div class="newsletter">
+    <span class="newsletter-title">Newsletter</span>
+    <hr class="newsletter-line"/>
+    <span class="newsletter-span">Enter your email address below to subscribe to our newsletter</span>
+    <form novalidate
+          action="<?= $block->escapeUrl($block->getFormActionUrl()) ?>"
+          method="post"
+          data-mage-init='{"validation": {"errorClass": "mage-error"}}'>
+        <input class="newsletter-input" name="email" type="text" placeholder="Enter your email" data-mage-init='{"mage/trim-input":{}}'
+               data-validate="{required:true, 'validate-email':true}"/>
+        <button class="newsletter-button">Subscribe</button>
+    </form>
+</div>

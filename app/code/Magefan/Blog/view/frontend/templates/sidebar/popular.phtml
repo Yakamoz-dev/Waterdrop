@@ -1,0 +1,64 @@
+
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog sidebar posts list template
+ *
+ * @var $block \Magefan\Blog\Block\Sidebar\Popular
+ */
+?>
+
+<style type="text/css">
+    .block-list-posts{
+        position: static;
+        width: 285px;
+        background: #FFFFFF;
+    }
+    .block-title{
+
+
+    }
+
+    .block-content{
+        border:none !important;
+    }
+
+</style>
+<?php
+$_postCollection = $block->getPostCollection();
+?>
+<?php
+$width = (int)$block->getBlockImageWidth() ?: 300;
+$height = (int)$block->getBlockImageheight() ?: 200;
+$imageHelper = $this->helper(\Magefan\Blog\Helper\Image::class);
+?>
+<?php if ($_postCollection->count()) { ?>
+    <div class="widget block block-<?= $block->escapeHtml(str_replace('_', '-', $block->getWidgetKey())) ?> block-list-posts popular">
+        <div class="block-title">
+            <strong><?= $block->escapeHtml(__($block->getBlockTitle() ?: 'Popular')) ?></strong>
+        </div>
+        <div class="block-content">
+            <?php foreach ($_postCollection as $_post) { ?>
+                <?php
+                $_postUrl = $block->escapeUrl($_post->getPostUrl());
+                $_postName = $block->escapeHtml($_post->getTitle());
+                ?>
+                <div class="item clearfix">
+                    <a class="post-item-link" title="<?= $_postName ?>" href="<?= $_postUrl ?>">
+                        <?= $_postName ?>
+                    </a>
+                </div>
+
+            <?php } ?>
+        </div>
+    </div>
+<?php } ?>
+
+

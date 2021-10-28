@@ -42,7 +42,16 @@ class ImageUploader extends \Magento\Catalog\Model\ImageUploader
         $basePath,
         $allowedExtensions
     ) {
-        parent::__construct($coreFileStorageDatabase, $filesystem, $uploaderFactory, $storeManager, $logger, $baseTmpPath, $basePath, $allowedExtensions);
+        parent::__construct(
+            $coreFileStorageDatabase,
+            $filesystem,
+            $uploaderFactory,
+            $storeManager,
+            $logger,
+            $baseTmpPath,
+            $basePath,
+            $allowedExtensions
+        );
         $this->filesystem = $filesystem;
     }
 
@@ -50,7 +59,7 @@ class ImageUploader extends \Magento\Catalog\Model\ImageUploader
      * Checking file for moving and move it
      *
      * @param string $imageName
-     *
+     * @param bool $returnRelativePath
      * @return string
      *
      * @throws \Magento\Framework\Exception\LocalizedException
@@ -58,7 +67,6 @@ class ImageUploader extends \Magento\Catalog\Model\ImageUploader
     public function moveFileFromTmp($imageName, $returnRelativePath = false)
     {
         $originalImageName = $imageName;
-
         $baseTmpPath = $this->getBaseTmpPath();
         $basePath = $this->getBasePath();
         $baseImagePath = $this->getFilePath($basePath, $imageName);
@@ -94,6 +102,6 @@ class ImageUploader extends \Magento\Catalog\Model\ImageUploader
             );
         }
 
-        return $imageName;
+        return $returnRelativePath ? $baseImagePath : $imageName;
     }
 }

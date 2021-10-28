@@ -108,7 +108,7 @@ class View extends \Magefan\Blog\Block\Post\PostList
             ]);
         }
     }
-    
+
     /**
      * Retrieve identities
      *

@@ -64,8 +64,54 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
                 $robots = $this->config->getAuthorRobots();
                 $this->pageConfig->setRobots($robots);
             }
+
+            $pageMainTitle = $this->getLayout()->getBlock('page.main.title');
+            if ($pageMainTitle) {
+                $pageMainTitle->setPageTitle(
+                    $this->escapeHtml($author->getTitle())
+                );
+            }
         }
 
         return parent::_prepareLayout();
+    }
+
+    /**
+     * Get template type
+     *
+     * @return string
+     */
+    public function getPostTemplateType()
+    {
+        $template = (string)$this->_scopeConfig->getValue(
+            'mfblog/author/template',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+        if ($template) {
+            return $template;
+        }
+
+        $template = (string)$this->getAuthor()->getData('posts_list_template');
+        if ($template) {
+            return $template;
+        }
+
+        return parent::getPostTemplateType();
+    }
+
+    /**
+     * Retrieve Toolbar Block
+     * @return \Magefan\Blog\Block\Post\PostList\Toolbar
+     */
+    public function getToolbarBlock()
+    {
+        $toolBarBlock = parent::getToolbarBlock();
+        $limit = (int)$this->getAuthor()->getData('posts_per_page');
+
+        if ($limit) {
+            $toolBarBlock->setData('limit', $limit);
+        }
+
+        return $toolBarBlock;
     }
 }

@@ -62,8 +62,12 @@ class View extends \Magefan\Blog\App\Action\Action
      */
     protected function _initPost()
     {
-        $id = $this->getRequest()->getParam('id');
-        $secret = $this->getRequest()->getParam('secret');
+        $id = (int)$this->getRequest()->getParam('id');
+        if (!$id) {
+            return false;
+        }
+
+        $secret = (string)$this->getRequest()->getParam('secret');
         $storeId = $this->_storeManager->getStore()->getId();
 
         $post = $this->_objectManager->create(\Magefan\Blog\Model\Post::class)->load($id);
@@ -92,10 +96,12 @@ class View extends \Magefan\Blog\App\Action\Action
      */
     protected function _initCategory()
     {
-        $id = $this->getRequest()->getParam('category_id');
+        $id = (int)$this->getRequest()->getParam('category_id');
+        if (!$id) {
+            return false;
+        }
 
         $storeId = $this->_storeManager->getStore()->getId();
-
         $category = $this->_objectManager->create(\Magefan\Blog\Model\Category::class)->load($id);
 
         if (!$category->isVisibleOnStore($storeId)) {

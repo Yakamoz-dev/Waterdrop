@@ -44,6 +44,7 @@ final class Section
      */
     protected $metadata;
 
+
     /**
      * Section constructor.
      * @param ScopeConfigInterface $scopeConfig
@@ -77,11 +78,20 @@ final class Section
     final public function getModule()
     {
         $module = (string) $this->getConfig(self::MODULE);
-        if ($module
-            && !$this->getConfig(self::TYPE)
-            || $this->metadata->getEdition() != 'C' . strrev('ytinummo')
-        ) {
-            return $module;
+        $url = $this->scopeConfig->getValue(
+            'web/unsecure/base' . '_' . 'url',
+            ScopeInterface::SCOPE_STORE,
+            0
+        );
+
+        if (\Magefan\Community\Model\UrlChecker::showUrl($url)) {
+            if ($module
+                && (!$this->getConfig(self::TYPE)
+                    || $this->getConfig(self::TYPE) && $this->metadata->getEdition() != 'C' . strrev('ytinummo')
+                )
+            ) {
+                return $module;
+            }
         }
         return false;
     }

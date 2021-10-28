@@ -24,8 +24,10 @@ class Index extends \Magefan\Blog\Block\Post\PostList
      */
     protected function _prepareLayout()
     {
-        $this->_addBreadcrumbs();
-        $this->pageConfig->getTitle()->set($this->_getConfigValue('title'));
+//        $this->_addBreadcrumbs();
+        $this->pageConfig->getTitle()->set(
+            $this->_getConfigValue('meta_title') ?: $this->_getConfigValue('title')
+        );
         $this->pageConfig->setKeywords($this->_getConfigValue('meta_keywords'));
         $this->pageConfig->setDescription($this->_getConfigValue('meta_description'));
 
@@ -37,7 +39,33 @@ class Index extends \Magefan\Blog\Block\Post\PostList
             );
         }
 
+        $pageMainTitle = $this->getLayout()->getBlock('page.main.title');
+        if ($pageMainTitle) {
+            $pageMainTitle->setPageTitle(
+                $this->escapeHtml($this->_getConfigValue('title'))
+            );
+        }
+
         return parent::_prepareLayout();
+    }
+
+    /**
+     * Retrieve Toolbar Block
+     * @return \Magefan\Blog\Block\Post\PostList\Toolbar
+     */
+    public function getToolbarBlock()
+    {
+        $toolBarBlock = parent::getToolbarBlock();
+        $limit = (int)$this->_scopeConfig->getValue(
+            'mfblog/index_page/posts_per_page',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+
+        if ($limit) {
+            $toolBarBlock->setData('limit', $limit);
+        }
+
+        return $toolBarBlock;
     }
 
     /**
@@ -117,7 +145,6 @@ class Index extends \Magefan\Blog\Block\Post\PostList
         );
     }
 
-
     /**
      * Prepare breadcrumbs
      *
@@ -151,5 +178,57 @@ class Index extends \Magefan\Blog\Block\Post\PostList
                 ]
             );
         }
+    }
+
+    /**
+     * Get template type
+     *
+     * @return string
+     */
+    public function getPostTemplateType()
+    {
+        $template = (string)$this->_scopeConfig->getValue(
+            'mfblog/index_page/template',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+        if ($template) {
+            return $template;
+        }
+
+        return parent::getPostTemplateType();
+    }
+
+    /**
+     * Render block HTML
+     *
+     * @return string
+     */
+    protected function _toHtml()
+    {
+        $displayMode = $this->_scopeConfig->getValue(
+            \Magefan\Blog\Model\Config::XML_PATH_HOMEPAGE_DISPLAY_MODE,
+            ScopeInterface::SCOPE_STORE
+        );
+        if (2 == $displayMode) {
+            return '';
+        }
+        return parent::_toHtml();
+    }
+
+    /**
+     * Retrieve identities
+     * git add
+     * @return array
+     */
+    public function getIdentities()
+    {
+        $displayMode = $this->_scopeConfig->getValue(
+            \Magefan\Blog\Model\Config::XML_PATH_HOMEPAGE_DISPLAY_MODE,
+            ScopeInterface::SCOPE_STORE
+        );
+        if (2 == $displayMode) {
+            return [];
+        }
+        return parent::getIdentities();
     }
 }

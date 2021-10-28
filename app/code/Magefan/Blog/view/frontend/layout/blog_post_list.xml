@@ -11,6 +11,9 @@
     <body>
         <attribute name="class" value="blog-page-list" />
         <referenceBlock name="blog.posts.list">
+            <arguments>
+                <argument name="style_view_model" xsi:type="object">Magefan\Blog\ViewModel\Style</argument>
+            </arguments>
             <block class="Magefan\Blog\Block\Post\PostList\Item" name="blog.posts.list.item" template="post/list/item.phtml">
                 <block class="Magefan\Blog\Block\Post\Info" name="blog.post.info" template="post/info.phtml" />
                 <action method="setPostInfoBlockName">
@@ -24,10 +27,11 @@
                     </action>
                     <arguments>
                         <argument name="lazyload_js" xsi:type="string">Magefan_Blog/js/lazyload</argument>
-                        <argument name="list_wrapper" xsi:type="string">.post-list-wrapper .post-list, .blog-list-wrapper .blog-list</argument>
+                        <argument name="list_wrapper" xsi:type="string">.post-list-wrapper .post-list, .blog-list-wrapper .blog-list, .column .mosaica-4, .column .mosaica-5, .column .mosaica-6, .column .template-1-2, .column .template-1-3, .column .template-4-1, .column .template-4-2, .column .template-5-1, .column .mosaica-1, .column .mosaica-2</argument>
                     </arguments>
                 </block>
             </block>
+
             <action method="setToolbarBlockName">
                 <argument name="name" xsi:type="string">post_list_toolbar</argument>
             </action>

@@ -1,0 +1,56 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+/**
+ * Blog post info template
+ *
+ * @var $block \Magefan\Blog\Block\Post\ViewInfo
+ */
+?>
+
+<?php $_post = $block->getPost() ?>
+
+<div class="post-info">
+
+    <?php if ($block->authorEnabled()) { ?>
+        <?php if ($_author = $_post->getAuthor()) { ?>
+            <div class="item post-author">
+                <i class="mf-blog-icon mfbi-user"></i>
+                <span class="label"><?= $block->escapeHtml(__('by ')) ?></span>
+                <span class="value">
+                <?php if ($authorPageEnabled = $block->authorPageEnabled()) { ?>
+                <a title="<?= $block->escapeHtml($_author->getTitle()) ?>"
+                   href="<?= $block->escapeUrl($_author->getAuthorUrl()) ?>">
+                <?php } ?>
+
+                <?= $block->escapeHtml($_author->getTitle()) ?>
+
+                <?php if ($authorPageEnabled) { ?>
+                </a>
+                <?php } ?>
+            </span>
+            </div>
+            <span class="middle-circle"> · </span>
+        <?php } ?>
+    <?php } ?>
+
+    <?php if ($_categoriesCount = $_post->getCategoriesCount()) { ?>
+        <div class="item post-categories">
+            <i class="mf-blog-icon mfbi-folder"></i>
+            <?php $n = 0; ?>
+            <?php foreach ($_post->getParentCategories() as $ct) { ?>
+                <?php $n++; ?>
+                <a title="<?= $block->escapeHtml($ct->getTitle()) ?>"
+                   href="<?= $block->escapeUrl($ct->getCategoryUrl()) ?>"
+                ><?= $block->escapeHtml($ct->getTitle()) ?></a><?= /*@noEscape*/ ($n != $_categoriesCount) ? ',' : '' ?>
+            <?php } ?>
+        </div>
+    <?php } ?>
+
+</div>

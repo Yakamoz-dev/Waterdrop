@@ -62,7 +62,7 @@
 
         .step-title {
             &:extend(.abs-checkout-title all);
-            .lib-css(border-bottom, @checkout-step-title__border);
+            border-bottom: 1px solid #E1E1E1;
         }
 
         .step-content {
@@ -205,7 +205,7 @@
 #checkoutSteps {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-column-gap: 20px;
+    grid-column-gap: 35px;
     background-color: unset;
     box-shadow: unset;
     .field-error {
@@ -226,6 +226,21 @@
     border-radius: 4px !important;
     border: 1px solid #E1E1E1 !important;
     height: 40px;
+}
+.payment-option-inner {
+    width: 100%;
+    #discount-code {
+        width: 100%;
+        padding: 0 20px;
+        border-radius: 4px 0 0 4px !important;
+        font-size: 14px;
+        line-height: 16px;
+        &::placeholder {
+            font-size: 14px;
+            line-height: 16px;
+            color: #999999;
+        }
+    }
 }
 .custom-checkout-style {
     width: 100%;
@@ -261,6 +276,7 @@
     font-size: 12px;
     line-height: 14px;
     color: #333333;
+    padding-top: 4px;
 }
 .custom-style-shoppin-method a {
     color: #155DA4;
@@ -296,8 +312,14 @@
     margin-top: 0 !important;
 }
 #discount-form > div.actions-toolbar > div > button{
-    border-radius: 4px;
+    border-radius: 0 4px 4px 0;
     height: 40px;
+    margin-right: 0;
+    margin-left: -1px;
+    padding: 10px 28.5px;
+    font-size: 14px;
+    line-height: 20px;
+    min-width: 100px;
 }
 #checkout-review-table {
     border: none;
@@ -361,15 +383,18 @@
 #shipping-new-address-form > fieldset > div > div.field._required > label {
     display: none;
 }
-.opc-wrapper .form-login .fieldset .field .label, .opc-wrapper .form-shipping-address .fieldset .field .label {
+.opc-wrapper .form-login .fieldset .field .label, .opc-wrapper .form-shipping-address .fieldset .field .label, .opc-wrapper .checkout-billing-address .billing-address-form .fieldset .field .label {
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
     line-height: 16px;
     color: #333333;
 }
+.opc-wrapper .checkout-billing-address .billing-address-form .admin__control-fields .control .field .label {
+    display: none;
+}
 .onestepcheckout-index-index .field.choice {
-    padding: 0 10px;
+    padding-left: 10px;
 }
 .field .control._with-tooltip input {
     margin-right: 0;
@@ -388,6 +413,23 @@
     line-height: 16px;
     color: #333333;
     margin-bottom: 8px;
+}
+// Pad
+@media (max-width: 1024px) {
+    .opc-wrapper .form-discount {
+        max-width: unset;
+    }
+    #checkoutSteps {
+        input[type="email"] {
+            margin-bottom: 20px;
+        }
+    }
+    .checkout-container, .opc-wrapper {
+        margin: 0;
+    }
+    .columns .column.main {
+        padding-bottom: 0;
+    }
 }
 // Mobile
 @media (max-width: 767px) {
@@ -409,5 +451,8 @@
 
     .onestepcheckout-index-index .field.choice {
         padding-bottom: 16px;
+    }
+    .onestepcheckout-index-index .field.choice {
+        padding-left: 30px !important;
     }
 }

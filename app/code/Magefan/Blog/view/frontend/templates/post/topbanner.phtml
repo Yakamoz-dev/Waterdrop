@@ -1,0 +1,31 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ *
+ * Glory to Ukraine! Glory to the heroes!
+ */
+?>
+<?php
+
+?>
+<div class="top-banner">
+    <div class="top-banner-main">
+        <div class="top-banner-left">
+            <div class="top-banner-title"><span>Newsletter</span></div>
+            <hr class="top-banner-line" />
+            <p>Enter your email address below to subscribe to our newsletter and get more information from us.</p>
+            <form class="top-banner-form" novalidate
+                  action="<?= $block->escapeUrl($block->getFormActionUrl()) ?>"
+                  method="post"
+                  data-mage-init='{"validation": {"errorClass": "mage-error"}}'>
+                <input name="email" placeholder="Enter your email" data-mage-init='{"mage/trim-input":{}}'
+                       data-validate="{required:true, 'validate-email':true}"/>
+                <button>Subscribe</button>
+            </form>
+        </div>
+        <div class="top-banner-right">
+        </div>
+    </div>
+</div>
+

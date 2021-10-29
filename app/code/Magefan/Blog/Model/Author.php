@@ -16,6 +16,12 @@ use Magento\Framework\Model\AbstractModel;
  */
 class Author extends AbstractModel implements AuthorInterface
 {
+
+    /**
+     * @var string
+     */
+    protected $controllerName;
+
     /**
      * Initialize dependencies.
      *
@@ -51,6 +57,7 @@ class Author extends AbstractModel implements AuthorInterface
     {
         $this->_init(\Magefan\Blog\Model\ResourceModel\Author::class);
         $this->_collectionName = \Magefan\Blog\Model\ResourceModel\Author\Collection::class;
+        $this->controllerName = URL::CONTROLLER_AUTHOR;
     }
 
     /**
@@ -154,5 +161,55 @@ class Author extends AbstractModel implements AuthorInterface
     public function getName($separator = ' ')
     {
         return $this->getFirstname() . $separator . $this->getLastname();
+    }
+
+    /**
+     * @deprecated use getDynamicData method in graphQL data provider
+     * Prepare all additional data
+     * @return array
+     */
+    public function getDynamicData()
+    {
+        $data = $this->getData();
+
+        $keys = [
+            'meta_description',
+            'meta_title',
+            'author_url',
+            'name',
+            'title',
+            'identifier',
+        ];
+
+        $data['author_id'] = $this->getId();
+
+        foreach ($keys as $key) {
+            $method = 'get' . str_replace(
+                '_',
+                '',
+                ucwords($key, '_')
+            );
+            $data[$key] = $this->$method();
+        }
+
+        return $data;
+    }
+
+    /**
+     * Retrieve controller name
+     * @return string
+     */
+    public function getControllerName()
+    {
+        return $this->controllerName;
+    }
+
+    /**
+     * Retrieve true if author is active
+     * @return boolean
+     */
+    public function isActive()
+    {
+        return $this->getIsActive();
     }
 }

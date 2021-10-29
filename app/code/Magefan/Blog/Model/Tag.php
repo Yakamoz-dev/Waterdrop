@@ -53,6 +53,11 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     protected $_url;
 
     /**
+     * @var string
+     */
+    protected $controllerName;
+
+    /**
      * Initialize dependencies.
      *
      * @param \Magento\Framework\Model\Context $context
@@ -81,7 +86,8 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
      */
     protected function _construct()
     {
-        $this->_init('Magefan\Blog\Model\ResourceModel\Tag');
+        $this->_init(\Magefan\Blog\Model\ResourceModel\Tag::class);
+        $this->controllerName = URL::CONTROLLER_TAG;
     }
 
     /**
@@ -94,6 +100,16 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     }
 
     /**
+     * Retrieve if is visible on store
+     * @return bool
+     */
+    public function isVisibleOnStore($storeId)
+    {
+        return $this->getIsActive()
+            && (null === $storeId || array_intersect([0, $storeId], $this->getStoreIds()));
+    }
+
+    /**
      * Retrieve model title
      * @param  boolean $plural
      * @return string
@@ -102,7 +118,6 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     {
         return $plural ? 'Tags' : 'Tag';
     }
-
 
     /**
      * Check if tag identifier exist for specific store
@@ -131,7 +146,13 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
      */
     public function getTagUrl()
     {
-        return $this->_url->getUrl($this, URL::CONTROLLER_TAG);
+        $url = $this->getData('tag_url');
+        if (!$url) {
+            $url = $this->_url->getUrl($this, URL::CONTROLLER_TAG);
+            $this->setData('tag_url', $url);
+        }
+
+        return $url;
     }
 
     /**
@@ -185,5 +206,41 @@ class Tag extends \Magento\Framework\Model\AbstractModel implements \Magento\Fra
     public function getIdentifier()
     {
         return (string)$this->getData('identifier');
+    }
+
+    /**
+     * Retrieve controller name
+     * @return string
+     */
+    public function getControllerName()
+    {
+        return $this->controllerName;
+    }
+
+    /**
+     * @deprecated use getDynamicData method in graphQL data provider
+     * Return all additional data
+     * @return array
+     */
+    public function getDynamicData()
+    {
+        $data = $this->getData();
+
+        $keys = [
+            'meta_description',
+            'meta_title',
+            'tag_url',
+        ];
+
+        foreach ($keys as $key) {
+            $method = 'get' . str_replace(
+                '_',
+                '',
+                ucwords($key, '_')
+            );
+            $data[$key] = $this->$method();
+        }
+
+        return $data;
     }
 }

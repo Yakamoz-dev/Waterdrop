@@ -13,6 +13,10 @@ namespace Magefan\Blog\Block\Widget;
  */
 class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \Magento\Widget\Block\BlockInterface
 {
+    /**
+     * @var array
+     */
+    static $processedIds = [];
 
     /**
      * @var \Magefan\Blog\Model\CategoryFactory
@@ -51,7 +55,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
     /**
      * Set blog template
      *
-     * @return this
+     * @return string
      */
     public function _toHtml()
     {
@@ -59,7 +63,12 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
             $this->getData('custom_template') ?: 'Magefan_Blog::widget/recent.phtml'
         );
 
-        return parent::_toHtml();
+        $html = parent::_toHtml();
+
+        foreach ($this->getPostCollection() as $item) {
+            self::$processedIds[$item->getId()] = $item->getId();
+        }
+        return $html;
     }
 
     /**
@@ -69,7 +78,7 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
      */
     public function getTitle()
     {
-        return $this->getData('title') ?: __('Recent Blog Posts');
+        return $this->getData('title') ?: '';
     }
 
     /**
@@ -92,7 +101,11 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
         parent::_preparePostCollection();
 
         $this->_postCollection->addRecentFilter();
-        if ($category = $this->getCategory()) {
+
+        $categoryIds = explode(',', $this->getData('category_id'));
+        if (count($categoryIds) > 1) {
+            $this->_postCollection->addCategoryFilter($categoryIds);
+        } elseif ($category = $this->getCategory()) {
             $this->_postCollection->addCategoryFilter($category);
         }
 
@@ -112,6 +125,11 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
         if ($to = $this->getData('to')) {
             $this->_postCollection
                 ->addFieldToFilter('publish_time', ['lteq' => $to . " 00:00:00"]);
+        }
+
+        $enableNoRepeat = $this->getData('no_repeat_posts_enable');
+        if ($enableNoRepeat && self::$processedIds) {
+            $this->_postCollection->addFieldToFilter('post_id', ['nin' => self::$processedIds]);
         }
     }
 
@@ -139,15 +157,17 @@ class Recent extends \Magefan\Blog\Block\Post\PostList\AbstractList implements \
 
         return $this->_category;
     }
-
+    
     /**
      * Retrieve post short content
-     * @param  \Magefan\Blog\Model\Post $post
      *
+     * @param  \Magefan\Blog\Model\Post $post
+     * @param  mixed $len
+     * @param  mixed $endСharacters
      * @return string
      */
-    public function getShorContent($post)
+    public function getShorContent($post, $len = null, $endСharacters = null)
     {
-        return $post->getShortFilteredContent();
+        return $post->getShortFilteredContent($len, $endСharacters);
     }
 }

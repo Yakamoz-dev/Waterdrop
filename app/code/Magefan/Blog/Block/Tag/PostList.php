@@ -70,8 +70,46 @@ class PostList extends \Magefan\Blog\Block\Post\PostList
                     ['attributes' => ['rel' => 'canonical']]
                 );
             }
+
+            $pageMainTitle = $this->getLayout()->getBlock('page.main.title');
+            if ($pageMainTitle) {
+                $pageMainTitle->setPageTitle(
+                    $this->escapeHtml($tag->getTitle())
+                );
+            }
         }
 
         return parent::_prepareLayout();
+    }
+
+    /**
+     * Get template type
+     *
+     * @return string
+     */
+    public function getPostTemplateType()
+    {
+        $template = (string)$this->getTag()->getData('posts_list_template');
+        if ($template) {
+            return $template;
+        }
+
+        return parent::getPostTemplateType();
+    }
+
+    /**
+     * Retrieve Toolbar Block
+     * @return \Magefan\Blog\Block\Post\PostList\Toolbar
+     */
+    public function getToolbarBlock()
+    {
+        $toolBarBlock = parent::getToolbarBlock();
+        $limit = (int)$this->getTag()->getData('posts_per_page');
+
+        if ($limit) {
+            $toolBarBlock->setData('limit', $limit);
+        }
+
+        return $toolBarBlock;
     }
 }

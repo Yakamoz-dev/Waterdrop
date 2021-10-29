@@ -9,6 +9,7 @@
 namespace Magefan\Blog\Model;
 
 use Magefan\Blog\Model\Url;
+use Magento\Store\Model\ScopeInterface;
 
 /**
  * Post model
@@ -43,7 +44,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     const CACHE_TAG = 'mfb_p';
 
     /**
-     * Gallery images separator
+     * Gallery images separator constant
      */
     const GALLERY_IMAGES_SEPARATOR = ';';
 
@@ -200,7 +201,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      */
     protected function _construct()
     {
-        $this->_init('Magefan\Blog\Model\ResourceModel\Post');
+        $this->_init(\Magefan\Blog\Model\ResourceModel\Post::class);
         $this->controllerName = URL::CONTROLLER_POST;
     }
 
@@ -227,6 +228,9 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             $newCategories = [];
         }
 
+        if ($this->getData('is_active') && $this->getData('is_active') != $this->getOrigData('is_active')) {
+            $identities[] = self::CACHE_TAG . '_' . 0;
+        }
 
         $isChangedCategories = count(array_diff($oldCategories, $newCategories));
 
@@ -239,6 +243,12 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             }
         }
 
+        $links = $this->getData('links');
+        if (!empty($links['product'])) {
+            foreach ($links['product'] as $productId => $linkData) {
+                $identities[] = \Magento\Catalog\Model\Product::CACHE_TAG . '_' . $productId;
+            }
+        }
 
         return $identities;
     }
@@ -355,6 +365,24 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     }
 
     /**
+     * Retrieve featured link image url
+     * @return mixed
+     */
+    public function getFeaturedListImage()
+    {
+        if (!$this->hasData('featured_list_image')) {
+            if ($file = $this->getData('featured_list_img')) {
+                $image = $this->_url->getMediaUrl($file);
+            } else {
+                $image = false;
+            }
+            $this->setData('featured_list_image', $image);
+        }
+
+        return $this->getData('featured_list_image');
+    }
+
+    /**
      * Set media gallery images url
      *
      * @param array $images
@@ -455,6 +483,9 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     {
         $key = 'short_filtered_content' . $len;
         if (!$this->hasData($key)) {
+
+            $isPagebreakDefined = false;
+
             if ($this->getShortContent()) {
                 $content = $this->filterProvider->getPageFilter()->filter(
                     (string) $this->getShortContent() ?: ''
@@ -465,19 +496,75 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                 if (!$len) {
                     $pageBraker = '<!-- pagebreak -->';
                     $len = mb_strpos($content, $pageBraker);
-                    if (!$len) {
+                    if ($len) {
+                        $isPagebreakDefined = true;
+                    } else {
                         $len = (int)$this->scopeConfig->getValue(
                             'mfblog/post_list/shortcotent_length',
-                            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+                            ScopeInterface::SCOPE_STORE
                         );
                     }
                 }
             }
 
             if ($len) {
+
+                if (!$isPagebreakDefined) {
+
+                    $oLen = $len;
+                    /* Skip <style> tags at the begining of string in calculations */
+                    $sp1 = mb_strpos($content, '<style>');
+                    if (false !== $sp1) {
+                        $stylePattern = "~\<style(.*)\>(.*)\<\/style\>~";
+                        $cc = preg_replace($stylePattern, '', $content); /* remove style tag */
+                        $sp2 = mb_strpos($content, '</style>');
+
+                        while (false !== $sp1 && false !== $sp2 && $sp1 < $sp2 && $sp2 > $len && $sp1 < $len) {
+                            $len = $oLen + $sp2 + 8;
+                            $sp1 = mb_strpos($content, '<style>', $sp2 + 1);
+                            $sp2 = mb_strpos($content, '</style>', $sp2 + 1);
+                        }
+
+                        $l = mb_strlen($content);
+                        if ($len < $l) {
+                            $sp2 = mb_strrpos($content, '</style>', $len - $l);
+                            if ($len < $oLen + $sp2 + 8) {
+                                $len = $oLen + $sp2 + 8;
+                            }
+                        }
+
+                    } else {
+                        $cc = $content;
+                    }
+
+                    /* Skip long HTML */
+                    $stcc = trim(strip_tags($cc));
+                    //if ($stcc && strlen($stcc) < strlen($cc) / 3) {
+                    if ($stcc && $len < mb_strlen($content)) {
+                        $str = '';
+                        $start = false;
+                        foreach (explode(' ', $stcc) as $s) {
+                            $str .= ($str ? ' ' : '') . $s;
+
+                            $pos = mb_strpos($content, $str);
+                            if (false !== $pos) {
+                                $start = $pos;
+                            } else {
+                                break;
+                            }
+                        }
+
+                        if (false !== $start) {
+                            if ($len < $start + $oLen) {
+                                $len = $start + $oLen;
+                            }
+                        }
+                    }
+                }
+
                 /* Do not cut words */
                 while ($len < strlen($content)
-                    && !in_array($content[$len], [' ', '<', "\t", "\r", "\n"]) ) {
+                    && !in_array($content[$len], [' ', '<', "\t", "\r", "\n"])) {
                     $len++;
                 }
 
@@ -500,7 +587,15 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
                         $content = $_content->saveHTML();
                     }
                 } catch (\Exception $e) {
+                    /* Do nothing, it's OK */
                 }
+            }
+
+            if ($endСharacters === null) {
+                $endСharacters = $this->scopeConfig->getValue(
+                    'mfblog/post_list/end_characters',
+                    ScopeInterface::SCOPE_STORE
+                );
             }
 
             if ($len && $endСharacters) {
@@ -584,7 +679,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             }
         }
 
-        return trim($desc);
+        return trim(html_entity_decode($desc));
     }
 
     /**
@@ -625,7 +720,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      */
     public function getParentCategories()
     {
-        if (is_null($this->_parentCategories)) {
+        if (null === $this->_parentCategories) {
             $this->_parentCategories = $this->_categoryCollectionFactory->create()
                 ->addFieldToFilter('category_id', ['in' => $this->getCategories()])
                 ->addStoreFilter($this->getStoreId())
@@ -671,9 +766,10 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      */
     public function getRelatedTags()
     {
-        if (is_null($this->_relatedTags)) {
+        if (null === $this->_relatedTags) {
             $this->_relatedTags = $this->_tagCollectionFactory->create()
                 ->addFieldToFilter('tag_id', ['in' => $this->getTags()])
+                ->addStoreFilter($this->getStoreId())
                 ->addActiveFilter()
                 ->setOrder('title');
         }
@@ -711,14 +807,21 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      */
     public function getCommentsCount()
     {
-        if (!$this->hasData('comments_count')) {
-            $comments = $this->_commentCollectionFactory->create()
-                ->addFieldToFilter('post_id', $this->getId())
-                ->addActiveFilter()
-                ->addFieldToFilter('parent_id', 0);
-            $this->setData('comments_count', (int)$comments->getSize());
+        $enableComments = $this->getEnableComments();
+        if ($enableComments || $enableComments === null) {
+            /*
+            if (!$this->hasData('comments_count')) {
+                $comments = $this->_commentCollectionFactory->create()
+                    ->addFieldToFilter('post_id', $this->getId())
+                    ->addActiveFilter()
+                    ->addFieldToFilter('parent_id', 0);
+                $this->setData('comments_count', (int)$comments->getSize());
+            }
+            */
+            return $this->getData('comments_count');
+        } else {
+            return 0;
         }
-        return $this->getData('comments_count');
     }
 
     /**
@@ -817,11 +920,34 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * @param  string $format
      * @return string
      */
-    public function getPublishDate($format = 'Y-m-d H:i:s')
+    public function getPublishDate($format = '')
     {
+        if (!$format) {
+            $format = $this->scopeConfig->getValue(
+                'mfblog/design/format_date',
+                ScopeInterface::SCOPE_STORE
+            );
+
+            if (!$format) {
+                $format = 'Y-m-d H:i:s';
+            }
+        }
+
         return \Magefan\Blog\Helper\Data::getTranslatedDate(
             $format,
             $this->getData('publish_time')
+        );
+    }
+
+    /**
+     * Retrieve true if post publish date display is enabled
+     * @return bool
+     */
+    public function isPublishDateEnabled()
+    {
+        return (bool)$this->scopeConfig->getValue(
+            'mfblog/design/publication_date',
+            ScopeInterface::SCOPE_STORE
         );
     }
 
@@ -856,6 +982,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
      * Prepare all additional data
      * @param  string $format
      * @return self
+     * @deprecated replaced with getDynamicData
      */
     public function initDinamicData()
     {
@@ -886,6 +1013,93 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
     }
 
     /**
+     * @deprecated use getDynamicData method in graphQL data provider
+     * Prepare all additional data
+     * @param null|array $fields
+     * @return array
+     */
+    public function getDynamicData($fields = null)
+    {
+        $data = $this->getData();
+
+        $keys = [
+            'og_image',
+            'og_type',
+            'og_description',
+            'og_title',
+            'meta_description',
+            'meta_title',
+            'short_filtered_content',
+            'filtered_content',
+            'first_image',
+            'featured_image',
+            'post_url',
+        ];
+
+        foreach ($keys as $key) {
+            if (null === $fields || array_key_exists($key, $fields)) {
+                $method = 'get' . str_replace(
+                    '_',
+                    '',
+                    ucwords($key, '_')
+                );
+                $data[$key] = $this->$method();
+            }
+        }
+
+        if (null === $fields || array_key_exists('tags', $fields)) {
+            $tags = [];
+            foreach ($this->getRelatedTags() as $tag) {
+                $tags[] = $tag->getDynamicData(
+                    // isset($fields['tags']) ? $fields['tags'] : null
+                );
+            }
+            $data['tags'] = $tags;
+        }
+
+        /* Do not use check for null === $fields here
+         * this checks is used for REST, and related data was not provided via reset */
+        if (is_array($fields) && array_key_exists('related_posts', $fields)) {
+            $relatedPosts = [];
+            foreach ($this->getRelatedPosts() as $relatedPost) {
+                $relatedPosts[] = $relatedPost->getDynamicData(
+                    isset($fields['related_posts']) ? $fields['related_posts'] : null
+                );
+            }
+            $data['related_posts'] = $relatedPosts;
+        }
+
+        /* Do not use check for null === $fields here */
+        if (is_array($fields) && array_key_exists('related_products', $fields)) {
+            $relatedProducts = [];
+            foreach ($this->getRelatedProducts() as $relatedProduct) {
+                $relatedProducts[] = $relatedProduct->getSku();
+            }
+            $data['related_products'] = $relatedProducts;
+        }
+
+        if (null === $fields || array_key_exists('categories', $fields)) {
+            $categories = [];
+            foreach ($this->getParentCategories() as $category) {
+                $categories[] = $category->getDynamicData(
+                    isset($fields['categories']) ? $fields['categories'] : null
+                );
+            }
+            $data['categories'] = $categories;
+        }
+
+        if (null === $fields || array_key_exists('author', $fields)) {
+            if ($author = $this->getAuthor()) {
+                $data['author'] = $author->getDynamicData(
+                    //isset($fields['author']) ? $fields['author'] : null
+                );
+            }
+        }
+
+        return $data;
+    }
+
+    /**
      * Duplicate post and return new object
      * @return self
      */
@@ -898,6 +1112,7 @@ class Post extends \Magento\Framework\Model\AbstractModel implements \Magento\Fr
             ->unsetData('update_time')
             ->unsetData('publish_time')
             ->unsetData('identifier')
+            ->unsetData('comments_count')
             ->setTitle($object->getTitle() . ' (' . __('Duplicated') . ')')
             ->setData('is_active', 0);
 

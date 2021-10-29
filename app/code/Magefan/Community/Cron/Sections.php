@@ -67,6 +67,9 @@ class Sections
         foreach ($connection->fetchAll($select) as $config) {
             $matches = false;
             preg_match("/(.*)\/" . str_replace('/', '\/', $path) . "/", $config['path'], $matches);
+            if (empty($matches[1])) {
+                continue;
+            }
             $section = $this->sectionFactory->create([
                 'name' => $matches[1]
             ]);
@@ -81,16 +84,18 @@ class Sections
         if (count($sections)) {
             $data = $this->info->load($sections);
 
-            foreach ($data as $module => $item) {
-                $section = $sections[$module];
-                if (!$section->validate($data)) {
-                    $connection->update(
-                        $table,
-                        [
-                            'value' => 0
-                        ],
-                        ['path = ? ' => $section->getName() . '/' . $path]
-                    );
+            if ($data && is_array($data)) {
+                foreach ($data as $module => $item) {
+                    $section = $sections[$module];
+                    if (!$section->validate($data)) {
+                        $connection->update(
+                            $table,
+                            [
+                                'value' => 0
+                            ],
+                            ['path = ? ' => $section->getName() . '/' . $path]
+                        );
+                    }
                 }
             }
         }

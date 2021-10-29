@@ -1,62 +1,63 @@
 <?php
-/**
- * Copyright © 2016 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
 
 namespace Magefan\Blog\Setup;
 
 use Magento\Framework\Setup\UpgradeDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
+use Magefan\Blog\Model\ResourceModel\Comment;
 
 class UpgradeData implements UpgradeDataInterface
 {
-    /**
-     * Sales setup factory
-     *
-     * @var SalesSetupFactory
-     */
-    protected $salesSetupFactory;
+    protected $commentResource;
 
-    /**
-     * @var \Magento\Eav\Model\Config
-     */
-    protected $eavConfig;
+    protected $_commentCollection;
 
-    /**
-     * @param SalesSetupFactory $salesSetupFactory
-     * @param \Magento\Eav\Model\Config $eavConfig
-     */
     public function __construct(
-        \Magefan\Blog\Model\ResourceModel\Post\CollectionFactory $postsFactory
+        Comment $commentResource
     ) {
-        $this->postsFactory = $postsFactory;
+        $this->commentResource = $commentResource;
     }
 
-    /**
-     * {@inheritdoc}
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     */
     public function upgrade(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
-        $setup->startSetup();
         $version = $context->getVersion();
-        if (version_compare($version, '2.5.3', '<')) {
-            $this->cloneImageFieldData();
+        if (version_compare($version, '2.9.1') < 0) {
+            $connection = $this->commentResource->getConnection();
+            $postSelect = $connection->select()->from(
+                [$this->commentResource->getTable('magefan_blog_post')]
+            )
+                ->where('is_active = ?', 1);
+            $posts = $connection->fetchAll($postSelect);
+            foreach ($posts as $post) {
+                $this->commentResource->updatePostCommentsCount($post['post_id']);
+            }
         }
-        $setup->endSetup();
-    }
 
-    public function cloneImageFieldData()
-    {
-        //$themes = $this->designFactory->create();
-        $posts = $this->postsFactory->create();
-        $posts->addFieldToSelect('*');
-        foreach($posts as $post){
-            if($post->getPostImage()){
-                $post->setFeaturedImg($post->getPostImage());
-                $post->save();
+        if (version_compare($version, '2.9.8') < 0) {
+            $connection = $this->commentResource->getConnection();
+            $tagSelect = $connection->select()->from(
+                [$this->commentResource->getTable('magefan_blog_tag')]
+            );
+            $tags = $connection->fetchAll($tagSelect);
+
+            $count = count($tags);
+            if ($count) {
+                $data = [];
+                foreach ($tags as $i => $tag) {
+                    $data[] = [
+                        'tag_id' => $tag['tag_id'],
+                        'store_id' => 0,
+                    ];
+
+                    if (count($data) == 100 || $i == $count - 1) {
+                        $this->commentResource->getConnection()->insertMultiple(
+                            $this->commentResource->getTable('magefan_blog_tag_store'),
+                            $data
+                        );
+                        $data = [];
+                    }
+                }
             }
         }
     }

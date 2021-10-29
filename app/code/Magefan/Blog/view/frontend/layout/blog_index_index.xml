@@ -11,6 +11,10 @@
     <update handle="blog_default"/>
     <update handle="blog_post_list"/>
     <body>
+        <referenceContainer name="columns.top">
+            <block class="Magento\Newsletter\Block\Subscribe" name="blog.posts.topbanner" template="Magefan_Blog::post/topbanner.phtml" before="content" />
+            <block class="Magefan\Blog\Block\Sidebar\Categories" name="blog.posts.midcategories" template="post/midcategories.phtml" />
+        </referenceContainer>
         <referenceContainer name="content">
             <block class="Magefan\Blog\Block\Index" name="blog.posts.list" template="post/list.phtml" />
         </referenceContainer>

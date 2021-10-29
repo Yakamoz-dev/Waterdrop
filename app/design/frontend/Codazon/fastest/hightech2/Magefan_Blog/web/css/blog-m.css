@@ -515,20 +515,32 @@
     height: 71.4667vw;
 }
 
-
-
 .blog-category-view .wrapper-breadcrums {
     display: none;
 }
 .blog-author-view .wrapper-breadcrums {
     display: none;
 }
-/*.blog-category-view .columns .sidebar-additional {*/
-/*    margin-top: 0;*/
-/*}*/
-/*.blog-author-view .columns .sidebar-additional {*/
-/*    margin-top: 0;*/
-/*}*/
+.wrapper-breadcrums .breadcrumbs .home {
+    display: none;
+}
+.wrapper-breadcrums .breadcrumbs .blog {
+    display: none;
+}
+.wrapper-breadcrums .breadcrumbs .blog_post {
+    display: none;
+}
+.wrapper-breadcrums .breadcrumbs .item:after {
+    content: none;
+}
+.wrapper-breadcrums .breadcrumbs .item:before {
+    position: relative;
+    top: 1px;
+    font-family: 'icomoon';
+    content: "\e932";
+    padding-right: 5px;
+    color: #155da4;
+}
 .blog-post-view .columns .sidebar-additional {
     margin-top: 0;
 }

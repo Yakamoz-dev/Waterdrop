@@ -54,3 +54,10 @@
         return false;
     }
 </script>
+<script>
+    require(['jquery', 'domReady!'], function($) {
+        setInterval(function(){
+            $('#blog_search_mini_form .action.search').removeAttr('disabled');
+        }, 2000);
+    });
+</script>

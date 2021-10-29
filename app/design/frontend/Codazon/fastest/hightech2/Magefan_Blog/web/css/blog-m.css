@@ -359,7 +359,7 @@
     margin-top: 10.6667vw !important;
     margin: 0 auto !important;
 }
-.newsletter {
+.newsletter-blog {
     text-align: center;
     background: #F4FBFF;
     width: 91.4667vw;
@@ -369,13 +369,13 @@
     padding: 10.6667vw 5.3333vw 10.6667vw 5.3333vw;
     border-radius: 4px;
 }
-.newsletter .newsletter-title {
+.newsletter-blog .newsletter-title {
     font-family: Roboto-Medium;
     font-size: 6.9333vw;
     line-height: 8vw;
     color: #333333;
 }
-.newsletter .newsletter-line {
+.newsletter-blog .newsletter-line {
 
     width: 8.5333vw;
     margin-top: 3.2vw;
@@ -385,13 +385,13 @@
     height: 2px;
     border: none;
 }
-.newsletter .newsletter-span {
+.newsletter-blog .newsletter-span {
     font-family: Roboto;
     font-size: 4.2667vw;
     line-height: 150%;
     color: #333333;
 }
-.newsletter .newsletter-input {
+.newsletter-blog .newsletter-input {
     background: #FFFFFF;
     border: 1px solid #E1E1E1;
     box-sizing: border-box;
@@ -400,13 +400,13 @@
     height: 10.6667vw;
     padding: 3.2vw 0 3.2vw 4.2667vw;
 }
-.newsletter .newsletter-input::-webkit-input-placeholder {
+.newsletter-blog .newsletter-input::-webkit-input-placeholder {
     font-family: Roboto;
     font-size: 3.7333vw;
     line-height: 4.2667vw;
     color: #999999;
 }
-.newsletter button {
+.newsletter-blog button {
     width: 80.8vw;
     background: #155DA4;
     border-radius: 4px;
@@ -419,7 +419,7 @@
     line-height: 5.3333vw;
     color: #FFFFFF;
 }
-.newsletter button:hover {
+.newsletter-blog button:hover {
     color: #ffffff;
 }
 .blog-post-view .block-categories {

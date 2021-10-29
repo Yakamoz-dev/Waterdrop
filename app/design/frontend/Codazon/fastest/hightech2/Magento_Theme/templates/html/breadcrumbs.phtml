@@ -7,13 +7,8 @@
 // @codingStandardsIgnoreFile
 
 ?>
-<style type="text/css">
-    .display {
-        display: none;
-    }
-</style>
 <?php if ($crumbs && is_array($crumbs)) : ?>
-    <div class="wrapper-breadcrums normal">
+    <div class="wrapper-breadcrums">
         <div class="breadcrumbs">
             <ul class="items">
                 <?php foreach ($crumbs as $crumbName => $crumbInfo) : ?>
@@ -29,19 +24,6 @@
                         <?php endif; ?>
                     </li>
                 <?php endforeach; ?>
-            </ul>
-        </div>
-    </div>
-    <div class="wrapper-breadcrums display">
-        <div class="breadcrumbs">
-            <ul class="items">
-                <?php foreach ($crumbs as $crumbName => $crumbInfo) : ?>
-                    <?php if ($crumbInfo['link']) : ?>
-                        <?php $categoryname = $crumbInfo['title'];?>
-                        <?php $categoryurl = $crumbInfo['link'];?>
-                    <?php endif;?>
-                <?php endforeach; ?>
-                <li class="item"><a onclick="Javascript:history(-1);"><&nbsp;&nbsp;&nbsp;</a><a href="<?php echo $categoryurl;?>"><?php echo $categoryname;?></a> </li>
             </ul>
         </div>
     </div>

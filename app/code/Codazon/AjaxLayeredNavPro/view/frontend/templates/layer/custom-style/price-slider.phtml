@@ -2,7 +2,7 @@
 /**
  * Copyright © 2018 Codazon, Inc. All rights reserved.
  * See COPYING.txt for license details.
- */ 
+ */
 ?>
 
 <?php
@@ -13,7 +13,7 @@ $code = $filter->getRequestVar();
 $helper = $this->helper('Codazon\AjaxLayeredNavPro\Helper\Data');
     $rate = $helper->getRate();
 if ($productCollection = $filter->getBeforeApplyCollection()) {
-    
+
 } else {
     $productCollection = $filter->getLayer()->getProductCollection();
 }
@@ -55,8 +55,8 @@ $currency = \Magento\Framework\App\ObjectManager::getInstance()
 $uniqId = uniqid();
 if ($code == 'price') {
     $widget = [
-        'minValue'  => round(min($minPrice, $productCollection->getMinPrice())*$rate),
-        'maxValue'  => round(max($maxPrice, $productCollection->getMaxPrice())*$rate),
+        'minValue'  => floor(min($minPrice, $productCollection->getMinPrice())*$rate),
+        'maxValue'  => ceil(max($maxPrice, $productCollection->getMaxPrice())*$rate),
     ];
 } else {
     $widget = [
@@ -73,11 +73,11 @@ if ($code == 'price') {
         <div class="price-slider" data-role="price-slider"></div>
         <div class="input-wrap">
             <div class="control min-value">
-                <input class="input-text" id="min-price-<?= $uniqId ?>" name="min_price" type="text" required="required" number="true" validate-zero-or-greater="true" placeholder="<?= __('From') ?>" data-role="min_price" value="<?= round($minPrice*$rate) ?>" />
+                <input class="input-text" id="min-price-<?= $uniqId ?>" name="min_price" type="text" required="required" number="true" validate-zero-or-greater="true" placeholder="<?= __('From') ?>" data-role="min_price" value="<?= floor($minPrice*$rate) ?>" />
             </div>
             <span class="delimiter">–</span>
             <div class="control max-value">
-                <input class="input-text" id="max-price-<?= $uniqId ?>" name="max_price" type="text" required="required" number="true" validate-greater-than-zero="true" placeholder="<?= __('To') ?>" data-role="max_price" value="<?= round($maxPrice*$rate) ?>" />
+                <input class="input-text" id="max-price-<?= $uniqId ?>" name="max_price" type="text" required="required" number="true" validate-greater-than-zero="true" placeholder="<?= __('To') ?>" data-role="max_price" value="<?= ceil($maxPrice*$rate) ?>" />
             </div>
             <span class="currency"><?= $currency ?></span>
         </div>

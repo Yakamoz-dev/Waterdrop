@@ -62,6 +62,7 @@
 
         <referenceBlock name="logo">
             <arguments>
+                <argument name="logo_width" xsi:type="number">220</argument>
                 <argument name="logo_img_width" xsi:type="number">200</argument>
                 <argument name="logo_img_height" xsi:type="number">58</argument>
             </arguments>

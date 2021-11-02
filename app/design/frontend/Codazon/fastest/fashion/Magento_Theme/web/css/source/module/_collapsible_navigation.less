@@ -112,6 +112,16 @@
     }
 }
 
+@media (min-width: 768px) and (max-width: 1024px) {
+    .customer-account-index {
+        .columns {
+            .sidebar-additional {
+                display: none;
+            }
+        }
+    }
+}
+
 //
 //  Mobile
 //  ---------------------------------------------
@@ -137,9 +147,6 @@
             }
         }
         .block-collapsible-nav-title {
-            padding-top: 16px;
-            padding-left: 16px;
-            padding-bottom: 16px;
             &:after {
                 font-size: 16px;
                 line-height: 19px;
@@ -150,5 +157,12 @@
     }
     .account .column.main>.table-wrapper, .account .column.main>.form-address-edit, .account .column.main>.form, .account .column.main .block {
         margin-bottom: 8px;
+    }
+    .customer-account-index {
+        .block-collapsible-nav {
+            .block-collapsible-nav-title {
+                padding: 16px !important;
+            }
+        }
     }
 }

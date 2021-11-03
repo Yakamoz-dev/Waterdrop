@@ -13,46 +13,40 @@
  * @var $block \Magefan\Blog\Block\MidCategories
  */
 ?>
-
-
 <?php $items = $block->getGroupedChilds(); ?>
-    <div class="top-banner-bottom">
-        <ul class="top-banner-ul">
-            <li class="top-banner-li all" id="allcate"><a href="/blog" class="top-banner-li-a">All Categories</a></li>
-            <?php foreach($items as $item){?>
+<div class="top-banner-bottom">
+    <ul class="top-banner-ul">
+        <li class="top-banner-li all" id="allcate"><a href="/blog" class="top-banner-li-a">Latest Articles</a></li>
+        <?php foreach($items as $item){?>
             <li class="top-banner-li" id="<?php echo $item['identifier'];?>"><a class="top-banner-li-a" href="<?= $block->escapeUrl($item->getCategoryUrl());?>"><?= $block->escapeHtml($item->getTitle())?></a></li>
-            <?php }?>
-        </ul>
-    </div>
-
-    <div class="mobile-top-banner-bottom">
-        <select class="mobile-top-banner-bottom-select" onchange="window.location.href=this.options[this.selectedIndex].id">
-            <option class="mobile-top-banner-bottom-option all" id="<?php echo $block->getUrl();?>blog" name="blog" selected>All Categories</option>
-            <?php foreach($items as $item){?>
-                <option class="mobile-top-banner-bottom-option" name="<?php echo $item['identifier'];?>" id="<?= $block->escapeUrl($item->getCategoryUrl());?>"><?= $block->escapeHtml($item->getTitle());?></option>
-            <?php }?>
-        </select>
-    </div>
+        <?php }?>
+    </ul>
+</div>
+<div class="mobile-top-banner-bottom">
+    <?php
+    $str =  $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+    $arr = explode('/',$str);
+    $cate = end($arr);
+    ?>
+    <select class="mobile-top-banner-bottom-select" onchange="window.location.href=this.options[this.selectedIndex].id">
+        <option class="mobile-top-banner-bottom-option all" <?php if ($cate == 'blog') {?>selected<?php }?> id="<?php echo $block->getUrl();?>blog" name="blog">Latest Articles</option>
+        <?php foreach($items as $item){?>
+            <option class="mobile-top-banner-bottom-option"<?php if ($cate == $item['identifier']) {?>selected<?php }?> name="<?php echo $item['identifier'];?>" id="<?= $block->escapeUrl($item->getCategoryUrl());?>"><?= $block->escapeHtml($item->getTitle());?></option>
+        <?php }?>
+    </select>
+</div>
 <script>
     require([
         "jquery"
     ], function($){
         var url = window.location.href;
         var cate = url.substring(url.lastIndexOf("/")+1);
-
         if (cate == 'blog') {
             $(".top-banner-li").removeClass("all");
             $("#allcate").addClass("all");
-            $(".mobile-top-banner-bottom-select option").removeAttr('selected');
-            $(".mobile-top-banner-bottom-select").find("option[name='blog']").prop("selected",true);
         } else {
             $(".top-banner-li").removeClass("all");
             $('#'+cate+'').addClass("all");
-            $(".mobile-top-banner-bottom-select option").removeAttr('selected');
-            $(".mobile-top-banner-bottom-select").find("option[name="+cate+"]").prop("selected",true);
         }
-
     });
-
 </script>
-

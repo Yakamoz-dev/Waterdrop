@@ -38,8 +38,11 @@ $helper = $this->helper('Magefan\Blog\Helper\Image');
         </div>
         <div class="post-image cdz-left">
             <a href="<?php echo $_postUrl ?>">
-                <img class="img-responsive" width="<?php echo $width ?>" height="<?php echo $height ?>"
-                     src="<?php echo $helper->init($_post->getPostImage())->resize($width, $height); ?>"/>
+                <?php
+                $featuredImage = $_post->getFeaturedImage();
+                $featuredImgAlt = $_postName;?>
+                <img class="img-responsive"
+                     src="<?= $block->escapeUrl($featuredImage); ?>" alt="<?= $block->escapeUrl($_postName);?>"/>
             </a>
         </div>
         <div class="post-content">
@@ -50,7 +53,6 @@ $helper = $this->helper('Magefan\Blog\Helper\Image');
         </div>
 
         <div class="post-bottom">
-            <!--            --><?php //echo $this->getChildHtml('blog.post.bottom') ?>
             <hr class="one-line" align="left"/>
             <div class="addthis_inline_share_toolbox" addthis:url="<?php echo $_postUrl ?>"></div>
         </div>

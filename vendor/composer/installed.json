@@ -21483,6 +21483,52 @@
             "install-path": "../react/promise"
         },
         {
+            "name": "reviewscouk/reviews",
+            "version": "0.0.40",
+            "version_normalized": "0.0.40.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Reviewscouk/magento2-reviews.git",
+                "reference": "2364c3207042b239d8b051b02461a993853f853b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Reviewscouk/magento2-reviews/zipball/2364c3207042b239d8b051b02461a993853f853b",
+                "reference": "2364c3207042b239d8b051b02461a993853f853b",
+                "shasum": ""
+            },
+            "time": "2021-10-08T09:56:54+00:00",
+            "type": "magento2-module",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Reviewscouk\\Reviews\\": ""
+                },
+                "files": [
+                    "registration.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Reviews.co.uk",
+                    "email": "support@reviews.co.uk",
+                    "homepage": "http://www.reviews.co.uk"
+                }
+            ],
+            "description": "Reviews.co.uk Magento 2 Integration",
+            "support": {
+                "email": "support@reviews.co.uk",
+                "issues": "https://github.com/Reviewscouk/magento2-reviews/issues",
+                "source": "https://github.com/Reviewscouk/magento2-reviews/tree/0.0.40"
+            },
+            "install-path": "../reviewscouk/reviews"
+        },
+        {
             "name": "sebastian/code-unit-reverse-lookup",
             "version": "1.0.2",
             "version_normalized": "1.0.2.0",

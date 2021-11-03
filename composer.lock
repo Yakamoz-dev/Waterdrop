@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8a30ac66a392f09ef5ee0a857c747e2d",
+    "content-hash": "40331d317222e5f0d0116a6b29a7e8d7",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -19123,6 +19123,49 @@
                 "source": "https://github.com/reactphp/promise/tree/v2.8.0"
             },
             "time": "2020-05-12T15:16:56+00:00"
+        },
+        {
+            "name": "reviewscouk/reviews",
+            "version": "0.0.40",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Reviewscouk/magento2-reviews.git",
+                "reference": "2364c3207042b239d8b051b02461a993853f853b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Reviewscouk/magento2-reviews/zipball/2364c3207042b239d8b051b02461a993853f853b",
+                "reference": "2364c3207042b239d8b051b02461a993853f853b",
+                "shasum": ""
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "psr-4": {
+                    "Reviewscouk\\Reviews\\": ""
+                },
+                "files": [
+                    "registration.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0",
+                "AFL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Reviews.co.uk",
+                    "email": "support@reviews.co.uk",
+                    "homepage": "http://www.reviews.co.uk"
+                }
+            ],
+            "description": "Reviews.co.uk Magento 2 Integration",
+            "support": {
+                "email": "support@reviews.co.uk",
+                "issues": "https://github.com/Reviewscouk/magento2-reviews/issues",
+                "source": "https://github.com/Reviewscouk/magento2-reviews/tree/0.0.40"
+            },
+            "time": "2021-10-08T09:56:54+00:00"
         },
         {
             "name": "seld/jsonlint",

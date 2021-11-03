@@ -4435,6 +4435,15 @@ private static $installed = array (
       ),
       'reference' => 'f3cff96a19736714524ca0dd1d4130de73dbbbc4',
     ),
+    'reviewscouk/reviews' => 
+    array (
+      'pretty_version' => '0.0.40',
+      'version' => '0.0.40.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '2364c3207042b239d8b051b02461a993853f853b',
+    ),
     'rhumsaa/uuid' => 
     array (
       'replaced' => 

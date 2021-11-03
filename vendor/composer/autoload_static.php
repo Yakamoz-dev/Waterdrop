@@ -492,6 +492,7 @@ class ComposerStaticInitfea2efe9fa4d73211abe777881f2e709
         'dc4b4418d0c68b7ed636761dce59ad35' => __DIR__ . '/..' . '/olegkoval/magento2-regenerate-url-rewrites/registration.php',
         'e3374b74f4d3a702a6980fab2d4c0d68' => __DIR__ . '/..' . '/sparsh/buy-now-magento-2-extension/registration.php',
         'da400493fb2af189f474a289bdfdd8d4' => __DIR__ . '/..' . '/sparsh/magento-2-facebook-pixel-extension/registration.php',
+        '8bbf152b291e04f5e5dca18de54cd51f' => __DIR__ . '/..' . '/reviewscouk/reviews/registration.php',
         'b4cf39431a4b949eea8aa69ebb3d39da' => __DIR__ . '/../..' . '/app/etc/NonComposerComponentRegistration.php',
     );
 
@@ -574,6 +575,7 @@ class ComposerStaticInitfea2efe9fa4d73211abe777881f2e709
         ),
         'R' => 
         array (
+            'Reviewscouk\\Reviews\\' => 20,
             'React\\Promise\\' => 14,
             'ReCaptcha\\' => 10,
             'Ramsey\\Uuid\\' => 12,
@@ -1280,6 +1282,10 @@ class ComposerStaticInitfea2efe9fa4d73211abe777881f2e709
             0 => __DIR__ . '/..' . '/thecodingmachine/safe/lib',
             1 => __DIR__ . '/..' . '/thecodingmachine/safe/deprecated',
             2 => __DIR__ . '/..' . '/thecodingmachine/safe/generated',
+        ),
+        'Reviewscouk\\Reviews\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/reviewscouk/reviews',
         ),
         'React\\Promise\\' => 
         array (

@@ -1,0 +1,17 @@
+<?php
+if ($block->isQuestionWidgetEnabled() && $block->isTabMode()){
+    $_data = $block->getSettings();
+    $_skus = $block->getProductSkus();
+?>
+    <div id="questions-widget"></div>
+    <script src="https://<?php /* @escapeNotVerified */ print $_data['api_url']; ?>/questions-answers/dist.js" type="text/javascript"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            questionsWidget('questions-widget', {
+                store: "<?php print $block->escapeHtml($_data['store_id']); ?>",
+                group: '<?php print $block->escapeHtml((!empty($_skus[0]) ? $_skus[0] : "")); ?>', // Multiple SKU"s Seperated by Semi-Colons
+            });
+        });
+    </script>
+<?php
+}

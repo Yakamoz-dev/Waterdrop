@@ -19,6 +19,7 @@
         "magepow/stickycart": "^1.0",
         "nordcomputer/showoutofstockprice": "0.4.2",
         "olegkoval/magento2-regenerate-url-rewrites": "^1.3",
+        "reviewscouk/reviews": "^0.0.40",
         "sparsh/buy-now-magento-2-extension": "1.0.1",
         "sparsh/magento-2-facebook-pixel-extension": "1.0.1",
         "stripe/stripe-payments": "^2.7"

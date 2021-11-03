@@ -326,7 +326,10 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
     .cdz-popup-wrapper .modal-popup .modal-inner-wrap {
         width:721px !important;
-        margin: 10rem auto;
+        margin: 0;
+        top: 50%;
+        left: 50%;
+        -webkit-transform:translate(-50%,-50%);
         .cdz-popup-newsletter {
             .cdz-popup-newsletter-left {
                 width: 330px;
@@ -399,7 +402,10 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .cdz-popup-wrapper .modal-popup .modal-inner-wrap {
         width:721px !important;
-        margin: 10rem auto;
+        margin: 0;
+        top: 50%;
+        left: 50%;
+        -webkit-transform:translate(-50%,-50%);
         .cdz-popup-newsletter {
             .cdz-popup-newsletter-left {
                 width: 330px;

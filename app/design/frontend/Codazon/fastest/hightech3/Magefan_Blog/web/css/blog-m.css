@@ -734,15 +734,15 @@
     padding: 10px;
     display: flex;
     align-items: center;
+    min-width: 170px;
 }
 .mg_blog_recommended_img { width: 100%; display: block; max-width: none;}
-.mg_blog_recommended_content { padding: 30px 12px 30px 0; }
+.mg_blog_recommended_content { padding: 30px 12px 30px 0;}
 .mg_blog_recommended_title { font-size: 16px; line-height: 150%; color: #333333; font-family: "roboto-regular"; font-weight: normal; margin-bottom: 8px; }
 .mg_blog_recommended_title a { text-overflow: ellipsis; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 .mg_blog_recommended_price { font-size: 20px; line-height: 1.5; color: #333333; margin-bottom: 34px; font-family: "roboto-regular"; font-weight: normal; }
 .mg_blog_recommended_button_box { display: flex; }
 .mg_blog_recommended_button_box a:first-child { margin-right: 12px; }
-.mg_blog_recommended_button_box { flex-direction: column; }
 .mg_blog_recommended_view_more {
     font-size: 14px;
     line-height: 20px;
@@ -780,6 +780,10 @@
     -o-transition: all .2s linear;
 }
 .mg_blog_recommended_buy_on_amazon:hover { opacity: 0.75; }
+@media (max-width:1023px) {
+    .mg_blog_recommended_button_box { flex-direction: column; }
+}
+
 @media (max-width:767px) {
     .mg_blog_img img { width: 100%; }
     .mg_blog_recommended { flex-direction: column; width: auto; }

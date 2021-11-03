@@ -55,6 +55,12 @@ $schema = ($block->getZone() == 'item_view') ? true : false;
                 line-height: 19px;
             }
         }
+        .catalog-category-view .product-item .old-price,
+        .catalogsearch-result-index .product-item .old-price,
+        .catalog-category-view .product-item .save-price-info,
+        .catalogsearch-result-index .product-item .save-price-info {
+            display: none;
+        }
     </style>
     <div class="save-price-info">
         You save $<?php echo $save_price ?> (<?php echo $save_percent ?>%)

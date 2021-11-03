@@ -47,6 +47,7 @@ atlassian*
 /pub/media/import/*
 !/pub/media/import/.htaccess
 /pub/media/logo/*
+/pub/media/magefan_blog/*
 /pub/media/custom_options/*
 !/pub/media/custom_options/.htaccess
 /pub/media/theme/*

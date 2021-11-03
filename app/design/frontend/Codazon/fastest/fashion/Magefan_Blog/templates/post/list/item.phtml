@@ -57,7 +57,7 @@
 
         <div class="post-content">
             <div class="post-description clearfix">
-                <?php echo $_post->getShortFilteredContent() ?>
+                <?php echo strip_tags($_post->getShortFilteredContent()) ?>
             </div>
 			<a class="post-read-more" href="<?php echo $_postUrl ?>" title="<?php echo $_postName ?>"
 			   >

@@ -729,12 +729,12 @@
     margin-top: 12px;
 }
 .mg_blog_recommended { margin: 0 auto; max-width: 612px; height: auto; background: #FFFFFF; border: 10px solid #F4F4F4; display: flex; margin-bottom: 24px; }
-.mg_blog_recommended a { text-decoration: none; display: inline-block; color: inherit; }
+.mg_blog_recommended a { text-decoration: none; display: inline-block; color: inherit;min-width: 160px; }
 .mg_blog_recommended_image {
     padding: 10px;
     display: flex;
     align-items: center;
-    min-width: 170px;
+    min-width: 200px;
 }
 .mg_blog_recommended_img { width: 100%; display: block; max-width: none;}
 .mg_blog_recommended_content { padding: 30px 12px 30px 0;}

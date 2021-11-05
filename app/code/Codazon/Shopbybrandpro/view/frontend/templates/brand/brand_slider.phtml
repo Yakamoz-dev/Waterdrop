@@ -17,45 +17,29 @@ $sortOrder = $block->getConfigValue('codazon_shopbybrand/featured_brands/sort_or
 $brands = $block->getBrandObject($orderBy, $sortOrder, true);
 $count = count($brands);
 $i = 0;
-$row = 3;
+$width = $height = 300;
+$paddingBottom = 100;
+$adapts = array('1900', '1600', '1420', '1280','980','768','480','320','0');
+foreach ($adapts as $adapt) {
+    $itemPerRow[$adapt] = (float)$this->getData('items_' . $adapt);
+}
 $widget = ['Codazon_Shopbybrandpro/js/brands' => [
-    'codazon.brandslider' => ['sliderConfig' => [
-        'margin'    => 10,
-        'nav'       => true,
-        'dots'      => false,
-        'responsive' => [
-            '1200'  => ['items' => 2, 'nav' => true],
-            '768'   => ['items' => 1, 'nav' => false],
-            '560'   => ['items' => 4],
-            '480'   => ['items' => 3],
-            '0'     => ['items' => 3]
-        ]
-    ]]
+    'codazon.autowidth' => ['itemsPerRow' => $itemPerRow]
 ]];
 ?>
 <?php if ($count > 0): ?>
 <div class="block block-brands">
 	<div class="block-title"><strong id="block-brands-heading"><?php echo $block->getConfigValue('codazon_shopbybrand/featured_brands/title') ?></strong></div>
     <div class="block-content">
-        <div class="brand-slider-wrapper featured-brands no-loaded" data-role="slider-wrapper">
-            <div class="brand-loader double-bounce-spinner" data-role="slider-loader">
-                <div class="double-bounce1"></div>
-                <div class="double-bounce2"></div>
-            </div>
-            <div class="brand-slider items owl-carousel" data-mage-init='<?= json_encode($widget) ?>'>
-                <?php foreach( $brands as $brand ): ?>
-                <?php if ($i%$row == 0): ?>
-                <div class="slide-item">
-                <?php endif ?>
-                        <div class="brand-item">
-                            <a class="brank-link abs-img" style="padding-bottom: 55%" title="<?= strip_tags($brand->getBrandLabel()) ?>" href="<?php echo $brand->getUrl() ?>">
-                                <img class="img-responsive zoom-eff" alt="<?php echo strip_tags($brand->getBrandLabel()) ?>" src="<?php echo $block->getThumbnailImage($brand, ['width' => 125, 'height' => 60]) ?>" />
-                            </a>
-                        </div>
-                <?php if (($i%$row == ($row-1)) || ($i == $count - 1)): ?>
-                </div>
-                <?php endif; $i++; ?>
-                <?php endforeach ?>
+        <div class="brand-slider-wrapper featured-brands" data-role="slider-wrapper">
+            <div class="shop-by-brand-list style-default flex-grid" data-mage-init='<?= json_encode($widget) ?>'>
+                <?php foreach ($brands as $brand) : ?>
+                    <div class="brand-item" data-role="item">
+                        <a class="brand-link abs-img" style="padding-bottom: <?= $paddingBottom ?>%" href="<?= $brand->getUrl() ?>" title="<?= $brand->getBrandLabel(); ?>">
+                            <img class="brand-img zoom-eff" alt="<?= strip_tags($brand->getBrandLabel()) ?>" src="<?= $block->getThumbnailImage($brand, ['width' => $width, 'height' => $height]) ?>" />
+                        </a>
+                    </div>
+                    <?php $i++; endforeach ?>
             </div>
         </div>
     </div>

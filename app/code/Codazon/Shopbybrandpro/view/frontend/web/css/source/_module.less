@@ -395,7 +395,7 @@
 	/*Bock Brand - Next/Prev */
 	.block-brands{
         .block-content {
-            padding: 10px 10px 2px 10px !important;
+            padding: 10px 0 2px 10px !important;
         }
 		.owl-carousel{
 			padding-top: 0;
@@ -423,6 +423,16 @@
 				}
 			}
 		}
+        .brand-item {
+            width: 50% !important;
+            margin-right: 0 !important;
+            margin-bottom: 10px !important;
+            padding-right: 10px;
+            height: 60px;
+        }
+        .abs-img img {
+            top: -31px !important;
+        }
 	}
 	.featured-brands-block{
 		.owl-carousel .owl-nav{
@@ -472,6 +482,31 @@
 		}
 	}
 }
+
+@media (max-width: 1024px) {
+    .block-brands{
+        .brand-item {
+            width: 100% !important;
+            margin-bottom: 52px !important;
+        }
+        .abs-img img {
+            top: -55px !important;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .block-brands{
+        .brand-item {
+            width: 100% !important;
+            margin-bottom: 22px !important;
+        }
+        .abs-img img {
+            top: -39px !important;
+        }
+    }
+}
+
 /*Loading*/
 .brand-loader{
 	display: none;

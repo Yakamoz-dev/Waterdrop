@@ -14,7 +14,6 @@
         "ext-curl": "*",
         "ext-json": "*",
         "cjpublicis/universal-tag-module": "1.0.3",
-        "facebook/php-business-sdk": "^12.0",
         "laminas/laminas-serializer": "^2.10",
         "magento/product-community-edition": "2.4.3",
         "magepow/stickycart": "^1.0",

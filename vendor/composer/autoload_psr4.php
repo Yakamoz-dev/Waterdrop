@@ -474,7 +474,6 @@ return array(
     'Gt\\Dom\\' => array($vendorDir . '/phpgt/dom/src'),
     'Gt\\CssXPath\\' => array($vendorDir . '/phpgt/cssxpath/src'),
     'GraphQL\\' => array($vendorDir . '/webonyx/graphql-php/src'),
-    'FacebookAds\\' => array($vendorDir . '/facebook/php-business-sdk/src/FacebookAds'),
     'FG\\' => array($vendorDir . '/fgrosse/phpasn1/lib'),
     'Endroid\\QrCode\\' => array($vendorDir . '/endroid/qr-code/src'),
     'Elasticsearch\\' => array($vendorDir . '/elasticsearch/elasticsearch/src/Elasticsearch'),

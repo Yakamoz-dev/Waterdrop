@@ -390,6 +390,15 @@
       ),
       'reference' => '0b78f89d8e0bb9e380046c31adfa40347e9f663b',
     ),
+    'facebook/php-business-sdk' => 
+    array (
+      'pretty_version' => '12.0.1',
+      'version' => '12.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '8a5116a7b9dda010e41438380c18eb2576719ef9',
+    ),
     'fgrosse/phpasn1' => 
     array (
       'pretty_version' => 'v2.3.0',

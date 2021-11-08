@@ -489,8 +489,8 @@ return array(
     'f9345205bcd43206b98e59c7597cc3c9' => $vendorDir . '/magepow/stickycart/registration.php',
     '79b3724166c1e73e36c45f44df1c4e1a' => $vendorDir . '/nordcomputer/showoutofstockprice/registration.php',
     'dc4b4418d0c68b7ed636761dce59ad35' => $vendorDir . '/olegkoval/magento2-regenerate-url-rewrites/registration.php',
+    '8bbf152b291e04f5e5dca18de54cd51f' => $vendorDir . '/reviewscouk/reviews/registration.php',
     'e3374b74f4d3a702a6980fab2d4c0d68' => $vendorDir . '/sparsh/buy-now-magento-2-extension/registration.php',
     'da400493fb2af189f474a289bdfdd8d4' => $vendorDir . '/sparsh/magento-2-facebook-pixel-extension/registration.php',
-    '8bbf152b291e04f5e5dca18de54cd51f' => $vendorDir . '/reviewscouk/reviews/registration.php',
     'b4cf39431a4b949eea8aa69ebb3d39da' => $baseDir . '/app/etc/NonComposerComponentRegistration.php',
 );

@@ -2098,6 +2098,53 @@
             "install-path": "../ezimuel/ringphp"
         },
         {
+            "name": "facebook/php-business-sdk",
+            "version": "12.0.1",
+            "version_normalized": "12.0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/facebook/facebook-php-business-sdk.git",
+                "reference": "8a5116a7b9dda010e41438380c18eb2576719ef9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/facebook/facebook-php-business-sdk/zipball/8a5116a7b9dda010e41438380c18eb2576719ef9",
+                "reference": "8a5116a7b9dda010e41438380c18eb2576719ef9",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.5 || ^7.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "1.3.3",
+                "phpunit/phpunit": "~8",
+                "symfony/finder": "~2.6"
+            },
+            "time": "2021-10-25T22:58:14+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "FacebookAds\\": "src/FacebookAds/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "PHP SDK for Facebook Business",
+            "homepage": "https://developers.facebook.com/",
+            "keywords": [
+                "ads",
+                "business",
+                "facebook",
+                "instagram",
+                "page",
+                "sdk"
+            ],
+            "support": {
+                "source": "https://github.com/facebook/facebook-php-business-sdk/tree/12.0.1"
+            },
+            "install-path": "../facebook/php-business-sdk"
+        },
+        {
             "name": "fgrosse/phpasn1",
             "version": "v2.3.0",
             "version_normalized": "2.3.0.0",

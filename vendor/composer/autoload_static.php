@@ -490,9 +490,9 @@ class ComposerStaticInitfea2efe9fa4d73211abe777881f2e709
         'f9345205bcd43206b98e59c7597cc3c9' => __DIR__ . '/..' . '/magepow/stickycart/registration.php',
         '79b3724166c1e73e36c45f44df1c4e1a' => __DIR__ . '/..' . '/nordcomputer/showoutofstockprice/registration.php',
         'dc4b4418d0c68b7ed636761dce59ad35' => __DIR__ . '/..' . '/olegkoval/magento2-regenerate-url-rewrites/registration.php',
+        '8bbf152b291e04f5e5dca18de54cd51f' => __DIR__ . '/..' . '/reviewscouk/reviews/registration.php',
         'e3374b74f4d3a702a6980fab2d4c0d68' => __DIR__ . '/..' . '/sparsh/buy-now-magento-2-extension/registration.php',
         'da400493fb2af189f474a289bdfdd8d4' => __DIR__ . '/..' . '/sparsh/magento-2-facebook-pixel-extension/registration.php',
-        '8bbf152b291e04f5e5dca18de54cd51f' => __DIR__ . '/..' . '/reviewscouk/reviews/registration.php',
         'b4cf39431a4b949eea8aa69ebb3d39da' => __DIR__ . '/../..' . '/app/etc/NonComposerComponentRegistration.php',
     );
 
@@ -1021,6 +1021,7 @@ class ComposerStaticInitfea2efe9fa4d73211abe777881f2e709
         ),
         'F' => 
         array (
+            'FacebookAds\\' => 12,
             'FG\\' => 3,
         ),
         'E' => 
@@ -2959,6 +2960,10 @@ class ComposerStaticInitfea2efe9fa4d73211abe777881f2e709
         'GraphQL\\' => 
         array (
             0 => __DIR__ . '/..' . '/webonyx/graphql-php/src',
+        ),
+        'FacebookAds\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/facebook/php-business-sdk/src/FacebookAds',
         ),
         'FG\\' => 
         array (

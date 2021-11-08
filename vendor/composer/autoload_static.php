@@ -1021,7 +1021,6 @@ class ComposerStaticInitfea2efe9fa4d73211abe777881f2e709
         ),
         'F' => 
         array (
-            'FacebookAds\\' => 12,
             'FG\\' => 3,
         ),
         'E' => 
@@ -2960,10 +2959,6 @@ class ComposerStaticInitfea2efe9fa4d73211abe777881f2e709
         'GraphQL\\' => 
         array (
             0 => __DIR__ . '/..' . '/webonyx/graphql-php/src',
-        ),
-        'FacebookAds\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/facebook/php-business-sdk/src/FacebookAds',
         ),
         'FG\\' => 
         array (

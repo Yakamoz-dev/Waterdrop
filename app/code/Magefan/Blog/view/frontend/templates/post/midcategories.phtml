@@ -29,9 +29,9 @@
     $cate = end($arr);
     ?>
     <select class="mobile-top-banner-bottom-select" onchange="window.location.href=this.options[this.selectedIndex].id">
-        <option class="mobile-top-banner-bottom-option all" <?php if ($cate == 'blog') {?>selected<?php }?> id="<?php echo $block->getUrl();?>blog" name="blog">Latest Articles</option>
+        <option class="mobile-top-banner-bottom-option all" <?php if (strpos($cate,'blog') !== false) {?>selected<?php }?> id="<?php echo $block->getUrl();?>blog" name="blog">Latest Articles</option>
         <?php foreach($items as $item){?>
-            <option class="mobile-top-banner-bottom-option"<?php if ($cate == $item['identifier']) {?>selected<?php }?> name="<?php echo $item['identifier'];?>" id="<?= $block->escapeUrl($item->getCategoryUrl());?>"><?= $block->escapeHtml($item->getTitle());?></option>
+            <option class="mobile-top-banner-bottom-option"<?php if (strpos($cate,$item['identifier']) !== false) {?>selected<?php }?> name="<?php echo $item['identifier'];?>" id="<?= $block->escapeUrl($item->getCategoryUrl());?>"><?= $block->escapeHtml($item->getTitle());?></option>
         <?php }?>
     </select>
 </div>
@@ -41,12 +41,13 @@
     ], function($){
         var url = window.location.href;
         var cate = url.substring(url.lastIndexOf("/")+1);
-        if (cate == 'blog') {
+        var cate2 = cate.split('?')[0];
+        if (cate.indexOf("blog") != -1) {
             $(".top-banner-li").removeClass("all");
             $("#allcate").addClass("all");
         } else {
             $(".top-banner-li").removeClass("all");
-            $('#'+cate+'').addClass("all");
+            $('#'+cate2+'').addClass("all");
         }
     });
 </script>

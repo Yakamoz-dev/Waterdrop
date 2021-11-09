@@ -46,6 +46,17 @@ $boxMaxHeight = (int)$helper->getConfig('codazon_ajaxlayerednavpro/general/box_m
     .filter-options-content-inner .swatch-attribute-options{margin: 0 0 0 0;}
 }
 </style>
+<script src="https://widget.reviews.io/rating-snippet/dist.js"></script>
+<link rel="stylesheet" href="https://widget.reviews.io/rating-snippet/dist.css" />
+<script>
+    ratingSnippet("ruk_rating_snippet",{
+        store: "www.water-filter.com",
+        color: "#FBB500",
+        linebreak: true,
+        usePolaris: true,
+        text: "Reviews"
+    });
+</script>
 <?php endif ?>
 <?php else : ?>
 <?php echo $this->getChildHtml() ?>

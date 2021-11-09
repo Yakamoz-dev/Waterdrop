@@ -230,6 +230,13 @@ if ($block->isProductWidgetEnabled() && $block->isTabMode()){
               });
           </script>
 
+<script>
+    require(['jquery'],function($){
+        setTimeout(function(){
+            $("p:contains(Be the first to write a review)").css("cursor", "pointer");
+        }, 2000);
+    });
+</script>
 
           <?php
 

@@ -34,10 +34,11 @@ if ($priceRange = $request->getParam($code)) {
     $priceRange = explode('-', $priceRange);
     $minPrice = ($priceRange[0]!==null) ? $priceRange[0] : floor(min($prices));
     $maxPrice = $priceRange[1] ? : ceil(max($prices));
-} else {
-    $minPrice = count($prices) ? (float)(min($prices)) : $minPrice;
-    $maxPrice = count($prices) ? (float)(max($prices)) : $maxPrice;
 }
+//else {
+//    $minPrice = count($prices) ? (float)(min($prices)) : $minPrice;
+//    $maxPrice = count($prices) ? (float)(max($prices)) : $maxPrice;
+//}
 
 
 $query = $request->getQueryValue();

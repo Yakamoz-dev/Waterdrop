@@ -42,6 +42,10 @@
 .blog-page .pages .pages-items li.item {
     margin: 0px 4px 0px 4px !important;
 }
+.blog-page .pages .pages-items li.item a:hover {
+    color: #ffffff !important;
+    font-family: "roboto-medium";
+}
 .blog-page .post-list {
     margin-top: 20px;
     margin-bottom: 20px;

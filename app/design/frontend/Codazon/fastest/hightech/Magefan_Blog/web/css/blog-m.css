@@ -713,7 +713,7 @@
 .mg_blog_title_4 { font-size: 18px; line-height: 120%; font-family: "roboto-medium"; font-weight: normal; margin: 28px 0 24px 0; }
 .mg_blog_title_maintext { font-family: "roboto-regular"; font-weight: normal; font-size: 16px; line-height: 170%; margin-bottom: 24px; }
 .mg_blog_strong { font-family: "roboto-medium"; font-weight: normal; }
-.mg-blog-link { color: #333; text-decoration: underline; word-wrap: break-word; }
+.mg-blog-link { color: #333 !important; text-decoration: underline; word-wrap: break-word; }
 .mg-blog-link:hover { color: #155DA4; }
 .mg_blog_ul { margin-bottom: 24px; }
 .mg_blog_ul ul { font-size: 16px; line-height: 170%; font-family: "roboto-regular"; font-weight: normal; list-style: inside; padding-left: 5px; }

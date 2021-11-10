@@ -50,3 +50,13 @@ $boxMaxHeight = (int)$helper->getConfig('codazon_ajaxlayerednavpro/general/box_m
 <?php else : ?>
 <?php echo $this->getChildHtml() ?>
 <?php endif ?>
+<script>
+    require(['jquery'],function($){
+        $('[data-block="minicart"]').on('contentLoading', function (event) {
+            fbq('track', 'AddToCart');
+            setTimeout(function() {
+                $('html, body').animate({scrollTop:0}, 'slow');
+            }, 2000);
+        });
+    });
+</script>

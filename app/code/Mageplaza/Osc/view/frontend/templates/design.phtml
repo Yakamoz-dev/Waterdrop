@@ -1070,3 +1070,12 @@ $placeOrder = '#' . trim($design['place_order_button'], '#');
         });
     </script>
 <?php } ?>
+<script>
+    require(['jquery'], function ($) {
+        $(document).ready(function() {
+            setTimeout(function () {
+                fbq('track', 'InitiateCheckout');
+            }, 3000);
+        });
+    });
+</script>

@@ -145,3 +145,14 @@ if (array_key_exists("waterdrop_ch", $_COOKIE) && $_COOKIE['waterdrop_ch'] != "S
         });
     }
 </script>
+
+<!-- Facebook Purchase track -->
+<script>
+    require(['jquery'], function ($) {
+        $(document).ready(function() {
+            setTimeout(function () {
+                fbq('track', 'Purchase', {value: <?php echo sprintf("%.2f",$subtotal); ?>, currency: 'USD'});
+            }, 3000);
+        });
+    });
+</script>

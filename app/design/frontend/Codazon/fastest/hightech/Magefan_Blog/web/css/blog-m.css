@@ -17,9 +17,7 @@
     background: #F5F5F5;
     padding: 20px;
 }
-
 .blog-page .post-holder .post-header {position:relative;}
-
 .blog-page-list .post-holder .post-header .post-info {padding: 0 0 12px 0;}
 .blog-page .post-holder .post-header .post-info .item span {
     font-family: Roboto;
@@ -46,12 +44,17 @@
     color: #ffffff !important;
     font-family: "roboto-medium";
 }
+.blog-page .pages .action.previous:hover:before {
+    color: #ffffff !important;
+}
+.blog-page .pages .action.next:hover:before {
+    color: #ffffff !important;
+}
 .blog-page .post-list {
     margin-top: 20px;
     margin-bottom: 20px;
     list-style: none;
 }
-
 .blog-page .post-list .post-content .post-read-more {
     padding: 10px 24px;
     background: #155DA4;
@@ -293,14 +296,14 @@
     border-radius: 3px;
     color: #000;
 }
-.pages .action.previous:before {
-    color: #000 !important;
+.blog-page .pages .action.previous:before {
+    color: #000;
     content: '\e617';
     font-family: 'luma-icons';
 
 }
 .blog-page .pages .action.next:before {
-    color: #000 !important;
+    color: #000;
 }
 .blog-page .pages strong.page {
     border-radius: 3px;

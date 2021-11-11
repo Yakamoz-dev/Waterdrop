@@ -32,16 +32,12 @@ class View extends ProductView
             /* Custom Rewrite */
             $custom_canonical_url = $product->getCanonicalUrl();
             if ($custom_canonical_url) {
-                $canonicalUrl = $custom_canonical_url;
-            }else{
-                $canonicalUrl = $product->getUrlModel()->getUrl($product, ['_ignore_category' => true]);
+                $pageConfig->addRemotePageAsset(
+                    $custom_canonical_url,
+                    'canonical',
+                    ['attributes' => ['rel' => 'canonical']]
+                );
             }
-            $pageConfig->addRemotePageAsset(
-                $canonicalUrl,
-                'canonical',
-                ['attributes' => ['rel' => 'canonical']]
-            );
-
         }
 
         $pageMainTitle = $resultPage->getLayout()->getBlock('page.main.title');

@@ -25,14 +25,6 @@
 <!--    });-->
 <!--</script>-->
 
-<!-- Event snippet for buy conversion page -->
-<script>
-    gtag('event', 'conversion', {
-        'send_to': 'AW-734942208/TD1KCLb-v-0CEICoud4C',
-        'transaction_id': ''
-    });
-</script>
-
 <div class="checkout-success">
 	<div class="success-title">
 		<p><span class="success-title-icon">icon</span></p>
@@ -106,6 +98,16 @@ if (array_key_exists("waterdrop_ch", $_COOKIE) && $_COOKIE['waterdrop_ch'] != "S
 
 <script src='https://www.dwin1.com/19038.js' type='text/javascript' defer='defer'></script>
 <!-- end ShareASale.com affiliate tracking -->
+
+<!-- Event snippet for buy conversion page -->
+<script>
+    gtag('event', 'conversion', {
+        'send_to': 'AW-734942208/TD1KCLb-v-0CEICoud4C',
+        'value': <?php echo sprintf("%.2f",$subtotal) ?>,
+        'currency': 'USD',
+        'transaction_id': '<?php echo $orderId ?>'
+    });
+</script>
 
 <!-- Bing -->
 <script> window.uetq1 = window.uetq1 || []; window.uetq1.push('event', 'purchase', {'revenue_value': '<?php echo sprintf("%.2f",$subtotal); ?>', 'currency': 'USD' }); </script>

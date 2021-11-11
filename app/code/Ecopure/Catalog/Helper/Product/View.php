@@ -30,10 +30,9 @@ class View extends ProductView
 
         if ($this->_catalogProduct->canUseCanonicalTag()) {
             /* Custom Rewrite */
-            $custom_canonical_url = $product->getCanonicalUrl();
-            if ($custom_canonical_url) {
+            if ($product->getCanonicalUrl()) {
                 $pageConfig->addRemotePageAsset(
-                    $custom_canonical_url,
+                    $product->getCanonicalUrl(),
                     'canonical',
                     ['attributes' => ['rel' => 'canonical']]
                 );

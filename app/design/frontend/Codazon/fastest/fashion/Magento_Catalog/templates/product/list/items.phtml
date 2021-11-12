@@ -258,9 +258,7 @@ switch ($type = $block->getType()) {
                                     <?php echo $block->escapeHtml($_item->getName()) ?></a>
                             </strong>
 
-                            <?php if ($templateType): ?>
-                                <?php echo $block->getReviewsSummaryHtml($_item, $templateType) ?>
-                            <?php endif; ?>
+                            <div class="ruk_rating_snippet" data-sku="<?php echo $_item->getSku(); ?>" style="min-height: 0;"></div>
 
                             <?php /* @escapeNotVerified */ echo $block->getProductPrice($_item); ?>
 

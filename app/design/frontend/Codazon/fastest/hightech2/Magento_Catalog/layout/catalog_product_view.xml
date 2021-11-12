@@ -58,6 +58,7 @@
 
     <referenceBlock name="catalog.compare.sidebar" remove="true" />
     <referenceBlock name="wishlist_sidebar" remove="true" />
+    <referenceBlock name="product.info.review" remove="true" />
     <referenceBlock name="reviews.tab" remove="true" />
 
     <referenceBlock name="product.info.details">

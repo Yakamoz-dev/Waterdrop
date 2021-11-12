@@ -47,8 +47,11 @@ class Richsnippet extends Framework\View\Element\Template
         if ($current_product && $product_enabled) {
 
             $sku = $this->dataHelper->getProductSkus($current_product);
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            $stock_state = $objectManager->get('\Magento\CatalogInventory\Api\StockRegistryInterface');
+            $stock_item = $stock_state->getStockItem($current_product->getId());
             $product = [
-                'availability'  => $this->availability($current_product->getData('quantity_and_stock_status')['is_in_stock']),
+                'availability'  => $this->availability($stock_item->getIsInStock()),
                 'price'         => $current_product->getFinalPrice(),
                 'url'         => $current_product->getProductUrl(),
                 'description'         => $current_product->getMetaDescription(),

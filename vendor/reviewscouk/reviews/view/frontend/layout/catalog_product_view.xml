@@ -9,6 +9,7 @@
                    group="detailed_info">
                    <arguments>
                     <argument translate="true" name="title" xsi:type="string">Reviews</argument>
+                    <argument name="sort_order" xsi:type="string">31</argument>
                   </arguments>
             </block>
 
@@ -18,6 +19,7 @@
                    group="detailed_info">
                    <arguments>
                     <argument translate="true" name="title" xsi:type="string">Product Questions</argument>
+                    <argument name="sort_order" xsi:type="string">32</argument>
                   </arguments>
             </block>
         </referenceContainer>

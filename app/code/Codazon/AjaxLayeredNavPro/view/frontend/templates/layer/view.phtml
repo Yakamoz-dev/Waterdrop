@@ -44,24 +44,30 @@
                     $active = 'false';
                 }
             ?>
+            <?php
+                $currentCategory = $block->getLayer()->getCurrentCategory()->getName();
+                $isEventCategory = $currentCategory == "Black Friday & Cyber Monday Sales";
+            ?>
             <?php foreach ($block->getFilters() as $filter): ?>
                 <?php if ($filter->getItemsCount()): ?>
                     <?php if (!$wrapOptions): ?>
                         <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?= __('Shopping Options') ?></strong>
                         <div class="filter-options" id="narrow-by-list" data-role="content" data-mage-init='{"accordion":{"openedState": "active", "collapsible": true, "active": <?= $active ?>, "multipleCollapsible": true}}'>
-                    <?php  $wrapOptions = true; endif; ?>
-                    <?php //echo $filter->getName();die; ?>
-                    <?php  if($filter->getName() != __('Category')): ?>
-                    <div data-role="collapsible" class="filter-options-item <?= $filter->getRequestVar() ?>">
-                        <div data-role="title" class="filter-options-title"><?= __($filter->getName()) ?></div>
-                        <div data-role="content" class="filter-options-content">
-                            <div class="filter-options-content-outer">
-                                <div class="filter-options-content-inner">
-                                    <?= $block->getChildBlock('renderer')->render($filter) ?>
+                    <?php $wrapOptions = true; endif; ?>
+                    <?php if(
+                        ($filter->getName() != __('Category')) &&
+                        ($isEventCategory || (!$isEventCategory && $filter->getName() != "Discount" && $filter->getName() != "RO Flow Rate"))
+                    ): ?>
+                        <div data-role="collapsible" class="filter-options-item <?= $filter->getRequestVar() ?>">
+                            <div data-role="title" class="filter-options-title"><?= __($filter->getName()) ?></div>
+                            <div data-role="content" class="filter-options-content">
+                                <div class="filter-options-content-outer">
+                                    <div class="filter-options-content-inner">
+                                        <?= $block->getChildBlock('renderer')->render($filter) ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     <?php endif; ?>
                 <?php endif; ?>
             <?php endforeach; ?>

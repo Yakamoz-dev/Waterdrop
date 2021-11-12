@@ -151,13 +151,7 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
                                         <?php /* @escapeNotVerified */ echo $desc; ?>
                                     </div>
                                 <?php endif; ?>
-                                <?php if($block->isShow('review')): ?>
-                                    <?php if(trim($block->getReviewsSummaryHtml($_product, $templateType)) != ""): ?>
-                                        <?php echo $block->getReviewsSummaryHtml($_product, $templateType); ?>
-                                    <?php else: ?>
-                                        <div class="product-reviews-summary short"></div>
-                                    <?php endif ?>
-                                <?php endif ?>
+                                <div class="ruk_rating_snippet" data-sku="<?php echo $_product->getSku(); ?>"></div>
 								<?php if($block->isShow('price')): ?>
 				                <?php /* @escapeNotVerified */ echo $block->getProductPrice($_product) ?>
 				                <?php endif ?>

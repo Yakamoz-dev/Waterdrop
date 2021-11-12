@@ -80,8 +80,8 @@ class Get
                             $shipment->save();
                             $shipment->getOrder()->save();
                             // Send email
-//                            $objectManager->create('Magento\Shipping\Model\ShipmentNotifier')->notify($shipment);
-//                            $shipment->save();
+                            $objectManager->create('Magento\Shipping\Model\ShipmentNotifier')->notify($shipment);
+                            $shipment->save();
 
                             $tongtoolOrder = $objectManager->create('Ecopure\Tongtool\Model\Tongtool')->load($tongtoolOrderId, 'order_id');
                             $tongtoolOrder->setTrackingNo($trackingNumber);

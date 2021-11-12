@@ -151,20 +151,17 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
 
                             <style>
                                 .certified_info {
-                                    min-height: 16px;
                                     font-size: 14px;
                                     line-height: 16px;
                                     color: #155DA4;
-                                    margin-bottom: 12px;
+                                    margin-bottom: 8px;
                                 }
                             </style>
                             <div class="certified_info">
                                 <?php /* @escapeNotVerified */ echo $_product->getCertifiedInfo(); ?>
                             </div>
 
-							<?php if($showReviewRating): ?>
-							<?php echo $block->getReviewsSummaryHtml($_product, $templateType); ?>
-							<?php endif ?>
+                            <div class="ruk_rating_snippet" data-sku="<?php echo $_product->getSku(); ?>"></div>
                             <?php /* @escapeNotVerified */ echo $block->getProductPrice($_product) ?>
 							<?php echo $block->getProductDetailsHtml($_product); ?>
 

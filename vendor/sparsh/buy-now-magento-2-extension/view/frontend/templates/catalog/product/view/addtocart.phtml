@@ -32,7 +32,6 @@ $flag = 1;
             <div class="actions">
                 <?php if ($isModuleEnable ? ($hideCart ? $flag = 0 : $flag) : $flag): ?>
                     <button type="submit"
-                            title="<?= /* @noEscape */ $buttonTitle ?>"
                             class="action primary tocart"
                             id="product-addtocart-button">
                         <span><?= /* @noEscape */ $buttonTitle ?></span>
@@ -42,7 +41,6 @@ $flag = 1;
                     $buttonTitle = $this->helper(\Sparsh\BuyNow\Helper\Data::class)->getConfig('buynow/advance/button_title'); ?>
                     <div class="sparsh-buynow-view">
                         <button type="submit"
-                                title="<?= /* @noEscape */ __($buttonTitle) ?>"
                                 class="action primary"
                                 id="product-sparsh-buynow-button"
                                 data-mage-init='

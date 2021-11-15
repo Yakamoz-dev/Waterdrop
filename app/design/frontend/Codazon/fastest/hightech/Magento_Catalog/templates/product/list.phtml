@@ -139,6 +139,7 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
 							?>
 							<strong class="product name product-item-name">
 								<a class="product-item-link"
+                                   title="<?php /* @escapeNotVerified */ echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?>"
 								   href="<?php /* @escapeNotVerified */ echo $_product->getProductUrl() ?>">
 									<?php /* @escapeNotVerified */ echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?>
 								</a>

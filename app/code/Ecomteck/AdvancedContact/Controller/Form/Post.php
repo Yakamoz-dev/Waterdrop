@@ -47,7 +47,7 @@ class Post extends Action
             return $resultRedirect;
         } else {
             $message = $this->getRequest()->getParam("message");
-            if(strpos($message," ") === false) {
+            if((strpos($message," ") === false) || (strpos($message,"<a") !== false)) {
                 $messageManager = $this->_objectManager
                     ->get(\Magento\Framework\Message\ManagerInterface::class);
                 $messageManager->addSuccess(

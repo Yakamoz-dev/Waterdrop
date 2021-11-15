@@ -1,0 +1,227 @@
+# Copyright © Magento, Inc. All rights reserved.
+type Query {
+    tagcategories (
+        id: Int @doc(description: "Id of Tag Categories")
+    ): TagCategoriesData @resolver(class: "Magedelight\\BundlediscountGraphQl\\Model\\Resolver\\TagCategoriesApi") @doc(description: "The Tag Categories Data Query Returns Data about a Tag Categories Object")
+    tagwrapper (
+        id: Int @doc(description: "Id of Tag Wrapper")
+    ): TagWrapperData @resolver(class: "Magedelight\\BundlediscountGraphQl\\Model\\Resolver\\TagWrapperApi") @doc(description: "The Tag Wrapper Data Query Returns Data about a Tag Wrapper Object")
+    budleoptions (
+        bundle_id: Int @doc(description: "Bundle ID")
+    ): BundleOptionsData @resolver(class: "Magedelight\\BundlediscountGraphQl\\Model\\Resolver\\BundleOptionsApi") @doc(description: "The Bundle Options Data Query Returns Data about a Bundle Options Object")
+    getBundleByProduct (
+        product_id: Int @doc(description: "Product Id")
+    ): BundlesByProduct @resolver(class: "Magedelight\\BundlediscountGraphQl\\Model\\Resolver\\BundlesByProduct") @doc(description: "Get Bundle Data by Product ID")
+    tagwrapperData(
+        filter: tagWrapperFilterInput @doc(description: "Identifies which bundle options fields to search for and return."),
+        pageSize: Int = 5 @doc(description: "How many items should show on the page"),
+        currentPage: Int = 1 @doc(description: "Allows to ussing paging it start with 1"),
+    ):tagWrapperFilterOutput @resolver(class: "\\Magedelight\\BundlediscountGraphQl\\Model\\Resolver\\TagwrapperFilter") @doc(description: "The Impelemention to resolve Bundle Options")
+    tagcategoriesData(
+        filter: tagCategoryFilterInput @doc(description: "Identifies which bundle options fields to search for and return."),
+        pageSize: Int = 5 @doc(description: "How many items should show on the page"),
+        currentPage: Int = 1 @doc(description: "Allows to ussing paging it start with 1"),
+    ):tagCategoryFilterOutput @resolver(class: "\\Magedelight\\BundlediscountGraphQl\\Model\\Resolver\\TagCategoriesFilter") @doc(description: "The Impelemention to resolve Bundle Options")
+    bundlesOptionsData(
+        filter: bundlesOptionsFilterInput @doc(description: "Identifies which bundle options fields to search for and return."),
+        pageSize: Int = 5 @doc(description: "How many items should show on the page"),
+        currentPage: Int = 1 @doc(description: "Allows to ussing paging it start with 1"),
+    ):bundlesOptionsOutput @resolver(class: "\\Magedelight\\BundlediscountGraphQl\\Model\\Resolver\\BundleOptionsFilter") @doc(description: "The Impelemention to resolve Bundle Options")
+}
+
+type Cart {
+bundle_items : [BundleCartItems] @resolver(class: "\\Magedelight\\BundlediscountGraphQl\\Model\\Resolver\\BundleCartItems")
+}
+
+type BundleCartItems {
+    bundle_id : Int
+    product_id: Int
+    name: String
+    sku: String
+    qty: Int
+}
+
+type Mutation {
+    createTagCategories (input: CreateTagCategoriesInput!): CreateTagCategoriesOutput @resolver(class: "\\Magedelight\\BundlediscountGraphQl\\Model\\Resolver\\CreateTagCategoriesApi") @doc(description:"Create Tag Category")
+    deleteTagCategories(id: Int!): Boolean @resolver(class: "\\Magedelight\\BundlediscountGraphQl\\Model\\Resolver\\DeleteTagCategoriesApi") @doc(description:"Delete Tag Category")
+    updateTagCategories (input: UpdateTagCategoriesInput!): UpdateTagCategoriesOutput @resolver(class: "\\Magedelight\\BundlediscountGraphQl\\Model\\Resolver\\UpdateTagCategoriesApi") @doc(description:"Update Tag Category")
+    createTag (input: CreateTagInput!): CreateTagOutput @resolver(class: "\\Magedelight\\BundlediscountGraphQl\\Model\\Resolver\\CreateTagApi") @doc(description:"Create Tag")
+    updateTag (input: UpdateTagInput!): UpdateTagOutput @resolver(class: "\\Magedelight\\BundlediscountGraphQl\\Model\\Resolver\\UpdateTagApi") @doc(description:"Update Tag")
+    deleteTag(id: Int!): Boolean @resolver(class: "\\Magedelight\\BundlediscountGraphQl\\Model\\Resolver\\DeleteTagApi") @doc(description:"Delete Tag")
+    deleteBundleOptions (bundle_id: Int!): Boolean @resolver(class: "\\Magedelight\\BundlediscountGraphQl\\Model\\Resolver\\DeleteBundleOptionsApi") @doc(description:"Delete Bundle Options by Bundle Options ID")
+}
+
+type BundlesByProduct @doc(description: "Bundle Details By Product Id") {
+    bundle_id: Int
+    name: String
+    discount_price: Float
+    status: Boolean
+    product_items: [CustomizableProductsValue]
+}
+
+type TagCategoriesData @doc(description: "Tag Categories Information by Tag Categories ID") {
+    name: String @doc(description: "Tag Categories Name")
+    is_active: Int @doc(description: "Tag Categories Status")
+    created_at: String @doc(description: "Created Date of Tag Categories Record.")
+    update_time: String @doc(description: "Updated Date of Tag Categories Record.")
+}
+
+type TagWrapperData @doc(description: "Tag Wrapper Information by Tag ID") {
+    category: String @doc(description: "Tag Wrapper Categories Name")
+    name: String @doc(description: "Tag Wrapper Name")
+    is_active: Int @doc(description: "Tag Wrapper Status")
+    created_at: String @doc(description: "Created Date of Tag Wrapper Record.")
+    update_time: String @doc(description: "Updated Date of Tag Wrapper Record.")
+}
+
+input CreateTagCategoriesInput {
+    name: String! @doc(description: "Tag Category Name")
+    is_active: Int @doc(description: "Tag Category Status")
+}
+
+input CreateTagInput {
+    name: String @doc(description: "Tag Name")
+    category: String @doc(description: "Tag Category Name")    
+    is_active: Int @doc(description: "Tag Status")
+}
+
+input UpdateTagCategoriesInput {
+    id: Int @doc(description: "Tag Category ID")
+    name: String @doc(description: "Tag Category Name")
+    is_active: Int @doc(description: "Tag Category Status")
+}
+
+input UpdateTagInput {
+    id: Int @doc(description: "Tag ID")
+    name: String @doc(description: "Tag Name")
+    category: String @doc(description: "Tag Category Name")
+    is_active: Int @doc(description: "Tag Status")
+}
+
+type CreateTagCategoriesOutput {
+    tag_categories: TagCategoriesList @doc(description: "Tag Category List")
+}
+
+type UpdateTagCategoriesOutput {
+    tag_categories: TagCategoriesList @doc(description: "Tag Category List")
+}
+
+type CreateTagOutput {
+    tag_list: TagList @doc(description: "Tag List")
+}
+
+type UpdateTagOutput {
+    tag_list: TagList @doc(description: "Tag List")
+}
+
+type TagCategoriesList  {
+    id: Int @doc(description: "Tag Categories ID"),
+    name: String @doc(description: "Tag Categories Name"),
+    is_active: Int @doc(description: "Tag Categories Status"),
+    created_at: String @doc(description: "Created Date of Tag Categories Record."),
+    update_time: String @doc(description: "Updated Date of Tag Categories Record."),
+}
+
+type TagList  {
+    id: Int @doc(description: "Tag ID"),
+    category: String @doc(description: "Tag Categories Name"),
+    name: String @doc(description: "Tag Name"),
+    is_active: Int @doc(description: "Tag Status"),
+    created_at: String @doc(description: "Created Date of Tag Record."),
+    update_time: String @doc(description: "Updated Date of Tag Record."),
+}
+
+type BundleOptionsData @doc(description: "Bundle Options Information") {
+    name: String @doc(description: "Bundle Options Name Field")
+    status: Int @doc(description: "Bundle Options Status Field")
+    qty: Int @doc(description: "Bundle Options Qtty Field")
+    date_from: String @doc(description: "Bundle Options Date From Field.")
+    date_to: String @doc(description: "Bundle Options Date To Field.")
+    bundle_option: String @doc(description: "Bundle Options Type.")
+    discount_type: Int @doc(description: "Bundle Options Discount Type.")
+    discount_price: Float @doc(description: "Bundle Options Discount Price")
+    exclude_base_product: Int @doc(description: "Bundle Options Exclude Base Product.")
+    bundle_keywords: String @doc(description: "Bundle Options Keywords.")
+    bundle_tags: String @doc(description: "Bundle Options Tags.")
+    sort_order: Int @doc(description: "Bundle Options Sort Order.")
+    customer_groups: String @doc(description: "Bundle Options Customer Groups.")
+    store_ids: String @doc(description: "Bundle Options Store IDs.")
+    products_items: [CustomizableProductsValue] @doc(description: "An array that defines the set of options for a multiselect.")
+}
+
+type CustomizableProductsValue @doc(description: "Bundle Options Product Data.") {
+    bundle_id: Int @doc(description: "The Bundle Id.")
+    name: String @doc(description: "The Bundle Options Product Name.")
+    qty: Int @doc(description: "The Bundle Options Product Qty.")
+    sort_order: Int @doc(description: "The order in which the option is displayed.")
+}
+
+type bundlesOptionsOutput {
+    total_count:  Int @doc(description: "total_count")
+    items: [BundleOptionsFilterOutput] @doc(description: "items")
+}
+
+type BundleOptionsFilterOutput @doc(description: "Bundle Options Information") {
+    bundle_id: Int @doc(description: "Bundle Options Id")
+    product_id: Int @doc(description: "Bundle Options Product Id")
+    name: String @doc(description: "Bundle Options Name Field")
+    status: Int @doc(description: "Bundle Options Status Field")
+    qty: Int @doc(description: "Bundle Options Qtty Field")
+    date_from: String @doc(description: "Bundle Options Date From Field.")
+    date_to: String @doc(description: "Bundle Options Date To Field.")
+    bundle_option: String @doc(description: "Bundle Options Type.")
+    discount_type: Int @doc(description: "Bundle Options Discount Type.")
+    discount_price: Float @doc(description: "Bundle Options Discount Price")
+    exclude_base_product: Int @doc(description: "Bundle Options Exclude Base Product.")
+    bundle_keywords: String @doc(description: "Bundle Options Keywords.")
+    bundle_tags: String @doc(description: "Bundle Options Tags.")
+    sort_order: Int @doc(description: "Bundle Options Sort Order.")
+    customer_groups: String @doc(description: "Bundle Options Customer Groups.")
+    store_ids: String @doc(description: "Bundle Options Store IDs.")
+}
+
+input bundlesOptionsFilterInput @doc(description: "bundlesOptionsFilterInput specifies the fields to search") {
+    bundle_id: FilterTypeInput  @doc(description: "bundle_id")
+    product_id: FilterTypeInput  @doc(description: "product_id")
+    name: FilterTypeInput  @doc(description: "bundle_name")
+    created_at: FilterTypeInput  @doc(description: "created_at")
+    updated_at: FilterTypeInput  @doc(description: "updated_at")
+    or: bundlesOptionsFilterInput @doc(description: "The keyword required to perform a logical OR comparison")
+}
+
+input tagCategoryFilterInput @doc(description: "tagCategoryFilterInput specifies the fields to search") {
+    entity_id: FilterTypeInput  @doc(description: "entity_id")
+    name: FilterTypeInput  @doc(description: "name")
+    is_active: FilterTypeInput  @doc(description: "is_active")
+    created_at: FilterTypeInput  @doc(description: "created_at")
+    update_time: FilterTypeInput  @doc(description: "update_time")
+    or: tagCategoryFilterInput @doc(description: "The keyword required to perform a logical OR comparison")
+}
+
+input tagWrapperFilterInput @doc(description: "tagWrapperFilterInput specifies the fields to search") {
+    id: FilterTypeInput  @doc(description: "entity_id")
+    category: FilterTypeInput  @doc(description: "name")
+    name: FilterTypeInput  @doc(description: "name")
+    is_active: FilterTypeInput  @doc(description: "is_active")
+    created_at: FilterTypeInput  @doc(description: "created_at")
+    update_time: FilterTypeInput  @doc(description: "update_time")
+    or: tagWrapperFilterInput @doc(description: "The keyword required to perform a logical OR comparison")
+}
+
+type tagCategoryFilterOutput {
+    total_count:  Int @doc(description: "total_count")
+    items: [TagCategoriesFilterList] @doc(description: "items")
+}
+
+type TagCategoriesFilterList  {
+    entity_id: Int @doc(description: "Tag Categories ID"),
+    name: String @doc(description: "Tag Categories Name"),
+    is_active: Int @doc(description: "Tag Categories Status"),
+    created_at: String @doc(description: "Created Date of Tag Categories Record."),
+    update_time: String @doc(description: "Updated Date of Tag Categories Record."),
+}
+
+type tagWrapperFilterOutput {
+    total_count:  Int @doc(description: "total_count")
+    items: [TagList] @doc(description: "items")
+}

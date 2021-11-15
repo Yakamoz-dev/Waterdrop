@@ -1,0 +1,133 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Magedelight
+* Copyright (C) 2016 Magedelight <info@magedelight.com>
+*
+* NOTICE OF LICENSE
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program. If not, see http://opensource.org/licenses/gpl-3.0.html.
+*
+* @category Magedelight
+* @package Magedelight_Bundlediscount
+* @copyright Copyright (c) 2016 Mage Delight (http://www.magedelight.com/)
+* @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+* @author Magedelight <info@magedelight.com>
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+<preference for="Magento\Quote\Model\Cart\CartTotalRepository" type="Magedelight\Bundlediscount\Model\Quote\CartTotalRepository" />
+  
+    <virtualType name="BundleGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="BundleGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Magedelight\Bundlediscount\Model\ResourceModel\Bundlediscount\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">BundleGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magedelight\Bundlediscount\Model\ResourceModel\Bundlediscount\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">md_bundlediscount_bundles</argument>
+            <argument name="resourceModel" xsi:type="string">Magedelight\Bundlediscount\Model\ResourceModel\Bundlediscount</argument>
+        </arguments>
+    </virtualType>
+
+
+    <virtualType name="TagwrapperGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magedelight\Bundlediscount\Ui\Component\DataProvider">
+        <arguments>
+            <argument name="additionalFilterPool" xsi:type="array">
+                <item name="fulltext" xsi:type="object">Magedelight\Bundlediscount\Ui\Component\Page\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="TagwrapperGridDataProvider" type="Magedelight\Bundlediscount\Ui\Component\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Magedelight\Bundlediscount\Model\ResourceModel\Tagwrapper\Grid\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">TagwrapperGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magedelight\Bundlediscount\Model\ResourceModel\Tagwrapper\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">md_bundle_tag_item</argument>
+            <argument name="eventPrefix" xsi:type="string">md_bundle_tagwrapper_collection</argument>
+            <argument name="eventObject" xsi:type="string">bundle_tagwrapper_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Magedelight\Bundlediscount\Model\ResourceModel\Tagwrapper</argument>
+        </arguments>
+    </type>
+
+     <!-- <virtualType name="Magedelight\Bundlediscount\Model\ResourceModel\Tagwrapper\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">md_bundle_tag_item</argument>
+            <argument name="resourceModel" xsi:type="string">Magedelight\Bundlediscount\Model\ResourceModel\Tagwrapper</argument>
+        </arguments>
+    </virtualType> -->
+    
+    <!-- /* Gift Category Management */ -->
+    <virtualType name="TagcategoriesGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>   
+   <virtualType name="TagcategoriesGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Magedelight\Bundlediscount\Model\ResourceModel\Tagcategories\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">TagcategoriesGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magedelight\Bundlediscount\Model\ResourceModel\Tagcategories\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">md_bundle_tag_category</argument>
+            <argument name="resourceModel" xsi:type="string">Magedelight\Bundlediscount\Model\ResourceModel\Tagcategories</argument>
+        </arguments>
+    </virtualType>
+    <!-- /* Gift Category Management */ -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="entity_listing_data_source1" xsi:type="string">Magedelight\Bundlediscount\Model\ResourceModel\Bundlediscount\Grid\Collection</item>
+                <item name="gridmanager_tagwrapper_listing_data_source" xsi:type="string">Magedelight\Bundlediscount\Model\ResourceModel\Tagwrapper\Grid\Collection</item>
+                <item name="gridmanager_tagcategories_listing_data_source" xsi:type="string">Magedelight\Bundlediscount\Model\ResourceModel\Tagcategories\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Magento\ConfigurableProduct\Helper\Product\Options\Loader" type="Magedelight\Bundlediscount\Helper\Product\Options\Loader" />
+    <preference for="Magedelight\Bundlediscount\Api\BundleTagCategoryInterface" type="Magedelight\Bundlediscount\Model\TagcategoriesApi" />
+    <preference for="Magedelight\Bundlediscount\Api\BundleTagInterface" type="Magedelight\Bundlediscount\Model\TagwrapperApi" />
+    <preference for="Magedelight\Bundlediscount\Api\BundleOptionsInterface" type="Magedelight\Bundlediscount\Model\BundleOptionsApi" />
+    <preference for="Magedelight\Bundlediscount\Api\Data\BundleOptionsSearchResultInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Magedelight\Bundlediscount\Api\Data\BundleTagCategorySearchResultInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Magedelight\Bundlediscount\Api\Data\BundleTagSearchResultInterface" type="Magento\Framework\Api\SearchResults"/>
+
+</config>

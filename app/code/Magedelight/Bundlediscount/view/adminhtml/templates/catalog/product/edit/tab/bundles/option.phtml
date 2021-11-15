@@ -1,0 +1,173 @@
+<?php
+/**
+ * Magedelight
+ * Copyright (C) 2016 Magedelight <info@magedelight.com>
+ *
+ * NOTICE OF LICENSE
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://opensource.org/licenses/gpl-3.0.html.
+ *
+ * @category Magedelight
+ * @package Magedelight_Bundlediscount
+ * @copyright Copyright (c) 2016 Mage Delight (http://www.magedelight.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author Magedelight <info@magedelight.com>
+ */
+?>
+<script type="text/javascript">
+    optionTemplate = '<div id="<?= /* @noEscape */  $block->getFieldId() ?>content__{{index}}"  class="admin__collapsible-content _show"><div id="<?= /* @noEscape */  $block->getFieldId() ?>_{{index}}"  class="fieldset-wrapper"> ' +
+            '<fieldset class="admin__fieldset">' +
+            '<fieldset class="admin__field" id="<?= /* @noEscape */ $block->getFieldId() ?>__field_{{index}}">' +
+            '<div class="admin__field-control admin__field-group-columns admin__control-group-equal admin__control-grouped">' +
+            '<div class="admin__field _required" > ' +
+            '<label class="admin__field-label" for="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][name]"><span><?= /* @noEscape */  __('Bundle Name') ?></span> </label>' +
+            '<div class="admin__field-control">' +
+            '<input class="admin__control-text required-entry" type="text" data-form-part="product_form" name="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][name]" id="<?= /* @noEscape */  $block->getFieldId() ?>_{{index}}_name" value="{{name}}">' +
+            '</div>' +
+            '</div>' +
+            '<div class="admin__field" >' +
+            '<label class="admin__field-label"  for="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][qty]"><span><?= /* @noEscape */  __('Base Product Qty') ?></span> </label>' +
+            '<div class="admin__field-control">' +
+            '<input class="admin__control-text qty validate-greater-than-zero" data-form-part="product_form"  type="text" name="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][qty]" id="<?= /* @noEscape */  $block->getFieldId() ?>_{{index}}_qty" value="{{qty}}"/>' +
+            '</div>' +
+            '<?php //echo $block->escapeJsQuote($block->getOptionDeleteButtonHtml())    ?>' +
+            '</div>' +
+            '<div class="admin__field">' +
+            '<label class="admin__field-label"><span></span> </label>' +
+            '<div class="admin__field-control">' +
+            '<button id="<?= /* @noEscape */  $block->getFieldId() ?>_{{index}}_delete" title="Delete Bundle" onclick="pbOption.remove(event)" type="button" class="action-delete action-secondary"  data-ui-id="product-bundlediscount-md-bundlediscount-options-box-option-delete-button" ><span>Delete Bundle</span></button>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</fieldset>' +
+            '<fieldset class="admin__field">' +
+            '<div class="admin__field-control admin__field-group-columns admin__control-group-equal admin__control-grouped">' +
+            '<div class="admin__field" > ' +
+            '<label class="admin__field-label" for="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][date_from]"><span><?= /* @noEscape */  __('Enable From') ?></span> </label>' +
+            '<div class="admin__field-control">' +
+            '<input data-form-part="product_form" class="admin__control-text validate-date-range date-range-<?= /* @noEscape */  $block->getFieldId() ?>_{{index}}_date-from" type="text" name="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][date_from]" id="<?= /* @noEscape */  $block->getFieldId() ?>_{{index}}_date_from" value="{{date_from}}">' +
+            '<script>require(["jquery","mage/calendar"],function($){$("#<?= /* @noEscape */  $block->getFieldId() ?>_{{index}}_date_from").calendar({buttonText:"<?= /* @noEscape */  __('Select Date') ?>",minDate : new Date()});});<\/script>' +
+            '</div>' +
+            '</div>' +
+            '<div class="admin__field"> ' +
+            '<label class="admin__field-label" for="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][date_to]"><span><?= /* @noEscape */  __('Enable To') ?></span> </label>' +
+            '<div class="admin__field-control">' +
+            '<input data-form-part="product_form"  class="admin__control-text validate-date-range date-range-<?= /* @noEscape */  $block->getFieldId() ?>_{{index}}_date-to" type="text" name="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][date_to]" id="<?= /* @noEscape */  $block->getFieldId() ?>_{{index}}_date_to" value="{{date_to}}">' +
+            '<script type="text\/javascript">require(["jquery","mage/calendar"],function($){$("#<?= /* @noEscape */  $block->getFieldId() ?>_{{index}}_date_to").calendar({buttonText:"<?= /* @noEscape */  __('Select Date') ?>",minDate : new Date()});});<\/script>' +
+            '</div>' +
+            '</div>' +
+            '<div class="admin__field"> ' +
+            '<label class="admin__field-label" for="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][bundle_option]"><span><?= /* @noEscape */  __('Bundle Type') ?></span> </label>' +
+            '<div class="admin__field-control">' +
+             '<select data-form-part="product_form" name="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][bundle_option]" id="<?= /* @noEscape */  $block->getFieldId() ?>_{{index}}_bundle_option" class="admin__control-select"><option value="Fixed"><?= /* @noEscape */  __('Fixed') ?></option><option value="Flexible"><?= /* @noEscape */  __('Flexible') ?></option></select>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</fieldset>' +
+            '<fieldset class="admin__field">' +
+            '<div class="admin__field-control admin__field-group-columns admin__control-group-equal admin__control-grouped"> ' +
+            '<div class="admin__field" > ' +
+            '<label class="admin__field-label" for="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][discount_type]"><span><?= /* @noEscape */  __('Discount Type') ?> </span></label>' +
+            '<div class="admin__field-control">' +
+            '<select data-form-part="product_form"  name="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][discount_type]" id="<?= /* @noEscape */  $block->getFieldId() ?>_{{index}}_discount_type" class="admin__control-select"><option value="0"><?= /* @noEscape */  __('Fixed') ?></option><option value="1"><?= /* @noEscape */  __('Percentage') ?></option></select>' +
+            '</div>' +
+            '</div>' +
+            '<div class="admin__field _required"> ' +
+            '<label class="admin__field-label" for="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][discount_price]"><span><?= /* @noEscape */  __('Discount Price') ?></span></label>' +
+            '<div class="admin__field-control">' +
+            '<input data-form-part="product_form"  class="required-entry admin__control-text validate-greater-than-zero" type="text" name="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][discount_price]" id="<?= /* @noEscape */  $block->getFieldId() ?>_{{index}}_discount_price" value="{{discount_price}}" />' +
+            '</div>' +
+            '</div>' +
+            '<div class="admin__field"> ' +
+            '<label class="admin__field-label" for="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][exclude_base_product]"><span><?= /* @noEscape */  __('Ignore Base Product From Discount') ?> </span></label>' +
+            '<div class="admin__field-control">' +
+            '<select data-form-part="product_form"  name="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][exclude_base_product]" id="<?= /* @noEscape */  $block->getFieldId() ?>_{{index}}_exclude_base_product" class="admin__control-select"><option value="0"><?= /* @noEscape */  __('No') ?></option><option value="1"><?= /* @noEscape */  __('Yes') ?></option></select>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</fieldset>' +
+             '<fieldset class="admin__field">' +
+            '<div class="admin__field-control admin__field-group-columns admin__control-group-equal admin__control-grouped"> ' +
+            '<div class="admin__field" > ' +
+            '<label class="admin__field-label" for="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][bundle_keywords]"><span><?= /* @noEscape */  __('Bundle Keywords') ?> </span></label>' +
+            '<div class="admin__field-control">' +
+            '<input data-form-part="product_form"  class="admin__control-text" type="text" name="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][bundle_keywords]" id="<?= /* @noEscape */  $block->getFieldId() ?>_{{index}}_discount_price" value="{{bundle_keywords}}" />' +
+            '</div>' +
+            '</div>' +
+            '<div class="admin__field" > ' +
+            '<label class="admin__field-label" for="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][bundle_tags]"><span><?= /* @noEscape */  __('Bundle Tags') ?> </span></label>' +
+            '<div class="admin__field-control">' +
+            '<select data-form-part="product_form"  class=" admin__control-multiselect bundle_tags" id="<?= /* @noEscape */  $block->getFieldId() ?>_{{index}}_bundle_tags" size="6" multiple="multiple"><?= /* @noEscape */  $block->getTagOptions() ?></select>' +
+            '<input type="hidden" data-form-part="product_form" id="<?= /* @noEscape */  $block->getFieldId() ?>_{{index}}_bundle_tags_hid" name="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][bundle_tags]" value="{{bundle_tags}}">'+
+            
+            '</div>' +
+            '</div>' +
+           
+            '</div>' +
+            '</fieldset>' +
+            '<fieldset class="admin__fieldset">' +
+            '<table class="admin__dynamic-rows admin__control-table" cellpadding="0" cellspacing="0">' +
+            '<thead>' +
+            '<tr>' +
+            '<th class="opt-type _required"><?= /* @noEscape */  __('Status') ?> <span class="_required"></span></label></th>' +
+            '<th class="opt-order _required"><?= /* @noEscape */  __('Position') ?> <span class="_required"></span></label></th>' +
+            '<th class="opt-type _required"><?= /* @noEscape */  __('Customer Groups') ?> <span class="_required"></span></label></th>' +
+            '<th class="opt-type _required"><?= /* @noEscape */  __('Store View') ?> <span class="_required"></span></label></th>' +
+            '<th>&nbsp;</th>' +
+            '</tr>' +
+            '</thead>' +
+            '<tbody>' +
+            '<tr>' +
+            '<input type="hidden" data-form-part="product_form"  id="<?= /* @noEscape */  $block->getFieldId() ?>_id_{{index}}" name="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][bundle_id]" value="{{bundle_id}}">' +
+            '<input type="hidden" data-form-part="product_form"  name="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][delete]" value="" class="delete">' +
+            '<td><select data-form-part="product_form"  title="" class="admin__control-select" id="<?= /* @noEscape */  $block->getFieldId() ?>_{{index}}_status" name="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][status]"><option value="1"><?= /* @noEscape */  __('Enabled') ?></option><option value="0"><?= /* @noEscape */  __('Disabled') ?></option></select></td>' +
+            '<td><input data-form-part="product_form"  class="required-entry admin__control-text validate-zero-or-greater" type="text" name="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][sort_order]" value="{{sort_order}}"></td>' +
+            '<td><select multiple class="required-entry  admin__control-multiselect bundle_customer_group" id="<?= /* @noEscape */  $block->getFieldId() ?>_{{index}}_customer_groups" data-form-part="product_form" size="6" multiple="multiple"><?= /* @noEscape */  $block->getCustomerGroupsOptions() ?></select>' +
+            '<input type="hidden" data-form-part="product_form" id="<?= /* @noEscape */  $block->getFieldId() ?>_{{index}}_customer_groups_hid" name="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][customer_groups]" value="{{customer_groups}}">' +
+            '</td>' +
+            '<td><select data-form-part="product_form" class=" required-entry admin__control-multiselect bundle_stores" id="<?= /* @noEscape */  $block->getFieldId() ?>_{{index}}_store_ids" size="6" multiple="multiple"><?= /* @noEscape */  $block->getStoreViewOptions() ?></select>' +
+            '<input type="hidden" data-form-part="product_form" id="<?= /* @noEscape */  $block->getFieldId() ?>_{{index}}_store_ids_hid" name="<?= /* @noEscape */  $block->getFieldName() ?>[{{index}}][store_ids]" value="{{store_ids}}">' +
+            '</td>' +
+            '<td>&nbsp;<?php //echo $block->escapeJsQuote($block->getAddSelectionButtonHtml())    ?><button id="bundlediscount_option_{{index}}_add_button" title="Add Product" type="button" class="action-default primary add" onclick="pbSelection.showSearch(event)"  data-ui-id="product-bundlediscount-md-bundlediscount-options-box-add-selection-button" ><span>Add Product</span></button></td>' +
+            '</tr>' +
+            '</tbody>' +
+            '</table>' +
+            '<div id="<?= /* @noEscape */  $block->getFieldId() ?>_search_{{index}}">' +
+            '</div>' +
+            '</fieldset>' +
+            '</fieldset>' +
+            '</div>' +
+            '</div>';
+</script>
+
+<script type="text/javascript">
+    var pbOption = new Productbundle.Option(optionTemplate, '<?= /* @noEscape */  $block->getFieldId() ?>', 'productbundle_container_top');
+
+</script>
+<?= /* @noEscape */  $block->getSelectionHtml() ?>
+<script type="text/javascript">
+    var optionIndex = 0;
+<?php foreach ($block->getBundles() as $_bundle): ?>
+        optionIndex = pbOption.add(<?= /* @noEscape */  $_bundle->toJson() ?>);
+    <?php if ($_bundle->getSelections()): ?>
+        <?php foreach ($_bundle->getSelections() as $_selection): ?>
+                pbSelection.addRow(optionIndex, <?= /* @noEscape */  $_selection->toJson() ?>);
+        <?php endforeach; ?>
+    <?php endif; ?>
+<?php endforeach; ?>
+</script>
+
+<script type="text/javascript">
+observeMultiSelect();
+</script>

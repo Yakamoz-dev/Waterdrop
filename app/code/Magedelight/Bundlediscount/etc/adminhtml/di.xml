@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="bundlediscount" xsi:type="array">
+                    <item name="class" xsi:type="string">Magedelight\Bundlediscount\Ui\DataProvider\Product\Modifier\Bundlediscount</item>
+                    <item name="sortOrder" xsi:type="number">200</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magedelight\Bundlediscount\Ui\DataProvider\Product\Modifier\Bundlediscount">
+        <arguments>
+            <argument name="formName" xsi:type="string">product_form</argument>
+            <argument name="dataScopeName" xsi:type="string">product_form.product_form</argument>
+            <argument name="dataSourceName" xsi:type="string">product_form.product_form_data_source</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Backend\Model\Menu\Item">
+        <plugin name="md_bundlediscount_menu_item_newtab" type="Magedelight\Bundlediscount\Plugin\Magento\Backend\Model\Menu\Item" />
+    </type>
+
+    <type name="Magento\Sales\Model\Order\Invoice">
+        <plugin name="md_invoice" type="Magedelight\Bundlediscount\Plugin\Invoice" />
+    </type>
+
+    <type name="Magento\Sales\Model\Order\Creditmemo">
+        <plugin name="md_invoice" type="Magedelight\Bundlediscount\Plugin\Creditmemo" />
+    </type>
+
+</config>

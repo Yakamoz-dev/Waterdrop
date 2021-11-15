@@ -1,0 +1,29 @@
+<?php
+/**
+ * Magedelight
+ * Copyright (C) 2017 Magedelight <info@magedelight.com>
+ *
+ * @category Magedelight
+ * @package Magedelight_Bundlediscount
+ * @copyright Copyright (c) 2017 Mage Delight (http://www.magedelight.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author Magedelight <info@magedelight.com>
+ */
+$collection = $block->getTagcategoriesCollection();
+$data = $block->getRequest()->getParams();
+?>
+<?php if (sizeof($collection) > 0):?>
+<div style="clear: both;">
+    <div class='tagcategory-block' data-action='<?= /* @noEscape */  $data['action']; ?>' id='md_tagcategories<?= /* @noEscape */  $data['quote_item_id']; ?>'>
+        <h2><?=  /* @noEscape */ __("Select the giftwrapper category"); ?></h2>
+        <select class='giftcategory-listing' name='giftcategory'>
+            <option value=''><?=  /* @noEscape */  __('--Select Giftwrapper Category--'); ?></option>
+            <?php foreach ($collection as $giftcategory): ?>
+                <option value='<?= /* @noEscape */  $giftcategory->getEntityId() ?>'><?= /* @noEscape */  $giftcategory->getName(); ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+</div>
+<?php else: ?>
+<p> <?=  /* @noEscape */ __('Categories Not Found'); ?></p>
+<?php endif; ?>

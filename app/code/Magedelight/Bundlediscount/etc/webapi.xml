@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../app/code/Magento/Webapi/etc/webapi.xsd">
+    
+    <!-- Create Tag Category -->
+    <route url="/V1/bundlediscount/create/tagcategory" method="PUT">
+        <service class="Magedelight\Bundlediscount\Api\BundleTagCategoryInterface" method="createBundleTagCategory"/>
+        <resources>
+            <resource ref="admin"/>
+        </resources>
+    </route>
+
+    <!-- Get Tag Category -->
+    <route url="/V1/bundlediscount/gettagcategory/:tagcategoryid" method="GET">
+        <service class="Magedelight\Bundlediscount\Api\BundleTagCategoryInterface" method="getBundleTagCategory"/>
+        <resources>
+            <resource ref="admin"/>
+        </resources>
+    </route>
+
+    <!-- Update Tag Category -->
+    <route url="/V1/bundlediscount/updatetagcategory/:tagcategoryid" method="PUT">
+        <service class="Magedelight\Bundlediscount\Api\BundleTagCategoryInterface" method="updateBundleTagCategory"/>
+        <resources>
+            <resource ref="admin"/>
+        </resources>
+    </route>
+
+    <!-- Delete Tag Category -->
+    <route url="/V1/bundlediscount/deletetagcategory/:tagcategoryid" method="DELETE">
+        <service class="Magedelight\Bundlediscount\Api\BundleTagCategoryInterface" method="deleteBundleTagCategory"/>
+        <resources>
+            <resource ref="admin"/>
+        </resources>
+    </route>
+
+    <!-- Filter Tag Category -->
+    <route url="/V1/bundlediscount/tagcategory/search" method="GET">
+        <service class="Magedelight\Bundlediscount\Api\BundleTagCategoryInterface" method="getList"/>
+        <resources>
+            <resource ref="admin"/>
+        </resources>
+    </route>
+
+    <!-- Create Tag -->
+    <route url="/V1/bundlediscount/create/tag" method="PUT">
+        <service class="Magedelight\Bundlediscount\Api\BundleTagInterface" method="createBundleTag"/>
+        <resources>
+            <resource ref="admin"/>
+        </resources>
+    </route>
+
+    <!-- Get Tag -->
+    <route url="/V1/bundlediscount/gettag/:tagid" method="GET">
+        <service class="Magedelight\Bundlediscount\Api\BundleTagInterface" method="getBundleTag"/>
+        <resources>
+            <resource ref="admin"/>
+        </resources>
+    </route>
+
+    <!-- Update Tag -->
+    <route url="/V1/bundlediscount/updatetag/:tagid" method="PUT">
+        <service class="Magedelight\Bundlediscount\Api\BundleTagInterface" method="updateBundleTag"/>
+        <resources>
+            <resource ref="admin"/>
+        </resources>
+    </route>
+
+    <!-- Delete Tag Category -->
+    <route url="/V1/bundlediscount/deletetag/:tagid" method="DELETE">
+        <service class="Magedelight\Bundlediscount\Api\BundleTagInterface" method="deleteBundleTag"/>
+        <resources>
+            <resource ref="admin"/>
+        </resources>
+    </route>
+
+    <!-- Filter Tag -->
+    <route url="/V1/bundlediscount/tag/search" method="GET">
+        <service class="Magedelight\Bundlediscount\Api\BundleTagInterface" method="getList"/>
+        <resources>
+            <resource ref="admin"/>
+        </resources>
+    </route>
+
+    <!-- Get Bundle Options -->
+    <route url="/V1/bundlediscount/getbundleoptions/:bundleid" method="GET">
+        <service class="Magedelight\Bundlediscount\Api\BundleOptionsInterface" method="getBundleOptions"/>
+        <resources>
+            <resource ref="admin"/>
+        </resources>
+    </route>
+
+    <!-- Create Bundle Options -->
+    <route url="/V1/bundlediscount/createbundleoptions" method="PUT">
+        <service class="Magedelight\Bundlediscount\Api\BundleOptionsInterface" method="createBundleOptions"/>
+        <resources>
+            <resource ref="admin"/>
+        </resources>
+    </route>
+
+    <!-- Update Bundle Options -->
+    <route url="/V1/bundlediscount/updatebundleoptions/:bundleid" method="PUT">
+        <service class="Magedelight\Bundlediscount\Api\BundleOptionsInterface" method="updateBundleOptions"/>
+        <resources>
+            <resource ref="admin"/>
+        </resources>
+    </route>
+
+    <!-- Update Bundle Options -->
+    <route url="/V1/bundlediscount/deletebundleoptions/:bundleid" method="DELETE">
+        <service class="Magedelight\Bundlediscount\Api\BundleOptionsInterface" method="deleteBundleOptions"/>
+        <resources>
+            <resource ref="admin"/>
+        </resources>
+    </route>
+
+    <!-- Filter Brand Options -->
+    <route url="/V1/bundlediscount/bundleoptions/search" method="GET">
+        <service class="Magedelight\Bundlediscount\Api\BundleOptionsInterface" method="getList"/>
+        <resources>
+            <resource ref="admin"/>
+        </resources>
+    </route>
+
+    <!-- Filter Brand Options -->
+    <route url="/V1/bundlediscount/bundlebyproduct/:productid" method="GET">
+        <service class="Magedelight\Bundlediscount\Api\BundleOptionsInterface" method="getBundleByProduct"/>
+        <resources>
+            <resource ref="admin"/>
+        </resources>
+    </route>
+</routes>

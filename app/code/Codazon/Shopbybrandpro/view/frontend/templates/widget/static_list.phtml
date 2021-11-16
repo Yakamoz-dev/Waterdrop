@@ -28,6 +28,13 @@ $widget = ['Codazon_Shopbybrandpro/js/brands' => [
 
 <?php if ($itemCount > 0): ?>
 <?php $i = 0; ?>
+<style>
+    @media (max-width: 1024px) and (min-width: 768px) {
+        .brand-loader.double-bounce-spinner {
+            display: none;
+        }
+    }
+</style>
 <div class="static-list-wrapper no-loaded" data-role="static-list-wrapper">
     <div class="brand-loader double-bounce-spinner" data-role="static-list-loader">
         <div class="double-bounce1"></div>

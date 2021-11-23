@@ -28,6 +28,8 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
+<preference for="Magedelight\Bundlediscount\Api\BundlePromoAddInterface" type="Magedelight\Bundlediscount\Model\BundlePromoAdd" />
+
 <preference for="Magento\Quote\Model\Cart\CartTotalRepository" type="Magedelight\Bundlediscount\Model\Quote\CartTotalRepository" />
   
     <virtualType name="BundleGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">

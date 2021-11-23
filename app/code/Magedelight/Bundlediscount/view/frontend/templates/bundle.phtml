@@ -39,12 +39,12 @@ $helper = $this->helper('Magedelight\Bundlediscount\Helper\Data');
 
     if (!empty($bundles) && count($bundles) != 0):
         ?>
-        <div style="clear:both;">
+        <div class="bundle-module" style="clear:both;">
             <div class="col-main">
 
                 <div class="page-contents promotions">
-                    <div class="page-title category-title">
-                        <h1><?= /* @noEscape */ $helper->getPromotionHeading() ?></h1>
+                    <div class="page-title category-title title">
+                        <strong>Bundle Discounts</strong>
                     </div>
                     <div class="prmomtions-contents">
                         <ul>
@@ -59,29 +59,22 @@ $helper = $this->helper('Magedelight\Bundlediscount\Helper\Data');
                                 }
                                 ?>
                                 <li class="promotions-lists">
-                                    <?php if ($bundle->getName() != '' || strlen($bundle->getName()) > 0): ?>
-                                        <h3><a href="<?= /* @noEscape */ $bundle->getProductUrl() ?>" title="<?= /* @noEscape */ $bundle->getProductName() ?>"><?= /* @noEscape */ $bundle->getName() ?></a></h3>
-                                    <?php endif; ?>
                                     <div class="promotions-discount-container">
                                         <div class="promotions-selections">
                                             <div class="promotions-selections-img tooltip<?= /* @noEscape */ $bundle->getId() ?>">
                                                 <a href="<?= /* @noEscape */ $bundle->getProductUrl() ?>" title="<?= /* @noEscape */ $bundle->getProductName() ?>">
                                                     <img src="<?= /* @noEscape */ $bundle->getImageUrl() ?>" height="90" width="90" /></a>
-                                                <div class="promotions-qty">X<?= /* @noEscape */ $bundle->getQty() ?></div>
-                                                <div class="tooltip" id="productNameTooltip<?= /* @noEscape */ $bundle->getId() ?>"><?= /* @noEscape */ $bundle->getProductName() ?></div>
-                                                <style type="text/css">
-                                                    .tooltip<?= /* @noEscape */ $bundle->getId() ?>:hover .tooltip{display:block;position:absolute;top:0;cursor:pointer;}
-                                                </style>
+                                                <div class="promotions-qty"><span>X<?= /* @noEscape */ $bundle->getQty() ?></span></div>
+                                                <div class="tooltip1" id="productNameTooltip<?= /* @noEscape */ $bundle->getId() ?>"><?= /* @noEscape */ $bundle->getProductName() ?></div>
+                                                <div class="toolprice">$<?php echo sprintf('%.2f',$bundle->getProductPrice());?></div>
                                                 <div class="check-configure" style="display: none;">
                                                  <input type="checkbox"  class="custom-check bundle_section_<?= /* @noEscape */ $bundle->getId() ?>" name="flexible_product" value="<?= /* @noEscape */ $bundle->getProductId() ?>" checked="">
                                                  <label></label>
                                                  </div>
                                             </div>
 
-                                            <div class="promotions-selections-plus">+</div>
-                                            <?php $i = 1;
-
-                                            ?>
+                                            <div class="promotions-selections-plus"><img src="<?php echo $block->getViewFileUrl('images/union.png');?>"/></div>
+                                            <?php $i = 1;?>
                                             <?php foreach ($_selections as $_selection):
                                                  $configureIds = $helper->loadConfigurableType($_selection->getData('product_id'));
                                                 ?>
@@ -96,11 +89,9 @@ $helper = $this->helper('Magedelight\Bundlediscount\Helper\Data');
                                                             <a href="<?= /* @noEscape */ $_selection->getProductUrl() ?>" title="<?= /* @noEscape */ $_selection->getProductName() ?>">
                                                         <img src="<?= /* @noEscape */ $_selection->getImageUrl() ?>" height="90" width="90" /></a>
                                                     <?php } ?>
-                                                    <div class="promotions-qty">X<?= /* @noEscape */ $_selection->getQty() ?></div>
-                                                    <div class="tooltip" id="productNameTooltip<?= /* @noEscape */ $_selection->getId() ?>"><?= /* @noEscape */ $_selection->getName() ?></div>
-                                                    <style type="text/css">
-                                                        .tooltip<?= /* @noEscape */ $_selection->getId() ?>:hover .tooltip{display:block;position:absolute;top:0;;cursor:pointer;}
-                                                    </style>
+                                                    <div class="promotions-qty"><span>X<?= /* @noEscape */ $_selection->getQty() ?></span></div>
+                                                    <div class="tooltip1" id="productNameTooltip<?= /* @noEscape */ $_selection->getId() ?>"><?= /* @noEscape */ $_selection->getName() ?></div>
+                                                    <div class="toolprice">$<?php echo sprintf('%.2f',$_selection->getPrice());?></div>
                                                     <?php if ($bundle->getBundleOption() == 'Flexible'): ?>
                                                        <div class="check-configure">
                                                         <?php $_propriceUrl = $block->getUrl('md_bundlediscount/index/custom'); ?>
@@ -121,7 +112,7 @@ $helper = $this->helper('Magedelight\Bundlediscount\Helper\Data');
                                                 </div>
 
                                                 <?php if ($i < $_selections->count()): ?>
-                                                    <div class="promotions-selections-plus">+</div>
+                                                    <div class="promotions-selections-plus"><img src="<?php echo $block->getViewFileUrl('images/union.png');?>"/></div>
                                                     <?php $i++; ?>
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
@@ -129,14 +120,12 @@ $helper = $this->helper('Magedelight\Bundlediscount\Helper\Data');
                                         <div class="promotions-info">
                                             <?php if (!$bundle->hasOptions() && !$bundle->hasCustomOptions()): ?>
                                                 <p class="price-container">
-
+                                                    <span class="new-price bundle_new_price_<?= /* @noEscape */ $bundle->getId() ?>"><?= /* @noEscape */ $priceHelper->currency($totals['final_amount'], true, false) ?></span>
                                                     <span class="old-price bundle_old_price_<?= /* @noEscape */ $bundle->getId() ?>">
                                                         <?= /* @noEscape */ $priceHelper->currency($totals['total_amount'], true, false);
 
                                                         ?>
                                                         </span>
-
-                                                    <span class="new-price bundle_new_price_<?= /* @noEscape */ $bundle->getId() ?>"><?= /* @noEscape */ $priceHelper->currency($totals['final_amount'], true, false) ?></span>
                                                 </p>
                                             <?php endif; ?>
 

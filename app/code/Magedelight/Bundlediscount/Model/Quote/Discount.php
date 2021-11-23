@@ -117,28 +117,35 @@ class Discount extends \Magento\Quote\Model\Quote\Address\Total\AbstractTotal
         $tableName2   = $connection->getTableName('md_bundlediscount_items');
         $results = [];
         $productids = [];
-
+        $productqty = [];
         foreach ($bundleIds as $bid) {
-            $query = "SELECT product_id FROM ".$tableName." WHERE bundle_id = ".$bid." ";
+            $query = "SELECT product_id,qty FROM ".$tableName." WHERE bundle_id = ".$bid." ";
             $results[] = $this->resourceConnection->getConnection()->fetchAll($query);
 
-            $queryp = "SELECT product_id FROM ".$tableName2." WHERE bundle_id = ".$bid." ";
+            $queryp = "SELECT product_id,qty FROM ".$tableName2." WHERE bundle_id = ".$bid." ";
             $resultsp[] = $this->resourceConnection->getConnection()->fetchAll($queryp);
         }
 
         foreach ($results as $res) {
             foreach ($res as $r) {
                 $productids[] = $r['product_id'];
+                $productqty[] = $r['qty'];
 
             }
         }
         foreach ($resultsp as $resp) {
             foreach ($resp as $rp) {
                 $productids[] = $rp['product_id'];
-
+                $productqty[] = $rp['qty'];
             }
         }
-
+        //echo "<pre>"; print_r($productqty); exit;
+        $productqtys = 0;
+        foreach($productqty  as $pq)
+        {
+            $productqtys += $pq;
+        }
+        //echo $productqtys; exit;
         $product = $this->productFactory->create();
         $productPriceById = [];
         $totalbundlediscountprod = 0;
@@ -221,13 +228,13 @@ class Discount extends \Magento\Quote\Model\Quote\Address\Total\AbstractTotal
             }
 
             if ($bundle->getDiscountType() == 0) {
-                $totalDiscountAmount += $bundle->getDiscountPrice() * $qtyAppliedDiscount;
+                $totalDiscountAmount += $bundle->getDiscountPrice() ;
 
-                $baseTotalDiscountAmount += $bundle->getDiscountPrice() * $qtyAppliedDiscount;
+                $baseTotalDiscountAmount += $bundle->getDiscountPrice() ;
                 $totalDiscountAmount = $this->priceCurrency->convert($totalDiscountAmount, $storeId, $currency);
             } else {
-                $totalDiscountAmount += ($bundle->getDiscountPrice() * $qtyAppliedDiscount * $totalAmountOfBundle) / 100;
-                $baseTotalDiscountAmount += ($bundle->getDiscountPrice() * $qtyAppliedDiscount * $totalAmountOfBundle) / 100;
+                $totalDiscountAmount += ($bundle->getDiscountPrice()  * $totalAmountOfBundle) / 100;
+                $baseTotalDiscountAmount += ($bundle->getDiscountPrice()  * $totalAmountOfBundle) / 100;
             }
         }
 

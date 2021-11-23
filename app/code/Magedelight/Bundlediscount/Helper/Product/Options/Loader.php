@@ -47,26 +47,32 @@ class Loader extends \Magento\ConfigurableProduct\Helper\Product\Options\Loader
         /** @var Configurable $typeInstance */
         $typeInstance = $product->getTypeInstance();
         if (get_class($typeInstance) == 'Magento\Catalog\Model\Product\Type\Simple' || get_class($typeInstance) == 'Magento\Bundle\Model\Product\Type') {
-            return null;
+            return false;
         }
-
-        $attributeCollection = $typeInstance->getConfigurableAttributeCollection($product);
-        $this->extensionAttributesJoinProcessor->process($attributeCollection);
-        foreach ($attributeCollection as $attribute) {
-            $values = [];
-            $attributeOptions = $attribute->getOptions();
-            if (is_array($attributeOptions)) {
-                foreach ($attributeOptions as $option) {
-                    /** @var \Magento\ConfigurableProduct\Api\Data\OptionValueInterface $value */
-                    $value = $this->optionValueFactory->create();
-                    $value->setValueIndex($option['value_index']);
-                    $values[] = $value;
+//        $writer = new \Zend\Log\Writer\Stream(BP . '/var/log/test.log');
+//        $logger = new \Zend\Log\Logger();
+//        $logger->addWriter($writer);
+//        $logger->info(get_class($typeInstance));
+        if (get_class($typeInstance) == 'Magento\ConfigurableProduct\Model\Product\Type\Configurable') {
+            $attributeCollection = $typeInstance->getConfigurableAttributeCollection($product);
+            //getConfigurableAttributeCollection
+            $this->extensionAttributesJoinProcessor->process($attributeCollection);
+            foreach ($attributeCollection as $attribute) {
+                $values = [];
+                $attributeOptions = $attribute->getOptions();
+                if (is_array($attributeOptions)) {
+                    foreach ($attributeOptions as $option) {
+                        /** @var \Magento\ConfigurableProduct\Api\Data\OptionValueInterface $value */
+                        $value = $this->optionValueFactory->create();
+                        $value->setValueIndex($option['value_index']);
+                        $values[] = $value;
+                    }
                 }
+                $attribute->setValues($values);
+                $options[] = $attribute;
             }
-            $attribute->setValues($values);
-            $options[] = $attribute;
-        }
 
-        return $options;
+            return $options;
+        }
     }
 }

@@ -37,7 +37,7 @@ $productOptionId = $block->getOptionId($block_options);
     <form data-form="quick-view-form" data-role="tocart-form" action="<?= /* @noEscape */ $block->getFormActionUrl() ?>" name="bundlediscount-option" id="bundle_product_addtocart_form" method="post" enctype="multipart/form-data" validate="validate">
          <input type="hidden" name="product_option_id" value="<?= /* @noEscape */ $productOptionId; ?>">
         <div class="configure_form_fields product-options">
-            <?php if ($bundle->hasOptions(true) || $bundle->hasCustomOptions(true)) : ?>
+            <?php if ($bundle->hasOptions(true) || $bundle->hasCustomOptions(true)): ?>
                 <div class="bundles-info">
                    <div class="base-product-name">
                         <h4><?= /* @noEscape */ $bundle->getProductName() ?></h4>
@@ -60,7 +60,7 @@ $productOptionId = $block->getOptionId($block_options);
                 </div>
                 <table border="0" cellpadding="0" cellspacing="0">
                     <tbody>
-                        <?php if ($bundle->hasOptions() || $bundle->hasCustomOptions()) : ?>
+                        <?php if ($bundle->hasOptions() || $bundle->hasCustomOptions()): ?>
                             <tr>
                                 <td>
                                     <img src="<?= /* @noEscape */ $bundle->getImageUrl() ?>" height="90" width="90" /> 

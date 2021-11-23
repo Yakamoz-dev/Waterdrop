@@ -1,0 +1,159 @@
+.bundle-module {
+    background: #ffffff;
+    margin-bottom: 8px;
+}
+
+.bundle-module .page-title {
+    padding: 5.3333vw 0 0 4.2667vw;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.bundle-module .page-title strong {
+    font-family: 'roboto-medium';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #333333;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #155DA4;
+    display: inline-block;
+}
+
+.bundle-module .promotions-lists {
+    padding: 4.2667vw;
+}
+
+.bundle-module .promotions-lists .promotions-selections {
+    float: none;
+    width: 100%;
+    border-bottom: 1px solid #E1E1E1;
+    margin-bottom: 4.2667vw;
+}
+
+.bundle-module .promotions-lists .promotions-info {
+    float: none;
+    border: none;
+    padding: 0;
+    width: 100%;
+    min-height: auto;
+}
+
+.bundle-module .promotions-lists .promotions-selections-img {
+    width: 43%;
+}
+
+.bundle-module .promotions-lists .promotions-selections-img img {
+    width: 100%;
+}
+
+.bundle-module .promotions-lists .promotions-selections-plus {
+    max-width: 7%;
+    padding-top: 18.9333vw;
+}
+
+.bundle-module .promotions-lists .promotions-selections-plus img {
+    width: 3.7333vw;
+}
+
+.bundle-module .promotions-lists .promotions-qty {
+    border: 1px solid #E1E1E1;
+    border-radius: 2px;
+    height: 22px;
+    width: 22px;
+    position: absolute;
+    top: 32.5vw;
+}
+
+.bundle-module .promotions-lists .promotions-qty span {
+    font-family: 'Roboto';
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    color: #666666;
+}
+
+.bundle-module .promotions-lists .tooltip1 {
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin-top: 2.6667vw;
+    font-family: 'Roboto';
+    font-size: 12px;
+    line-height: 130%;
+    color: #333333;
+    height: 30px;
+}
+
+.bundle-module .promotions-lists .toolprice {
+    margin-top: 2.1333vw;
+    font-family: 'Roboto';
+    font-size: 12px;
+    line-height: 14px;
+    color: #333333;
+}
+
+.bundle-module .promotions-lists .check-configure {
+    position: absolute;
+    top: 0.8vw;
+    right: 0.8vw;
+}
+
+.bundle-module .promotions-lists .price-container {
+    display: flex;
+}
+
+.bundle-module .promotions-lists .new-price {
+    font-family: 'roboto-medium';
+    font-size: 24px;
+    line-height: 28px;
+    color: #333333;
+}
+
+.bundle-module .promotions-lists .old-price {
+    font-family: 'roboto';
+    font-size: 14px;
+    line-height: 16px;
+    text-decoration-line: line-through;
+    color: #999999;
+    display: flex;
+    align-items: center;
+}
+
+.bundle-module .promotions-lists .discount-info {
+    margin-top: 1.0667vw;
+}
+
+.bundle-module .promotions-lists .discount-info, .bundle-module .promotions-lists .amount-info, .bundle-module .promotions-lists .out-of-stock {
+    font-family: 'roboto';
+    font-size: 14px;
+    line-height: 150%;
+    color: #333333;
+}
+
+.bundle-module .promotions-lists .actions {
+    width: 100%;
+    margin-top: 4.2667vw;
+    padding: 0;
+    float: none;
+}
+
+.bundle-module .promotions-lists .actions button {
+    width: 100%;
+    height: 12.8vw;
+    margin: 0;
+    padding: 3.2vw 0;
+    font-family: 'roboto';
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+}
+
+.bundle-module .check-configure input[type="checkbox"]:checked + label:before {
+    background: url(../images/bundleconfig.png);
+    border-radius: 2px;
+    border: none;
+}

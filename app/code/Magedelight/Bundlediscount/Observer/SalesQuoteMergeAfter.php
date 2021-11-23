@@ -32,15 +32,20 @@ use Magento\Framework\Event\ObserverInterface;
 
 class SalesQuoteMergeAfter implements ObserverInterface
 {
-
+    protected $customerSession;
+    protected $bundleDiscountFactory;
      /**
       * AddDiscount constructor.
       * @param \Magedelight\Bundlediscount\Helper\Data $helper
       */
     public function __construct(
-        \Magento\Framework\Message\ManagerInterface $messageManager
+        \Magento\Framework\Message\ManagerInterface $messageManager,
+        \Magento\Customer\Model\Session $customerSession,
+        \Magedelight\Bundlediscount\Model\ResourceModel\Bundlediscount\CollectionFactory $bundleDiscountFactory
     ) {
             $this->messageManager = $messageManager;
+            $this->customerSession = $customerSession;
+            $this->bundleDiscountFactory = $bundleDiscountFactory;
     }
     /**
      *
@@ -48,13 +53,31 @@ class SalesQuoteMergeAfter implements ObserverInterface
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-            $guestQuote = $observer->getEvent()->getSource();   //before merge
-            $customerQuote = $observer->getEvent()->getQuote(); //after merge
+        $customerGroupId = $this->customerSession->getCustomerGroupId();
+
+        $guestQuote = $observer->getEvent()->getSource();   //before merge
+        $customerQuote = $observer->getEvent()->getQuote(); //after merge
         if (isset($guestQuote)) {
             if ($guestQuote->getBundleIds()) {
-                $customerQuote->setBundleIds($guestQuote->getBundleIds());
-                $customerQuote->setBundleDiscountAmount($guestQuote->getBundleDiscountAmount());
-                $customerQuote->setBaseBundleDiscountAmount($guestQuote->getBaseBundleDiscountAmount());
+
+                $bundleDiscountData = $this->bundleDiscountFactory->create()
+                  ->addFieldToSelect('customer_groups')
+                  ->addFieldToFilter('bundle_id', $guestQuote->getBundleIds())
+                  ->getFirstItem();
+
+                $customerbundleIds = $customerQuote->getBundleIds();
+
+                $custGrp = explode(',', $bundleDiscountData->getData('customer_groups'));
+
+                if (in_array($customerGroupId, $custGrp)) {
+                    $guestBundleIds = $guestQuote->getBundleIds();
+                    $bundleIds = $customerbundleIds .','. $guestBundleIds;
+
+                    $customerQuote->setBundleIds($bundleIds);
+                    $customerQuote->setBundleDiscountAmount($guestQuote->getBundleDiscountAmount());
+                    $customerQuote->setBaseBundleDiscountAmount($guestQuote->getBaseBundleDiscountAmount());
+                }
+
             }
         }
             return $this;

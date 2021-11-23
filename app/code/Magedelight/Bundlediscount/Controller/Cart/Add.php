@@ -187,8 +187,9 @@ class Add extends \Magento\Checkout\Controller\Cart\Add
                             $params['links'] = $optionArr[$productId]['links'];
                         }
                         if (isset($optionArr[$productId]['bundle_option'])) {
+
                             $params['bundle_option'] = $optionArr[$productId]['bundle_option'];
-                             $params['bundle_option_qty'] = isset($params['qty']) ? ($params['qty']) :1 ;
+                            $params['bundle_option_qty'] = isset($params['qty']) ? ($params['qty']) :1 ;
                         }
                     }
 

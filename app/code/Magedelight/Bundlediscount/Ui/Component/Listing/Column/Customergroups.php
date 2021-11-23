@@ -82,22 +82,25 @@ class Customergroups extends Column
      */
     protected function prepareItem(array $item)
     {
-        $content = '';
-        $origGroups = $item['customer_groups'];
-
-        if (empty($origGroups)) {
-            return '';
-        }
-        $origGroups = explode(',', $origGroups);
         $groupCollection = $this->collectionFactory->create()->getCollection()
             ->load()
             ->toOptionHash();
-
+        $content = '';
+        $origGroups = $item['customer_groups'];
+         
+        if ($origGroups == '') {
+            return '';
+        }
+       
+        $origGroups = explode(',', $origGroups);
+         
         foreach ($groupCollection as $groupId => $code) {
+           
             if (in_array($groupId, $origGroups)) {
                 $content .= $code.'<br/>';
             }
         }
+       
         return $content;
     }
 }

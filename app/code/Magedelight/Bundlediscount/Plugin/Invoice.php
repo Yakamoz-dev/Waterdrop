@@ -26,8 +26,8 @@ class Invoice
     }
     public function afterCollectTotals(\Magento\Sales\Model\Order\Invoice $subject, $result)
     {
-        $result->setDiscountAmount($result->getOrder()->getDiscountAmount());
-        $result->setGrandTotal($result->getOrder()->getGrandTotal());
+        //$result->setDiscountAmount($result->getOrder()->getDiscountAmount());
+        //$result->setGrandTotal($result->getOrder()->getGrandTotal());
         return $result;
     }
 }

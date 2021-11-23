@@ -226,9 +226,9 @@ class BundleOptionsApi implements BundleOptionsInterface
                         }
                     }
                 }
-                if (count($grpCode) > 0) {
-                    $mdBundleDiscObj->setData('customer_groups', implode(",", $grpCode));
-                }
+               //if (count($grpCode) > 0) {
+                    $mdBundleDiscObj->setData('customer_groups', $bodyParams['bundle_options']['customer_groups']);
+                //}
             }if (isset($bodyParams['bundle_options']['store_ids'])) {
                 $storeList = $this->getStoreList();
                 $storeArr = [];
@@ -241,14 +241,15 @@ class BundleOptionsApi implements BundleOptionsInterface
                         }
                     }
                 }
-                if (count($storeArr) > 0) {
-                    $mdBundleDiscObj->setData('store_ids', implode(",", $storeArr));
-                }
+                //if (count($storeArr) > 0) {
+                    $mdBundleDiscObj->setData('store_ids', $bodyParams['bundle_options']['store_ids']);
+                //}
             }
             $mdBundleDiscObj->save();
             if (isset($bodyParams['bundle_options']['products_collection'])) {
                 if (count($bodyParams['bundle_options']['products_collection']) > 0) {
                     foreach ($bodyParams['bundle_options']['products_collection'] as $key => $value) {
+                        //echo "<pre>"; print_r($value);
                         if ($value['name'] != $productColl->getName()) {
                             $mdBundleItemsObj = $this->mdBundleItemsObj->create();
                             $productColl = $this->productCollFactory->create()->addFieldToSelect('*')->addFieldToFilter('name', ['eq' => $value['name']])->getLastItem();
@@ -274,6 +275,7 @@ class BundleOptionsApi implements BundleOptionsInterface
                             return $returnArray;
                         }
                     }
+                    //exit;
                 }
             }
             $returnArray = [
@@ -434,9 +436,9 @@ class BundleOptionsApi implements BundleOptionsInterface
                             }
                         }
                     }
-                    if (count($grpCode) > 0) {
-                        $mdBundleDiscObj->setCustomerGroups(implode(",", $grpCode));
-                    }
+                    //if (count($grpCode) > 0) {
+                        $mdBundleDiscObj->setCustomerGroups($bodyParams['bundle_options']['customer_groups']);
+                    //}
                 }if (isset($bodyParams['bundle_options']['store_ids'])) {
                     $storeList = $this->getStoreList();
                     $storeArr = [];
@@ -449,9 +451,9 @@ class BundleOptionsApi implements BundleOptionsInterface
                             }
                         }
                     }
-                    if (count($storeArr) > 0) {
-                        $mdBundleDiscObj->setStoreIds(implode(",", $storeArr));
-                    }
+                   // if (count($storeArr) > 0) {
+                        $mdBundleDiscObj->setStoreIds($bodyParams['bundle_options']['store_ids']);
+                    //}
                 }
                 $mdBundleDiscObj->save();
                 if (isset($bodyParams['bundle_options']['product_collection'])) {

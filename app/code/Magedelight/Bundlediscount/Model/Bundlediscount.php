@@ -30,7 +30,6 @@ namespace Magedelight\Bundlediscount\Model;
 
 use Magento\Customer\Model\SessionFactory as CustomerSession;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\View\Asset\NotationResolver\Variable;
 
 class Bundlediscount extends \Magento\Framework\Model\AbstractModel
 {
@@ -224,7 +223,7 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
         $customerGroup = (!$customerSession) ? 0 : $customerSession->getCustomerGroupId();
         $tag_elements =  explode(',', $tag_element);
         $valueFilter = [];
-
+           
         foreach ($tag_elements as $value) {
              $valueFilter[] = (['finset' => [$value]]);
         }
@@ -367,7 +366,7 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
         $bundleparentid = array_unique(array_merge($bundleparentid, $bundleparentidsingle));
         $customerSession = $this->getCustomerSession();
         $customerGroup = (!$customerSession) ? 0 : $customerSession->getCustomerGroupId();
-
+        
         $bundleCollection = $this->getCollection()
                 ->addFieldToFilter('status', ['eq' => 1])
                 ->addFieldToFilter('product_id', ['in' => $bundleparentid])
@@ -545,7 +544,7 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
                                 __($e->getMessage())
                             );
                 }
-
+                    
             }
         } catch (\Exception $e) {
             $this->messageManager->addError(
@@ -666,7 +665,7 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
                 __($e->getMessage())
             );
         }
-
+            
             // if ($object && $object->count() > 0) {
             //     return $object;
             // } else {
@@ -763,9 +762,12 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
                 $discountLabel = $this->_helper->formatPercentage($bundle->getDiscountPrice()).'%';
             }
 
+            $totalAmount += $bundle->getProductPrice() * $bundle->getQty();
+
             if ($discountAmount > $totalAmount) {
                 $discountAmount = $totalAmount;
             }
+
             $finalAmount = $totalAmount - $discountAmount;
             $result['total_amount'] = $totalAmount;
             $result['discount_amount'] = $discountAmount;
@@ -895,7 +897,7 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
                         __($e->getMessage())
                     );
                 }
-
+                
             }
             return $result;
         } catch (\Exception $e) {

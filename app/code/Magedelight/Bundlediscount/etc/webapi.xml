@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../app/code/Magento/Webapi/etc/webapi.xsd">
-    
     <!-- Create Tag Category -->
     <route url="/V1/bundlediscount/create/tagcategory" method="PUT">
         <service class="Magedelight\Bundlediscount\Api\BundleTagCategoryInterface" method="createBundleTagCategory"/>
@@ -105,7 +104,7 @@
         </resources>
     </route>
 
-    <!-- Update Bundle Options -->
+    <!-- Delete Bundle Options -->
     <route url="/V1/bundlediscount/deletebundleoptions/:bundleid" method="DELETE">
         <service class="Magedelight\Bundlediscount\Api\BundleOptionsInterface" method="deleteBundleOptions"/>
         <resources>
@@ -113,7 +112,7 @@
         </resources>
     </route>
 
-    <!-- Filter Brand Options -->
+    <!-- Get bundle list -->
     <route url="/V1/bundlediscount/bundleoptions/search" method="GET">
         <service class="Magedelight\Bundlediscount\Api\BundleOptionsInterface" method="getList"/>
         <resources>
@@ -121,11 +120,27 @@
         </resources>
     </route>
 
-    <!-- Filter Brand Options -->
+    <!-- Get bundle by product id -->
     <route url="/V1/bundlediscount/bundlebyproduct/:productid" method="GET">
         <service class="Magedelight\Bundlediscount\Api\BundleOptionsInterface" method="getBundleByProduct"/>
         <resources>
             <resource ref="admin"/>
+        </resources>
+    </route>
+
+    <!-- Get bundle details using cart id -->
+    <route url="/V1/bundlediscount/bundlebycart/:cartId" method="GET">
+        <service class="Magedelight\Bundlediscount\Api\BundlePromoAddInterface" method="getBundleByCart"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <!-- Add Bundle Promotion to the cart -->
+
+    <route method="POST" url="/V1/bundlediscount/bundlepromosadd">
+        <service class="Magedelight\Bundlediscount\Api\BundlePromoAddInterface" method="AddBundlePromoToCart"/>
+        <resources>
+            <resource ref="anonymous"/>
         </resources>
     </route>
 </routes>

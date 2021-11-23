@@ -87,11 +87,6 @@ display:block;
 }
 
 /* Prmomtion Page Css */
-.col-main .promotions {
-    background: #ffffff;
-    padding: 20px 20px 0 20px;
-    margin-bottom: 24px;
-}
 .promotions-lists{
     border-bottom: 2px solid #ddd;
     margin-bottom: 15px;
@@ -167,7 +162,6 @@ display:block;
 .promotions .promotions-selections .promotions-selections-img{
     float: left;
     position: relative;
-    border: 1px solid #ededed;
     margin-bottom: 18px;
 
 }
@@ -182,11 +176,10 @@ display:block;
     font-size: 20px;
 }
 .promotions-selections-img .promotions-qty{
-    background-color: #3399cc;
     text-align: center;
     font-weight: bold;
     font-size: 12px;
-    line-height: 12px;
+    line-height: 18px;
     color: #FFFFFF;
     width: auto;
     height: 15px;
@@ -347,8 +340,8 @@ top: -7px;
     position:absolute;
     top:1px;
     right:1px;
-    width:20px;
-    height:20px;
+    width:18px;
+    height:18px;
     text-align: center;
     input[type="checkbox"] {
         margin-right: 2px;
@@ -358,35 +351,37 @@ top: -7px;
         z-index:1;
         opacity:0;
         margin:0;
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
         right: 0;
+        top: 0;
     }
     input.custom-check + label {
         position:relative;
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
         float: left;
         &:before {
-            box-sizing:border-box;
+             box-sizing:border-box;
              background:transparent;
              content:"";
-             height:20px;
+             height:18px;
              position: absolute;
-             width:20px;
+             width:18px;
              right: 0;
-             border: 2px solid #3399cc;
+             border: 2px solid #155DA4;
+             border-radius: 2px;
         }
     }
-    input[type="checkbox"]:checked + label {
-        &:before {
-            content: '\e610';
-            font-family: 'luma-icons';
-            color: #fff;
-            font-size: 12px;
-            line-height: 16px;
-            background: #3399cc;
-        }
-    }
+    //input[type="checkbox"]:checked + label {
+    //    &:before {
+    //        content: '\e610';
+    //        font-family: 'luma-icons';
+    //        color: #fff;
+    //        font-size: 12px;
+    //        line-height: 16px;
+    //        background: #155DA4;
+    //    }
+    //}
 }
 /*************/

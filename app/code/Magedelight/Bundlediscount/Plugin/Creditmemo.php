@@ -26,8 +26,10 @@ class Creditmemo
     }
     public function afterCollectTotals(\Magento\Sales\Model\Order\Creditmemo $subject, $result)
     {
-        $result->setDiscountAmount($result->getOrder()->getDiscountAmount());
-        $result->setGrandTotal($result->getOrder()->getGrandTotal());
+        if($result->getOrder()->getDiscountAmount() > 0) {
+            $result->setDiscountAmount($result->getOrder()->getDiscountAmount());
+            $result->setGrandTotal($result->getOrder()->getGrandTotal());
+        }
         return $result;
     }
 }

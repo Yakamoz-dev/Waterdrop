@@ -27,25 +27,8 @@
 */
 -->
 <config xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='urn:magento:framework:Event/etc/events.xsd'>
-    
-    <event name="page_block_html_topmenu_gethtml_before">
-        <observer name="bundlediscount_observer" instance="Magedelight\Bundlediscount\Observer\TopMenu" />
-    </event>
 
-    <event name='bundlediscount_bundle_add_ids'>
-            <observer name='saveBundleIds' instance='Magedelight\Bundlediscount\Observer\SaveBundleIds' />
+    <event name="sales_quote_item_set_product">
+        <observer name="saveBundleIdsApi" instance="Magedelight\Bundlediscount\Observer\SaveBundleIdsApi" />
     </event>
-    
-    <event name='sales_quote_save_before'>
-            <observer name='validateBundleIds' instance='Magedelight\Bundlediscount\Observer\ValidateBundleIds' />
-    </event>
-
-    <event name="sales_quote_merge_after">
-        <observer name="sales_quote_merge_custom_column" instance="Magedelight\Bundlediscount\Observer\SalesQuoteMergeAfter" />
-    </event>
-
-    <event name="checkout_cart_update_items_after">
-        <observer name="salesquotemergecolumn" instance="Magedelight\Bundlediscount\Observer\SalesQuoteMergeAfter" />
-    </event> 
-
 </config>

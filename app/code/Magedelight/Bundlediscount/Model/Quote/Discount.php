@@ -255,7 +255,7 @@ class Discount extends \Magento\Quote\Model\Quote\Address\Total\AbstractTotal
             $subTotal = $total->getSubtotalInclTax(); // Subtotal included tax.
             $baseSubTotal = $total->getBaseSubtotalInclTax();
         }
-
+        
         if ($totalDiscountAmount > 0 && $this->taxHelper->applyTaxAfterDiscount()) {
             if ($count > 0) {
                 $divided = $totalDiscountAmount / $count;
@@ -265,7 +265,9 @@ class Discount extends \Magento\Quote\Model\Quote\Address\Total\AbstractTotal
                     $itemBaseRowTotal = $item->getBaseRowTotal();
 
                     $ids = array_diff($cartproductids, $productids);
-
+                    if ($totalbundlediscountprod == 0) {
+                        $totalbundlediscountprod = 1;
+                    }
                     $dis_amount = (($item->getPrice() * 100) / $totalbundlediscountprod);
                     $final_disamount = round((($dis_amount * $totalDiscountAmount) / 100), 1);
 

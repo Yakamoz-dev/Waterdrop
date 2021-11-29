@@ -35,7 +35,7 @@
     border: none;
     padding: 0;
     width: 100%;
-    min-height: auto;
+    min-height: 74px;
     position: relative;
 }
 
@@ -114,7 +114,7 @@
 }
 
 .bundle-module .promotions-lists .old-price {
-    font-family: 'roboto';
+    font-family: 'Roboto';
     font-size: 14px;
     line-height: 16px;
     color: #999999 !important;
@@ -127,7 +127,7 @@
 }
 
 .bundle-module .promotions-lists .discount-info, .bundle-module .promotions-lists .amount-info, .bundle-module .promotions-lists .out-of-stock {
-    font-family: 'roboto';
+    font-family: 'Roboto';
     font-size: 14px;
     line-height: 150%;
     color: #333333;
@@ -146,7 +146,7 @@
     height: 48px;
     margin: 0;
     padding: 12px 0;
-    font-family: 'roboto';
+    font-family: 'Roboto';
     font-size: 16px;
     line-height: 24px;
     color: #FFFFFF;
@@ -157,3 +157,126 @@
     border-radius: 2px;
     border: none;
 }
+
+/****configure****/
+.modal-inner-wrap .modal-content .configure-buttons-set button:hover {
+    background: #4F85BB;
+}
+
+.modal-inner-wrap .modal-content .configure-buttons-set button:active {
+    background: #155da4;
+    border: none;
+    color: #FFFFFF;
+}
+
+.modal-inner-wrap .modal-content .configure-buttons-set button:focus {
+    background: #155da4;
+    border: none;
+    color: #FFFFFF;
+}
+
+.modal-inner-wrap .modal-header {
+    padding: 20px 16px 0 20px;
+}
+
+.modal-inner-wrap .modal-header .modal-title {
+    font-family: 'roboto-medium';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #333333;
+    margin: 0;
+    padding-bottom: 20px;
+    width: 212px;
+    border-bottom: 2px solid #155DA4;
+}
+
+.modal-popup .modal-inner-wrap .modal-content {
+    border-top: 1px solid #E1E1E1 !important;
+    padding: 0 40px 20px 40px;
+}
+
+.modal-popup .modal-inner-wrap .modal-header .action-close:before {
+    font-size: 15px;
+    line-height: 15px !important;
+    color: #333333 !important;
+}
+
+.modal-popup .modal-inner-wrap .action-close {
+    position: absolute;
+    right: 6px;
+    top: 10px;
+}
+
+.modal-popup .modal-inner-wrap .configure_form_fields .bundles-info, .modal-popup .modal-inner-wrap .configure_form_fields .selection-info {
+    padding-top: 20px;
+}
+
+.modal-popup .modal-inner-wrap .configure_form_fields .bundles-info .base-product-name h4, .modal-popup .modal-inner-wrap .configure_form_fields .selection-info .selection-product-name h4 {
+    font-family: 'roboto-medium';
+    font-size: 16px;
+    line-height: 130%;
+    color: #333333;
+    margin-bottom: 12px;
+}
+
+.modal-popup .modal-inner-wrap .configure_form_fields .price-final_price .normal-price {
+    font-family: 'Roboto';
+    font-size: 14px;
+    line-height: 16px;
+    color: #333333;
+}
+
+.modal-popup .modal-inner-wrap .configure_form_fields table {
+    margin: 20px 0;
+}
+
+.modal-popup .modal-inner-wrap .configure_form_fields table .super-attribute-select {
+    border: none;
+    border-radius: 4px;
+    padding: 12px 16px;
+    background: #f4f4f4 url('../images/select-bg.svg') no-repeat 97% 45%;
+    font-family: 'Roboto';
+    font-size: 14px;
+    line-height: 16px;
+    color: #333333;
+}
+
+.modal-popup .modal-inner-wrap .configure_form_fields table td {
+    padding: 0;
+}
+
+.modal-popup .modal-inner-wrap .configure_form_fields table td img {
+    width: 160px;
+}
+
+.modal-popup .modal-inner-wrap .configure_form_fields .left-td {
+    width: 200px;
+}
+
+.modal-popup .modal-inner-wrap .configure_form_fields .right-td .label span {
+    font-family: 'Roboto';
+    font-size: 14px;
+    line-height: 16px;
+    color: #333333;
+}
+
+.modal-popup .modal-inner-wrap .configure-buttons-set button {
+    width: 240px;
+    height: 48px;
+    background: #155DA4;
+    border-radius: 4px;
+}
+
+.modal-popup .modal-inner-wrap .configure-buttons-set button span {
+    font-family: 'Roboto';
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+}
+
+.modal-popup .modal-inner-wrap .right-td .product-options-wrapper .field {
+    margin: 0 0 24px 0;
+}
+
+.modal-popup .modal-inner-wrap .

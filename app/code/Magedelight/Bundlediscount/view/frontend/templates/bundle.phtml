@@ -65,7 +65,7 @@ $helper = $this->helper('Magedelight\Bundlediscount\Helper\Data');
                                                 <a href="<?= /* @noEscape */ $bundle->getProductUrl() ?>" title="<?= /* @noEscape */ $bundle->getProductName() ?>">
                                                     <img src="<?= /* @noEscape */ $bundle->getImageUrl() ?>" height="90" width="90" /></a>
                                                 <div class="promotions-qty"><span>X<?= /* @noEscape */ $bundle->getQty() ?></span></div>
-                                                <div class="tooltipproductname" id="productNameTooltip<?= /* @noEscape */ $bundle->getId() ?>"><?= /* @noEscape */ $bundle->getProductName() ?></div>
+                                                <div class="tooltip-product-name" id="productNameTooltip<?= /* @noEscape */ $bundle->getId() ?>"><?= /* @noEscape */ $bundle->getProductName() ?></div>
                                                 <div class="toolprice">$<?php echo sprintf('%.2f',$bundle->getProductPrice());?></div>
                                                 <div class="check-configure" style="display: none;">
                                                  <input type="checkbox"  class="custom-check bundle_section_<?= /* @noEscape */ $bundle->getId() ?>" name="flexible_product" value="<?= /* @noEscape */ $bundle->getProductId() ?>" checked="">
@@ -90,7 +90,7 @@ $helper = $this->helper('Magedelight\Bundlediscount\Helper\Data');
                                                         <img src="<?= /* @noEscape */ $_selection->getImageUrl() ?>" height="90" width="90" /></a>
                                                     <?php } ?>
                                                     <div class="promotions-qty"><span>X<?= /* @noEscape */ $_selection->getQty() ?></span></div>
-                                                    <div class="tooltipproductname" id="productNameTooltip<?= /* @noEscape */ $_selection->getId() ?>"><?= /* @noEscape */ $_selection->getName() ?></div>
+                                                    <div class="tooltip-product-name" id="productNameTooltip<?= /* @noEscape */ $_selection->getId() ?>"><?= /* @noEscape */ $_selection->getName() ?></div>
                                                     <div class="toolprice">$<?php echo sprintf('%.2f',$_selection->getPrice());?></div>
                                                     <?php if ($bundle->getBundleOption() == 'Flexible'): ?>
                                                        <div class="check-configure">

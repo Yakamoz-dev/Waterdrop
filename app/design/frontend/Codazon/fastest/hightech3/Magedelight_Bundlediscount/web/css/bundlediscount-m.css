@@ -21,6 +21,10 @@
 
 .bundle-module .promotions-lists {
     padding: 20px;
+    border-bottom: 1px solid #E1E1E1;
+}
+.bundle-module .promotions-lists:last-child {
+    border-bottom: none;
 }
 
 .bundle-module .promotions-lists .promotions-selections {

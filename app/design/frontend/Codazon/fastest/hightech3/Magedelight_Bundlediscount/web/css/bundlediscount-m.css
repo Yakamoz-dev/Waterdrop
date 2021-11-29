@@ -77,7 +77,7 @@
     color: #666666;
 }
 
-.bundle-module .promotions-lists .tooltip1 {
+.bundle-module .promotions-lists .tooltipproductname {
     text-overflow: -o-ellipsis-lastline;
     overflow: hidden;
     text-overflow: ellipsis;

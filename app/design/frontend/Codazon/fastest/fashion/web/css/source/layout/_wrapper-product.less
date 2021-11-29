@@ -107,6 +107,10 @@
                 opacity: 1;
                 .abs-transition();
             }
+            .ruk_rating_snippet {
+                opacity: 1;
+                .abs-transition();
+            }
 		}
 	}
 
@@ -698,12 +702,17 @@
                             transform: translate(0, 0);
                         }
                         button.tocart.primary{
-                            transform: translate(0, 0);
+                            transform: translate(0, 8px);
                         }
                     }
                 }
                 .product-reviews-summary, .price-box {
                     //.abs-scale(~'0, 0');
+                    opacity: 0;
+                    transform: translateY(-25px);
+                    .abs-transition();
+                }
+                .ruk_rating_snippet {
                     opacity: 0;
                     transform: translateY(-25px);
                     .abs-transition();

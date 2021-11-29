@@ -30,7 +30,7 @@
     border-bottom: none;
 }
 
-.bundle-module .promotions-lists .tooltipproductname {
+.bundle-module .promotions-lists .tooltip-product-name {
     text-overflow: -o-ellipsis-lastline;
     overflow: hidden;
     text-overflow: ellipsis;

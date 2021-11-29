@@ -42,7 +42,7 @@ $productOptionId = $block->getOptionId($block_options);
                    <div class="base-product-name">
                         <h4><?= /* @noEscape */ $bundle->getProductName() ?></h4>
                    </div>
-               
+
                         <div class="base-product-price">
                         <div class="selection-product-price-<?= /* @noEscape */ $bundle->getProductId() ?>">
                             <?php
@@ -62,10 +62,10 @@ $productOptionId = $block->getOptionId($block_options);
                     <tbody>
                         <?php if ($bundle->hasOptions() || $bundle->hasCustomOptions()): ?>
                             <tr>
-                                <td>
-                                    <img src="<?= /* @noEscape */ $bundle->getImageUrl() ?>" height="90" width="90" /> 
+                                <td class="left-td">
+                                    <img src="<?= /* @noEscape */ $bundle->getImageUrl() ?>"/>
                                 </td>
-                                <td>
+                                <td class="right-td">
                                     <?php
                                     $renderer = $block->getRenderer($bundle->getTypeId());
                                     if (isset($renderer['block']) && isset($renderer['template'])) {
@@ -140,10 +140,10 @@ $productOptionId = $block->getOptionId($block_options);
                         <table border="0" cellpadding="0" cellspacing="0">
                             <tbody>
                                 <tr>
-                                    <td>
-                                        <img src="<?= /* @noEscape */ $_selection->getImageUrl() ?>" height="90" width="90" /> 
+                                    <td class="left-td">
+                                        <img src="<?= /* @noEscape */ $_selection->getImageUrl() ?>"/>
                                     </td>
-                                    <td>
+                                    <td class="right-td">
                                         <?php
                                         if (isset($renderer['block']) && isset($renderer['template'])) {
                                             $wrapperBlock = $block->getLayout()->createBlock('Magento\Catalog\Block\Product\View', uniqid(microtime()))->setTemplate('Magento_Catalog::product/view/options/wrapper.phtml');

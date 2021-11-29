@@ -762,12 +762,13 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
                 $discountLabel = $this->_helper->formatPercentage($bundle->getDiscountPrice()).'%';
             }
 
-            $totalAmount += $bundle->getProductPrice() * $bundle->getQty();
+            if ($bundle->getExcludeBaseProduct()) {
+                $totalAmount += $bundle->getProductPrice() * $bundle->getQty();
+            }
 
             if ($discountAmount > $totalAmount) {
                 $discountAmount = $totalAmount;
             }
-
             $finalAmount = $totalAmount - $discountAmount;
             $result['total_amount'] = $totalAmount;
             $result['discount_amount'] = $discountAmount;

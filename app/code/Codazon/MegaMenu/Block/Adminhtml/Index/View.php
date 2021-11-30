@@ -7,7 +7,7 @@ class View extends \Magento\Backend\Block\Template
 	protected $_blockFactory;
 	protected $_menuOject;
 	protected $_blockFilter;
-	
+
 	public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Cms\Model\Template\FilterProvider $filterProvider,
@@ -44,7 +44,7 @@ class View extends \Magento\Backend\Block\Template
 		if(isset($items[$k])){
 			return $items[$k]->item_type;
 		}else{
-			return false;	
+			return false;
 		}
 	}
 	public function openTag($items,$i){
@@ -60,7 +60,7 @@ class View extends \Magento\Backend\Block\Template
 					$html = '<ul class="temp"><li';
 				}else{
 					$html = '<ul class="groupmenu-drop"><li';
-				}			
+				}
 			}
 		}else{
 			$html = '</li><li';
@@ -79,19 +79,19 @@ class View extends \Magento\Backend\Block\Template
 		}
 		return $html;
 	}
-	
+
 	public function getIcon($content){
 		if(isset($content->icon_type) && $content->icon_type == 0){
-			return ($content->icon_font)?'<i class="menu-icon fa fa-'.$content->icon_font.'"></i>':'';	
+			return ($content->icon_font)?'<i class="menu-icon fa fa-'.$content->icon_font.'"></i>':'';
 		}else{
-			return ($content->icon_img)?'<i class="menu-icon img-icon"><img src="'.$content->icon_img.'"></i>':'';	
+			return ($content->icon_img)?'<i class="menu-icon img-icon"><img src="'.$content->icon_img.'" alt="image icon"></i>':'';
 		}
 	}
-	
+
 	public function filter($content){
 		return $this->_blockFilter->filter($content);
 	}
-	
+
 	public function hasChildren($items,$i){
 		$curDepth = $items[$i]->depth;
 		$nextDepth = isset($items[$i+1])?$items[$i+1]->depth:$curDepth;

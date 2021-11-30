@@ -20,7 +20,7 @@ class Megamenu extends Template implements \Magento\Widget\Block\BlockInterface
 	protected $_menuContentArray;
 	protected $_menuTree = null;
 	protected $_categoryTree = null;
-	
+
 	public function __construct(
 		Template\Context $context,
 		MegamenuFactory $megamenuFactory,
@@ -93,7 +93,7 @@ class Megamenu extends Template implements \Magento\Widget\Block\BlockInterface
 	public function getMenuObject(){
 		if(!$this->_menuObject){
 			$identifier = trim($this->getMenu());
-			$megamenu = $this->_megamenuFactory->create();		
+			$megamenu = $this->_megamenuFactory->create();
 			$col = $megamenu->getCollection()
 				->addFieldToFilter('is_active',1)
 				->addFieldToFilter('identifier',$identifier);
@@ -124,7 +124,7 @@ class Megamenu extends Template implements \Magento\Widget\Block\BlockInterface
 		}
 		return $html;
 	}
-	
+
 	/*public function getTemplate()
     {
         return 'menu.phtml';
@@ -141,22 +141,22 @@ class Megamenu extends Template implements \Magento\Widget\Block\BlockInterface
 		if(isset($items[$k])){
 			return $items[$k]->item_type;
 		}else{
-			return false;	
+			return false;
 		}
 	}
-	
+
 	public function getIcon($content){
 		if(isset($content->icon_type) && $content->icon_type == 0){
-			return ($content->icon_font)?'<i class="menu-icon fa fa-'.$content->icon_font.'"></i>':'';	
+			return ($content->icon_font)?'<i class="menu-icon fa fa-'.$content->icon_font.'"></i>':'';
 		}else{
-			return ($content->icon_img)?'<i class="menu-icon img-icon"><img src="'.$content->icon_img.'"></i>':'';	
+			return ($content->icon_img)?'<i class="menu-icon img-icon"><img src="'.$content->icon_img.'" alt="image icon"></i>':'';
 		}
 	}
-	
+
 	public function filter($content){
 		return $this->_blockFilter->filter($content);
 	}
-	
+
 	public function hasChildren($items,$i){
 		$curDepth = $items[$i]->depth;
 		$nextDepth = isset($items[$i+1])?$items[$i+1]->depth:$curDepth;

@@ -70,6 +70,13 @@ define([
                             self.element.find('[name="form_key"]').each(function() {
                                 var $field = $(this).val(self.formKey);
                             });
+                            ratingSnippet("ruk_rating_snippet",{
+                                store: "www.water-filter.com",
+                                color: "#FBB500",
+                                linebreak: true,
+                                usePolaris: true,
+                                text: "Reviews"
+                            });
                         }, 500);
                         if (typeof window.angularCompileElement !== 'undefined') {
                             window.angularCompileElement(self.element);

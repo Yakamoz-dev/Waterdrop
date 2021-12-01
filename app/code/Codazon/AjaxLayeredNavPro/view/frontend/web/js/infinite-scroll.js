@@ -85,6 +85,13 @@ define(['jquery'], function($) {
                         setTimeout(function() {
                             self.$loader.hide();
                             self.processing = false;
+                            ratingSnippet("ruk_rating_snippet",{
+                                store: "www.water-filter.com",
+                                color: "#FBB500",
+                                linebreak: true,
+                                usePolaris: true,
+                                text: "Reviews"
+                            });
                         }, 100);
                     });
                 } else {

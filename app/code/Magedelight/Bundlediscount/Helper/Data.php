@@ -72,7 +72,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @var \Magento\Framework\Url\EncoderInterface
      */
     protected $urlEncoder;
-    
+
     private $storeManager;
     public $productRepository;
     protected $configurableType;
@@ -108,7 +108,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         return $this->getConfig('bundlediscount/general/enable_link');
     }
 
-    
+
 
     /**
      * @param $config_path
@@ -185,7 +185,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
         );
 
         if (is_null($label) || strlen($label) <= 0) {
-            $label = $this->__('Bundle Promotions Discount');
+            $label = __('Bundle Promotions Discount');
         }
         return $label;
     }

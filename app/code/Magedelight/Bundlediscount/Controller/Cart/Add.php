@@ -30,6 +30,8 @@ namespace Magedelight\Bundlediscount\Controller\Cart;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Checkout\Model\Cart as CustomerCart;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\Serialize\Serializer\Json;
 
@@ -40,6 +42,10 @@ class Add extends \Magento\Checkout\Controller\Cart\Add
      */
     private $localeResolver;
     private $unserialize;
+    protected $cartData;
+    protected $productUrl;
+    protected $outputHelper;
+    protected $checkoutHelper;
     /**
      * Add constructor.
      * @param \Magento\Framework\App\Action\Context $context
@@ -68,7 +74,11 @@ class Add extends \Magento\Checkout\Controller\Cart\Add
         \Magento\Framework\DataObjectFactory $objectFactory,
         SerializerInterface $serializer,
         CustomerCart $cart,
-        ProductRepositoryInterface $productRepository
+        ProductRepositoryInterface $productRepository,
+        \Magento\Checkout\CustomerData\Cart $cartData,
+        \Magento\Catalog\Model\Product\Url $productUrl,
+        \Magento\Catalog\Helper\Output $outputHelper,
+        \Magento\Checkout\Helper\Data $checkoutHelper
     ) {
         $this->localeResolver = $localeResolver;
         $this->bundleDiscount = $bundlediscountFactory;
@@ -77,6 +87,10 @@ class Add extends \Magento\Checkout\Controller\Cart\Add
         $this->resultJsonFactory = $jsonFactory;
         $this->objectFactory = $objectFactory;
         $this->serializer = $serializer;
+        $this->cartData = $cartData;
+        $this->productUrl = $productUrl;
+        $this->outputHelper = $outputHelper;
+        $this->checkoutHelper = $checkoutHelper;
         parent::__construct(
             $context,
             $scopeConfig,
@@ -213,18 +227,16 @@ class Add extends \Magento\Checkout\Controller\Cart\Add
                 'bundlediscount_bundle_add_ids',
                 ['bundle_id' => $postParams['bundle_id'], 'cart' => $this->cart]
             );
+
             $this->cart->save();
+
             if (!$this->_checkoutSession->getNoCartRedirect(true)) {
                 if (!$this->cart->getQuote()->getHasError()) {
                     foreach ($bundleMessages as $bundleMessage) {
                         $this->messageManager->addSuccessMessage($bundleMessage);
                     }
                 }
-                $response->setError($error);
-                $response->setMessage($bundleMessage);
-                $response->setUrl($backUrl);
-                $resultJson->setJsonData($response->toJson());
-                return $resultJson;
+                return $this->goBack($backUrl, $product, $params);
             }
         } catch (\Magento\Framework\Exception\LocalizedException $e) {
             $this->messageManager->addError($e->getMessage());
@@ -233,15 +245,62 @@ class Add extends \Magento\Checkout\Controller\Cart\Add
             $response->setMessage($e->getMessage());
             $resultJson->setJsonData($response->toJson());
             return $resultJson;
+
         } catch (\Exception $e) {
-            $this->messageManager->addException($e, __('We can\'t add this item to your shopping cart right now.'));
+//            $this->messageManager->addException($e, __('We can\'t add this item to your shopping cart right now1111222222.'));
             $response->setUrl($backUrl);
             $response->setError(true);
             $response->setMessage($e->getMessage());
             $resultJson->setJsonData($response->toJson());
             return $resultJson;
+
         }
     }
+
+    /**
+     * Resolve response
+     *
+     * @param string $backUrl
+     * @param \Magento\Catalog\Model\Product $product
+     * @return ResponseInterface|ResultInterface
+     */
+    protected function goBack($backUrl = null, $product = null, $params = null)
+    {
+        if (!$this->getRequest()->isAjax()) {
+            return parent::_goBack($backUrl);
+        }
+
+        $result = [];
+
+        if ($backUrl || $backUrl = $this->getBackUrl()) {
+            $result['backUrl'] = $backUrl;
+        } else {
+            if ($product && !$product->getIsSalable()) {
+                $result['product'] = [
+                    'statusText' => __('Out of stock')
+                ];
+            }
+        }
+
+        if ($product) {
+            $crosssellHtml = '';
+            $result['product'] = [
+                'success' => true,
+                'img' => (string)$this->imgHelper->init($product, 'product_page_image_large')->resize(100,100)->getUrl(),
+                'name' => $this->outputHelper->productAttribute($product, $product->getName(), 'name'),
+                'id' => $product->getId(),
+                'url' => $this->productUrl->getUrl($product),
+                'params' => $params,
+                'price' => $this->checkoutHelper->formatPrice($product->getFinalPrice())
+            ];
+            $result['crosssell'] = ['html' => $crosssellHtml];
+            $result['cart'] = $this->cartData->getSectionData();
+        }
+        $this->getResponse()->representJson(
+            $this->_objectManager->get('Magento\Framework\Json\Helper\Data')->jsonEncode($result)
+        );
+    }
+
 
     /**
      * @param $posts
@@ -272,6 +331,7 @@ class Add extends \Magento\Checkout\Controller\Cart\Add
             $qtyArray[$_selection->getProductId()] = $_selection->getQty();
         }
         return $qtyArray;
+
     }
 
     /**

@@ -52,6 +52,7 @@
 			}
 		}
 		.header.links{
+            min-width: 87.2px;
 			.lib-list-inline();
 			li{
 				> a{
@@ -148,7 +149,7 @@
 
 		//Cart
 		.minicart-wrapper{
-			margin-left:40px;
+			margin-left:33px;
 			.rtl-layout &{
 				margin-left:0;
 				margin-right:@indent__s;
@@ -233,10 +234,6 @@
 		}
 
 	}
-
-    .customer-account-index .page-header .minicart-wrapper {
-        margin-left: 33px;
-    }
 }
 //Desktop
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {

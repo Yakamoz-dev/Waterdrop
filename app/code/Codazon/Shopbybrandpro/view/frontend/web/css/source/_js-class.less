@@ -72,6 +72,26 @@
     }
 }
 
+.our-brands {
+    .no-loaded {
+        .shop-by-brand-list {
+            height: 0;
+        }
+    }
+    .double-bounce-spinner {
+        height: 210px;
+        margin: 0;
+    }
+}
+
+@media(max-width: 767px) {
+    .our-brands {
+        .double-bounce-spinner {
+            height: calc(~'79vw - 32px');
+        }
+    }
+}
+
 @-webkit-keyframes sk-bounce {
   0%, 100% { -webkit-transform: scale(0.0) }
   50% { -webkit-transform: scale(1.0) }

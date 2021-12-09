@@ -18,13 +18,17 @@
     border-bottom: 2px solid #155DA4;
     display: inline-block;
 }
+.bundle-module ul {
+    margin-bottom: 0;
+}
 
 .bundle-module .promotions-lists {
-    padding: 4.2667vw;
+    padding: 4.2667vw 4.2667vw 0 4.2667vw;
     border-bottom: 1px solid #E1E1E1;
 }
 .bundle-module .promotions-lists:last-child {
     border-bottom: none;
+    margin-bottom: 1.3333vw;
 }
 
 

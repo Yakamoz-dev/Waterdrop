@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Magedelight
+* Copyright (C) 2016 Magedelight <info@magedelight.com>
+*
+* NOTICE OF LICENSE
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program. If not, see http://opensource.org/licenses/gpl-3.0.html.
+*
+* @category Magedelight
+* @package Magedelight_Bundlediscount
+* @copyright Copyright (c) 2016 Mage Delight (http://www.magedelight.com/)
+* @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+* @author Magedelight <info@magedelight.com>
+*/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+
+    	<!-- separate menu -->
+        <!--
+    	<add dependsOnConfig="bundlediscount/others/enable_frontend"
+             id="Magedelight_Bundlediscount::manager"
+             title="Bundle Discount"
+             module="Magedelight_Bundlediscount"
+             sortOrder="10" resource="Magedelight_Bundlediscount::manager"/>
+
+        <add dependsOnConfig="bundlediscount/others/enable_frontend"
+             id="Magedelight_Bundlediscount::gridmanager_categories" title="Tag Category"
+             module="Magedelight_Bundlediscount" sortOrder="20" parent="Magedelight_Bundlediscount::manager"
+             action="gridmanager/tagcategories" resource="Magedelight_Bundlediscount::gridmanager_categories"/>
+        <add dependsOnConfig="bundlediscount/others/enable_frontend"
+             id="Magedelight_Bundlediscount::gridmanager_template" title="Add Tag"
+             module="Magedelight_Bundlediscount" sortOrder="30" parent="Magedelight_Bundlediscount::manager"
+             action="gridmanager/tagwrapper"  resource="Magedelight_Bundlediscount::gridmanager_template"/>
+
+        <add dependsOnConfig="bundlediscount/others/enable_frontend" id="Magedelight_Bundlediscount::discountlist"
+             title="Bundle Promos" module="Magedelight_Bundlediscount" sortOrder="40"
+             parent="Magedelight_Bundlediscount::manager" action="md_bundlediscount/index/index"
+             resource="Magedelight_Bundlediscount::bundlediscount"/>
+        <add id="Magedelight_Bundlediscount::config_bundlediscount" title="Configuration"
+             module="Magedelight_Bundlediscount" sortOrder="40"
+             resource="Magedelight_Bundlediscount::config_bundlediscount"
+             action="adminhtml/system_config/edit/section/bundlediscount"
+             parent="Magedelight_Bundlediscount::manager" />-->
+
+        <!-- Magedelight New Menu -->
+        <add id="Magedelight_Bundlediscount::bundlediscount_root"
+             title="Bundle Discount"
+             module="Magedelight_Bundlediscount"
+             sortOrder="45"
+             resource="Magedelight_Bundlediscount::root"
+             toolTip="magedelight_base" />
+
+        <add id="Magedelight_Bundlediscount::bundlediscount_root_commonlyvisible"
+             title="Bundle Discount"
+             module="Magedelight_Bundlediscount"
+             sortOrder="45"
+             parent="Magedelight_Base::md_modules"
+             resource="Magedelight_Bundlediscount::root" />
+
+        <!-- Menu Item - Tags Categories -->
+        <add id="Magedelight_Bundlediscount::tagscategories"
+             title="Manage Tag Category"
+             module="Magedelight_Bundlediscount"
+             sortOrder="80"
+             parent="Magedelight_Bundlediscount::bundlediscount_root"
+             action="gridmanager/tagcategories"
+             resource="Magedelight_Bundlediscount::tagscategories"/>
+
+        <!-- Menu Item - Bundle Tags -->
+        <add id="Magedelight_Bundlediscount::tags"
+             title="Manage Tag"
+             module="Magedelight_Bundlediscount"
+             sortOrder="90"
+             parent="Magedelight_Bundlediscount::bundlediscount_root"
+             action="gridmanager/tagwrapper"
+             resource="Magedelight_Bundlediscount::tags"/>
+
+
+        <!-- Menu Item - Bundle Promos -->
+        <add id="Magedelight_Bundlediscount::bundlepromos"
+             title="Bundle Promos"
+             module="Magedelight_Bundlediscount"
+             sortOrder="100"
+             action="md_bundlediscount/index/index"
+             parent="Magedelight_Bundlediscount::bundlediscount_root"
+             resource="Magedelight_Bundlediscount::bundlepromos"/>
+
+        <!-- Menu Item - Configuration Menu -->
+        <add id="Magedelight_Bundlediscount::config_root"
+             title="Configuration"
+             module="Magedelight_Bundlediscount"
+             sortOrder="500"
+             action="adminhtml/system_config/edit/section/bundlediscount"
+             parent="Magedelight_Bundlediscount::bundlediscount_root"
+             resource="Magedelight_Bundlediscount::config_root" />
+
+        <add id="Magedelight_Bundlediscount::useful_links"
+             title="Useful Links"
+             module="Magedelight_Bundlediscount"
+             sortOrder="999"
+             parent="Magedelight_Bundlediscount::bundlediscount_root"
+             resource="Magedelight_Bundlediscount::bundlediscount_root" />
+
+        <add id="Magedelight_Bundlediscount::documentation"
+             title="Documentation"
+             module="Magedelight_Bundlediscount"
+             sortOrder="10"
+             target="_blank"
+             parent="Magedelight_Bundlediscount::useful_links"
+             resource="Magedelight_Bundlediscount::bundlediscount_root" />
+    </menu>
+</config>

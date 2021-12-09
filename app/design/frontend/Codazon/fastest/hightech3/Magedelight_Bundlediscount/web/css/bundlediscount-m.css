@@ -1,0 +1,286 @@
+.bundle-module {
+    background: #ffffff;
+    margin-bottom: 8px;
+}
+
+.bundle-module .page-title {
+    padding: 20px 0 0 20px;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.bundle-module .page-title strong {
+    font-family: 'roboto-medium';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #333333;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #155DA4;
+    display: inline-block;
+}
+
+.bundle-module .promotions-lists {
+    padding: 20px;
+    border-bottom: 1px solid #E1E1E1;
+}
+.bundle-module .promotions-lists:last-child {
+    border-bottom: none;
+}
+
+.bundle-module .promotions-lists .promotions-selections {
+    float: none;
+    width: 100%;
+    border-bottom: 1px solid #E1E1E1;
+    margin-bottom: 20px;
+}
+
+.bundle-module .promotions-lists .promotions-info {
+    float: none;
+    border: none;
+    padding: 0;
+    width: 100%;
+    min-height: 74px;
+    position: relative;
+}
+
+.bundle-module .promotions-lists .promotions-selections-img {
+    width: 19.14vw;
+}
+
+.bundle-module .promotions-lists .promotions-selections-img img {
+    width: 100%;
+}
+
+.bundle-module .promotions-lists .promotions-selections-plus {
+    max-width: 7%;
+    padding: 10.2865vw 11px 0 11px !important;
+}
+
+.bundle-module .promotions-lists .promotions-selections-plus img {
+    width: 18px;
+}
+
+.bundle-module .promotions-lists .promotions-qty {
+    border: 1px solid #E1E1E1;
+    border-radius: 2px;
+    height: 22px;
+    width: 22px;
+    position: absolute;
+    top: 16.9922vw;
+}
+
+.bundle-module .promotions-lists .promotions-qty span {
+    font-family: 'Roboto';
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    color: #666666;
+}
+
+.bundle-module .promotions-lists .tooltip-product-name {
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin-top: 10px;
+    font-family: 'Roboto';
+    font-size: 12px;
+    line-height: 130%;
+    color: #333333;
+}
+
+.bundle-module .promotions-lists .toolprice {
+    margin-top: 8px;
+    font-family: 'Roboto';
+    font-size: 12px;
+    line-height: 14px;
+    color: #333333;
+}
+
+.bundle-module .promotions-lists .check-configure {
+    position: absolute;
+    top: 0.3906vw;
+    right: 0.3906vw;
+}
+
+.bundle-module .promotions-lists .price-container {
+    display: flex;
+}
+
+.bundle-module .promotions-lists .new-price {
+    font-family: 'roboto-medium';
+    font-size: 24px !important;
+    line-height: 28px;
+    color: #333333 !important;
+}
+
+.bundle-module .promotions-lists .old-price {
+    font-family: 'Roboto';
+    font-size: 14px;
+    line-height: 16px;
+    color: #999999 !important;
+    display: flex;
+    align-items: center;
+}
+
+.bundle-module .promotions-lists .discount-info {
+    margin-top: 4px;
+}
+
+.bundle-module .promotions-lists .discount-info, .bundle-module .promotions-lists .amount-info, .bundle-module .promotions-lists .out-of-stock {
+    font-family: 'Roboto';
+    font-size: 14px;
+    line-height: 150%;
+    color: #333333;
+}
+
+.bundle-module .promotions-lists .actions {
+    padding: 0;
+    float: none !important;
+    position: absolute;
+    top: 13px;
+    right: 0;
+}
+
+.bundle-module .promotions-lists .actions button {
+    width: 240px;
+    height: 48px;
+    margin: 0;
+    padding: 12px 0;
+    font-family: 'Roboto';
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+}
+
+.bundle-module .check-configure input[type="checkbox"]:checked + label:before {
+    background: url(../images/bundleconfig.png);
+    border-radius: 2px;
+    border: none;
+}
+
+/****configure****/
+.modal-inner-wrap .modal-content .configure-buttons-set button:hover {
+    background: #4F85BB;
+}
+
+.modal-inner-wrap .modal-content .configure-buttons-set button:active {
+    background: #155da4;
+    border: none;
+    color: #FFFFFF;
+}
+
+.modal-inner-wrap .modal-content .configure-buttons-set button:focus {
+    background: #155da4;
+    border: none;
+    color: #FFFFFF;
+}
+
+.modal-inner-wrap .modal-header {
+    padding: 20px 16px 0 20px;
+}
+
+.modal-inner-wrap .modal-header .modal-title {
+    font-family: 'roboto-medium';
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #333333;
+    margin: 0;
+    padding-bottom: 20px;
+    width: 212px;
+    border-bottom: 2px solid #155DA4;
+}
+
+.modal-popup .modal-inner-wrap .modal-content {
+    border-top: 1px solid #E1E1E1 !important;
+    padding: 0 40px 20px 40px;
+}
+
+.modal-popup .modal-inner-wrap .modal-header .action-close:before {
+    font-size: 15px;
+    line-height: 15px !important;
+    color: #333333 !important;
+}
+
+.modal-popup .modal-inner-wrap .action-close {
+    position: absolute;
+    right: 6px;
+    top: 10px;
+}
+
+.modal-popup .modal-inner-wrap .configure_form_fields .bundles-info, .modal-popup .modal-inner-wrap .configure_form_fields .selection-info {
+    padding-top: 20px;
+}
+
+.modal-popup .modal-inner-wrap .configure_form_fields .bundles-info .base-product-name h4, .modal-popup .modal-inner-wrap .configure_form_fields .selection-info .selection-product-name h4 {
+    font-family: 'roboto-medium';
+    font-size: 16px;
+    line-height: 130%;
+    color: #333333;
+    margin-bottom: 12px;
+}
+
+.modal-popup .modal-inner-wrap .configure_form_fields .price-final_price .normal-price {
+    font-family: 'Roboto';
+    font-size: 14px;
+    line-height: 16px;
+    color: #333333;
+}
+
+.modal-popup .modal-inner-wrap .configure_form_fields table {
+    margin: 20px 0;
+}
+
+.modal-popup .modal-inner-wrap .configure_form_fields table .super-attribute-select {
+    border: none;
+    border-radius: 4px;
+    padding: 12px 16px;
+    background: #f4f4f4 url('../images/select-bg.svg') no-repeat 97% 45%;
+    font-family: 'Roboto';
+    font-size: 14px;
+    line-height: 16px;
+    color: #333333;
+}
+
+.modal-popup .modal-inner-wrap .configure_form_fields table td {
+    padding: 0;
+}
+
+.modal-popup .modal-inner-wrap .configure_form_fields table td img {
+    width: 160px;
+}
+
+.modal-popup .modal-inner-wrap .configure_form_fields .left-td {
+    width: 200px;
+}
+
+.modal-popup .modal-inner-wrap .configure_form_fields .right-td .label span {
+    font-family: 'Roboto';
+    font-size: 14px;
+    line-height: 16px;
+    color: #333333;
+}
+
+.modal-popup .modal-inner-wrap .configure-buttons-set button {
+    width: 240px;
+    height: 48px;
+    background: #155DA4;
+    border-radius: 4px;
+}
+
+.modal-popup .modal-inner-wrap .configure-buttons-set button span {
+    font-family: 'Roboto';
+    font-size: 16px;
+    line-height: 24px;
+    color: #FFFFFF;
+}
+
+.modal-popup .modal-inner-wrap .right-td .product-options-wrapper .field {
+    margin: 0 0 24px 0;
+}
+
+.modal-popup .modal-inner-wrap .

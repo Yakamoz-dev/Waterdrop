@@ -1,0 +1,172 @@
+<?php
+
+/**
+ * Magedelight
+ * Copyright (C) 2016 Magedelight <info@magedelight.com>
+ *
+ * NOTICE OF LICENSE
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see http://opensource.org/licenses/gpl-3.0.html.
+ *
+ * @category Magedelight
+ * @package Magedelight_Bundlediscount
+ * @copyright Copyright (c) 2016 Mage Delight (http://www.magedelight.com/)
+ * @license http://opensource.org/licenses/gpl-3.0.html GNU General Public License,version 3 (GPL-3.0)
+ * @author Magedelight <info@magedelight.com>
+ */
+
+/* $block  Magedelight\Bundlediscount\Block\Bundlecrosssell */
+$isEnabled = $block->isModuleEnable();
+$isEnabledCart = $block->isEnableForCart();
+$priceHelper = $this->helper('Magento\Framework\Pricing\Helper\Data');
+$helper = $this->helper('Magedelight\Bundlediscount\Helper\Data');
+?>
+<?php if ($isEnabled && $isEnabledCart): ?>
+    <script type="text/javascript">
+        var bundles_optionsPrice = [];
+    </script>
+    <?php
+    $bundles = $block->getCollection();
+
+    if (!empty($bundles) && count($bundles) != 0):
+        ?>
+        <div style="clear:both;">
+            <div class="col-main">
+
+                <div class="page-contents promotions">
+                    <div class="page-title category-title">
+
+                        <h1><?= /* @noEscape */  $helper->getPromotionHeading() ?></h1>
+                    </div>
+                    <div class="prmomtions-contents">
+                        <ul>
+                            <?php foreach ($bundles as $bundle): ?>
+                                <?php
+                                $totals = $block->calculateDiscountAmount($bundle);
+                                ?>
+                                <?php $_selections = $bundle->getSelections(); ?>
+                                <?php
+                                if (!$_selections) {
+                                    continue;
+                                }
+                                ?>
+                                <li class="promotions-lists">
+                                    <?php if ($bundle->getName() != '' || strlen($bundle->getName()) > 0): ?>
+                                        <h3><a href="<?= /* @noEscape */  $bundle->getProductUrl() ?>" title="<?= /* @noEscape */  $bundle->getProductName() ?>"><?= /* @noEscape */  $bundle->getName() ?></a></h3>
+                                    <?php endif; ?>
+                                    <div class="promotions-discount-container">
+                                        <div class="promotions-selections">
+                                            <div class="promotions-selections-img tooltip<?= /* @noEscape */  $bundle->getId() ?>">
+                                                <a href="<?= /* @noEscape */  $bundle->getProductUrl() ?>" title="<?= /* @noEscape */  $bundle->getProductName() ?>">
+                                                    <img src="<?= /* @noEscape */  $bundle->getImageUrl() ?>" height="90" width="90" /></a>
+                                                <div class="promotions-qty">X<?= /* @noEscape */  $bundle->getQty() ?></div>
+                                                <div class="tooltip" id="productNameTooltip<?= /* @noEscape */  $bundle->getId() ?>"><?= /* @noEscape */  $bundle->getProductName() ?></div>
+                                                <style type="text/css">
+                                                    .tooltip<?= /* @noEscape */  $bundle->getId() ?>:hover .tooltip{display:block;position:absolute;top:0;cursor:pointer;}
+                                                </style>
+                                                <div class="check-configure" style="display: none;">
+                                                <input type="checkbox"  class="custom-check bundle_section_<?= /* @noEscape */  $bundle->getId() ?>" name="flexible_product" value="<?= /* @noEscape */  $bundle->getProductId() ?>" checked="">
+                                                 <label></label>
+                                                 </div>
+                                            </div>
+
+                                            <div class="promotions-selections-plus">+</div>
+                                            <?php $i = 1; ?>
+                                            <?php foreach ($_selections as $_selection): ?>
+                                                <div class="promotions-selections-img tooltip<?= /* @noEscape */  $_selection->getId() ?>">
+                                                    <a href="<?= /* @noEscape */  $_selection->getProductUrl() ?>" title="<?= /* @noEscape */  $_selection->getProductName() ?>">
+                                                        <img src="<?= /* @noEscape */  $_selection->getImageUrl() ?>" height="90" width="90" /></a>
+                                                    <div class="promotions-qty">X<?= /* @noEscape */  $_selection->getQty() ?></div>
+                                                    <div class="tooltip" id="productNameTooltip<?= /* @noEscape */  $_selection->getId() ?>"><?= /* @noEscape */  $_selection->getName() ?></div>
+                                                    <style type="text/css">
+                                                        .tooltip<?= /* @noEscape */  $_selection->getId() ?>:hover .tooltip{display:block;position:absolute;top:0;;cursor:pointer;}
+                                                    </style>
+                                                    <?php if ($bundle->getBundleOption() == 'Flexible'): ?>
+                                                     <div class="check-configure">
+                                                        <?php $_propriceUrl = $block->getUrl('md_bundlediscount/index/custom'); ?>
+                                                        <?php if (!$bundle->hasOptions() && !$bundle->hasCustomOptions()): ?>
+                                                     <input type="checkbox" onclick="custombundle('<?= /* @noEscape */  $_propriceUrl ?>',<?= /* @noEscape */  $bundle->getId() ?>)" class="custom-check bundle_section_<?= /* @noEscape */  $bundle->getId() ?>" name="flexible_product" value="<?= /* @noEscape */  $_selection->getProductId() ?>" checked="">
+                                                        <?php else:?>
+                                                    <input type="checkbox" onclick="productcount(<?= /* @noEscape */  $bundle->getId() ?>);" class="custom-check bundle_section_<?= /* @noEscape */  $bundle->getId() ?>" name="flexible_product" value="<?= /* @noEscape */  $_selection->getProductId() ?>" checked="">
+                                                        <?php endif; ?>
+
+                                                     <label></label>
+                                                 </div>
+                                                    <?php else:?>
+                                                     <div class="check-configure" style="display: none;">
+                                                    <input  type="checkbox" class="custom-check bundle_section_<?= /* @noEscape */  $bundle->getId() ?>" name="flexible_product" value="<?= /* @noEscape */  $_selection->getProductId() ?>" checked=""><label></label>
+                                                    </div>
+
+                                                    <?php endif; ?>
+                                                </div>
+
+                                                <?php if ($i < $_selections->count()): ?>
+                                                    <div class="promotions-selections-plus">+</div>
+                                                    <?php $i++; ?>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                        </div>
+                                        <div class="promotions-info">
+                                            <?php if (!$bundle->hasOptions() && !$bundle->hasCustomOptions()): ?>
+                                                <p class="price-container">
+
+                                                    <span class="old-price bundle_old_price_<?= /* @noEscape */  $bundle->getId() ?>">
+                                                        <?= /* @noEscape */  $priceHelper->currency($totals['total_amount'], true, false);
+
+                                                        ?>
+                                                        </span>
+
+                                                    <span class="new-price bundle_new_price_<?= /* @noEscape */  $bundle->getId() ?>"><?= /* @noEscape */  $priceHelper->currency($totals['final_amount'], true, false) ?></span>
+                                                </p>
+                                            <?php endif; ?>
+
+                                            <?php if ($bundle->getDiscountType() == '0' || (!$bundle->hasOptions() && !$bundle->hasCustomOptions())): ?>
+                                                <p class="discount-info"><?= /* @noEscape */  $totals['discount_label']. ' discount.' ?></p>
+                                                <p class="amount-info">
+                                                    - <span class="bundle_new_discount_amount_<?= /* @noEscape */  $bundle->getId() ?>">
+                                                    <?= /* @noEscape */ $priceHelper->currency($totals['discount_amount'], true, false); ?></span>  discount on buying this offer.
+                                                </p>
+                                            <?php else: ?>
+                                                   <p class="discount-info"><?= /* @noEscape */  $totals['discount_label']. ' discount.' ?></p>
+
+                                            <?php endif; ?>
+                                            <?php if ($bundle->canShowAddToCartButton()): ?>
+                                                <p class="actions">
+                                                    <?php if (!$bundle->hasOptions() && !$bundle->hasCustomOptions()): ?>
+                                                        <button class="action primary tocart cart_button_<?= /* @noEscape */  $bundle->getId() ?> " type="button" title="<?= /* @noEscape */  __('Add to Cart') ?>" onclick="addToCart('<?= /* @noEscape */  $helper->getBundleAddToCartUrl($bundle->getId()) ?>',<?= /* @noEscape */  $bundle->getId()?>)"><span><span><?= /* @noEscape */  __('Add to Cart') ?></span></span></button>
+                                                    <?php else: ?>
+                                                        <?php $_configureUrl = $block->getUrl('md_bundlediscount/index/configure', ['bundle_id' => $bundle->getId()]) ?>
+                                                        <button class="action primary tocart cart_button_<?= /* @noEscape */  $bundle->getId() ?>" type="button" title="<?= /* @noEscape */  __('Configure') ?>" onclick="configureOptions(<?= /* @noEscape */  $bundle->getId() ?>, '<?= /* @noEscape */  $_configureUrl ?>');"><span><span><?= /* @noEscape */  __('Configure') ?></span></span></button>
+                                                    <div id="configure_bundle_<?= /* @noEscape */  $bundle->getId() ?>" class="loading configure_bundle_<?= /* @noEscape */  $bundle->getId() ?>" style="display:none;"></div>
+                                                    <?php endif; ?>
+                                                </p>
+                                            <?php else: ?>
+                                                <p class="action availability out-of-stock">
+                                                    <span><?= /* @noEscape */  __('Out of stock') ?></span>
+                                                </p>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>

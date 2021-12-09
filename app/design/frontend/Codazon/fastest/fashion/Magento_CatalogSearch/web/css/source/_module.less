@@ -278,6 +278,35 @@
     }
 }
 
+// mobile
+@media (max-width: 767px) {
+    .block-search{
+        input[type="text"] {
+            background: #ffffff;
+            border: 1px solid #ffffff;
+            color: #333333;
+            .abs-borderradius(4px);
+            padding: 0 15px;
+            font-style: unset;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .control {
+            width: 80vw;
+            background: #ffffff;
+            border-radius: 4px 0 0 4px;
+        }
+        .action.search {
+            right: -0.5px;
+            width: 56px;
+            background: #10477D;
+            border-radius: 0 4px 4px 0;
+            &:before {
+                color: #ffffff;
+            }
+        }
+    }
+}
 
 //Search icon hover show dropdown
 & when (@media-common = true) {

@@ -36,6 +36,9 @@
 							<resource id="Magedelight_Bundlediscount::gridmanager_categories" title="Tag Category" sortOrder="10" />
 							<resource id="Magedelight_Bundlediscount::gridmanager_template" title="Add Tag" sortOrder="20" />
 							<resource id="Magedelight_Bundlediscount::bundlediscount" title="Bundle Promos" sortOrder="30"/>
+                            <resource id="Magedelight_Bundlediscount::tagscategories" title="Tag Category Action" sortOrder="40" />
+                            <resource id="Magedelight_Bundlediscount::tags" title="Add Tag Action" sortOrder="50" />
+                            <resource id="Magedelight_Bundlediscount::bundlepromos" title="Bundle Promos Action" sortOrder="60"/>
 						</resource>
 					</resource>
 				</resource>

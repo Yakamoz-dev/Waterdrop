@@ -8,6 +8,9 @@
 		.header-wrapper-content{
 			.lib-css(color, @header_cart_background);
 			a{.abs-link(@header_cart_background, @header_hover_text);}
+            .header-wrapper-center {
+                display: none;
+            }
 		}
 		.header-panel-right{
 			float:right;
@@ -305,6 +308,7 @@
                 display:inline-block;
                 vertical-align:top;
                 width: 128px;
+                height: 32px;
             }
 			.main-logo{display:none;}
 			.rtl-layout &{
@@ -742,7 +746,7 @@
 
 		//search
 			.header-wrapper-middle{
-			padding: 0 15px 12px;
+			padding: 10px 15px 12px;
 		}
 		.mobile-search-wrapper{
 			.block-search .control{

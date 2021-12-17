@@ -127,27 +127,36 @@ $helper = $this->helper('Magedelight\Bundlediscount\Helper\Data');
                                                         ?>
                                                         </span>
                                                 </p>
+                                            <?php else: ?>
+                                                <p class="price-container">
+                                                    <span class="new-price bundle_new_price_<?= /* @noEscape */ $bundle->getId() ?>"><?= /* @noEscape */ $totals['discount_label'].' OFF'; ?></span>
+                                                </p>
                                             <?php endif; ?>
 
                                             <?php if ($bundle->getDiscountType() == '0' || (!$bundle->hasOptions() && !$bundle->hasCustomOptions())): ?>
-                                                <p class="discount-info"><?= /* @noEscape */ $totals['discount_label']. ' bundled discount.' ?></p>
-                                                <p class="amount-info">
-                                                    - <span class="bundle_new_discount_amount_<?= /* @noEscape */ $bundle->getId() ?>">
+                                                <?php if (!$bundle->hasOptions() && !$bundle->hasCustomOptions()): ?>
+                                                    <p class="discount-info"><?= /* @noEscape */ $totals['discount_label']. ' bundled discount.' ?></p>
+                                                    <p class="amount-info">
+                                                        - <span class="bundle_new_discount_amount_<?= /* @noEscape */ $bundle->getId() ?>">
                                                     <?= /* @noEscape */ $priceHelper->currency($totals['discount_amount'], true, false); ?></span>  bundled discount on buying this offer.
-                                                </p>
+                                                    </p>
+                                                <?php else: ?>
+                                                    <p class="discount-info">Get a <?= /* @noEscape */ $totals['discount_label'] ?> off bundle discount.<br>
+                                                    You can choose the number of your needed products.</p>
+                                                <?php endif; ?>
                                             <?php else: ?>
-                                                   <p class="discount-info"><?= /* @noEscape */ $totals['discount_label']. ' discount.' ?></p>
-
+                                                <p class="discount-info">Get a <?= /* @noEscape */ $totals['discount_label'] ?> off bundle discount.<br>
+                                                    You can choose the number of your needed products.</p>
                                             <?php endif; ?>
                                             <?php if ($bundle->canShowAddToCartButton()): ?>
                                                 <p class="actions">
-                                                    <?php if (!$bundle->hasOptions() && !$bundle->hasCustomOptions()): ?>
-                                                        <button class="action primary tocart cart_button_<?= /* @noEscape */ $bundle->getId() ?> " type="button" title="<?= /* @noEscape */ __('Add to Cart') ?>" onclick="addToCart('<?= /* @noEscape */ $helper->getBundleAddToCartUrl($bundle->getId()) ?>',<?= /* @noEscape */ $bundle->getId()?>)"><span><span><?= /* @noEscape */ __('Add to Cart') ?></span></span></button>
-                                                    <?php else: ?>
-                                                        <?php $_configureUrl = $block->getUrl('md_bundlediscount/index/configure', ['bundle_id' => $bundle->getId()]) ?>
-                                                        <button class="action primary tocart cart_button_<?= /* @noEscape */ $bundle->getId() ?>" type="button" title="<?= /* @noEscape */ __('Configure') ?>" onclick="configureOptions(<?= /* @noEscape */ $bundle->getId() ?>, '<?= /* @noEscape */ $_configureUrl ?>');"><span><span><?= /* @noEscape */ __('Configure') ?></span></span></button>
+                                                <?php if (!$bundle->hasOptions() && !$bundle->hasCustomOptions()): ?>
+                                                    <button class="action primary tocart cart_button_<?= /* @noEscape */ $bundle->getId() ?> " type="button" title="<?= /* @noEscape */ __('Add to Cart') ?>" onclick="addToCart('<?= /* @noEscape */ $helper->getBundleAddToCartUrl($bundle->getId()) ?>',<?= /* @noEscape */ $bundle->getId()?>)"><span><span><?= /* @noEscape */ __('Add to Cart') ?></span></span></button>
+                                                <?php else: ?>
+                                                    <?php $_configureUrl = $block->getUrl('md_bundlediscount/index/configure', ['bundle_id' => $bundle->getId()]) ?>
+                                                    <button class="action primary tocart cart_button_<?= /* @noEscape */ $bundle->getId() ?>" type="button" title="<?= /* @noEscape */ __('Configure') ?>" onclick="configureOptions(<?= /* @noEscape */ $bundle->getId() ?>, '<?= /* @noEscape */ $_configureUrl ?>');"><span><span><?= /* @noEscape */ __('Configure') ?></span></span></button>
                                                     <div id="configure_bundle_<?= /* @noEscape */ $bundle->getId() ?>" class="loading configure_bundle_<?= /* @noEscape */ $bundle->getId() ?>" style="display:none;"></div>
-                                                    <?php endif; ?>
+                                                <?php endif; ?>
                                                 </p>
                                             <?php else: ?>
                                                 <p class="action availability out-of-stock">

@@ -106,7 +106,7 @@ class Post extends Action
         $strs = array('live adult','Vape Store','free adult','girl videos','girl video','ass','cam','cams','camchat',
             'campsites','cum','nude','nudes','naked','porn','pussy','sexcam','sex','sexy','pron','tits','websex','webcam');
         foreach ($words as $v1){
-            if (strpos($message, $v1) !== false) {
+            if (stripos($message, $v1) !== false) {
                 $result = 1;
                 break;
             }
@@ -115,12 +115,15 @@ class Post extends Action
             return $result;
         }
         foreach ($strs as $v2) {
-            if (preg_match("/[^0-9a-zA-Z]".$v2."[^0-9a-zA-Z]/",$message)){
+            $str = str_replace(' ','[\s]',$v2);
+            $pattern = '/[^a-zA-Z0-9]{1}'.$str.'[^a-zA-Z0-9]{1}/i';
+            $strstart = substr($message,0,strlen($v2));
+            $strend = substr($message,'-'.strlen($v2));
+            if (preg_match($pattern,$message) || strcasecmp($strstart,$v2) == 0 || strcasecmp($strend,$v2) == 0){
                 $result = 1;
                 break;
             }
         }
-
         return $result;
     }
 

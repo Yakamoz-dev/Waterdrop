@@ -116,10 +116,12 @@ class Post extends Action
         }
         foreach ($strs as $v2) {
             $str = str_replace(' ','[\s]',$v2);
-            $pattern = '/[^a-zA-Z0-9]{1}'.$str.'[^a-zA-Z0-9]{1}/i';
+            $pattern1 = '/[^a-zA-Z0-9]{1,}'.$str.'[^a-zA-Z0-9]{1,}/i';
+            $pattern2 = '/[^a-zA-Z0-9]{1,}'.$str.'/i';
+            $pattern3 = '/'.$str.'[^a-zA-Z0-9]{1,}/i';
             $strstart = substr($message,0,strlen($v2));
             $strend = substr($message,'-'.strlen($v2));
-            if (preg_match($pattern,$message) || strcasecmp($strstart,$v2) == 0 || strcasecmp($strend,$v2) == 0){
+            if (preg_match($pattern1,$message) || ($message == $v2) || (strcasecmp($strstart,$v2) == 0 && preg_match($pattern3,$message)) || (strcasecmp($strend,$v2) == 0 && preg_match($pattern2,$message))){
                 $result = 1;
                 break;
             }

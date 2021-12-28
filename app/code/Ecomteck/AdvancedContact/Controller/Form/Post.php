@@ -47,24 +47,18 @@ class Post extends Action
             return $resultRedirect;
         } else {
             $message = $this->getRequest()->getParam("message");
-            if((strpos($message," ") === false) || (strpos($message,"<a") !== false)) {
-                $messageManager = $this->_objectManager
-                    ->get(\Magento\Framework\Message\ManagerInterface::class);
-                $messageManager->addSuccess(
-                    __('Thanks for contacting us with your comments and questions. We\'ll respond to you very soon.')
-                );
+            $intercept = $this->intercept($message);
+            if((strpos($message," ") === false) || (strpos($message,"<a") !== false) || $intercept == 1) {
                 $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
-                $resultRedirect->setUrl($this->_redirect->getRefererUrl());
+                $resultRedirect->setPath('advanced_contact/form/result');
                 return $resultRedirect;
             }
-
             $validator = $this->_objectManager->get(\Magento\Framework\Data\Form\FormKey\Validator::class);
             if ($validator->validate($this->getRequest())) {
                 $helper = $this->_objectManager->get(\Ecomteck\AdvancedContact\Helper\Data::class);
                 $json = $this->_objectManager->get(\Magento\Framework\Serialize\Serializer\Json::class);
                 $store = $this->_objectManager->get(\Magento\Store\Model\StoreManagerInterface::class)->getStore();
                 $fields = $helper->getConfig('advanced_contact/fields', $store->getId());
-                $message = $helper->getConfig('advanced_contact/thanks_message', $store->getId());
                 $fields = $json->unserialize($fields);
                 $info = [];
                 if (count($fields)>0) {
@@ -87,24 +81,48 @@ class Post extends Action
                         if ($model->getId()) {
                             $email = $this->_objectManager->get(\Ecomteck\AdvancedContact\Helper\Email::class);
                             $email->receive($model, $store->getId());
-                            if(!$message){
-                                $message = __('Thanks for contacting us with your comments and questions. We\'ll respond to you very soon.');
-                            }
-                            $messageManager = $this->_objectManager
-                                ->get(\Magento\Framework\Message\ManagerInterface::class);
-                            $messageManager->addSuccess($message);
                         }
                     } catch (\Exception $e) {
                         $this->messageManager->addError(
                             __('Sorry, We can\'t save contact messasge or send emails. Please try again later.')
                         );
                         $this->messageManager->addError($e->getMessage());
+                        $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+                        $resultRedirect->setUrl($this->_redirect->getRefererUrl());
+                        return $resultRedirect;
                     }
                 }
             }
             $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
-            $resultRedirect->setUrl($this->_redirect->getRefererUrl());
+            $resultRedirect->setPath('advanced_contact/form/result');
             return $resultRedirect;
         }
     }
+
+    public function intercept($message) {
+        $result = 0;
+        $words = array('а','е','о','и','т','л','http:','https:');
+        $strs = array('live adult','Vape Store','free adult','girl videos','girl video','ass','cam','cams','camchat',
+            'campsites','cum','nude','nudes','naked','porn','pussy','sexcam','sex','sexy','pron','tits','websex','webcam');
+        foreach ($words as $v1){
+            if (stripos($message, $v1) !== false) {
+                $result = 1;
+                break;
+            }
+        }
+        if ($result) {
+            return $result;
+        }
+        foreach ($strs as $v2) {
+            $str = str_replace(' ','[\s]',$v2);
+            $pattern = '/([^a-zA-Z0-9]{1}'.$str.'[^a-zA-Z0-9]{1}|^'.$str.'[^a-zA-Z0-9]+|[^a-zA-Z0-9]+'.$str.'$|^'.$str.'$)/i';
+            if (preg_match($pattern,$message)) {
+                $result = 1;
+                break;
+            }
+        }
+        return $result;
+    }
+
+
 }

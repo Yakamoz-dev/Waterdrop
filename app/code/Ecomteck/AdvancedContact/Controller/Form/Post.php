@@ -59,7 +59,6 @@ class Post extends Action
                 $json = $this->_objectManager->get(\Magento\Framework\Serialize\Serializer\Json::class);
                 $store = $this->_objectManager->get(\Magento\Store\Model\StoreManagerInterface::class)->getStore();
                 $fields = $helper->getConfig('advanced_contact/fields', $store->getId());
-                $message = $helper->getConfig('advanced_contact/thanks_message', $store->getId());
                 $fields = $json->unserialize($fields);
                 $info = [];
                 if (count($fields)>0) {
@@ -116,12 +115,8 @@ class Post extends Action
         }
         foreach ($strs as $v2) {
             $str = str_replace(' ','[\s]',$v2);
-            $pattern1 = '/[^a-zA-Z0-9]{1,}'.$str.'[^a-zA-Z0-9]{1,}/i';
-            $pattern2 = '/[^a-zA-Z0-9]{1,}'.$str.'/i';
-            $pattern3 = '/'.$str.'[^a-zA-Z0-9]{1,}/i';
-            $strstart = substr($message,0,strlen($v2));
-            $strend = substr($message,'-'.strlen($v2));
-            if (preg_match($pattern1,$message) || (strcasecmp($message,$v2) == 0) || (strcasecmp($strstart,$v2) == 0 && preg_match($pattern3,$message)) || (strcasecmp($strend,$v2) == 0 && preg_match($pattern2,$message))){
+            $pattern = '/([^a-zA-Z0-9]{1}'.$str.'[^a-zA-Z0-9]{1}|^'.$str.'[^a-zA-Z0-9]+|[^a-zA-Z0-9]+'.$str.'$|^'.$str.'$)/i';
+            if (preg_match($pattern,$message)) {
                 $result = 1;
                 break;
             }

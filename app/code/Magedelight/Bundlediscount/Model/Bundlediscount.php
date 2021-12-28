@@ -455,13 +455,20 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getBundlesByProduct($product)
-    {
+    {        
+        $pid='';
+        if(isset($product['entity_id']))
+        {
+            $pid=$product['entity_id'];
+        }
         $customerSession = $this->getCustomerSession();
         $customerGroup = (!$customerSession) ? 0 : $customerSession->getCustomerGroupId();
         try {
-            if ($product->getId()) {
+
+            if (isset($product['entity_id']) && $product['entity_id']!='') {
+          
                 $bundleCollection = $this->getCollection()
-                        ->addFieldToFilter('product_id', ['eq' => $product->getId()])
+                        ->addFieldToFilter('product_id', ['eq' => $pid])
                         ->addFieldToFilter('status', ['eq' => 1])
                         ->addFieldToFilter('store_ids', [['finset' => [0]],
                             ['finset' => [$this->_storeManager->getStore()->getId()]]])
@@ -475,9 +482,11 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
                         ->setCurPage($this->pageValue)
                         ->setPageSize($this->limitValue)
                         ->setOrder($this->orderValue, strtoupper($this->dirValue));
-                $displayBothPrice = (boolean) $this->_taxHelper->displayBothPrices();
+
+              $displayBothPrice = (boolean) $this->_taxHelper->displayBothPrices();
                 $displayIncludeTaxPrice = (boolean) $this->_taxHelper->displayPriceIncludingTax();
                 try {
+                 //   echo $product->getId();
                     if ($bundleCollection->count() > 0) {
                         foreach ($bundleCollection as $bundle) {
                                 $product = $this->productFactory->create()->setStoreId($this->_storeManager->getStore()->getId())
@@ -545,7 +554,7 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
                             );
                 }
                     
-            }
+            }            
         } catch (\Exception $e) {
             $this->messageManager->addError(
                 __($e->getMessage())
@@ -760,10 +769,6 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
             } else {
                 $discountAmount = ($bundle->getDiscountPrice() * $totalAmount) / 100;
                 $discountLabel = $this->_helper->formatPercentage($bundle->getDiscountPrice()).'%';
-            }
-
-            if ($bundle->getExcludeBaseProduct()) {
-                $totalAmount += $bundle->getProductPrice() * $bundle->getQty();
             }
 
             if ($discountAmount > $totalAmount) {

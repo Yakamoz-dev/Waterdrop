@@ -49,7 +49,6 @@ class Post extends Action
             $message = $this->getRequest()->getParam("message");
             $intercept = $this->intercept($message);
             if((strpos($message," ") === false) || (strpos($message,"<a") !== false) || $intercept == 1) {
-                var_dump('bufa');die;
                 $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
                 $resultRedirect->setPath('advanced_contact/form/result');
                 return $resultRedirect;
@@ -95,7 +94,6 @@ class Post extends Action
                     }
                 }
             }
-            var_dump('fa');die;
             $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
             $resultRedirect->setPath('advanced_contact/form/result');
             return $resultRedirect;

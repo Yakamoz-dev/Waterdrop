@@ -49,6 +49,7 @@ class Post extends Action
             $message = $this->getRequest()->getParam("message");
             $intercept = $this->intercept($message);
             if((strpos($message," ") === false) || (strpos($message,"<a") !== false) || $intercept == 1) {
+                var_dump('bufa');die;
                 $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
                 $resultRedirect->setPath('advanced_contact/form/result');
                 return $resultRedirect;
@@ -94,6 +95,7 @@ class Post extends Action
                     }
                 }
             }
+            var_dump('fa');die;
             $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
             $resultRedirect->setPath('advanced_contact/form/result');
             return $resultRedirect;
@@ -121,7 +123,7 @@ class Post extends Action
             $pattern3 = '/'.$str.'[^a-zA-Z0-9]{1,}/i';
             $strstart = substr($message,0,strlen($v2));
             $strend = substr($message,'-'.strlen($v2));
-            if (preg_match($pattern1,$message) || ($message == $v2) || (strcasecmp($strstart,$v2) == 0 && preg_match($pattern3,$message)) || (strcasecmp($strend,$v2) == 0 && preg_match($pattern2,$message))){
+            if (preg_match($pattern1,$message) || (strcasecmp($message,$v2) == 0) || (strcasecmp($strstart,$v2) == 0 && preg_match($pattern3,$message)) || (strcasecmp($strend,$v2) == 0 && preg_match($pattern2,$message))){
                 $result = 1;
                 break;
             }

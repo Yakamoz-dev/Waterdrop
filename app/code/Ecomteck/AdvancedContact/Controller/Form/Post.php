@@ -21,6 +21,7 @@
 namespace Ecomteck\AdvancedContact\Controller\Form;
 
 use Magento\Framework\App\Action\Action;
+use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
 
 /**
@@ -29,6 +30,16 @@ use Magento\Framework\Controller\ResultFactory;
  */
 class Post extends Action
 {
+    protected $_logger;
+
+    public function __construct(
+        Context $context,
+        \Ecomteck\AdvancedContact\Logger\Logger $logger
+    ){
+        $this->_logger = $logger;
+        parent::__construct($context);
+    }
+
     /**
      * Execute method
      *
@@ -36,6 +47,14 @@ class Post extends Action
      */
     public function execute()
     {
+        $this->_logger->info("------Start contact------");
+        $this->_logger->info("name:".$this->getRequest()->getParam("name"));
+        $this->_logger->info("email:".$this->getRequest()->getParam("email"));
+        $this->_logger->info("order:".$this->getRequest()->getParam("order"));
+        $this->_logger->info("shipping:".$this->getRequest()->getParam("shipping"));
+        $this->_logger->info("phone:".$this->getRequest()->getParam("phone"));
+        $this->_logger->info("message:".$this->getRequest()->getParam("message"));
+        $this->_logger->info("------End contact------");
         if ($this->getRequest()->getParam("lastname") != "") {
             $messageManager = $this->_objectManager
                 ->get(\Magento\Framework\Message\ManagerInterface::class);

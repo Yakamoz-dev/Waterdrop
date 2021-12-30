@@ -223,7 +223,7 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
         $customerGroup = (!$customerSession) ? 0 : $customerSession->getCustomerGroupId();
         $tag_elements =  explode(',', $tag_element);
         $valueFilter = [];
-           
+
         foreach ($tag_elements as $value) {
              $valueFilter[] = (['finset' => [$value]]);
         }
@@ -366,7 +366,7 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
         $bundleparentid = array_unique(array_merge($bundleparentid, $bundleparentidsingle));
         $customerSession = $this->getCustomerSession();
         $customerGroup = (!$customerSession) ? 0 : $customerSession->getCustomerGroupId();
-        
+
         $bundleCollection = $this->getCollection()
                 ->addFieldToFilter('status', ['eq' => 1])
                 ->addFieldToFilter('product_id', ['in' => $bundleparentid])
@@ -456,12 +456,19 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
      */
     public function getBundlesByProduct($product)
     {
+        $pid='';
+        if(isset($product['entity_id']))
+        {
+            $pid=$product['entity_id'];
+        }
         $customerSession = $this->getCustomerSession();
         $customerGroup = (!$customerSession) ? 0 : $customerSession->getCustomerGroupId();
         try {
-            if ($product->getId()) {
+
+            if (isset($product['entity_id']) && $product['entity_id']!='') {
+
                 $bundleCollection = $this->getCollection()
-                        ->addFieldToFilter('product_id', ['eq' => $product->getId()])
+                        ->addFieldToFilter('product_id', ['eq' => $pid])
                         ->addFieldToFilter('status', ['eq' => 1])
                         ->addFieldToFilter('store_ids', [['finset' => [0]],
                             ['finset' => [$this->_storeManager->getStore()->getId()]]])
@@ -475,7 +482,8 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
                         ->setCurPage($this->pageValue)
                         ->setPageSize($this->limitValue)
                         ->setOrder($this->orderValue, strtoupper($this->dirValue));
-                $displayBothPrice = (boolean) $this->_taxHelper->displayBothPrices();
+
+              $displayBothPrice = (boolean) $this->_taxHelper->displayBothPrices();
                 $displayIncludeTaxPrice = (boolean) $this->_taxHelper->displayPriceIncludingTax();
                 try {
                     if ($bundleCollection->count() > 0) {
@@ -544,7 +552,7 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
                                 __($e->getMessage())
                             );
                 }
-                    
+
             }
         } catch (\Exception $e) {
             $this->messageManager->addError(
@@ -665,7 +673,7 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
                 __($e->getMessage())
             );
         }
-            
+
             // if ($object && $object->count() > 0) {
             //     return $object;
             // } else {
@@ -760,10 +768,6 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
             } else {
                 $discountAmount = ($bundle->getDiscountPrice() * $totalAmount) / 100;
                 $discountLabel = $this->_helper->formatPercentage($bundle->getDiscountPrice()).'%';
-            }
-
-            if ($bundle->getExcludeBaseProduct()) {
-                $totalAmount += $bundle->getProductPrice() * $bundle->getQty();
             }
 
             if ($discountAmount > $totalAmount) {
@@ -898,7 +902,7 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
                         __($e->getMessage())
                     );
                 }
-                
+
             }
             return $result;
         } catch (\Exception $e) {

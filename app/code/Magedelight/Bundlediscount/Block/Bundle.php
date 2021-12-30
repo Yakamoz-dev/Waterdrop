@@ -88,15 +88,22 @@ class Bundle extends AbstractProduct
         $this->bundleItems = $bundleitems;
         $this->configurable = $configurable;
         parent::__construct($context, $data);
-
-        $product = $this->getProduct();
+        
+        /* @var $product \Magento\Catalog\Model\Product */
+        $product = $this->getProduct();        
+                
+        $pid='';
+        if(isset($product['entity_id']))
+        {
+            $pid=$product['entity_id'];
+        }
         $bundleCollection = $this->bundlediscount->getBundlesByProduct($product);
         $displayOptions = $this->helper->displayOption();
 
         if ($displayOptions == 'both') {
             $otherBundles = $this->bundleItems->getCollection()
                             ->addFieldToSelect('bundle_id')
-                            ->addFieldToFilter('product_id', ['eq' => $product->getId()]);
+                            ->addFieldToFilter('product_id', ['eq' => $pid]);
             $otherIds = $otherBundles->getColumnValues('bundle_id');
             if (count($otherIds) > 0) {
                 $bundleCollection = $this->bundlediscount->getBundleObjects($otherIds, $bundleCollection);

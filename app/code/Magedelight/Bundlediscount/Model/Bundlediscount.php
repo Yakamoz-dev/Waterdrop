@@ -223,7 +223,7 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
         $customerGroup = (!$customerSession) ? 0 : $customerSession->getCustomerGroupId();
         $tag_elements =  explode(',', $tag_element);
         $valueFilter = [];
-           
+
         foreach ($tag_elements as $value) {
              $valueFilter[] = (['finset' => [$value]]);
         }
@@ -366,7 +366,7 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
         $bundleparentid = array_unique(array_merge($bundleparentid, $bundleparentidsingle));
         $customerSession = $this->getCustomerSession();
         $customerGroup = (!$customerSession) ? 0 : $customerSession->getCustomerGroupId();
-        
+
         $bundleCollection = $this->getCollection()
                 ->addFieldToFilter('status', ['eq' => 1])
                 ->addFieldToFilter('product_id', ['in' => $bundleparentid])
@@ -455,7 +455,7 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getBundlesByProduct($product)
-    {        
+    {
         $pid='';
         if(isset($product['entity_id']))
         {
@@ -466,7 +466,7 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
         try {
 
             if (isset($product['entity_id']) && $product['entity_id']!='') {
-          
+
                 $bundleCollection = $this->getCollection()
                         ->addFieldToFilter('product_id', ['eq' => $pid])
                         ->addFieldToFilter('status', ['eq' => 1])
@@ -486,7 +486,6 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
               $displayBothPrice = (boolean) $this->_taxHelper->displayBothPrices();
                 $displayIncludeTaxPrice = (boolean) $this->_taxHelper->displayPriceIncludingTax();
                 try {
-                 //   echo $product->getId();
                     if ($bundleCollection->count() > 0) {
                         foreach ($bundleCollection as $bundle) {
                                 $product = $this->productFactory->create()->setStoreId($this->_storeManager->getStore()->getId())
@@ -553,8 +552,8 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
                                 __($e->getMessage())
                             );
                 }
-                    
-            }            
+
+            }
         } catch (\Exception $e) {
             $this->messageManager->addError(
                 __($e->getMessage())
@@ -674,7 +673,7 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
                 __($e->getMessage())
             );
         }
-            
+
             // if ($object && $object->count() > 0) {
             //     return $object;
             // } else {
@@ -903,7 +902,7 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
                         __($e->getMessage())
                     );
                 }
-                
+
             }
             return $result;
         } catch (\Exception $e) {

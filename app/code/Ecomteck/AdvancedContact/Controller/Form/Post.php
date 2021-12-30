@@ -50,8 +50,8 @@ class Post extends Action
         $this->_logger->info("------Start contact------");
         $this->_logger->info("name:".$this->getRequest()->getParam("name"));
         $this->_logger->info("email:".$this->getRequest()->getParam("email"));
+        $this->_logger->info("type:".$this->getRequest()->getParam("type"));
         $this->_logger->info("order:".$this->getRequest()->getParam("order"));
-        $this->_logger->info("shipping:".$this->getRequest()->getParam("shipping"));
         $this->_logger->info("phone:".$this->getRequest()->getParam("phone"));
         $this->_logger->info("message:".$this->getRequest()->getParam("message"));
         $this->_logger->info("------End contact------");

@@ -46,7 +46,7 @@
             ?>
             <?php
                 $currentCategory = $block->getLayer()->getCurrentCategory()->getName();
-                $isEventCategory = $currentCategory == "Christmas Sales";
+                $isEventCategory = ($block->getLayer()->getCurrentCategory()->getId() == "106");
             ?>
             <?php foreach ($block->getFilters() as $filter): ?>
                 <?php if ($filter->getItemsCount()): ?>

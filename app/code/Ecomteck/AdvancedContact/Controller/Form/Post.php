@@ -122,7 +122,7 @@ class Post extends Action
         $result = 0;
         $words = array('а','е','о','и','т','л','http:','https:');
         $strs = array('live adult','Vape Store','free adult','girl videos','girl video','ass','cam','cams','camchat',
-            'campsites','cum','nude','nudes','naked','porn','pussy','sexcam','sex','sexy','pron','tits','websex','webcam');
+            'campsites','cum','nude','nudes','naked','porn','pussy','sexcam','sex','sexy','pron','tits','websex','webcam','bit.ly');
         foreach ($words as $v1){
             if (stripos($message, $v1) !== false) {
                 $result = 1;

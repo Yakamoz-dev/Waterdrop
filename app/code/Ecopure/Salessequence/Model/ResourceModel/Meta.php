@@ -8,7 +8,7 @@ class Meta extends \Magento\SalesSequence\Model\ResourceModel\Meta
         $entityType = $object->getEntityType(); //order/invoice/creditmemo/shipment
         $storeId = $object->getStoreId(); //CURRENT STORE ID
 
-        $prefix = "ECO".date('y').date('m').date('d');
+        $prefix = "M".date('y').date('m').date('d');
         $activeProfile = $this->resourceProfile->loadActiveProfile($object->getId());
         $activeProfile->setPrefix($prefix); //SET CUSTOM PREFIX - DEFAULT: store_id
         //$activeProfile->setSuffix(''); //SET CUSTOM SUFFIX

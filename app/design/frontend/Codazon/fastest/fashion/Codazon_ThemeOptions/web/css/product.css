@@ -933,7 +933,7 @@
 /* start A+Style */
 .a-product-block-bigbanner {
     margin: 0 auto;
-    width: 1100px;
+    width: 100%;
     height: 450px;
     position: relative;
     margin-bottom: 20px;
@@ -982,7 +982,7 @@
 
 .a-product-block-bigbanner-leftmid {
     box-sizing: border-box;
-    width: 520px;
+    width: 48%;
     padding: 20px 20px 24px 20px;
     margin-left: 40px;
     background-color:rgba(0,0,0,0.5);
@@ -1061,7 +1061,7 @@
 .a-product-block-bigvideo {
     margin: 0 auto;
     margin-bottom: 20px;
-    width: 1100px;
+    width: 100%;
     height: 450px;
     position: relative;
     align-items: center;
@@ -1074,15 +1074,6 @@
     vertical-align: baseline;
 }
 
-.video-img {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    z-index: 999;
-    background: url(../image/Polygon1.png) no-repeat;
-    background-position: center;
-    cursor: pointer;
-}
 
 @media (max-width: 767px) {
     .a-product-block-bigvideo {
@@ -1097,15 +1088,10 @@
         height: 37.3333vw;
     }
 
-    .video-img {
-        width: 48.5px;
-        height: 48px;
-        background: url(../image/Polygon2.png) no-repeat;
-    }
 }
 
 .a-product-block-videowithtexts {
-    width: 1100px;
+    width: 100%;
     height: 360px;
     margin: 0 auto;
     margin-bottom: 40px;
@@ -1316,9 +1302,6 @@
     background: rgba(21, 93, 164, 0.75);
 }
 
-.a-product-block-bigbannerwithfeatures .td-btn:hover + .td-div {
-    display: block;
-}
 
 .a-product-block-bigbannerwithfeatures .td-div {
     display: none;
@@ -1329,6 +1312,16 @@
     border-radius: 4px;
     padding: 20px;
     box-sizing: border-box;
+    z-index: 99;
+}
+
+.a-product-block-bigbannerwithfeatures .td-div .td-div-exit {
+    width: 10.67px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    left: unset;
+    content:url(../image/Union.png);
 }
 
 .a-product-block-bigbannerwithfeatures .td-div img {

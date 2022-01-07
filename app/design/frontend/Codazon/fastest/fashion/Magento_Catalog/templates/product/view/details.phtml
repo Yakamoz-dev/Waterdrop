@@ -1,0 +1,99 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Magento\Catalog\Block\Product\View\Details $block */
+?>
+<?php if ($detailedInfoGroup = $block->getGroupSortedChildNames('detailed_info', 'getChildHtml')) :?>
+    <div class="product info detailed">
+        <?php $layout = $block->getLayout(); ?>
+        <div class="product data items" data-mage-init='{"tabs":{"openedState":"active"}}'>
+            <?php foreach ($detailedInfoGroup as $name) :?>
+                <?php
+                $html = $layout->renderElement($name);
+                if (!trim($html)) {
+                    continue;
+                }
+                $alias = $layout->getElementAlias($name);
+                $label = $block->getChildData($alias, 'title');
+                ?>
+                <div class="data item title"
+                     data-role="collapsible" id="tab-label-<?= $block->escapeHtmlAttr($alias) ?>">
+                    <a class="data switch"
+                       tabindex="-1"
+                       data-toggle="trigger"
+                       href="#<?= $block->escapeUrl($alias) ?>"
+                       id="tab-label-<?= $block->escapeHtmlAttr($alias) ?>-title">
+                        <?= /* @noEscape */ $label ?>
+                    </a>
+                </div>
+                <div class="data item content sss"
+                     aria-labelledby="tab-label-<?= $block->escapeHtmlAttr($alias) ?>-title" id="<?= $block->escapeHtmlAttr($alias) ?>" data-role="content">
+                    <?= /* @noEscape */ $html ?>
+                </div>
+            <?php endforeach;?>
+        </div>
+    </div>
+<?php endif; ?>
+<script>
+    require(["jquery","swipeslider"],function($,Swiper){
+        $(document).ready(function(){
+            var swiper1 = new Swiper(".pcswiper", {
+                cssMode: true,
+                loop: true,
+                navigation: {
+                    nextEl: ".a-product-block-videowithtexts-next",
+                    prevEl: ".a-product-block-videowithtexts-prev",
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+            });
+            var text = new Swiper('.mobileswiper-text', {
+                loop: true,
+                cssMode: true,
+            });
+            var video = new Swiper('.mobileswiper-video', {
+                loop: true,
+                cssMode: true,
+                navigation: {
+                    nextEl: ".a-product-block-videowithtexts-next-mobile",
+                    prevEl: ".a-product-block-videowithtexts-prev-mobile",
+                },
+                pagination: {
+                    el: ".swiper-pagination2",
+                    clickable: true,
+                },
+                mousewheel: true,
+                keyboard: true,
+            });
+            text.controller.control = video;
+            video.controller.control = text;
+            var swiper2 = new Swiper(".mySwiper-feature", {
+                loop: true,
+                pagination: {
+                    el: ".swiper-pagination-feature",
+                    clickable: true,
+                },
+            });
+            $(".td-div").mouseover(function(){
+                $(this).show();
+            });
+            $(".td-div").mouseout(function(){
+                $(this).hide();
+            });
+            $(".td-div-exit").click(function () {
+                $(this).parent(".td-div").hide();
+            });
+            $(".feature-div").mouseover(function(){
+                $(this).children(".td-div").show();
+            });
+            $(".feature-div").mouseout(function(){
+                $(this).children(".td-div").hide();
+            })
+        })
+    })
+</script>

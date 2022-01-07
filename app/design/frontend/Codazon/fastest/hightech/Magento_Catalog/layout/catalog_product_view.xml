@@ -70,5 +70,9 @@
             </arguments>
         </block>
     </referenceBlock>
+    <referenceBlock name="product.info.details">
+        <block class="Magento\Catalog\Block\Product\View\Details" name="details" template="Magento_Catalog::product/view/details.phtml" after="product.info.media">
+        </block>
+    </referenceBlock>
     </body>
 </page>

@@ -17,49 +17,4 @@ $_attributeValue = $_product->getResource()->getAttribute($_code)->getFrontend()
         <?php echo $_attributeValue; ?>
     </div>
 <?php endif; ?>
-<script>
-    require(["jquery","swipeslider"],function($,Swiper){
-        $(document).ready(function(){
-            var swiper1 = new Swiper(".pcswiper", {
-                cssMode: true,
-                loop: true,
-                navigation: {
-                    nextEl: ".a-product-block-videowithtexts-next",
-                    prevEl: ".a-product-block-videowithtexts-prev",
-                },
-                pagination: {
-                    el: ".swiper-pagination",
-                    clickable: true,
-                },
-            });
-            var text = new Swiper('.mobileswiper-text', {
-                loop: true,
-                cssMode: true,
-            });
-            var video = new Swiper('.mobileswiper-video', {
-                loop: true,
-                cssMode: true,
-                navigation: {
-                    nextEl: ".a-product-block-videowithtexts-next-mobile",
-                    prevEl: ".a-product-block-videowithtexts-prev-mobile",
-                },
-                pagination: {
-                    el: ".swiper-pagination2",
-                    clickable: true,
-                },
-                mousewheel: true,
-                keyboard: true,
-            });
-            text.controller.control = video;
-            video.controller.control = text;
 
-            var swiper2 = new Swiper(".mySwiper-feature", {
-                loop: true,
-                pagination: {
-                    el: ".swiper-pagination-feature",
-                    clickable: true,
-                },
-            });
-        })
-    })
-</script>

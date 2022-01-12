@@ -29,7 +29,7 @@
                         <?= /* @noEscape */ $label ?>
                     </a>
                 </div>
-                <div class="data item content sss"
+                <div class="data item content"
                      aria-labelledby="tab-label-<?= $block->escapeHtmlAttr($alias) ?>-title" id="<?= $block->escapeHtmlAttr($alias) ?>" data-role="content">
                     <?= /* @noEscape */ $html ?>
                 </div>
@@ -79,6 +79,10 @@
                     clickable: true,
                 },
             });
+
+            // $(".td-info-p").css("font-size",($(window).width()/1920)*10+"px");
+
+
             $(".td-div").mouseover(function(){
                 $(this).show();
             });
@@ -89,10 +93,10 @@
                 $(this).parent(".td-div").hide();
             });
             $(".feature-div").mouseover(function(){
-                $(this).children(".td-div").show();
+                $(this).next(".td-div").show();
             });
             $(".feature-div").mouseout(function(){
-                $(this).children(".td-div").hide();
+                $(this).next(".td-div").hide();
             })
         })
     })

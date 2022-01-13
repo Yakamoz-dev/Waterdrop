@@ -1136,6 +1136,7 @@
     font-size: 14px;
     line-height: 150%;
     color: #333333;
+    width: 50%;
 }
 
 .a-product-block-videowithtexts-video {
@@ -1278,6 +1279,7 @@
         position: static;
         display: block;
         margin-top: 15px;
+        width: unset;
     }
 }
 .a-product-block-bigbannerwithfeatures {
@@ -1322,12 +1324,6 @@
     content:url(../image/Union.png);
     cursor:pointer;
 }
-
-/*.a-product-block-bigbannerwithfeatures .td-div img {*/
-/*    position: absolute;*/
-/*    left: 20px;*/
-/*    float: left;*/
-/*}*/
 
 .a-product-block-bigbannerwithfeatures .td-info {
     width: 64%;
@@ -1444,31 +1440,65 @@
     height: 0;
     border-width: 12px;
     border-style: solid;
-    border-color:#FFFFFF transparent transparent transparent;
+    border-color:#ffffff transparent transparent transparent;
+    align-self: center;
 }
 .triangle2{
     width: 0;
     height: 0;
     border-width: 12px;
     border-style: solid;
-    border-color:#FFFFFF transparent transparent transparent;
+    border-color:#ffffff transparent transparent transparent;
     transform: rotate(90deg);
+    position: absolute;
+    align-self: center;
 }
 .triangle3{
     width: 0;
     height: 0;
     border-width: 12px;
     border-style: solid;
-    border-color:#FFFFFF transparent transparent transparent;
+    border-color:#ffffff transparent transparent transparent;
     transform: rotate(180deg);
+    align-self: center;
 }
 .triangle4{
     width: 0;
     height: 0;
     border-width: 12px;
     border-style: solid;
-    border-color:#FFFFFF transparent transparent transparent;
+    border-color:#ffffff transparent transparent transparent;
     transform: rotate(270deg);
+    position: absolute;
+    align-self: center;
 }
 
+.triangleright-div {
+    position: absolute;
+    right: -23px;
+    top: 0;
+    height: 100%;
+    width: 24px;
+    display: flex;
+}
+.triangleleft-div {
+    position: absolute;
+    left: -23px;
+    top: 0;
+    height: 100%;
+    width: 24px;
+    display: flex;
+}
+@media (max-width: 1024px) {
+    .triangleleft-div {
+        left: -2.2436vw;
+        width: 2.3436vw;
+    }
+
+    .triangleright-div {
+        right: -2.2436vw;
+        width: 2.3436vw;
+    }
+    .triangle1,.triangle2,.triangle3,.triangle4{border-width: 1.1719vw;}
+}
 /* end A+Style */

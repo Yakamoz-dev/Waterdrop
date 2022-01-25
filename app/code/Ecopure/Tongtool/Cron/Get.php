@@ -47,7 +47,8 @@ class Get
 
                     if (isset($trackingNumber) && !empty($trackingNumber)) {
                         $this->_logger->info("tracking order: ".$tongtoolOrderId);
-                        $orderId = str_replace("M_", "", $orderTrackingInfo->orderId);
+                        $tempId = str_replace("_1", "", $tongtoolOrderId);
+                        $orderId = str_replace("M_", "", $tempId);
                         $order = $objectManager->create('Magento\Sales\Model\Order')->loadByIncrementId($orderId);
 
                         $tracksCollection = $order->getTracksCollection();
@@ -55,7 +56,7 @@ class Get
                             $trackNumbers[] = $track->getTrackNumber();
                         }
 
-                        if (empty($tracknums[0])) {
+                        if (empty($trackNumbers[0])) {
                             $convertOrder = $objectManager->create('Magento\Sales\Model\Convert\Order');
                             $shipment = $convertOrder->toShipment($order);
                             foreach ($order->getAllItems() as $orderItem) {
@@ -83,12 +84,12 @@ class Get
                             $objectManager->create('Magento\Shipping\Model\ShipmentNotifier')->notify($shipment);
                             $shipment->save();
 
-                            $tongtoolOrder = $objectManager->create('Ecopure\Tongtool\Model\Tongtool')->load($tongtoolOrderId, 'order_id');
+                            $tongtoolOrder = $objectManager->create('Ecopure\Tongtool\Model\Tongtool')->load($tempId, 'order_id');
                             $tongtoolOrder->setTrackingNo($trackingNumber);
                             $tongtoolOrder->setIsCompleted(1);
                             $tongtoolOrder->save();
                         } else {
-                            $tongtoolOrder = $objectManager->create('Ecopure\Tongtool\Model\Tongtool')->load($tongtoolOrderId, 'order_id');
+                            $tongtoolOrder = $objectManager->create('Ecopure\Tongtool\Model\Tongtool')->load($tempId, 'order_id');
                             $tongtoolOrder->setIsCompleted(1);
                             $tongtoolOrder->save();
                         }
@@ -109,13 +110,14 @@ class Get
         }
         $action = 'trackingNumberQuery';
         $finalUrl = $this->getPostUrl($action);
-        $roderData = array();
-        foreach ($list as $key => $order) {
-            $roderData[$key] = $order['order_id'];
+        $orderData = array();
+        foreach ($list as $order) {
+            $orderData[] = $order['order_id'];
+            $orderData[] = $order['order_id'].'_1';
         }
         $data = array(
             'merchantId' => '2a66c9aa291efb5c816f7b77eeef821f',
-            'orderIds' => $roderData,
+            'orderIds' => $orderData,
             'pageNo' => '1',
             'pageSize' => '100'
         );

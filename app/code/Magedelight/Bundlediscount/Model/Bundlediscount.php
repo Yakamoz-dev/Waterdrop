@@ -813,7 +813,7 @@ class Bundlediscount extends \Magento\Framework\Model\AbstractModel
     {
         $imageUrl = $this->imageHelperFactory->create()->init($product, 'category_page_list')
             ->constrainOnly(false)->keepTransparency(true)->keepAspectRatio(true)
-            ->keepFrame(true)->backgroundColor([255, 255, 255])->resize(90, 90)->getUrl();
+            ->keepFrame(true)->backgroundColor([255, 255, 255])->getUrl();
         return $imageUrl;
     }
 

@@ -63,7 +63,7 @@ $helper = $this->helper('Magedelight\Bundlediscount\Helper\Data');
                                         <div class="promotions-selections">
                                             <div class="promotions-selections-img tooltip<?= /* @noEscape */ $bundle->getId() ?>">
                                                 <a href="<?= /* @noEscape */ $bundle->getProductUrl() ?>" title="<?= /* @noEscape */ $bundle->getProductName() ?>">
-                                                    <img src="<?= /* @noEscape */ $bundle->getImageUrl() ?>" height="90" width="90" alt="<?= /* @noEscape */ $bundle->getProductSku() ?>"/></a>
+                                                    <img src="<?= /* @noEscape */ $bundle->getImageUrl() ?>" alt="<?= /* @noEscape */ $bundle->getProductSku() ?>"/></a>
                                                 <div class="promotions-qty"><span>X<?= /* @noEscape */ $bundle->getQty() ?></span></div>
                                                 <div class="tooltip-product-name" id="productNameTooltip<?= /* @noEscape */ $bundle->getId() ?>" title="<?= /* @noEscape */ $bundle->getProductName() ?>"><?= /* @noEscape */ $bundle->getProductName() ?></div>
                                                 <div class="toolprice">$<?php echo sprintf('%.2f',$bundle->getProductPrice());?></div>
@@ -84,10 +84,10 @@ $helper = $this->helper('Magedelight\Bundlediscount\Helper\Data');
                                                         $pid = $configureIds[0];
                                                         $purl = $helper->loadMyProductUrl($pid)->getProductUrl()?>
                                                         <a href="<?= /* @noEscape */ $purl ?>" title="<?= /* @noEscape */ $_selection->getName() ?>">
-                                                            <img src="<?= /* @noEscape */ $_selection->getImageUrl() ?>" height="90" width="90" alt="<?= /* @noEscape */ $_selection->getSku() ?>"/></a>
+                                                            <img src="<?= /* @noEscape */ $_selection->getImageUrl() ?>" alt="<?= /* @noEscape */ $_selection->getSku() ?>"/></a>
                                                     <?php } else { ?>
                                                             <a href="<?= /* @noEscape */ $_selection->getProductUrl() ?>" title="<?= /* @noEscape */ $_selection->getName() ?>">
-                                                        <img src="<?= /* @noEscape */ $_selection->getImageUrl() ?>" height="90" width="90"  alt="<?= /* @noEscape */ $_selection->getSku() ?>"/></a>
+                                                        <img src="<?= /* @noEscape */ $_selection->getImageUrl() ?>" alt="<?= /* @noEscape */ $_selection->getSku() ?>"/></a>
                                                     <?php } ?>
                                                     <div class="promotions-qty"><span>X<?= /* @noEscape */ $_selection->getQty() ?></span></div>
                                                     <div class="tooltip-product-name" id="productNameTooltip<?= /* @noEscape */ $_selection->getId() ?>" title="<?= /* @noEscape */ $_selection->getName() ?>"><?= /* @noEscape */ $_selection->getName() ?></div>

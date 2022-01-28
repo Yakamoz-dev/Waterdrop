@@ -24,4 +24,8 @@
 <?php if($block->getProduct()->getGtin()): ?>
     <div itemprop="gtin12" style="display: none;"><?php echo $block->getProduct()->getGtin(); ?></div>
 <?php endif; ?>
-<div class="ruk_rating_snippet" data-sku="<?php echo $block->getProduct()->getSku(); ?>" style="margin-bottom: 6px;min-height: 0;"></div>
+<?php
+    $ec_helper = $this->helper('\Ecopure\Catalog\Helper\Data');
+    $ec_skus = $ec_helper->getProductSkus($block->getProduct());
+?>
+<div class="ruk_rating_snippet" data-sku="<?php echo $block->escapeHtml($ec_skus); ?>" style="margin-bottom: 6px;min-height: 0;"></div>

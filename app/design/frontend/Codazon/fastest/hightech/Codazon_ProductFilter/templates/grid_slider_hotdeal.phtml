@@ -170,7 +170,11 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
 								<?php if($block->isShow('price')): ?>
 				                <?php /* @escapeNotVerified */ echo $block->getProductPrice($_product) ?>
 				                <?php endif ?>
-                                <div class="ruk_rating_snippet" data-sku="<?php echo $_product->getSku(); ?>"></div>
+                                <?php
+                                    $ec_helper = $this->helper('\Ecopure\Catalog\Helper\Data');
+                                    $ec_skus = $ec_helper->getProductSkus($_product);
+                                ?>
+                                <div class="ruk_rating_snippet" data-sku="<?php echo $block->escapeHtml($ec_skus); ?>"></div>
 
 				                <?php echo $block->getProductDetailsHtml($_product); ?>
 				            </div>

@@ -258,7 +258,11 @@ switch ($type = $block->getType()) {
                                     <?php echo $block->escapeHtml($_item->getName()) ?></a>
                             </strong>
 
-                            <div class="ruk_rating_snippet" data-sku="<?php echo $_item->getSku(); ?>" style="min-height: 0;"></div>
+                            <?php
+                                $ec_helper = $this->helper('\Ecopure\Catalog\Helper\Data');
+                                $ec_skus = $ec_helper->getProductSkus($_item);
+                            ?>
+                            <div class="ruk_rating_snippet" data-sku="<?php echo $block->escapeHtml($ec_skus); ?>" style="min-height: 0;"></div>
 
                             <?php /* @escapeNotVerified */ echo $block->getProductPrice($_item); ?>
 

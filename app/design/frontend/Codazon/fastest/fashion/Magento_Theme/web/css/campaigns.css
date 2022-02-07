@@ -1,0 +1,18 @@
+.header-campaigns {
+    height: 60px;
+    width: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: auto 60px;
+    background-image:url(../images/campaigns-big.png) ;
+}
+@media (max-width: 1024px) {
+    .header-campaigns {
+        background-image:url(../images/campaigns-middle.png);
+    }
+}
+@media (max-width: 767px) {
+    .header-campaigns {
+        background-image:url(../images/campaigns-small.png);
+    }
+}

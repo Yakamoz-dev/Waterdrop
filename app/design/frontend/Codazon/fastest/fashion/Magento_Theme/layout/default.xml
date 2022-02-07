@@ -8,6 +8,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
 	<head>
         <css src="Codazon_Lookbookpro::css/lookbook.css" />
+        <css src="Magento_Theme::css/campaigns.css" />
     </head>
     <body>
 		 <referenceBlock name="head.additional">
@@ -38,8 +39,11 @@
 
 		<!--END MOVE COMPARE - WISHLIST-->
 
-		<referenceContainer name="header.container">
-			<container name="header.wrapper.content" htmlTag="div" htmlClass="header-wrapper-content sticky-menu" after="-">
+        <referenceContainer name="header.container">
+            <container name="header.wrapper.content" htmlTag="div" htmlClass="header-wrapper-content sticky-menu" after="-">
+                <container name="header.campaigns" before="header.bottom.content">
+                    <block class="Ecopure\Catalog\Block\Campaigns" name="header_campaigns" template="Magento_Theme::html/header/campaigns.phtml"></block>
+                </container>
                 <container name="header.bottom.middle" htmlTag="div" htmlClass="header-wrapper-middle" before="header.wrapper.bottom" />
                 <container name="header.wrapper.bottom" htmlTag="div" htmlClass="header-wrapper-bottom" after="-">
                     <container name="header.bottom.content" htmlTag="div" htmlClass="header content" before="-" label="Header Bottom Content" >
@@ -47,8 +51,8 @@
                         <container name="menu.container" htmlTag="div" htmlClass="menu-container" label="Header Main Menu" />
                     </container>
                 </container>
-			</container>
-		</referenceContainer>
+            </container>
+        </referenceContainer>
 
 
 

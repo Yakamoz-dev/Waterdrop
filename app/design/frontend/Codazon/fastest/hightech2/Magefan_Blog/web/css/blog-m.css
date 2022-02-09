@@ -657,3 +657,64 @@
     .mg_blog_recommended_view_more { width: 100%; }
     .mg_blog_recommended_buy_on_amazon { width: 100%; margin-top: 12px; }
 }
+
+.blog-table-icon-parent {
+    display: flex !important;
+    justify-content: center;
+    margin-bottom: 0px !important;
+    padding: 12px 0;
+}
+
+.blog-top-table-a {
+    color: #00549c !important;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 150%;
+    font-family: 'poppins-regular';
+    display: flex;
+    align-items: center;
+}
+
+.blog-top-table {
+    background-color: #F6F8FC;
+    margin-bottom: 48px;
+    border-radius: 25px;
+}
+
+.blog-top-table a {
+    text-decoration: none;
+}
+
+.blog-top-table-list {
+    padding: 4px 48px 12px 48px;
+    display: none;
+}
+
+.blog-top-table-list a {
+    color: #00549C !important;
+    font-family: 'poppins-medium';
+    font-size: 16px;
+    line-height: 125%;
+    display: block;
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
+.blog-top-table-list a:last-child {
+    margin-bottom: 0;
+}
+
+.blog-top-table-list .wd-blog-collection-secondary-anchor {
+    font-size: 12px;
+    padding-left: 12px;
+}
+
+@media screen and (max-width: 767px) {
+    .blog-top-table-list {
+        padding: 0 16px 16px 16px;
+    }
+
+    .blog-top-table-list a {
+        font-size: 14px;
+    }
+}

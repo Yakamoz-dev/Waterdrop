@@ -48,6 +48,7 @@ $helper = $this->helper('Magefan\Blog\Helper\Image');
         <div class="post-content">
             <div class="post-description">
                 <?php echo $block->getContent() ?>
+                <?php echo $this->getImageUrl('wd-blog-table-down-icon-small.png');?>
                 <div class="clear"></div>
             </div>
         </div>
@@ -59,3 +60,20 @@ $helper = $this->helper('Magefan\Blog\Helper\Image');
     </div>
 </div>
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-61650043458516a6"></script>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    function topTable() {
+        if ($('.blog-top-table-list').css("display") == "block") {
+            $('.blog-table-icon').css('transform','rotate(0)');
+        } else {
+            $('.blog-table-icon').css('transform','rotate(180deg)');
+        };
+        $('.blog-top-table-list').slideToggle();
+    }
+    var lis = document.getElementsByClassName("anchor"); for (var i = 0; i < lis.length; i++) {
+        lis[i].onclick = function () {
+            var attr = this.getAttribute("data-to");
+            var div_top = document.getElementById(attr).offsetTop; window.scrollTo(0, div_top - 30);
+        }
+    }
+</script>

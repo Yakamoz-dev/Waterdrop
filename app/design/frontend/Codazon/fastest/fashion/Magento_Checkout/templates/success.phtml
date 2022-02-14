@@ -82,6 +82,9 @@ if($customer){
     $newcustomer = ($orderCount > 1 ? 0 : 1);
 }
 $currency = $order->getOrderCurrencyCode();
+$stateId = trim($order->getShippingAddress()->getData('region_id'));
+$region = $objectManager->create('Magento\Directory\Model\Region')->load($stateId);
+$regionCode = $region->getCode();
 
 if (array_key_exists("waterdrop_ch", $_COOKIE) && $_COOKIE['waterdrop_ch'] != "ShareASale") {
     $shareasale_channel = true;
@@ -107,6 +110,20 @@ if (array_key_exists("waterdrop_ch", $_COOKIE) && $_COOKIE['waterdrop_ch'] != "S
         'currency': 'USD',
         'transaction_id': '<?php echo $orderId ?>'
     });
+    var enhanced_conversion_data = {
+        "email": "<?php echo $order->getCustomerEmail() ?>",
+        "phone_number": "<?php echo $order->getShippingAddress()->getData('telephone') ?>",
+        "first_name": "<?php echo $order->getShippingAddress()->getData('firstname') ?>",
+        "last_name": "<?php echo $order->getShippingAddress()->getData('lastname') ?>",
+        "home_address": {
+            "street": "<?php echo ($order->getShippingAddress()->getStreet()[0] ?? "") ?>",
+            "city":"<?php echo $order->getShippingAddress()->getData('city') ?>",
+            "region": "<?php echo $regionCode ?>",
+            "postal_code": "<?php echo $order->getShippingAddress()->getData('postcode') ?>",
+            "country": "<?php echo $order->getShippingAddress()->getData('country_id') ?>"
+        }
+    }
+    gtag('event', 'conversion', {'send_to': 'AW-734942208/TD1KCLb-v-0CEICoud4C'});
 </script>
 
 <!-- Bing -->

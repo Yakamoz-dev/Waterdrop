@@ -21,66 +21,71 @@ class UploadOrder implements ObserverInterface
             $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 
             $order = $observer->getEvent()->getOrder();
-            $orderItems = $order->getAllVisibleItems();
-            $incrementId = $order->getIncrementId();
-            $phone   = trim($order->getShippingAddress()->getData('telephone'));
-            $firstname   = trim($order->getShippingAddress()->getData('firstname'));
-            $lastname   = trim($order->getShippingAddress()->getData('lastname'));
-            $street = $order->getShippingAddress()->getStreet();
-            $address1 = isset($street[0]) ? trim($street[0]) : "";
-            $address2 = isset($street[1]) ? trim($street[1]) : "";
-            $shippingMethod = $order->getShippingDescription();
-            $country = trim($order->getShippingAddress()->getData('country_id'));
-            $zipCode = trim($order->getShippingAddress()->getData('postcode'));
-            $stateId = trim($order->getShippingAddress()->getData('region_id'));
-            $region = $objectManager->create('Magento\Directory\Model\Region')->load($stateId);
-            $regionCode = $region->getCode();
-            $email = trim($order->getShippingAddress()->getData('email'));
-            $city = trim($order->getShippingAddress()->getData('city'));
-            $record['shipping_method'] = $shippingMethod;
-            $record['country'] = $country;
-            $record['customer_name'] = $firstname . " " . $lastname;
-            $record['order_id'] = 'M_' . $incrementId;
-            $record['magento_id'] = $incrementId;
-            $record['phone'] = $this->phoneNumberFormat($phone);
-            $record['zip'] = $zipCode;
-            $record['state'] = $regionCode;
-            $record['email'] = $email;
-            $record['city'] = $city;
-            $record['address1'] = $address1;
-            $record['address2'] = $address2;
-            $record['time'] = date("Y-m-d H:i:s");
-            $record['is_cancelled'] = 0;
-            $record['is_completed'] = 0;
-            $items = array();
-            foreach ($orderItems as $key => $item) {
-                if($item->getProductType() == "simple") {
-                    $items[$key] = new \stdClass();
-                    $items[$key]->sku = $item->getSku();
-                    $items[$key]->qty = json_encode($item->getQtyOrdered());
-                }
-            }
-            $record['order_items'] = json_encode(array_values($items));
-            $result = $this->processOrder($record);
-
-            $this->_logger->info("------Upload Order Result------");
-            $this->_logger->info(json_encode($result));
-            $this->_logger->info("------Upload Order Result------");
-
-            if (strpos($result, 'Success') === FALSE) {
-                $record['is_uploaded'] = 0;
-                $record['error'] = json_decode($result)->message;
+            $status = $order->getStatus();
+            if ($status == "holded") {
+                $this->_logger->info("On Hold Order: ".$order->getIncrementId());
             } else {
-                $record['is_uploaded'] = 1;
+                $orderItems = $order->getAllVisibleItems();
+                $incrementId = $order->getIncrementId();
+                $phone   = trim($order->getShippingAddress()->getData('telephone'));
+                $firstname   = trim($order->getShippingAddress()->getData('firstname'));
+                $lastname   = trim($order->getShippingAddress()->getData('lastname'));
+                $street = $order->getShippingAddress()->getStreet();
+                $address1 = isset($street[0]) ? trim($street[0]) : "";
+                $address2 = isset($street[1]) ? trim($street[1]) : "";
+                $shippingMethod = $order->getShippingDescription();
+                $country = trim($order->getShippingAddress()->getData('country_id'));
+                $zipCode = trim($order->getShippingAddress()->getData('postcode'));
+                $stateId = trim($order->getShippingAddress()->getData('region_id'));
+                $region = $objectManager->create('Magento\Directory\Model\Region')->load($stateId);
+                $regionCode = $region->getCode();
+                $email = trim($order->getShippingAddress()->getData('email'));
+                $city = trim($order->getShippingAddress()->getData('city'));
+                $record['shipping_method'] = $shippingMethod;
+                $record['country'] = $country;
+                $record['customer_name'] = $firstname . " " . $lastname;
+                $record['order_id'] = 'M_' . $incrementId;
+                $record['magento_id'] = $incrementId;
+                $record['phone'] = $this->phoneNumberFormat($phone);
+                $record['zip'] = $zipCode;
+                $record['state'] = $regionCode;
+                $record['email'] = $email;
+                $record['city'] = $city;
+                $record['address1'] = $address1;
+                $record['address2'] = $address2;
+                $record['time'] = date("Y-m-d H:i:s");
+                $record['is_cancelled'] = 0;
+                $record['is_completed'] = 0;
+                $items = array();
+                foreach ($orderItems as $key => $item) {
+                    if($item->getProductType() == "simple") {
+                        $items[$key] = new \stdClass();
+                        $items[$key]->sku = $item->getSku();
+                        $items[$key]->qty = json_encode($item->getQtyOrdered());
+                    }
+                }
+                $record['order_items'] = json_encode(array_values($items));
+                $result = $this->processOrder($record);
+
+                $this->_logger->info("------Upload Order Result------");
+                $this->_logger->info(json_encode($result));
+                $this->_logger->info("------Upload Order Result------");
+
+                if (strpos($result, 'Success') === FALSE) {
+                    $record['is_uploaded'] = 0;
+                    $record['error'] = json_decode($result)->message;
+                } else {
+                    $record['is_uploaded'] = 1;
+                }
+
+                $newOrder = $objectManager->create('Ecopure\Tongtool\Model\Tongtool');
+                $newOrder->setData($record);
+                $newOrder->save();
+
+                $this->_logger->info("------Save Order Result------");
+                $this->_logger->info(json_encode($record));
+                $this->_logger->info("------Save Order Result------");
             }
-
-            $newOrder = $objectManager->create('Ecopure\Tongtool\Model\Tongtool');
-            $newOrder->setData($record);
-            $newOrder->save();
-
-            $this->_logger->info("------Save Order Result------");
-            $this->_logger->info(json_encode($record));
-            $this->_logger->info("------Save Order Result------");
         } catch (\Exception $e) {
             $this->_logger->info($e->getMessage());
         }

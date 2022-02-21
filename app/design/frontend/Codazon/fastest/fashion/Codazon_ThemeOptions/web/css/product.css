@@ -1505,3 +1505,11 @@
     .triangle1,.triangle2,.triangle3,.triangle4{border-width: 1.1719vw;}
 }
 /* end A+Style */
+
+/* Reviews IO */
+@media (max-width: 767px) {
+    #reviews-io-polaris-modal {
+        display: none;
+    }
+}
+/* end Reviews IO */

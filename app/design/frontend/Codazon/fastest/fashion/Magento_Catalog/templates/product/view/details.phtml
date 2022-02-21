@@ -52,10 +52,7 @@
                     clickable: true,
                 },
             });
-            var text = new Swiper('.mobileswiper-text', {
-                loop: true,
-                cssMode: true,
-            });
+
             var video = new Swiper('.mobileswiper-video', {
                 loop: true,
                 cssMode: true,
@@ -67,11 +64,9 @@
                     el: ".swiper-pagination2",
                     clickable: true,
                 },
-                mousewheel: true,
-                keyboard: true,
+
             });
-            text.controller.control = video;
-            video.controller.control = text;
+
             var swiper2 = new Swiper(".mySwiper-feature", {
                 loop: true,
                 pagination: {

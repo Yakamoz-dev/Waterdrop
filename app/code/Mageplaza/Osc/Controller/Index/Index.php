@@ -314,10 +314,11 @@ class Index extends Onepage
      */
     public function filterMethod($method)
     {
-        $defaultShippingMethod = $this->helper->getDefaultShippingMethod();
-        $methodCode = $method->getCarrierCode() . '_' . $method->getMethodCode();
-
-        return $methodCode === $defaultShippingMethod;
+//        $defaultShippingMethod = $this->helper->getDefaultShippingMethod();
+//        $methodCode = $method->getCarrierCode() . '_' . $method->getMethodCode();
+//
+//        return $methodCode === $defaultShippingMethod;
+        return true;
     }
 
     /**

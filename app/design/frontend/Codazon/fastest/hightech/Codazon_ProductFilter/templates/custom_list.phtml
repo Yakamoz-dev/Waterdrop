@@ -58,7 +58,7 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
 							            <?php // Product Image ?>
 							            <?php if($block->isShow('thumb')): ?>
 							            <div class="base-image">
-							            <a href="<?php /* @escapeNotVerified */ echo $_product->getProductUrl() ?>" class="product photo product-item-photo" tabindex="-1">
+							            <a href="<?php /* @escapeNotVerified */ echo $_product->getProductUrl()."?ref=bestsellers" ?>" class="product photo product-item-photo" tabindex="-1">
 							                <span class="main-image">
 												<?php echo $productImage->toHtml(); ?>
 											</span>
@@ -80,7 +80,7 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
 							                <strong class="product name product-item-name">
 							                    <a class="product-item-link"
                                                    title="<?php /* @escapeNotVerified */ echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?>"
-							                       href="<?php /* @escapeNotVerified */ echo $_product->getProductUrl() ?>">
+							                       href="<?php /* @escapeNotVerified */ echo $_product->getProductUrl()."?ref=bestsellers" ?>">
 							                        <?php /* @escapeNotVerified */ echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?>
 							                    </a>
 							                </strong>

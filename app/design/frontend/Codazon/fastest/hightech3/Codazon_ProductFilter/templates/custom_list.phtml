@@ -30,7 +30,25 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
      */
     $pos = $block->getPositioned();
     $row = 2;
+
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $smile = $objectManager->get('Smile\ProductLabel\Block\ProductLabel\ProductLabel');
     ?>
+    <style>
+        .top_right {
+            position: absolute;
+            top: 0;
+            z-index: 2;
+            right: 0;
+            max-width: 35%;
+        }
+        .top_right img {
+            padding: 5px;
+        }
+        .best-seller {
+            max-width: 50% !important;
+        }
+    </style>
     <div class="block widget block-products-list <?php /* @escapeNotVerified */ echo $viewMode; ?> custom-list">
 		<?php if ($title):?>
 		<div class="block-title">
@@ -43,6 +61,7 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
 				<div class="products list items product-items">
 				    <?php /** @var $_product \Magento\Catalog\Model\Product */ ?>
 				    <?php foreach ($_productCollection as $_product): ?>
+                        <?php $smile->setProduct($_product); ?>
 						        <div class="item product product-item">
 							        <div class="product-item-info" data-container="product-grid">
 							        	<div class="product-images">
@@ -63,6 +82,16 @@ $filterHelper = $this->helper('Codazon\ProductFilter\Helper\Data');
 												<?php echo $productImage->toHtml(); ?>
 											</span>
 											<span class="hover-image">
+                                                <?php $productLabels = $smile->getProductLabels(); ?>
+                                                <?php if ($productLabels) : ?>
+                                                    <?php foreach($productLabels as $class => $labels) :?>
+                                                        <div class="<?php echo $class; ?> best-seller">
+                                                        <?php foreach ($labels as $label) : ?>
+                                                            <img src="<?php echo $label['image']; ?>" alt="<?php echo $label['alt'] ?? ''; ?>" title="<?php echo $label['alt'] ?? ''; ?>"/>
+                                                        <?php endforeach ;?>
+                                                    </div>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
 												<?php echo $productHoverImage->toHtml(); ?>
 											</span>
 							            </a>

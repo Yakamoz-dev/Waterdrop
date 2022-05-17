@@ -41,9 +41,9 @@
 
         <referenceContainer name="header.container">
             <container name="header.wrapper.content" htmlTag="div" htmlClass="header-wrapper-content sticky-menu" after="-">
-<!--                <container name="header.campaigns" before="header.bottom.content">-->
-<!--                    <block class="Ecopure\Catalog\Block\Campaigns" name="header_campaigns" template="Magento_Theme::html/header/campaigns.phtml"></block>-->
-<!--                </container>-->
+                <container name="header.campaigns" before="header.bottom.content">
+                    <block class="Ecopure\Catalog\Block\Campaigns" name="header_campaigns" template="Magento_Theme::html/header/campaigns.phtml" />
+                </container>
                 <container name="header.bottom.middle" htmlTag="div" htmlClass="header-wrapper-middle" before="header.wrapper.bottom" />
                 <container name="header.wrapper.bottom" htmlTag="div" htmlClass="header-wrapper-bottom" after="-">
                     <container name="header.bottom.content" htmlTag="div" htmlClass="header content" before="-" label="Header Bottom Content" >

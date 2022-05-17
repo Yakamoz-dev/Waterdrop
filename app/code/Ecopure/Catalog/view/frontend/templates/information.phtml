@@ -1,0 +1,7 @@
+<?php
+    $mediaUrl = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+    $modelNos = $block->getModelNos();
+?>
+<?php if($block->getCategory()->getID() == 106): ?>
+    <img src="<?php echo $mediaUrl ?>father-day-banner.png" alt="Activity" >
+<?php endif; ?>

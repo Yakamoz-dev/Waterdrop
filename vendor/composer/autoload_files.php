@@ -485,6 +485,7 @@ return array(
     '3109cb1a231dcd04bee1f9f620d46975' => $vendorDir . '/paragonie/sodium_compat/autoload.php',
     'aa75ea0761a2f40c1f3b32ad314f86c4' => $vendorDir . '/phpseclib/mcrypt_compat/lib/mcrypt.php',
     '6afbb3ece6b14bcedd88522ddc6978f5' => $vendorDir . '/stripe/module-payments/registration.php',
+    '08b8d935cfa6dbf3ac88a1134b0b5478' => $vendorDir . '/metagento/core-m2/registration.php',
     'a6e74928b181a381143e38e147ad0f09' => $vendorDir . '/cjpublicis/universal-tag-module/registration.php',
     'f9345205bcd43206b98e59c7597cc3c9' => $vendorDir . '/magepow/stickycart/registration.php',
     '79b3724166c1e73e36c45f44df1c4e1a' => $vendorDir . '/nordcomputer/showoutofstockprice/registration.php',
@@ -492,5 +493,6 @@ return array(
     '8bbf152b291e04f5e5dca18de54cd51f' => $vendorDir . '/reviewscouk/reviews/registration.php',
     'e3374b74f4d3a702a6980fab2d4c0d68' => $vendorDir . '/sparsh/buy-now-magento-2-extension/registration.php',
     'da400493fb2af189f474a289bdfdd8d4' => $vendorDir . '/sparsh/magento-2-facebook-pixel-extension/registration.php',
+    '80dcec58a785dfb4764474023d6d12b4' => $vendorDir . '/metagento/disable-newsletter-success-magento2/registration.php',
     'b4cf39431a4b949eea8aa69ebb3d39da' => $baseDir . '/app/etc/NonComposerComponentRegistration.php',
 );

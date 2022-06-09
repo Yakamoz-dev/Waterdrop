@@ -81,6 +81,8 @@ return array(
     'Nordcomputer\\Showoutofstockprice\\' => array($vendorDir . '/nordcomputer/showoutofstockprice'),
     'MyCLabs\\Enum\\' => array($vendorDir . '/myclabs/php-enum/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
+    'Metagento\\DisableNewsletterSuccess\\' => array($vendorDir . '/metagento/disable-newsletter-success-magento2'),
+    'Metagento\\Core\\' => array($vendorDir . '/metagento/core-m2'),
     'Magepow\\Stickycart\\' => array($vendorDir . '/magepow/stickycart'),
     'Magepow\\Core\\' => array($vendorDir . '/magepow/core'),
     'Magento\\Wishlist\\' => array($vendorDir . '/magento/module-wishlist'),

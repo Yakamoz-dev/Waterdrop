@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "40331d317222e5f0d0116a6b29a7e8d7",
+    "content-hash": "397f64ffe1aef82264b06ad79d3b6718",
     "packages": [
         {
             "name": "2tvenom/cborencode",
@@ -17440,6 +17440,91 @@
             "time": "2021-05-14T11:12:37+00:00"
         },
         {
+            "name": "metagento/core-m2",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/metagento/core-m2.git",
+                "reference": "de02d7a6cabaa4b2d61cd1ba31f38090a71c6282"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/metagento/core-m2/zipball/de02d7a6cabaa4b2d61cd1ba31f38090a71c6282",
+                "reference": "de02d7a6cabaa4b2d61cd1ba31f38090a71c6282",
+                "shasum": ""
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Metagento\\Core\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Metagento",
+                    "email": "support@metagento.com.com",
+                    "homepage": "https://www.metagento.com",
+                    "role": "Magento Developer"
+                }
+            ],
+            "description": "Metagento Core module for Magento 2",
+            "support": {
+                "source": "https://github.com/metagento/core-m2/tree/master"
+            },
+            "time": "2018-09-20T10:03:35+00:00"
+        },
+        {
+            "name": "metagento/disable-newsletter-success-magento2",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/metagento/magento-2-disable-newsletter-success-email.git",
+                "reference": "0b402aaa23ca7e8532021239592ce0f409d04b37"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/metagento/magento-2-disable-newsletter-success-email/zipball/0b402aaa23ca7e8532021239592ce0f409d04b37",
+                "reference": "0b402aaa23ca7e8532021239592ce0f409d04b37",
+                "shasum": ""
+            },
+            "require": {
+                "metagento/core-m2": "*"
+            },
+            "type": "magento2-module",
+            "autoload": {
+                "files": [
+                    "registration.php"
+                ],
+                "psr-4": {
+                    "Metagento\\DisableNewsletterSuccess\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "metagento",
+                    "email": "support@metagento.com",
+                    "homepage": "https://www.metagento.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "This Magento 2 extension helps store owner to disable newsletter subscription success email",
+            "support": {
+                "source": "https://github.com/metagento/magento-2-disable-newsletter-success-email/tree/master"
+            },
+            "time": "2018-11-01T11:02:48+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.26.1",
             "source": {
@@ -25076,5 +25161,5 @@
         "ext-json": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.2.0"
 }
